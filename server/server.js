@@ -23,8 +23,6 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
-app.get("/", (req, res) => res.send("Hello world!"));
-
 app.use("/user", router);
 
 app.listen(port, () => {
