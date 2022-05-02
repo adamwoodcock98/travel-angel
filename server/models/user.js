@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-import { transfersSchema } from "./transfers.js";
-import { parkingSchema } from "./parking.js";
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -22,43 +20,10 @@ const userSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
+    default: "/images/blank-avatar.jpg",
   },
-  transfers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Transfer",
-    },
-  ],
-  parking: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Parking",
-    },
-  ],
-  flights: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Flights",
-    },
-  ],
-  accommodation: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Accommodation",
-    },
-  ],
-  visas: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Visa",
-    },
-  ],
-  covidDocumentation: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CovidDocumentation",
-    },
-  ],
 });
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
