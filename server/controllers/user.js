@@ -1,9 +1,9 @@
 import { User } from "../models/user.js";
 import bcrypt from "bcryptjs";
 
-export const User = {
+export const UserController = {
   New: (req, res) => {
-    res.json({});
+    // res.json({});
   },
 
   Create: (req, res) => {

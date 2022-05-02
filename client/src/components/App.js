@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import SignUp from "./signUp/signUp";
 import axios from "axios";
 
