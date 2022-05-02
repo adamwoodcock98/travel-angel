@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 export const User = {
   New: (req, res) => {
-    res.render("users/signup", {});
+    res.json({});
   },
 
   Create: (req, res) => {
@@ -28,7 +28,7 @@ export const User = {
     const username = req.params.username;
     User.findOne({ username: username }, (err, user) => {
       if (user) {
-        res.render("users/profile", { user: user });
+        res.json({ user: user });
       } else {
         req.session.message = {
           type: "danger",
