@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 require("../mongodb_helper");
-const User = require("../../models/user");
+const User = require("../../models/user.js");
 
 describe("User model", () => {
   beforeEach((done) => {
