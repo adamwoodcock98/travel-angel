@@ -1,3 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-export const parkingSchema = mongoose.Schema({});
+const parkingSchema = mongoose.Schema({});
+
+module.exports = parkingSchema

@@ -1,9 +1,9 @@
-import { User } from "../models/user.js";
-import bcrypt from "bcryptjs";
+const User = require("../models/user.js");
+const bcrypt = require('bcryptjs');
 
-export const UserController = {
+const UsersController = {
   New: (req, res) => {
-    // res.json({});
+    res.json({});
   },
 
   Create: (req, res) => {
@@ -38,3 +38,5 @@ export const UserController = {
     });
   }
 }
+
+module.exports = UsersController

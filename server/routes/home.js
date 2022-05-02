@@ -1,7 +1,7 @@
-import express from "express";
-import { Home } from "../controllers/home.js";
+const express = require("express");
 const router = express.Router();
+const HomeController = require("../controllers/home");
 
-router.get("/", Home.Index);
+router.get("/", HomeController.Index);
 
-export default router;
+module.exports = router;

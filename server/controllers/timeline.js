@@ -1,11 +1,11 @@
-import { Transfer } from "../models/transfer";
-import { Parking } from "../models/parking";
-import { Flight } from "../models/flight";
-import { Accomodation } from "../models/accomodation";
-import { Passport } from "../models/passport";
-import { Visa } from "../models/visa";
+const Transfer = require("../models/transfer");
+const Parking = require("../models/parking");
+const Flight = require("../models/flight");
+const Accomodation = require("../models/accomodation");
+const Passport = require("../models/passport");
+const Visa = require("../models/visa");
 
-export const Timeline = {
+const TimelineController = {
   Index: async (req, res) => {
     const user = req.session.user.userId // ?????
     const transfers = Transfer.findAll({ "user": user }, (err, transfers) => {
@@ -105,3 +105,5 @@ export const Timeline = {
     )
   }
 }
+
+module.exports = TimelineController

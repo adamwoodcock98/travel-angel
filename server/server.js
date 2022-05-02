@@ -1,10 +1,13 @@
-import express from "express";
-import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import cors from "cors";
-import router from "./routes/user.js";
-
-import dotenv from "dotenv";
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const homeRouter = require("./routes/home.js");
+const usersRouter = require("./routes/user.js");
+const timelineRouter = require("./routes/timeline.js");
+const path = require('path')
+// require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
+const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
 const app = express();
@@ -23,7 +26,9 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
-app.use("/user", router);
+app.use("/", homeRouter);
+app.use("/timeline", timelineRouter);
+app.use("/users", usersRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);

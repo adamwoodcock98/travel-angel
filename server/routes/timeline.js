@@ -1,12 +1,12 @@
-import express from "express";
-import { Timeline } from "../controllers/timeline.js";
+const express = require("express");
+const TimelineController = require("../controllers/timeline");
 const router = express.Router();
 
-router.get("/", Timeline.Index);
-router.get(":info/new", Timeline. New);
-router.post("/", Timeline.Create);
-router.get(":info/:id/delete", Timeline.Delete);
-router.get(":info/:id/edit", Timeline.Edit);
-router.post(":info/:id/save", Timeline.Save);
+router.get("/", TimelineController.Index);
+router.get(":info/new", TimelineController. New);
+router.post("/", TimelineController.Create);
+router.get(":info/:id/delete", TimelineController.Delete);
+router.get(":info/:id/edit", TimelineController.Edit);
+router.post(":info/:id/save", TimelineController.Save);
 
-export default router;
+module.exports = TimelineController;

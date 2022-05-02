@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import { transfersSchema } from "./transfers.js";
-import { parkingSchema } from "./parking.js";
+const mongoose = require("mongoose");
+const transferSchema = require("./transfer.js");
+const parkingSchema = require("./parking.js");
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -61,4 +61,6 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
