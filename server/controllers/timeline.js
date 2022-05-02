@@ -37,35 +37,71 @@ export const Timeline = {
     }});
   },
 
+  New: (req, res) => {
+    const user = req.session.user
+    const info = req.params.info;
+    res.json({ user: user, infoType: [info] });
+  },
+
   Create: (req, res) => {
-    const password = req.body.password;
-    bcrypt.hash(password, 10).then((hashedPassword) => {
-    const user = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-    user
-      .save()
-      .then((book) => res.json({ msg: "User added successfully" }))
-      .catch((err) =>
-        res.status(400).json({ error: "Unable to add this user" })
-      );
+    const user = req.session.user
+    const info = req.params.info;
+    const content = new [info](req.body);
+    
+    content.user = user.userId;
+    post.save((err) => {
+      if (err) {
+        throw err;
+      }
+      req.session.message = {
+        type: "success",
+        message: "The post has been successfully created!",
+      };
+      res.json({ user: user, [info]: info });
+      res.status(201).redirect("/posts");
     });
   },
 
-  Profile: (req, res) => {
-    const username = req.params.username;
-    User.findOne({ username: username }, (err, user) => {
-      if (user) {
-        res.json({ user: user });
-      } else {
-        req.session.message = {
-          type: "danger",
-          message: `The user "${username}" has not been found`,
-        };
+  Delete: (req, res) => {
+    const info = req.params.info;
+    const id = req.params.id;
+    [info].deleteOne({ _id: id }, (err) => {
+      if (err) {
+        throw err;
       }
+      req.session.message = {
+        type: "success",
+        message: `The ${info} has been successfully deleted`,
+      };
+      res.redirect("..");
     });
+  },
+
+  Edit: (req, res) => {
+    const info = req.params.info;
+    const id = req.params.id;
+    [info].find({ _id: id }, (err, info) => {
+      if (err) {
+        throw err;
+      }
+      res.json({ [info]: info });
+    });
+  },
+
+  Save: (req, res) => {
+    const info = req.params.info;
+    const id = req.params.id;
+    const content = req.body;
+    [info].updateOne(
+      { _id: id },
+      { $set: {  } }, // Fields to change!
+      () => {
+        req.session.message = {
+          type: "success",
+          message: `The ${info} has been successfully edited!`,
+        };
+        res.redirect("..");
+      }
+    )
   }
 }
