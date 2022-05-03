@@ -2,10 +2,6 @@ const User = require("../models/user.js");
 const bcrypt = require("bcryptjs");
 
 const UsersController = {
-  New: (req, res) => {
-    res.json({});
-  },
-
   Create: (req, res) => {
     const password = req.body.password;
     bcrypt.hash(password, 10).then((hashedPassword) => {
