@@ -15,7 +15,7 @@ const UsersController = {
         .save()
         .then((book) => res.json({ msg: "User added successfully" }))
         .catch((err) =>
-          res.status(400).json({ error: "Unable to add this user" })
+          res.status(400).json({ error: "Unable to sign up" })
         );
     });
   },
@@ -30,7 +30,7 @@ const UsersController = {
             req.session.user = user;
             res.json({ user: user });
           } else {
-            res.json({ msg: "User not signed in with user found" });
+            res.json({ msg: "User not found" });
           }
         });
       } else {
@@ -40,7 +40,6 @@ const UsersController = {
   },
 
   SignOut: (req, res) => {
-    console.log("logging out");
     if (req.session.user && req.cookies.user_sid) {
       res.clearCookie("user_sid");
     }
