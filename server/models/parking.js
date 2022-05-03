@@ -1,3 +1,8 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-export const parkingSchema = mongoose.Schema({});
+const parkingSchema = new mongoose.Schema({
+  
+});
+
+const Parking = mongoose.model("Parking", parkingSchema);
+module.exports = Parking;
