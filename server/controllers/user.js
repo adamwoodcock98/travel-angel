@@ -25,14 +25,14 @@ const UsersController = {
   },
 
   Profile: (req, res) => {
-    const username = req.params.username;
-    User.findOne({ username: username }, (err, user) => {
+    const userId = req.params.id;
+    User.findOne({ username: userId }, (err, user) => {
       if (user) {
         res.json({ user: user });
       } else {
         req.session.message = {
           type: "danger",
-          message: `The user "${username}" has not been found`,
+          message: `The user has not been found`,
         };
       }
     });
