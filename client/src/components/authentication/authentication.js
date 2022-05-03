@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import SignUp from "./signUp/signUp";
-import SignIn from "./signIn/signIn";
+import LogIn from "./logIn/logIn";
 import Button from "@mui/material/Button";
 
 export const Authentication = () => {
@@ -12,8 +12,8 @@ export const Authentication = () => {
     email: "",
     password: "",
   });
-  const [openSignIn, setOpenSignIn] = useState(false);
-  const [userSignIn, setUserSignIn] = useState({
+  const [openlogIn, setOpenlogIn] = useState(false);
+  const [userlogIn, setUserlogIn] = useState({
     email: "",
     password: "",
   });
@@ -46,69 +46,51 @@ export const Authentication = () => {
     });
   };
 
-  const handleChangeSignIn = (e) => {
+  const handleChangelogIn = (e) => {
     const value = e.target.value;
-    setUserSignIn({
-      ...userSignIn,
+    setUserlogIn({
+      ...userlogIn,
       [e.target.name]: value,
     });
   };
 
-  const handleOpenSignIn = () => {
-    setOpenSignIn(true);
+  const handleOpenlogIn = () => {
+    setOpenlogIn(true);
   };
 
-  const handleCloseSignIn = () => {
-    setOpenSignIn(false);
+  const handleCloselogIn = () => {
+    setOpenlogIn(false);
   };
 
-  const handleSubmitSignIn = async (e) => {
+  const handleSubmitlogIn = async (e) => {
     e.preventDefault();
 
     const { firstName, lastName, email, password } = user;
     const newUser = { firstName, lastName, email, password };
 
     await axios
-      .post("http://localhost:5000/user/sign-in", newUser)
+      .post("http://localhost:5000/user/log-in", newUser)
       .then((res) => {
-        greetUser(res.data.msg);
+        console.log(res.data.msg);
         handleClose();
         window.location = "/";
       });
   };
 
-  const handleSubmitSignOut = async (e) => {
+  const handleSubmitlogOut = async (e) => {
     e.preventDefault();
 
     const { firstName, lastName, email, password } = user;
     const newUser = { firstName, lastName, email, password };
 
     await axios
-      .post("http://localhost:5000/user/sign-out", newUser)
+      .post("http://localhost:5000/user/log-out", newUser)
       .then((res) => {
-        console.log(newUser);
         console.log(res.data);
         handleClose();
         window.location = "/";
       });
   };
-
-  const greetUser = (message) => {
-    console.log(message);
-  };
-
-  // const getUserData = async (e) => {
-  //   await axios
-  //     .post(`/posts/${element.id}/${element.textContent.trim()}`, {
-  //       post_id: element.id,
-  //     })
-  //     .then((response) => {
-  //       updateLikes(response.data, element.id);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   return (
     <div className="Authentication">
@@ -120,18 +102,17 @@ export const Authentication = () => {
         user={user}
         handleSubmit={handleSubmit}
       />
-      <SignIn
-        open={openSignIn}
-        handleOpen={handleOpenSignIn}
-        handleClose={handleCloseSignIn}
-        handleChange={handleChangeSignIn}
-        user={userSignIn}
-        handleSubmit={handleSubmitSignIn}
+      <LogIn
+        open={openlogIn}
+        handleOpen={handleOpenlogIn}
+        handleClose={handleCloselogIn}
+        handleChange={handleChangelogIn}
+        user={userlogIn}
+        handleSubmit={handleSubmitlogIn}
       />
-      <Button variant="outlined" onClick={handleSubmitSignOut}>
-        Sign Out
+      <Button variant="outlined" onClick={handleSubmitlogOut}>
+        log Out
       </Button>
-      <h1>User: </h1>
     </div>
   );
 };

@@ -14,13 +14,11 @@ const UsersController = {
       user
         .save()
         .then((book) => res.json({ msg: "User added successfully" }))
-        .catch((err) =>
-          res.status(400).json({ error: "Unable to sign up" })
-        );
-    });
+        .catch((err) => res.status(400).json({ error: "Unable to sign up" }));
+    }); 
   },
 
-  SignIn: (req, res) => {
+  LogIn: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     User.findOne({ email: email }).then((user) => {
@@ -39,7 +37,7 @@ const UsersController = {
     });
   },
 
-  SignOut: (req, res) => {
+  LogOut: (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
       res.clearCookie("user_sid");
     }

@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function SignIn({
+export default function LogIn({
   open,
   handleOpen,
   handleClose,
@@ -21,10 +21,10 @@ export default function SignIn({
         Sign In
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Sign In</DialogTitle>
+        <DialogTitle>Log In</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please sign in to manage your holiday
+            Please log in to manage your holiday
           </DialogContentText>
           <TextField
             value={user.emailAddress}
@@ -54,7 +54,7 @@ export default function SignIn({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Sign In</Button>
+          <Button onClick={handleSubmit}>Log In</Button>
         </DialogActions>
       </Dialog>
     </div>
