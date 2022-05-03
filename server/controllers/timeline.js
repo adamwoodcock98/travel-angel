@@ -55,7 +55,7 @@ const TimelineController = {
       }
       req.session.message = {
         type: "success",
-        message: "The post has been successfully created!",
+        message: `The ${info} has been successfully created!`,
       };
       res.json({ user: user, [info]: info });
       res.status(201).redirect("/posts");
