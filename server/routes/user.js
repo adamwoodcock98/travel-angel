@@ -1,9 +1,8 @@
-import express from "express";
-import { signUp } from "../controllers/user.js";
-import { User } from "../models/user.js";
+const express = require("express");
+const UsersController = require("../controllers/user");
+const usersRouter = express.Router();
 
-const router = express.Router();
-router.get("/", (req, res) => res.send("user route testing!"));
-router.post("/", signUp);
+usersRouter.get("/signup", UsersController.New);
+usersRouter.post("/", UsersController.Create);
 
-export default router;
+module.exports = userRouter;
