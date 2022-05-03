@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
 import router from "./routes/user.js";
+import session from "express-session";
+import { default as connectMongoDBSession } from "connect-mongodb-session";
+
+const MongoDBStore = connectMongoDBSession(session);
 
 import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
@@ -22,6 +26,25 @@ mongoose
     console.log("DB connected");
   })
   .catch((err) => console.log(err.message));
+
+const mongoDBstore = new MongoDBStore({
+  uri: uri,
+  collection: "mySessions",
+});
+
+app.use(
+  session({
+    secret: process.env.SESS_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: mongoDBstore,
+    cookie: {
+      maxAge: 60000,
+      sameSite: false,
+      secure: true,
+    },
+  })
+);
 
 app.use("/user", router);
 
