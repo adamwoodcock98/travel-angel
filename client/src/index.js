@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
-import Sidebar from "./components/Dashboard/sidebar/sidebar"
+import VerticalTabs from "./components/Dashboard/dashboard"
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Sidebar />
+    <VerticalTabs />
     <App />
   </React.StrictMode>
 );
