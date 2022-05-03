@@ -6,3 +6,5 @@ const flightSchema = new mongoose.Schema({
     required: true,
   }
 })
+
+module.exports = flightSchema;
