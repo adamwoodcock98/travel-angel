@@ -26,7 +26,7 @@ const UsersController = {
 
   Profile: (req, res) => {
     const userId = req.params.id;
-    User.findOne({ username: userId }, (err, user) => {
+    User.findOne({ user: userId }, (err, user) => {
       if (user) {
         res.json({ user: user });
       } else {
