@@ -5,8 +5,7 @@ const cors = require("cors");
 const usersRouter = require("./routes/user.js");
 const dotenv = require("dotenv");
 const session = require("express-session");
-const connectMongoDBSession = require("connect-mongodb-session");
-const MongoDBStore = connectMongoDBSession(session);
+const MongoStore = require("connect-mongo");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -25,17 +24,17 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
-const mongoDBstore = new MongoDBStore({
-  uri: uri,
-  collection: "mySessions",
+const store = MongoStore.create({
+  mongoUrl: uri,
+  collection: "sessions",
 });
 
 app.use(
   session({
     secret: "aaahh",
-    resave: true,
-    saveUninitialized: false,
-    store: mongoDBstore,
+    resave: false,
+    saveUninitialized: true,
+    store: store,
     cookie: {
       maxAge: 60000,
       sameSite: false,
