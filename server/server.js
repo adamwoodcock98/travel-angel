@@ -5,7 +5,7 @@ const cors = require("cors");
 const usersRouter = require("./routes/user.js");
 const dotenv = require("dotenv");
 const session = require("express-session");
-const connectMongoDBSession = require("mongo-db-session");
+const connectMongoDBSession = require("connect-mongodb-session");
 const MongoDBStore = connectMongoDBSession(session);
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,7 +32,7 @@ const mongoDBstore = new MongoDBStore({
 
 app.use(
   session({
-    secret: process.env.SESS_SECRET,
+    secret: "aaahh",
     resave: true,
     saveUninitialized: false,
     store: mongoDBstore,

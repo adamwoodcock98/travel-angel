@@ -24,8 +24,8 @@ export default function SignUp({
         <DialogTitle>Sign Up</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Sign Up to this site to organise your holiday. All documents in one
-            place.
+            Sign Up to Travel Angel to organise your holiday. All documents in one
+            place!
           </DialogContentText>
           <TextField
             value={user.firstName}
