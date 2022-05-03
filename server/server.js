@@ -6,7 +6,6 @@ const homeRouter = require("./routes/home.js");
 const usersRouter = require("./routes/user.js");
 const timelineRouter = require("./routes/timeline.js");
 const path = require('path')
-// require('dotenv').config({ path: path.resolve(__dirname, '../../.env') })
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
