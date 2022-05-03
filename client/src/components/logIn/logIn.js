@@ -7,57 +7,28 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function SignUp({
+export default function LogIn({
   open,
   handleOpen,
   handleClose,
   handleChange,
   user,
-  handleSubmit,
+  onSubmit,
 }) {
   return (
     <div>
       <Button variant="outlined" onClick={handleOpen}>
-        Sign Up
+        Sign In
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Sign Up</DialogTitle>
+        <DialogTitle>Sign In</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Sign Up to this site to organise your holiday. All documents in one
-            place.
-          </DialogContentText>
-          <TextField
-            value={user.firstName}
-            autoFocus
-            margin="dense"
-            id="firstName"
-            name="firstName"
-            label="First Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            required
-            onChange={handleChange}
-          />
-          <TextField
-            value={user.lastName}
-            autoFocus
-            margin="dense"
-            id="lastName"
-            name="lastName"
-            label="Last Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            required
-            onChange={handleChange}
-          />
+          <DialogContentText>Log In to manage your holiday</DialogContentText>
           <TextField
             value={user.emailAddress}
             autoFocus
             margin="dense"
-            id="email"
+            id="emailLogIn"
             name="email"
             label="Email Address"
             type="email"
@@ -69,7 +40,7 @@ export default function SignUp({
           <TextField
             autoFocus
             margin="dense"
-            id="password"
+            id="passwordLogIn"
             name="password"
             label="Password"
             type="password"
@@ -81,7 +52,7 @@ export default function SignUp({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Sign Up</Button>
+          <Button onClick={onSubmit}>Log In</Button>
         </DialogActions>
       </Dialog>
     </div>

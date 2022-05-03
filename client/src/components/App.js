@@ -27,7 +27,7 @@ const App = () => {
     setOpen(false);
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { firstName, lastName, email, password } = user;
@@ -47,7 +47,7 @@ const App = () => {
         handleClose={handleClose}
         handleChange={handleChange}
         user={user}
-        onSubmit={onSubmit}
+        handleSubmit={handleSubmit}
       />
     </div>
   );
