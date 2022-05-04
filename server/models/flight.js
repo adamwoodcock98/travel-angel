@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const flightSchema = new mongoose.Schema({
+const flightSchema = mongoose.Schema({
   flightNumber: String,
   departureTime: {
     type: Date,
@@ -31,7 +31,10 @@ const flightSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-  }
-})
+    required: true,
+  },
+});
 
-module.exports = flightSchema;
+const Flight = mongoose.model("Flight", flightSchema);
+
+module.exports = Flight;
