@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./components/App";
 import VerticalTabs from "./components/Dashboard/dashboard"
 import NavBar from "./components/navBar/navBar"
+import Flights from "./components/Dashboard/flights/flights"
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -11,6 +12,7 @@ root.render(
   <React.StrictMode>
     <NavBar/>
     <VerticalTabs />
+    <Flights />
     <App />
   </React.StrictMode>
 );
