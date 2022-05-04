@@ -5,4 +5,4 @@ const usersRouter = express.Router();
 usersRouter.get("/signup", UsersController.New);
 usersRouter.post("/", UsersController.Create);
 
-module.exports = userRouter;
+module.exports = usersRouter;
