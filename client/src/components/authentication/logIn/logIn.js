@@ -18,7 +18,7 @@ export default function LogIn({
   return (
     <div>
       <Button variant="outlined" onClick={handleOpen}>
-       Log In
+        Log In
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Log In</DialogTitle>
@@ -32,7 +32,7 @@ export default function LogIn({
             margin="dense"
             id="emailLogIn"
             name="email"
-            label="email"
+            label="E-mail"
             type="email"
             fullWidth
             variant="standard"

@@ -87,18 +87,6 @@ export const Authentication = () => {
     });
   };
 
-  const handleSubmitLogOut = async (e) => {
-    e.preventDefault();
-
-    const { firstName, lastName, email, password } = user;
-    const newUser = { firstName, lastName, email, password };
-
-    await axios.post(`${url}/user/log-out`, newUser).then((res) => {
-      handleClose();
-      handleAlert(res.data.msg);
-    });
-  };
-
   const handleAlert = (message) => {
     setAlertOpen(true);
     setAlertMessage(message);
@@ -122,9 +110,6 @@ export const Authentication = () => {
         user={userLogIn}
         handleSubmit={handleSubmitLogIn}
       />
-      <Button variant="outlined" onClick={handleSubmitLogOut}>
-        Log Out
-      </Button>
       <Alert
         message={alertMessage}
         open={alertOpen}
