@@ -21,17 +21,20 @@ const UsersController = {
   LogIn: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
+    console.log(email)
+    console.log(password)
+    console.log(req.body)
     User.findOne({ email: email }).then((user) => {
       if (user) {
         bcrypt.compare(password, user.password).then((result) => {
           if (result) {
             req.session.user = user;
-            res.json({ user: user });
+            res.json({ msg: `Welcome back, ${user.firstName}!`, user: `${user}` });
           } else {
             res.json({ msg: "Incorrect details entered" });
           }
         });
-      } else {
+      } else  {
         res.json({ msg: "User not found" });
       }
     });

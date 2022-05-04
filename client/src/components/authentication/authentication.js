@@ -82,8 +82,8 @@ export const Authentication = () => {
   const handleSubmitLogIn = async (e) => {
     e.preventDefault();
 
-    const { email, password } = user;
-    const newUser = JSON.stringify({ email, password });
+    const { email, password } = userLogIn;
+    const newUser = { email, password };
 
     await axios
       .post("http://localhost:8000/user/log-in", newUser)
@@ -105,8 +105,8 @@ export const Authentication = () => {
       .post("http://localhost:8000/user/log-out", newUser)
       .then((res) => {
         handleClose();
-        window.location = "/";
         handleAlert(res.data.msg);
+        // window.location = "/";
       });
   };
 

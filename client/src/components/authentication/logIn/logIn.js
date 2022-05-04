@@ -27,12 +27,12 @@ export default function LogIn({
             Please login to manage your holiday
           </DialogContentText>
           <TextField
-            value={user.emailAddress}
+            value={user.email}
             autoFocus
             margin="dense"
             id="emailLogIn"
             name="email"
-            label="Email Address"
+            label="email"
             type="email"
             fullWidth
             variant="standard"
@@ -40,6 +40,7 @@ export default function LogIn({
             onChange={handleChange}
           />
           <TextField
+            value={user.password}
             autoFocus
             margin="dense"
             id="passwordLogIn"
