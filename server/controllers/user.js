@@ -13,9 +13,13 @@ const UsersController = {
       });
       user
         .save()
-        .then((book) => res.json({ msg: "You have signed up successfully!" }))
-        .catch((err) => res.status(400).json({ error: "Unable to sign up" }));
-    }); 
+        .then((book) =>
+          res.json({ msg: "You have signed up successfully!", type: "success" })
+        )
+        .catch((err) =>
+          res.status(400).json({ error: "Unable to sign up", type: "error" })
+        );
+    });
   },
 
   LogIn: (req, res) => {
@@ -26,13 +30,19 @@ const UsersController = {
         bcrypt.compare(password, user.password).then((result) => {
           if (result) {
             req.session.user = user;
-            res.json({ msg: `Welcome back, ${user.firstName}!`, user: user });
+            res.json({
+              msg: `Welcome back, ${user.firstName}!`,
+              type: "success",
+            });
           } else {
-            res.json({ msg: "Incorrect details entered" });
+            res.json({ msg: "Incorrect details entered!", type: "error" });
           }
         });
-      } else  {
-        res.json({ msg: "User not found. Please sign up first!" });
+      } else {
+        res.json({
+          msg: "User not found. Please sign up first!",
+          type: "warning",
+        });
       }
     });
   },
@@ -42,7 +52,7 @@ const UsersController = {
       res.clearCookie("user_sid");
       req.session.destroy();
     }
-    res.json({ msg: "You have logged out successfully!" });
+    res.json({ msg: "You have logged out successfully!", type: "success" });
   },
 };
 
