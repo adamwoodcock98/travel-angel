@@ -28,7 +28,7 @@ export default function NavBar(){
       <Box sx={{ flexGrow: 1 }}>
         <AppBar 
           position='static' 
-          sx={{ backgroundColor: "#64BAAA" }}
+          sx={{ backgroundColor: "#f22771" }}
         >
 
         <Toolbar>
