@@ -18,13 +18,13 @@ export default function LogIn({
   return (
     <div>
       <Button variant="outlined" onClick={handleOpen}>
-        Sign In
+       Log In
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Log In</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please log in to manage your holiday
+            Please login to manage your holiday
           </DialogContentText>
           <TextField
             value={user.emailAddress}

@@ -28,11 +28,11 @@ const UsersController = {
             req.session.user = user;
             res.json({ user: user });
           } else {
-            res.json({ msg: "User not found" });
+            res.json({ msg: "Incorrect details entered" });
           }
         });
       } else {
-        res.json({ msg: "User not signed in" });
+        res.json({ msg: "User not found" });
       }
     });
   },
@@ -40,6 +40,7 @@ const UsersController = {
   LogOut: (req, res) => {
     if (req.session.user && req.cookies.user_sid) {
       res.clearCookie("user_sid");
+      req.session.destroy();
     }
     res.json({ msg: "User signed out successfully" });
   },

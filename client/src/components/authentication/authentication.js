@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import SignUp from "./signUp/signUp";
 import LogIn from "./logIn/logIn";
+import { Alert } from "./snackbar"
 import Button from "@mui/material/Button";
 
 export const Authentication = () => {
@@ -12,11 +13,22 @@ export const Authentication = () => {
     email: "",
     password: "",
   });
-  const [openlogIn, setOpenlogIn] = useState(false);
-  const [userlogIn, setUserlogIn] = useState({
+  const [openLogIn, setOpenLogIn] = useState(false);
+  const [userLogIn, setUserLogIn] = useState({
     email: "",
     password: "",
   });
+
+  const [alertOpen, setAlertOpen] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
+  const alertPosition = {
+    vertical: 'top',
+    horizontal: 'center',
+  }
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -38,59 +50,70 @@ export const Authentication = () => {
     e.preventDefault();
 
     const { firstName, lastName, email, password } = user;
-    const newUser = { firstName, lastName, email, password };
+    const newUser = JSON.stringify({ firstName, lastName, email, password });
 
-    await axios.post("http://localhost:5000/user/sign-up", newUser).then(() => {
+    await axios.post("http://localhost:8000/user/sign-up", newUser, {
+      headers: {
+        // Overwrite Axios's automatically set Content-Type
+        'Content-Type': 'application/json'
+      }}).then((res) => {
       handleClose();
-      window.location = "/";
+      handleAlert(res.data.msg);
+      // window.location = "/";
     });
   };
 
-  const handleChangelogIn = (e) => {
+  const handleChangeLogIn = (e) => {
     const value = e.target.value;
-    setUserlogIn({
-      ...userlogIn,
+    setUserLogIn({
+      ...userLogIn,
       [e.target.name]: value,
     });
   };
 
-  const handleOpenlogIn = () => {
-    setOpenlogIn(true);
+  const handleOpenLogIn = () => {
+    setOpenLogIn(true);
   };
 
-  const handleCloselogIn = () => {
-    setOpenlogIn(false);
+  const handleCloseLogIn = () => {
+    setOpenLogIn(false);
   };
 
-  const handleSubmitlogIn = async (e) => {
+  const handleSubmitLogIn = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, password } = user;
-    const newUser = { firstName, lastName, email, password };
+    const { email, password } = user;
+    const newUser = JSON.stringify({ email, password });
 
     await axios
-      .post("http://localhost:5000/user/log-in", newUser)
+      .post("http://localhost:8000/user/log-in", newUser)
       .then((res) => {
         console.log(res.data.msg);
         handleClose();
-        window.location = "/";
+        handleAlert(res.data.msg);
+        // window.location = "/";
       });
   };
 
-  const handleSubmitlogOut = async (e) => {
+  const handleSubmitLogOut = async (e) => {
     e.preventDefault();
 
     const { firstName, lastName, email, password } = user;
     const newUser = { firstName, lastName, email, password };
 
     await axios
-      .post("http://localhost:5000/user/log-out", newUser)
+      .post("http://localhost:8000/user/log-out", newUser)
       .then((res) => {
-        console.log(res.data);
         handleClose();
         window.location = "/";
+        handleAlert(res.data.msg);
       });
   };
+
+  const handleAlert = (message) => {
+    setAlertOpen(true)
+    setAlertMessage(message)
+  }
 
   return (
     <div className="Authentication">
@@ -103,16 +126,25 @@ export const Authentication = () => {
         handleSubmit={handleSubmit}
       />
       <LogIn
-        open={openlogIn}
-        handleOpen={handleOpenlogIn}
-        handleClose={handleCloselogIn}
-        handleChange={handleChangelogIn}
-        user={userlogIn}
-        handleSubmit={handleSubmitlogIn}
+        open={openLogIn}
+        handleOpen={handleOpenLogIn}
+        handleClose={handleCloseLogIn}
+        handleChange={handleChangeLogIn}
+        user={userLogIn}
+        handleSubmit={handleSubmitLogIn}
       />
-      <Button variant="outlined" onClick={handleSubmitlogOut}>
-        log Out
+      <Button 
+        variant="outlined" 
+        onClick={handleSubmitLogOut}
+      >
+        Log Out
       </Button>
+      <Alert 
+        message={alertMessage} 
+        open={alertOpen} 
+        handleClose={handleAlertClose}
+        alertPosition = {alertPosition}
+        />
     </div>
   );
 };
