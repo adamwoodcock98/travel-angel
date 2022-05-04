@@ -10,22 +10,31 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
+import { useState } from "react";
 
+export default function NavBar(){
+  const [open, setOpen] = useState(false);
 
-// const NavBar = () => {
-  export default function NavBar(){
+  const handleOpenMenu = () => {
+    setOpen(true);
+  };
+
+  const handleCloseMenu = () => {
+    setOpen(false);
+  };  
 
   return (
     <div className='navbar'>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar 
           position='static' 
-          sx={{ backgroundColor: "#F3B19A" }}
+          sx={{ backgroundColor: "#64BAAA" }}
         >
 
         <Toolbar>
-          
+          <div>
             <Typography
+              className="logo"
               aria-label="logo"
               variant="h6"
               noWrap
@@ -34,29 +43,37 @@ import Grid from '@mui/material/Grid';
             >
               TRAVEL ANGEL
             </Typography>
-         
+            </div>
 
           <Grid container justifyContent='flex-end'>
- 
+            <div>
               <Button 
-                aria-label="dashboard"
+                className="dashboard-btn"
+                aria-label="dashboard-btn"
                 style={{ flex: 1 }} 
                 color='inherit'
-                sx={{ mt: '12px' }}
+                sx={{ mt: '4px', mx: 3 }}
                 >
                 Dashboard
               </Button>
-     
-    
+            </div>
+          <div>
           <Box sx={{ flexGrow: 0 }}>
  
             <Tooltip title="Open user menu">
-               <IconButton sx={{ p: 0 }}>
-                  <Avatar src="/static/images/avatar/2.jpg" />
-                </IconButton>
+              <IconButton 
+                className="avatar" 
+                sx={{ p: 0 }}
+                onClick={handleOpenMenu}
+              >
+                <Avatar src="/static/images/avatar/2.jpg" />
+              </IconButton>
              </Tooltip>
       
-             <Menu
+            <Menu
+              open={open}
+              onClose={handleCloseMenu}
+              className="menu-dropdown"
               sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorOrigin={{
@@ -71,11 +88,26 @@ import Grid from '@mui/material/Grid';
             >
             <MenuItem>
               <IconButton>
+                <Typography textAlign="center">Account</Typography>
+              </IconButton>
+            </MenuItem>
+
+            <MenuItem>
+              <IconButton>
+                <Typography textAlign="center">Settings</Typography>
+              </IconButton>
+            </MenuItem>
+
+            <MenuItem>
+              <IconButton>
                 <Typography textAlign="center">Logout</Typography>
               </IconButton>
             </MenuItem>
+
             </Menu>
           </Box>
+          </div>
+
           </Grid>
 
         </Toolbar>
