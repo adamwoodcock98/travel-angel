@@ -21,9 +21,6 @@ const UsersController = {
   LogIn: (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(email)
-    console.log(password)
-    console.log(req.body)
     User.findOne({ email: email }).then((user) => {
       if (user) {
         bcrypt.compare(password, user.password).then((result) => {

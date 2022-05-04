@@ -6,6 +6,7 @@ import { Alert } from "./snackbar"
 import Button from "@mui/material/Button";
 
 export const Authentication = () => {
+  const url = "http://localhost:8000"
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({
     firstName: "",
@@ -50,16 +51,11 @@ export const Authentication = () => {
     e.preventDefault();
 
     const { firstName, lastName, email, password } = user;
-    const newUser = JSON.stringify({ firstName, lastName, email, password });
+    const newUser = { firstName, lastName, email, password };
 
-    await axios.post("http://localhost:8000/user/sign-up", newUser, {
-      headers: {
-        // Overwrite Axios's automatically set Content-Type
-        'Content-Type': 'application/json'
-      }}).then((res) => {
+    await axios.post(`${url}/user/sign-up`, newUser).then((res) => {
       handleClose();
       handleAlert(res.data.msg);
-      // window.location = "/";
     });
   };
 
@@ -86,12 +82,10 @@ export const Authentication = () => {
     const newUser = { email, password };
 
     await axios
-      .post("http://localhost:8000/user/log-in", newUser)
+      .post(`${url}/user/log-in`, newUser)
       .then((res) => {
-        console.log(res.data.msg);
-        handleClose();
+        handleCloseLogIn();
         handleAlert(res.data.msg);
-        // window.location = "/";
       });
   };
 
@@ -102,12 +96,11 @@ export const Authentication = () => {
     const newUser = { firstName, lastName, email, password };
 
     await axios
-      .post("http://localhost:8000/user/log-out", newUser)
+      .post(`${url}/user/log-out`, newUser)
       .then((res) => {
         handleClose();
         handleAlert(res.data.msg);
-        // window.location = "/";
-      });
+      })
   };
 
   const handleAlert = (message) => {

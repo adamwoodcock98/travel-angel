@@ -7,6 +7,7 @@ export const Alert = ({message, open, handleClose, alertPosition}) => {
         anchorOrigin={ alertPosition }
         open={open}
         onClose={handleClose}
+        autoHideDuration={6000}
         message={message}
         key={alertPosition.vertical + alertPosition.horizontal}
       />
