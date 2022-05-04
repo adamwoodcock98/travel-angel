@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import SignUp from "./signUp/signUp";
 import LogIn from "./logIn/logIn";
-import { Alert } from "./snackbar"
+import { Alert } from "../assets/snackbar";
 import Button from "@mui/material/Button";
 
 export const Authentication = () => {
-  const url = "http://localhost:8000"
+  const url = "http://localhost:8000";
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({
     firstName: "",
@@ -20,12 +20,12 @@ export const Authentication = () => {
     password: "",
   });
 
-  const [alertOpen, setAlertOpen] = useState(false)
-  const [alertMessage, setAlertMessage] = useState('')
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const alertPosition = {
-    vertical: 'top',
-    horizontal: 'center',
-  }
+    vertical: "top",
+    horizontal: "center",
+  };
 
   const handleAlertClose = () => {
     setAlertOpen(false);
@@ -81,12 +81,10 @@ export const Authentication = () => {
     const { email, password } = userLogIn;
     const newUser = { email, password };
 
-    await axios
-      .post(`${url}/user/log-in`, newUser)
-      .then((res) => {
-        handleCloseLogIn();
-        handleAlert(res.data.msg);
-      });
+    await axios.post(`${url}/user/log-in`, newUser).then((res) => {
+      handleCloseLogIn();
+      handleAlert(res.data.msg);
+    });
   };
 
   const handleSubmitLogOut = async (e) => {
@@ -95,18 +93,16 @@ export const Authentication = () => {
     const { firstName, lastName, email, password } = user;
     const newUser = { firstName, lastName, email, password };
 
-    await axios
-      .post(`${url}/user/log-out`, newUser)
-      .then((res) => {
-        handleClose();
-        handleAlert(res.data.msg);
-      })
+    await axios.post(`${url}/user/log-out`, newUser).then((res) => {
+      handleClose();
+      handleAlert(res.data.msg);
+    });
   };
 
   const handleAlert = (message) => {
-    setAlertOpen(true)
-    setAlertMessage(message)
-  }
+    setAlertOpen(true);
+    setAlertMessage(message);
+  };
 
   return (
     <div className="Authentication">
@@ -126,18 +122,15 @@ export const Authentication = () => {
         user={userLogIn}
         handleSubmit={handleSubmitLogIn}
       />
-      <Button 
-        variant="outlined" 
-        onClick={handleSubmitLogOut}
-      >
+      <Button variant="outlined" onClick={handleSubmitLogOut}>
         Log Out
       </Button>
-      <Alert 
-        message={alertMessage} 
-        open={alertOpen} 
+      <Alert
+        message={alertMessage}
+        open={alertOpen}
         handleClose={handleAlertClose}
-        alertPosition = {alertPosition}
-        />
+        alertPosition={alertPosition}
+      />
     </div>
   );
 };
