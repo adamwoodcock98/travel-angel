@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import SignUp from "./signUp/signUp";
 import LogIn from "./logIn/logIn";
-import { Alert } from "../assets/snackbar";
-import Button from "@mui/material/Button";
+import { Alerts } from "../assets/snackbar";
 
 export const Authentication = () => {
   const url = "http://localhost:8000";
@@ -22,6 +21,7 @@ export const Authentication = () => {
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
   const alertPosition = {
     vertical: "top",
     horizontal: "center",
@@ -55,7 +55,7 @@ export const Authentication = () => {
 
     await axios.post(`${url}/user/sign-up`, newUser).then((res) => {
       handleClose();
-      handleAlert(res.data.msg);
+      handleAlert(res.data.msg, res.data.type);
     });
   };
 
@@ -83,13 +83,14 @@ export const Authentication = () => {
 
     await axios.post(`${url}/user/log-in`, newUser).then((res) => {
       handleCloseLogIn();
-      handleAlert(res.data.msg);
+      handleAlert(res.data.msg, res.data.type);
     });
   };
 
-  const handleAlert = (message) => {
+  const handleAlert = (message, type) => {
     setAlertOpen(true);
     setAlertMessage(message);
+    setAlertType(type);
   };
 
   return (
@@ -110,11 +111,12 @@ export const Authentication = () => {
         user={userLogIn}
         handleSubmit={handleSubmitLogIn}
       />
-      <Alert
+      <Alerts
         message={alertMessage}
         open={alertOpen}
         handleClose={handleAlertClose}
         alertPosition={alertPosition}
+        alertType={alertType}
       />
     </div>
   );
