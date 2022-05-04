@@ -292,7 +292,7 @@ export default function AddAccommodation() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          {/* <Button onClick={onSubmit}>Save Accommodation Details</Button> */}
+          <Button onClick={onSubmit}>Save Accommodation Details</Button>
         </DialogActions>
       </Dialog>
     </div>
