@@ -5,6 +5,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 
 export default function AddFlight({
   open,
@@ -12,9 +17,8 @@ export default function AddFlight({
   handleClose,
   handleChange,
   flight,
-  onSubmit
+  onSubmit,
 }) {
-
   return (
     <div>
       <Button variant="outlined" onClick={handleOpen}>
@@ -165,6 +169,22 @@ export default function AddFlight({
             variant="outlined"
             onChange={handleChange}
           />
+          <FormControl sx={{ m: 1, minWidth: 190 }}>
+            <InputLabel id="demo-select-small">Journey Type</InputLabel>
+            <Select
+              value={flight.isOutbound}
+              autoFocus
+              margin="dense"
+              id="isOutbound"
+              name="isOutbound"
+              label="Journey type"
+              variant="outlined"
+              onChange={handleChange}
+            >
+              <MenuItem value={false}>Inbound</MenuItem>
+              <MenuItem value={true}>Outbound</MenuItem>
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

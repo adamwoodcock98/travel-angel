@@ -1,4 +1,4 @@
-import AddFlight from './modal/modal.js';
+import AddFlight from './addFlight.js';
 import { useState } from 'react'
 
 const Flights = () => {
@@ -15,7 +15,8 @@ const Flights = () => {
     arrivalTerminal: "",
     arrivalCity: "",
     arrivalGate: "",
-    bookingReference: ""
+    bookingReference: "",
+    isOutbound: ""
   });
 
   const handleChange = (e) => {
