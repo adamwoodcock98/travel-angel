@@ -9,7 +9,7 @@ const App = () => {
     lastName: "",
     email: "",
     password: "",
-  });
+});
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -33,7 +33,7 @@ const App = () => {
     const { firstName, lastName, email, password } = user;
     const newUser = { firstName, lastName, email, password };
 
-    await axios.post("http://localhost:5000/user", newUser).then(() => {
+    await axios.post("http://localhost:8000/user", newUser).then(() => {
       handleClose();
       window.location = "/";
     });
@@ -41,7 +41,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <SignUp
+    <SignUp
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
@@ -49,7 +49,8 @@ const App = () => {
         user={user}
         onSubmit={onSubmit}
       />
-    </div>
+    
+       </div>
   );
 };
 
