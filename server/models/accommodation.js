@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const parkingSchema = new mongoose.Schema({
+const accommodationSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -10,15 +10,20 @@ const parkingSchema = new mongoose.Schema({
   },
   checkInDate: {
     type: Date,
+    required: true,
   },
   checkOutDate: {
     type: Date,
+    required: true,
   },
-  // checkInTime: "",
-  // checkOutTime: "",
-  // bookingReference: "",
-  address: "",
+  checkInTime: String,
+  checkOutTime: String,
+  bookingReference: String,
+  address: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Address",
+  },
 });
 
-const Parking = mongoose.model("Parking", parkingSchema);
-module.exports = Parking;
+const Accommodation = mongoose.model("Accommodation", accommodationSchema);
+module.exports = Accommodation;

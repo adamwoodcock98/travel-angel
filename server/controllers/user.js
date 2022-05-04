@@ -13,7 +13,7 @@ const UsersController = {
       });
       user
         .save()
-        .then((book) => res.json({ msg: "User added successfully" }))
+        .then((user) => res.json({ msg: "User added successfully" }))
         .catch((err) =>
           res.status(400).json({ error: "Unable to add this user" })
         );
