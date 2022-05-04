@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FlightTakeoffOutlined from '@mui/icons-material/FlightTakeoffOutlined';
 import HotelIcon from "@mui/icons-material/HotelOutlined";
+import "./dashboard.css"
 
 
 function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -49,10 +50,11 @@ export default function VerticalTabs() { // the main functional component to be 
   };
 
   return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 224 }}
+    <Box className="tab-box"
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
     >
       <Tabs
+        className="sidebar"
         orientation="vertical"
         variant="scrollable"
         value={value}
@@ -61,13 +63,13 @@ export default function VerticalTabs() { // the main functional component to be 
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         <Tab icon={<FlightTakeoffOutlined />} aria-label="plane" {...a11yProps(0)} /> {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
-        <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
+        <Tab icon={<HotelIcon color="#F22771"/>} aria-label="hotel" {...a11yProps(1)} />
       </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
+      <TabPanel className="tab-content" value={value} index={0}>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mollis arcu sed velit cursus ultrices. Nam non augue vel sem dictum malesuada. In viverra nibh ut ex bibendum, interdum molestie mi sagittis. Nulla vel lacinia lectus. Pellentesque tincidunt in enim id vulputate. Donec vel consectetur lacus. Praesent sed tristique nibh. Fusce sollicitudin feugiat ex, ac mollis leo tempus et. Nam ac bibendum libero, sit amet auctor turpis. Quisque in volutpat arcu, quis vehicula ante. Fusce mauris est, port</p>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
+      <TabPanel className="tab-content"value={value} index={1}>
+        <p>Item Two</p>
       </TabPanel>
     </Box>
   );
