@@ -24,6 +24,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.flightNumber).toEqual("BA1609");
@@ -38,6 +39,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.departureTime).toEqual(mockFlightTime);
@@ -51,6 +53,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     await expect(flight.save()).rejects.toThrow();
@@ -66,6 +69,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.airline).toEqual("British Airways");
@@ -80,6 +84,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.departureAirport).toEqual("London Heathrow");
@@ -93,6 +98,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     await expect(flight.save()).rejects.toThrow();
@@ -107,6 +113,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.departureCity).toEqual("London");
@@ -120,6 +127,7 @@ describe("Flight model", () => {
       departureAirport: "London Heathrow",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     await expect(flight.save()).rejects.toThrow();
@@ -135,6 +143,7 @@ describe("Flight model", () => {
       departureTerminal: "Terminal 5",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.departureTerminal).toEqual("Terminal 5");
@@ -150,6 +159,7 @@ describe("Flight model", () => {
       departureGate: "56",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.departureGate).toEqual("56");
@@ -164,6 +174,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.arrivalAirport).toEqual("Los Angeles International Airport");
@@ -177,6 +188,7 @@ describe("Flight model", () => {
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     await expect(flight.save()).rejects.toThrow();
@@ -191,6 +203,7 @@ describe("Flight model", () => {
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.arrivalCity).toEqual("Los Angeles");
@@ -204,6 +217,7 @@ describe("Flight model", () => {
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
+      isOutbound: true,
       user: mockUserID,
     });
     await expect(flight.save()).rejects.toThrow();
@@ -219,6 +233,7 @@ describe("Flight model", () => {
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
       arrivalTerminal: "TBIT",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.arrivalTerminal).toEqual("TBIT");
@@ -234,6 +249,7 @@ describe("Flight model", () => {
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
       arrivalGate: "33",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.arrivalGate).toEqual("33");
@@ -249,9 +265,39 @@ describe("Flight model", () => {
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
       bookingReference: "AJX0138123",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.bookingReference).toEqual("AJX0138123");
+  });
+
+  it("stores whether the journey is outbound", () => {
+    advanceTo();
+    const mockFlightTime = new Date();
+    const flight = new Flight({
+      departureTime: mockFlightTime,
+      departureAirport: "London Heathrow",
+      departureCity: "London",
+      arrivalAirport: "Los Angeles International Airport",
+      arrivalCity: "Los Angeles",
+      isOutbound: true,
+      user: mockUserID,
+    });
+    expect(flight.isOutbound).toEqual(true);
+  });
+
+  it("stores whether the journey is outbound as a required value", async () => {
+    advanceTo();
+    const mockFlightTime = new Date();
+    const flight = new Flight({
+      departureTime: mockFlightTime,
+      departureAirport: "London Heathrow",
+      departureCity: "London",
+      arrivalAirport: "Los Angeles International Airport",
+      arrivalCity: "Los Angeles",
+      user: mockUserID,
+    });
+    await expect(flight.save()).rejects.toThrow();
   });
 
   it("stores the user ID", () => {
@@ -264,12 +310,13 @@ describe("Flight model", () => {
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
       bookingReference: "AJX0138123",
+      isOutbound: true,
       user: mockUserID,
     });
     expect(flight.user).toEqual(mockUserID);
   });
 
-  it("stores the city of arrival as a required value", async () => {
+  it("stores the user as a required value", async () => {
     advanceTo();
     const mockFlightTime = new Date();
     const flight = new Flight({
@@ -277,6 +324,7 @@ describe("Flight model", () => {
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
+      isOutbound: true,
       arrivalCity: "Los Angeles",
     });
     await expect(flight.save()).rejects.toThrow();

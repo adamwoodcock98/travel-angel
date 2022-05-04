@@ -28,6 +28,10 @@ const flightSchema = mongoose.Schema({
   arrivalTerminal: String,
   arrivalGate: String,
   bookingReference: String,
+  isOutbound: {
+    type: Boolean,
+    required: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
