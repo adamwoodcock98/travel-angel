@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const usersRouter = require("./routes/user.js");
+const flightsRouter = require("./routes/flights.js")
+const accommodationRouter = require("./routes/accommodation.js")
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
@@ -23,6 +25,8 @@ mongoose
   .catch((err) => console.log(err.message));
 
 app.use("/user", usersRouter);
+app.use("/dashboard/flights", flightsRouter);
+app.use("/dashboard/accommodation", accommodationRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);
