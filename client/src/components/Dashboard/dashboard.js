@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FlightTakeoffOutlined from '@mui/icons-material/FlightTakeoffOutlined';
 import HotelIcon from "@mui/icons-material/HotelOutlined";
-import "./dashboard.css"
+import "./dashboard.css";
 
 
 function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -60,16 +60,18 @@ export default function VerticalTabs() { // the main functional component to be 
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
+        indicatorColor="secondary"
+        textColor="secondary"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         <Tab icon={<FlightTakeoffOutlined />} aria-label="plane" {...a11yProps(0)} /> {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
-        <Tab icon={<HotelIcon color="#F22771"/>} aria-label="hotel" {...a11yProps(1)} />
+        <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mollis arcu sed velit cursus ultrices. Nam non augue vel sem dictum malesuada. In viverra nibh ut ex bibendum, interdum molestie mi sagittis. Nulla vel lacinia lectus. Pellentesque tincidunt in enim id vulputate. Donec vel consectetur lacus. Praesent sed tristique nibh. Fusce sollicitudin feugiat ex, ac mollis leo tempus et. Nam ac bibendum libero, sit amet auctor turpis. Quisque in volutpat arcu, quis vehicula ante. Fusce mauris est, port</p>
+        Item One
       </TabPanel>
       <TabPanel className="tab-content"value={value} index={1}>
-        <p>Item Two</p>
+        Item Two
       </TabPanel>
     </Box>
   );
