@@ -33,7 +33,7 @@ jobs:
 
       - name: Testing Client
         run: |
-          cd ../client
+          cd client
           npm install
           npm run test
         
