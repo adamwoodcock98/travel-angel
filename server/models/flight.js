@@ -36,7 +36,7 @@ const flightSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
-  },
+  }
 });
 
 const Flight = mongoose.model("Flight", flightSchema);
