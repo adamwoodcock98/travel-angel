@@ -8,8 +8,12 @@ const AirportPane = (props) => {
   return(
     <>
       <div className="airport-pane-top">
-        <h1>{data.airport}</h1>
-        <h2>{data.city}</h2>
+        <div className="airport-pane-code">
+          <h1>{data.airport}</h1>
+        </div>
+        <div className="airport-pane-city">
+          <h2>{data.city}</h2>
+        </div>
       </div>
       <div className="airport-pane-middle">
         <h4>Terminal: {data.terminal} | Gate {data.gate}</h4>
