@@ -2,6 +2,11 @@ const Accommodation = require("../models/accommodation.js");
 const Address = require("../models/address.js");
 
 const AccommodationController = {
+  New: async (req, res) => {
+    const accommodation = await Accommodation.find().populate("address");
+    res.json(accommodation);
+  },
+
   Create: (req, res) => {
     const {
       name,
