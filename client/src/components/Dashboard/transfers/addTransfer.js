@@ -30,58 +30,17 @@ export default function AddTransfer({
             Fill in the fields to store your transfer details
           </DialogContentText>
           <TextField
-            value={transfer.pickupTime}
+            value={transfer.bookingReference}
             autoFocus
             margin="dense"
-            id="pickupTime"
-            name="pickupTime"
-            label="Pickup Time"
-            type="time"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-          />
-          <TextField
-            value={transfer.dropoffTime}
-            autoFocus
-            margin="dense"
-            id="dropoffTime"
-            name="dropoffTime"
-            label="Dropoff Time"
-            type="time"
-            variant="outlined"
-            required
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-          />
-          <TextField
-            value={transfer.pickupAddress}
-            autoFocus
-            margin="dense"
-            id="pickupAddress"
-            name="pickupAddress"
-            label="Pickup Address"
+            id="bookingReference"
+            name="bookingReference"
+            label="Booking Reference"
             type="text"
             variant="outlined"
             onChange={handleChange}
           />
-          <TextField
-            value={transfer.dropoffAddress}
-            autoFocus
-            margin="dense"
-            id="dropoffAddress"
-            name="dropoffAddress"
-            label="Dropoff Address"
-            type="text"
-            variant="outlined"
-            required
-            onChange={handleChange}
-          />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
+          <FormControl sx={{ m: 1, ml: 0, minWidth: 200 }}>
             <InputLabel id="demo-select-small">Journey Type</InputLabel>
             <Select
               value={transfer.isOutbound}
@@ -118,20 +77,224 @@ export default function AddTransfer({
             label="Contact Number"
             type="text"
             variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          
+          <TextField
+            value={transfer.pickupTime}
+            autoFocus
+            margin="dense"
+            id="pickupTime"
+            name="pickupTime"
+            label="Pickup Time"
+            type="time"
+            variant="outlined"
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={handleChange}
           />
           <TextField
-            value={transfer.bookingReference}
+            value={transfer.dropoffTime}
             autoFocus
             margin="dense"
-            id="bookingReference"
-            name="bookingReference"
-            label="Booking Reference"
+            id="dropoffTime"
+            name="dropoffTime"
+            label="Dropoff Time"
+            type="time"
+            variant="outlined"
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
+          <InputLabel id="demo-select-small">Pickup Address</InputLabel>
+          <TextField
+            value={transfer.pickupAddress.buildingNumber}
+            autoFocus
+            margin="dense"
+            id="buildingNumber"
+            name="buildingNumber"
+            label="Building Number"
             type="text"
             variant="outlined"
             onChange={handleChange}
           />
-          
+          <TextField
+            value={transfer.pickupAddress.buildingName}
+            autoFocus
+            margin="dense"
+            id="buildingName"
+            name="buildingName"
+            label="Building Name"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.pickupAddress.addressLine1}
+            autoFocus
+            margin="dense"
+            id="addressLine1"
+            name="addressLine1"
+            label="Address Line 1"
+            type="text"
+            variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.pickupAddress.addressLine2}
+            autoFocus
+            margin="dense"
+            id="addressLine2"
+            name="addressLine2"
+            label="Address Line 2"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.pickupAddress.city}
+            autoFocus
+            margin="dense"
+            id="city"
+            name="city"
+            label="City"
+            type="text"
+            variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.pickupAddress.stateCounty}
+            autoFocus
+            margin="dense"
+            id="stateCounty"
+            name="stateCounty"
+            label="State/Province"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.pickupAddress.postalCode}
+            autoFocus
+            margin="dense"
+            id="postalCode"
+            name="postalCode"
+            label="Postal/Zip Code"
+            type="text"
+            variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.pickupAddress.countryCode}
+            autoFocus
+            margin="dense"
+            id="countryCode"
+            name="countryCode"
+            label="Country"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <InputLabel id="demo-select-small">Dropoff Address</InputLabel>
+          <TextField
+            value={transfer.dropoffAddress.buildingNumber}
+            autoFocus
+            margin="dense"
+            id="buildingNumber"
+            name="buildingNumber"
+            label="Building Number"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.buildingName}
+            autoFocus
+            margin="dense"
+            id="buildingName"
+            name="buildingName"
+            label="Building Name"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.addressLine1}
+            autoFocus
+            margin="dense"
+            id="addressLine1"
+            name="addressLine1"
+            label="Address Line 1"
+            type="text"
+            variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.addressLine2}
+            autoFocus
+            margin="dense"
+            id="addressLine2"
+            name="addressLine2"
+            label="Address Line 2"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.city}
+            autoFocus
+            margin="dense"
+            id="city"
+            name="city"
+            label="City"
+            type="text"
+            variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.stateCounty}
+            autoFocus
+            margin="dense"
+            id="stateCounty"
+            name="stateCounty"
+            label="State/Province"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.postalCode}
+            autoFocus
+            margin="dense"
+            id="postalCode"
+            name="postalCode"
+            label="Postal/Zip Code"
+            type="text"
+            variant="outlined"
+            required
+            onChange={handleChange}
+          />
+          <TextField
+            value={transfer.dropoffAddress.countryCode}
+            autoFocus
+            margin="dense"
+            id="countryCode"
+            name="countryCode"
+            label="Country"
+            type="text"
+            variant="outlined"
+            onChange={handleChange}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
