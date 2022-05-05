@@ -4,7 +4,8 @@ import {render, screen} from '@testing-library/react'
 import { LogOut } from './logOut'
 
 test('log out', () => {
-  const text = 'Log Out'
   render(<LogOut />)
-  expect(screen.getByText(text)).toBeInTheDocument()
+
+  const logOut = 'Log Out'
+  expect(screen.getByText(logOut)).toBeInTheDocument()
 })

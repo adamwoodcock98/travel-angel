@@ -3,7 +3,7 @@ import * as React from 'react'
 import { render, fireEvent, screen } from '@testing-library/react'
 import { Authentication } from './authentication'
 
-test('sign up', async () => {
+test('sign up', () => {
   render(<Authentication />)
 
   const signUp = 'Sign Up'
@@ -31,7 +31,7 @@ test('sign up', async () => {
   fireEvent.change(inputEmail, { target: { value: newValue }});
   expect(inputEmail.value).toBe(newValue);
 
-  const inputPassword = document.getElementById('password')
+  const inputPassword = screen.getByLabelText(/password/i)
   expect(inputPassword).toBeInTheDocument()
   fireEvent.change(inputPassword, { target: { value: newValue }});
   expect(inputPassword.value).toBe(newValue);
@@ -42,6 +42,29 @@ test('sign up', async () => {
 
 test('log in', () => {
   render(<Authentication />)
-  const logIn = screen.getByText('Log In')
-  expect(logIn).toBeInTheDocument()
+
+  const logIn = 'Log In'
+  const newValue = 'New value'
+
+  expect(screen.getByText(logIn)).toBeInTheDocument()
+
+  fireEvent.click(screen.getByText(logIn))
+
+  expect(screen.getByRole('heading', {name: logIn})).toBeInTheDocument()
+  expect(screen.getByRole('dialog', {name: logIn})).toBeInTheDocument()
+
+  const inputEmail = screen.getByRole('textbox', { name: 'E-mail' })
+  expect(inputEmail).toBeInTheDocument()
+  fireEvent.change(inputEmail, { target: { value: newValue }});
+  expect(inputEmail.value).toBe(newValue);
+
+
+  const inputPassword = screen.getByLabelText(/password/i)
+  expect(inputPassword).toBeInTheDocument()
+  fireEvent.change(inputPassword, { target: { value: newValue }});
+  expect(inputPassword.value).toBe(newValue);
+
+  expect(screen.getByRole('button', {name: 'Cancel'})).toBeInTheDocument()
+  expect(screen.getByRole('button', {name: logIn})).toBeInTheDocument()
 })
+
