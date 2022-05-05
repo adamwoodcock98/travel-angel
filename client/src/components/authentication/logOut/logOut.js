@@ -7,7 +7,7 @@ export const LogOut = () => {
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [alertType, setAlertType] = useState("");
+  const [alertType, setAlertType] = useState("success");
   const alertPosition = {
     vertical: "top",
     horizontal: "center",
