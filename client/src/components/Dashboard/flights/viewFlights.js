@@ -1,4 +1,5 @@
 import React from "react";
+import "./viewFlights.css"
 
 const AirportPane = (props) => {
 
@@ -34,7 +35,7 @@ const FooterPane = (props) => {
       <div className="footer-pane-middle">
         <p>Flight: {data.flightNumber}</p>
       </div>
-      <div className="footer-pane-middle">
+      <div className="footer-pane-right">
         <p>Booking: {data.bookingReference}</p>
       </div>
     </>
