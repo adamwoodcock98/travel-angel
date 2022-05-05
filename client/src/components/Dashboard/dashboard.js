@@ -9,7 +9,6 @@ import HotelIcon from "@mui/icons-material/HotelOutlined";
 import Flights from "./flights/flights"
 import "./dashboard.css";
 
-
 function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the tab bar itself.
   const { children, value, index, ...other } = props; //object destructuring - defining props, also ready to be 'typed'. Value of a tab must be the index if no other value passed in.
 
