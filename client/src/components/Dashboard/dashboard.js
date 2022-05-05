@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FlightTakeoffOutlined from '@mui/icons-material/FlightTakeoffOutlined';
 import HotelIcon from "@mui/icons-material/HotelOutlined";
+import Flights from "./flights/flights"
 import "./dashboard.css";
 
 
@@ -68,7 +69,7 @@ export default function VerticalTabs() { // the main functional component to be 
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
-        Item One
+        <Flights />
       </TabPanel>
       <TabPanel className="tab-content"value={value} index={1}>
         Item Two
