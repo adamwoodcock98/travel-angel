@@ -1,4 +1,6 @@
 import Button from "@mui/material/Button";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -21,9 +23,12 @@ export default function AddFlight({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
+      {/* <Button variant="outlined" onClick={handleOpen}>
         Add Flight
-      </Button>
+      </Button> */}
+      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Flight</DialogTitle>
         <DialogContent>

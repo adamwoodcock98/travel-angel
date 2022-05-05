@@ -86,16 +86,14 @@ const Flights = () => {
           </div>
         </div>
         <div className="flights-footer">
-          <div className="Flights">
-            <AddFlight
-              open={open}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-              handleChange={handleChange}
-              flight={flight}
-              onSubmit={onSubmit}
-            />
-          </div>
+          <AddFlight
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            handleChange={handleChange}
+            flight={flight}
+            onSubmit={onSubmit}
+          />
         </div>
       </div>
     )
