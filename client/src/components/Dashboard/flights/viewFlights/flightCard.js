@@ -1,51 +1,7 @@
 import React from "react";
-import "./viewFlights.css"
-
-const AirportPane = (props) => {
-
-  const data = props.data;
-
-  return(
-    <>
-      <div className="airport-pane-top">
-        <div className="airport-pane-code">
-          <h1>{data.airport}</h1>
-        </div>
-        <div className="airport-pane-city">
-          <h2>{data.city}</h2>
-        </div>
-      </div>
-      <div className="airport-pane-middle">
-        <h4>Terminal: {data.terminal} | Gate {data.gate}</h4>
-      </div>
-      <div className="airport-pane-bottom">
-        <h4>Scheduled departure</h4>
-        <h3>{data.time}</h3>
-      </div>
-    </>
-  )
-
-};
-
-const FooterPane = (props) => {
-
-  const data = props.data;
-
-  return(
-    <>
-      <div className="footer-pane-left">
-        <p>{data.airline}</p>
-      </div>
-      <div className="footer-pane-middle">
-        <p>Flight: {data.flightNumber}</p>
-      </div>
-      <div className="footer-pane-right">
-        <p>Booking: {data.bookingReference}</p>
-      </div>
-    </>
-  );
-
-}
+import "./flightCard.css"
+import { AirportPane } from "./airportPane"
+import { FooterPane } from "./footerPane"
 
 export const FlightCard = (props) => {
 
