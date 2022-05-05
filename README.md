@@ -1,4 +1,5 @@
 # Travel Angel
+[![Tests](https://github.com/adamwoodcock98/travel-angel/actions/workflows/testing.yml/badge.svg)](https://github.com/adamwoodcock98/travel-angel/actions/workflows/testing.yml)
 
 Travel Angel is a MERN-stack web application used to safely and securely store travel documents.
 
