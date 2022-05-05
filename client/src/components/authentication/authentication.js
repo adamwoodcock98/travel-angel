@@ -94,7 +94,7 @@ export const Authentication = () => {
   };
 
   return (
-    <div className="Authentication">
+    <div id="Authentication">
       <SignUp
         open={open}
         handleOpen={handleOpen}
