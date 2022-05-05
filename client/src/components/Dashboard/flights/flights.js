@@ -1,5 +1,6 @@
 import AddFlight from './addFlight.js';
-import { useState } from 'react'
+import { useState } from 'react';
+import axios from "axios";
 
 const Flights = () => {
   const [open, setOpen] = useState(false);
@@ -35,6 +36,19 @@ const Flights = () => {
     setOpen(false);
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const { flightNumber, flightTime, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
+
+    const newFlight = { flightNumber, flightTime, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
+
+    await axios.post("http://localhost:8000/dashboard/flights/", newFlight).then(() => {
+      handleClose();
+      window.location = "/";
+    });
+  };
+
   return (
     <div className="Flights">
       <AddFlight
@@ -43,6 +57,7 @@ const Flights = () => {
         handleClose={handleClose}
         handleChange={handleChange}
         flight={flight}
+        onSubmit={onSubmit}
       />
     </div>
   );
