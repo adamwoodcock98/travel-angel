@@ -6,10 +6,12 @@ const usersRouter = require("./routes/user.js");
 const flightsRouter = require("./routes/flights.js")
 const accommodationRouter = require("./routes/accommodation.js")
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
-
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 const port = process.env.PORT || 8000;
+
+dotenv.config({ path: "./config.env" });
 
 app.use(cors());
 app.use(express.json());
@@ -23,6 +25,25 @@ mongoose
     console.log("DB connected");
   })
   .catch((err) => console.log(err.message));
+
+const store = MongoStore.create({
+  mongoUrl: uri,
+  collection: "sessions",
+});
+
+app.use(
+  session({
+    secret: "aaahh",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+    cookie: {
+      maxAge: 60000,
+      sameSite: false,
+      secure: true,
+    },
+  })
+);
 
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
