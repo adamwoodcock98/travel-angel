@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AddTransfer from './addTransfer'
+import axios from 'axios'
 
 const Transfers = () => {
   const [open, setOpen] = useState(false);
@@ -32,6 +33,28 @@ const Transfers = () => {
     bookingReference: "",
   });
 
+  const handlePickupChange = (e) => {
+    const value = e.target.value;
+    setTransfer((prevState) => ({
+      ...prevState,
+      pickupAddress: {
+        ...prevState.pickupAddress,
+        [e.target.name]: value
+      },
+    }));
+  }
+
+  const handleDropoffChange = (e) => {
+    const value = e.target.value;
+    setTransfer((prevState) => ({
+      ...prevState,
+      dropoffAddress: {
+        ...prevState.dropoffAddress,
+        [e.target.name]: value
+      },
+    }));
+  }
+
   const handleChange = (e) => {
     const value = e.target.value;
     setTransfer({
@@ -48,6 +71,35 @@ const Transfers = () => {
     setOpen(false);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { 
+      pickupTime,
+      dropoffTime,
+      pickupAddress,
+      dropoffAddress,
+      isOutbound,
+      company,
+      contactNumber,
+      bookingReference} = transfer;
+
+    const newTransfer = { 
+      pickupTime,
+      dropoffTime,
+      pickupAddress,
+      dropoffAddress,
+      isOutbound,
+      company,
+      contactNumber,
+      bookingReference };
+
+    await axios.post("http://localhost:8000/dashboard/transfers/", newTransfer).then(() => {
+      handleClose();
+      window.location = "/";
+    });
+  };
+
   return (
     <div className="Transfers">
       <AddTransfer
@@ -56,6 +108,9 @@ const Transfers = () => {
         handleClose={handleClose}
         handleChange={handleChange}
         transfer={transfer}
+        handleSubmit={handleSubmit}
+        handlePickupChange={handlePickupChange}
+        handleDropoffChange={handleDropoffChange}
       />
     </div>
   );

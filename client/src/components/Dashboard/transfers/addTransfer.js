@@ -16,7 +16,9 @@ export default function AddTransfer({
   handleClose,
   handleChange,
   transfer,
-  onSubmit,
+  handleSubmit,
+  handlePickupChange,
+  handleDropoffChange
 }) {
   return (
     <div>
@@ -111,7 +113,9 @@ export default function AddTransfer({
             }}
             onChange={handleChange}
           />
-          <InputLabel id="demo-select-small">Pickup Address</InputLabel>
+          <DialogContentText>
+            Pickup Address
+          </DialogContentText>
           <TextField
             value={transfer.pickupAddress.buildingNumber}
             autoFocus
@@ -121,7 +125,7 @@ export default function AddTransfer({
             label="Building Number"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.buildingName}
@@ -203,7 +207,9 @@ export default function AddTransfer({
             variant="outlined"
             onChange={handleChange}
           />
-          <InputLabel id="demo-select-small">Dropoff Address</InputLabel>
+          <DialogContentText>
+            Dropoff Address
+          </DialogContentText>          
           <TextField
             value={transfer.dropoffAddress.buildingNumber}
             autoFocus
@@ -298,7 +304,7 @@ export default function AddTransfer({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Transfer Details</Button>
+          <Button onClick={handleSubmit}>Save Transfer Details</Button>
         </DialogActions>
       </Dialog>
     </div>
