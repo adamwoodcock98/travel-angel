@@ -13,6 +13,7 @@ export const FlightCard = (props) => {
     terminal: flightData.departureTerminal,
     gate: flightData.departureGate,
     time: flightData.departureTime,
+    date: flightData.departureDate,
     isDeparture: true,
   }
 

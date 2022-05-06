@@ -69,6 +69,17 @@ const Flights = () => {
     });
   }, [])
 
+  const outboundFlights = [];
+  const inboundFlights = [];
+
+  outboundFlight.forEach((flight) => {
+    outboundFlights.push(<FlightCard outboundFlight={flight} />)
+  })
+
+  inboundFlight.forEach((flight) => {
+    inboundFlights.push(<FlightCard outboundFlight={flight} />)
+  })
+
   if (outboundFlight.length || inboundFlight.length) {
     return(
       <div className="flights-window">
@@ -78,11 +89,11 @@ const Flights = () => {
         <div className="flights-content">
           <div className="flights-content-outbound">
             <h1 className="flights-content-subheading">Outbound</h1>
-            {outboundFlight[0] && <FlightCard outboundFlight={outboundFlight[0]} />}
+            {outboundFlight[0] && outboundFlights}
           </div>
           <div className="flights-content-inbound">
             <h1 className="flights-content-subheading">Inbound</h1>
-            {inboundFlight[0] && <FlightCard outboundFlight={inboundFlight[0]} />}
+            {inboundFlight[0] && inboundFlights}
           </div>
         </div>
         <div className="flights-footer">

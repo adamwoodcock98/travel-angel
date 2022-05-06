@@ -1,9 +1,12 @@
 import React from "react";
 import "./flightCard.css"
+import moment from "moment";
 
 export const AirportPane = (props) => {
 
   const data = props.data;
+
+  const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
   return(
     <>
@@ -21,7 +24,7 @@ export const AirportPane = (props) => {
       <div className="airport-pane-bottom">
         {data.isDeparture && <h4>Scheduled departure</h4>}
         {!data.isDeparture && <h4>Scheduled arrival</h4>}
-        <h3>{data.time}</h3>
+        <h3>{formatDate(data.date)} @ {data.time}</h3>
       </div>
     </>
   )
