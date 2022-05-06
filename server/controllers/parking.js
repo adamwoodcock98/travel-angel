@@ -3,11 +3,11 @@ const Address = require("../models/address.js");
 
 const ParkingController = {
   Index: async (req, res) => {
-    const parkingBookings = Parking.find();
+    const parkingBookings = await Parking.find();
 
     console.log(parkingBookings)
 
-    res.json({ bookings: parkingBookings});
+    res.json({ bookings: parkingBookings });
   },
   New: async (req, res) => {
     const data = req.body;

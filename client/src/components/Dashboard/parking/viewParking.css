@@ -1,0 +1,62 @@
+.parking-card {
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+}
+
+  .parking-card-header {
+    border-style: solid;
+    flex: 1;
+  }
+
+  .parking-card-dates-content {
+    border-style: solid;
+    flex: 1;
+    display: flex;
+  }
+
+    .parking-card-dates-arrival {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .parking-card-dates-departure {
+      border-style: solid;
+      flex: 1;
+    }
+
+  .parking-card-contact-content {
+    border-style: solid;
+    flex: 2;
+    display: flex;
+  }
+
+    .parking-card-contact-airport {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .parking-card-contact-name {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .parking-card-contact-address {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .parking-card-contact-number {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .parking-card-vehicle-content {
+      border-style: solid;
+      flex: 2;
+    }
+
+  .parking-card-notes-footer {
+    border-style: solid;
+    flex: 1;
+  }
