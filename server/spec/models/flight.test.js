@@ -16,10 +16,11 @@ describe("Flight model", () => {
 
   it("stores the flight number", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
       flightNumber: "BA1609",
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -32,9 +33,10 @@ describe("Flight model", () => {
 
   it("stores the departure time", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -42,13 +44,45 @@ describe("Flight model", () => {
       isOutbound: true,
       user: mockUserID,
     });
-    expect(flight.departureTime).toEqual(mockdepartureTime);
+    expect(flight.departureTime).toEqual("12:25");
   });
 
   it("stores the departure time as a required value", async () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
+      departureDate: mockdepartureDate,
+      departureAirport: "London Heathrow",
+      departureCity: "London",
+      arrivalAirport: "Los Angeles International Airport",
+      arrivalCity: "Los Angeles",
+      isOutbound: true,
+      user: mockUserID,
+    });
+    await expect(flight.save()).rejects.toThrow();
+  });
+
+  it("stores the departure date", () => {
+    advanceTo();
+    const mockdepartureDate = new Date();
+    const flight = new Flight({
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
+      departureAirport: "London Heathrow",
+      departureCity: "London",
+      arrivalAirport: "Los Angeles International Airport",
+      arrivalCity: "Los Angeles",
+      isOutbound: true,
+      user: mockUserID,
+    });
+    expect(flight.departureDate).toEqual(mockdepartureDate);
+  });
+
+  it("stores the departure date as a required value", async () => {
+    advanceTo();
+    const mockdepartureDate = new Date();
+    const flight = new Flight({
+      departureTime: "12:25",
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -61,9 +95,10 @@ describe("Flight model", () => {
 
   it("stores the airline", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       airline: "British Airways",
       departureAirport: "London Heathrow",
       departureCity: "London",
@@ -77,9 +112,10 @@ describe("Flight model", () => {
 
   it("stores the airport of departure", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -92,9 +128,10 @@ describe("Flight model", () => {
 
   it("stores the airport of departure as a required value", async () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
@@ -106,9 +143,10 @@ describe("Flight model", () => {
 
   it("stores the city of departure", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -121,9 +159,10 @@ describe("Flight model", () => {
 
   it("stores the city of departure as a required value", async () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       arrivalAirport: "Los Angeles International Airport",
       arrivalCity: "Los Angeles",
@@ -135,9 +174,10 @@ describe("Flight model", () => {
 
   it("stores the departure terminal", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       departureTerminal: "Terminal 5",
@@ -151,9 +191,10 @@ describe("Flight model", () => {
 
   it("stores the departure gate", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       departureGate: "56",
@@ -167,9 +208,10 @@ describe("Flight model", () => {
 
   it("stores the airport of arrival", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -182,9 +224,10 @@ describe("Flight model", () => {
 
   it("stores the airport of arrival as a required value", async () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalCity: "Los Angeles",
@@ -196,9 +239,10 @@ describe("Flight model", () => {
 
   it("stores the city of arrival", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -211,9 +255,10 @@ describe("Flight model", () => {
 
   it("stores the city of arrival as a required value", async () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -225,9 +270,10 @@ describe("Flight model", () => {
 
   it("stores the arrival terminal", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -241,9 +287,10 @@ describe("Flight model", () => {
 
   it("stores the arrival gate", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -257,9 +304,10 @@ describe("Flight model", () => {
 
   it("stores the booking reference", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -273,9 +321,10 @@ describe("Flight model", () => {
 
   it("stores whether the journey is outbound", () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -288,9 +337,10 @@ describe("Flight model", () => {
 
   it("stores whether the journey is outbound as a required value", async () => {
     advanceTo();
-    const mockdepartureTime = new Date();
+    const mockdepartureDate = new Date();
     const flight = new Flight({
-      departureTime: mockdepartureTime,
+      departureTime: "12:25",
+      departureDate: mockdepartureDate,
       departureAirport: "London Heathrow",
       departureCity: "London",
       arrivalAirport: "Los Angeles International Airport",
@@ -300,33 +350,35 @@ describe("Flight model", () => {
     await expect(flight.save()).rejects.toThrow();
   });
 
-  it("stores the user ID", () => {
-    advanceTo();
-    const mockdepartureTime = new Date();
-    const flight = new Flight({
-      departureTime: mockdepartureTime,
-      departureAirport: "London Heathrow",
-      departureCity: "London",
-      arrivalAirport: "Los Angeles International Airport",
-      arrivalCity: "Los Angeles",
-      bookingReference: "AJX0138123",
-      isOutbound: true,
-      user: mockUserID,
-    });
-    expect(flight.user).toEqual(mockUserID);
-  });
+  // it("stores the user ID", () => {
+  //   advanceTo();
+  //   const mockdepartureDate = new Date();
+  //   const flight = new Flight({
+  //     departureTime: "12:25",
+  //     departureDate: mockdepartureDate,
+  //     departureAirport: "London Heathrow",
+  //     departureCity: "London",
+  //     arrivalAirport: "Los Angeles International Airport",
+  //     arrivalCity: "Los Angeles",
+  //     bookingReference: "AJX0138123",
+  //     isOutbound: true,
+  //     user: mockUserID,
+  //   });
+  //   expect(flight.user).toEqual(mockUserID);
+  // });
 
-  it("stores the user as a required value", async () => {
-    advanceTo();
-    const mockdepartureTime = new Date();
-    const flight = new Flight({
-      departureTime: mockdepartureTime,
-      departureAirport: "London Heathrow",
-      departureCity: "London",
-      arrivalAirport: "Los Angeles International Airport",
-      isOutbound: true,
-      arrivalCity: "Los Angeles",
-    });
-    await expect(flight.save()).rejects.toThrow();
-  });
+  // it("stores the user as a required value", async () => {
+  //   advanceTo();
+  //   const mockdepartureDate = new Date();
+  //   const flight = new Flight({
+  //     departureTime: "12:25",
+  //     departureDate: mockdepartureDate,
+  //     departureAirport: "London Heathrow",
+  //     departureCity: "London",
+  //     arrivalAirport: "Los Angeles International Airport",
+  //     isOutbound: true,
+  //     arrivalCity: "Los Angeles",
+  //   });
+  //   await expect(flight.save()).rejects.toThrow();
+  // });
 });
