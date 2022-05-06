@@ -65,6 +65,34 @@ describe("Parking model", () => {
     await expect(parking.save()).rejects.toThrow();
   });
 
+  it("stores the airport", () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const parking = new Parking({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      airport: "Heathrow",
+      address: mockAddressID,
+      user: mockUserID,
+    });
+    expect(parking.airport).toEqual("Heathrow");
+  });
+
+  it("stores the car park type", () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const parking = new Parking({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      type: "Long Stay",
+      address: mockAddressID,
+      user: mockUserID,
+    });
+    expect(parking.airport).toEqual("Long Stay");
+  });
+
   it("stores the address", () => {
     advanceTo();
     const mockStartDate = new Date();

@@ -9,6 +9,8 @@ const parkingSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  airport: String,
+  type: String,
   address: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Address",
