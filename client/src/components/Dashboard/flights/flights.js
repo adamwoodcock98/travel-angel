@@ -69,18 +69,19 @@ const Flights = () => {
     });
   }, [])
 
-  const outboundFlights = [];
-  const inboundFlights = [];
-
-  outboundFlight.forEach((flight) => {
-    outboundFlights.push(<FlightCard outboundFlight={flight} />)
-  })
-
-  inboundFlight.forEach((flight) => {
-    inboundFlights.push(<FlightCard outboundFlight={flight} />)
-  })
-
   if (outboundFlight.length || inboundFlight.length) {
+
+    const outboundFlights = [];
+    const inboundFlights = [];
+
+    outboundFlight.forEach((flight) => {
+      outboundFlights.push(<FlightCard outboundFlight={flight} key={flight._id} />)
+    })
+
+    inboundFlight.forEach((flight) => {
+      inboundFlights.push(<FlightCard outboundFlight={flight} key={flight._id} />)
+    })
+
     return(
       <div className="flights-window">
         <div className="flights-header">

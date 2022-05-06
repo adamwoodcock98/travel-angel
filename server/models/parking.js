@@ -17,7 +17,7 @@ const parkingSchema = new mongoose.Schema({
   },
   regPlate: String,
   company: String,
-  contactNumber: Number,
+  contactNumber: String,
   bookingReference: String,
   notes: String,
   // user: {

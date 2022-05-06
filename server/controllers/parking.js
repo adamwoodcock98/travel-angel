@@ -3,7 +3,7 @@ const Address = require("../models/address.js");
 
 const ParkingController = {
   Index: async (req, res) => {
-    const parkingBookings = await Parking.find();
+    const parkingBookings = await Parking.find().populate("address");
 
     console.log(parkingBookings)
 
@@ -43,7 +43,7 @@ const ParkingController = {
       await parking.save();
       res.status(200).send();
     } catch(e) {
-      console.log(err.message)
+      console.log(e.message)
       res.status(500).send();
     }
   }
