@@ -11,25 +11,25 @@ import axios from "axios";
 export default function AddAccommodation() {
   const [open, setOpen] = useState(false);
   const [accommodation, setAccommodation] = useState({
-    name: "",
-    contactNumber: "",
-    checkInDate: "",
-    checkOutDate: "",
-    checkInTime: "",
-    checkOutTime: "",
-    bookingReference: "",
-    buildingNumber: "",
-    buildingName: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    postalCode: "",
-    stateCounty: "",
-    countryCode: "",
+    name: undefined,
+    contactNumber: undefined,
+    checkInDate: undefined,
+    checkOutDate: undefined,
+    checkInTime: undefined,
+    checkOutTime: undefined,
+    bookingReference: undefined,
+    buildingNumber: undefined,
+    buildingName: undefined,
+    addressLine1: undefined,
+    addressLine2: undefined,
+    city: undefined,
+    postalCode: undefined,
+    stateCounty: undefined,
+    countryCode: undefined,
   });
 
   const handleChange = (e) => {
-    const value = e.target.value;
+    const value = e.target.value ? e.target.value : undefined;
     setAccommodation({
       ...accommodation,
       [e.target.name]: value,
@@ -86,6 +86,23 @@ export default function AddAccommodation() {
     await axios
       .post("http://localhost:5000/dashboard/accommodation", newAccommodation)
       .then(() => {
+        setAccommodation({
+          name: undefined,
+          contactNumber: undefined,
+          checkInDate: undefined,
+          checkOutDate: undefined,
+          checkInTime: undefined,
+          checkOutTime: undefined,
+          bookingReference: undefined,
+          buildingNumber: undefined,
+          buildingName: undefined,
+          addressLine1: undefined,
+          addressLine2: undefined,
+          city: undefined,
+          postalCode: undefined,
+          stateCounty: undefined,
+          countryCode: undefined,
+        });
         handleClose();
       });
   };

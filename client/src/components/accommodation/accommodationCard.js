@@ -17,51 +17,57 @@ export default function AccommodationCard({ accommodation }) {
   };
 
   return (
-    <div className="accommodation card-container">
-      <div className="header">
-        <h1>{accommodation[0].name}</h1>
-      </div>
-      <div className="body">
-        <div className="check-in">
-          <div className="check-in-header">
-            <h3>Check-In</h3>
+    <div className="card-container">
+      {accommodation.map((accommodation) => {
+        return (
+          <div className="accommodation-card">
+            <div className="header">
+              <h1>{accommodation.name}</h1>
+            </div>
+            <div className="body">
+              <div className="check-in">
+                <div className="check-in-header">
+                  <h3>Check-In</h3>
+                </div>
+                <div className="check-in-body">
+                  <p>
+                    {formatDate(accommodation.checkInDate)}
+                    {accommodation.checkInTime}
+                  </p>
+                </div>
+              </div>
+              <div className="check-out">
+                <div className="check-out-header">
+                  <h3>Check-Out</h3>
+                </div>
+                <div className="check-out-body">
+                  <p>
+                    {formatDate(accommodation.checkOutDate)}
+                    {accommodation.checkOutTime}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="footer">
+              <div className="booking-reference">
+                {accommodation.bookingReference && (
+                  <p>Booking Reference: {accommodation.bookingReference}</p>
+                )}
+              </div>
+              <div className="address">
+                {accommodation.address && (
+                  <p>Address: {formatAddress(accommodation.address)}</p>
+                )}
+              </div>
+              <div className="contact-number">
+                {accommodation.contactNumber && (
+                  <p>Contact Number: {accommodation.contactNumber}</p>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="check-in-body">
-            <p>
-              {formatDate(accommodation[0].checkInDate)}
-              {accommodation[0].checkInTime}
-            </p>
-          </div>
-        </div>
-        <div className="check-out">
-          <div className="check-out-header">
-            <h3>Check-Out</h3>
-          </div>
-          <div className="check-out-body">
-            <p>
-              {formatDate(accommodation[0].checkOutDate)}
-              {accommodation[0].checkOutTime}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="footer">
-        <div className="booking-reference">
-          {accommodation[0].bookingReference && (
-            <p>Booking Reference: {accommodation[0].bookingReference}</p>
-          )}
-        </div>
-        <div className="address">
-          {accommodation[0].address && (
-            <p>Address: {formatAddress(accommodation[0].address)}</p>
-          )}
-        </div>
-        <div className="contact-number">
-          {accommodation[0].contactNumber && (
-            <p>Contact Number: {accommodation[0].contactNumber}</p>
-          )}
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 }
