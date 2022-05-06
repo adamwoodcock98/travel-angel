@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FlightTakeoffOutlined from '@mui/icons-material/FlightTakeoffOutlined';
 import HotelIcon from "@mui/icons-material/HotelOutlined";
-import "./dashboard.css";
 import Flights from "./flights/flights"
+import "./dashboard.css";
 
 function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the tab bar itself.
   const { children, value, index, ...other } = props; //object destructuring - defining props, also ready to be 'typed'. Value of a tab must be the index if no other value passed in.
@@ -22,7 +22,7 @@ function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the
     >
       {value === index && ( // if the value is equal to the index, do the stuff after && (JSX if statement)
         <Box sx={{ p: 3 }}> {/*the sx prop allows you to provide supplementary CSS on top of the css already defined, in this case using p: 3 to set the padding*/}
-          <Typography>{children}</Typography> {/*children is a typography prop of type node (meaning any renderable type) and refers to the content of the component, so applying typography to whatever content is in the tab item*/}
+          <Typography component={"span"}>{children}</Typography> {/*children is a typography prop of type node (meaning any renderable type) and refers to the content of the component, so applying typography to whatever content is in the tab item*/}
         </Box>
       )}
     </div>

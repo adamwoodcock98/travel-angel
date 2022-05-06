@@ -1,0 +1,34 @@
+.flights-window {
+  display: flex;
+  flex-direction: column;
+}
+
+.flights-header {
+  font-size: xx-large;
+  margin-bottom: 3%;
+}
+
+.flights-content {
+  display: flex;
+  flex-direction: row;
+}
+
+  .flights-content-outbound {
+    flex: 1;
+    border-right: solid;
+    border-color: lightgrey;
+  }
+
+  .flights-content-inbound {
+    flex: 1;
+  }
+
+  .flights-content-subheading {
+    font-size: xxx-large;
+    text-align: center;
+  }
+
+.flights-footer {
+  margin-top: 3%;
+  text-align: right;
+}
