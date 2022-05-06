@@ -1,8 +1,10 @@
 const Parking = require("../models/parking.js");
 
 const ParkingController = {
-  Index: (req, res) => {
-    res.json({message: "welcome to parking"})
+  Index: async (req, res) => {
+    const parkingBookings = Parking.find();
+
+    res.json({ bookings: parkingBookings});
   },
   New: (req, res) => {
     res.json({message: "welcome to parking"})
