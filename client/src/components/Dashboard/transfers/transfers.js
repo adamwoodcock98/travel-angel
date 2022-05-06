@@ -71,7 +71,7 @@ const Transfers = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const { 
@@ -94,7 +94,7 @@ const Transfers = () => {
       contactNumber,
       bookingReference };
 
-    await axios.post("http://localhost:8000/dashboard/transfers/", newTransfer).then(() => {
+    axios.post("http://localhost:8000/dashboard/transfers/", newTransfer).then(() => {
       handleClose();
       window.location = "/";
     });

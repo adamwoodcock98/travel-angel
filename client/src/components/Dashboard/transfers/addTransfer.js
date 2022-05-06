@@ -43,7 +43,7 @@ export default function AddTransfer({
             onChange={handleChange}
           />
           <FormControl sx={{ m: 1, ml: 0, minWidth: 200 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
+            <InputLabel>Journey Type</InputLabel>
             <Select
               value={transfer.isOutbound}
               autoFocus
@@ -82,15 +82,14 @@ export default function AddTransfer({
             required
             onChange={handleChange}
           />
-          
           <TextField
             value={transfer.pickupTime}
             autoFocus
             margin="dense"
             id="pickupTime"
             name="pickupTime"
-            label="Pickup Time"
-            type="time"
+            label="Pickup Date and Time"
+            type="datetime-local"
             variant="outlined"
             required
             InputLabelProps={{
@@ -98,14 +97,15 @@ export default function AddTransfer({
             }}
             onChange={handleChange}
           />
+          
           <TextField
             value={transfer.dropoffTime}
             autoFocus
             margin="dense"
             id="dropoffTime"
             name="dropoffTime"
-            label="Dropoff Time"
-            type="time"
+            label="Dropoff Date and Time"
+            type="datetime-local"
             variant="outlined"
             required
             InputLabelProps={{
@@ -136,7 +136,7 @@ export default function AddTransfer({
             label="Building Name"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.addressLine1}
@@ -148,7 +148,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.addressLine2}
@@ -159,7 +159,7 @@ export default function AddTransfer({
             label="Address Line 2"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.city}
@@ -171,7 +171,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.stateCounty}
@@ -182,7 +182,7 @@ export default function AddTransfer({
             label="State/Province"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.postalCode}
@@ -194,7 +194,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <TextField
             value={transfer.pickupAddress.countryCode}
@@ -205,7 +205,7 @@ export default function AddTransfer({
             label="Country"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handlePickupChange}
           />
           <DialogContentText>
             Dropoff Address
@@ -219,7 +219,7 @@ export default function AddTransfer({
             label="Building Number"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.buildingName}
@@ -230,7 +230,7 @@ export default function AddTransfer({
             label="Building Name"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.addressLine1}
@@ -242,7 +242,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.addressLine2}
@@ -253,7 +253,7 @@ export default function AddTransfer({
             label="Address Line 2"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.city}
@@ -265,7 +265,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.stateCounty}
@@ -276,7 +276,7 @@ export default function AddTransfer({
             label="State/Province"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.postalCode}
@@ -288,7 +288,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
           <TextField
             value={transfer.dropoffAddress.countryCode}
@@ -299,7 +299,7 @@ export default function AddTransfer({
             label="Country"
             type="text"
             variant="outlined"
-            onChange={handleChange}
+            onChange={handleDropoffChange}
           />
         </DialogContent>
         <DialogActions>
