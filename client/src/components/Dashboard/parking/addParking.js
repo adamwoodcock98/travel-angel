@@ -78,9 +78,6 @@ export default function AddParking(
             label="Car Park Type"
             type="text"
             variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}
             onChange={handleChange}
           />
           <TextField
@@ -92,9 +89,6 @@ export default function AddParking(
             label="Vehicle Registration"
             type="text"
             variant="outlined"
-            InputLabelProps={{
-              shrink: true,
-            }}
             onChange={handleChange}
           />
           <TextField

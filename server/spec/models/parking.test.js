@@ -176,29 +176,29 @@ describe("Parking model", () => {
     expect(parking.notes).toEqual("Take the second exit on the left, then press the yellow button");
   });
 
-  it("stores the user", () => {
-    advanceTo();
-    const mockStartDate = new Date();
-    const mockEndDate = new Date();
-    const parking = new Parking({
-      startDate: mockStartDate,
-      endDate: mockEndDate,
-      address: mockAddressID,
-      user: mockUserID,
-    });
-    expect(parking.user).toEqual(mockUserID);
-  });
+  // it("stores the user", () => {
+  //   advanceTo();
+  //   const mockStartDate = new Date();
+  //   const mockEndDate = new Date();
+  //   const parking = new Parking({
+  //     startDate: mockStartDate,
+  //     endDate: mockEndDate,
+  //     address: mockAddressID,
+  //     user: mockUserID,
+  //   });
+  //   expect(parking.user).toEqual(mockUserID);
+  // });
 
-  it("stores the user as a required field", async () => {
-    advanceTo();
-    const mockStartDate = new Date();
-    const mockEndDate = new Date();
-    const parking = new Parking({
-      startDate: mockStartDate,
-      endDate: mockEndDate,
-      address: mockAddressID,
-    });
-    await expect(parking.save()).rejects.toThrow();
-  });
+  // it("stores the user as a required field", async () => {
+  //   advanceTo();
+  //   const mockStartDate = new Date();
+  //   const mockEndDate = new Date();
+  //   const parking = new Parking({
+  //     startDate: mockStartDate,
+  //     endDate: mockEndDate,
+  //     address: mockAddressID,
+  //   });
+  //   await expect(parking.save()).rejects.toThrow();
+  // });
 
 });

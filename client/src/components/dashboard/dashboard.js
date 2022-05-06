@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import FlightTakeoffOutlined from '@mui/icons-material/FlightTakeoffOutlined';
 import HotelIcon from "@mui/icons-material/HotelOutlined";
 import Flights from "./flights/flights"
+import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
+import Parking from "./parking/parking"
 import "./dashboard.css";
 
 function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -66,12 +68,16 @@ export default function VerticalTabs() { // the main functional component to be 
       >
         <Tab icon={<FlightTakeoffOutlined />} aria-label="plane" {...a11yProps(0)} /> {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
+        <Tab icon={<LocalParkingRoundedIcon />} aria-label="parking" {...a11yProps(2)} />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights />
       </TabPanel>
       <TabPanel className="tab-content"value={value} index={1}>
         Item Two
+      </TabPanel>
+      <TabPanel  className="tab-content"value={value} index={2}>
+        <Parking />
       </TabPanel>
     </Box>
   );
