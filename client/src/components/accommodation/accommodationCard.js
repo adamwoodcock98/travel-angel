@@ -3,7 +3,7 @@ import moment from "moment";
 import "./accommodationCard.css";
 
 export default function AccommodationCard({ accommodation }) {
-  const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
+  const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
     const addressObject = address;
@@ -30,10 +30,9 @@ export default function AccommodationCard({ accommodation }) {
                   <h3>Check-In</h3>
                 </div>
                 <div className="check-in-body">
-                  <p>
-                    {formatDate(accommodation.checkInDate)}
-                    {accommodation.checkInTime}
-                  </p>
+                  <p>{formatDate(accommodation.checkInDate)}</p>
+                  <br></br>
+                  <p>Check-in opens at {accommodation.checkInTime}</p>
                 </div>
               </div>
               <div className="check-out">
@@ -41,10 +40,9 @@ export default function AccommodationCard({ accommodation }) {
                   <h3>Check-Out</h3>
                 </div>
                 <div className="check-out-body">
-                  <p>
-                    {formatDate(accommodation.checkOutDate)}
-                    {accommodation.checkOutTime}
-                  </p>
+                  <p>{formatDate(accommodation.checkOutDate)}</p>
+                  <br></br>
+                  <p>Check-out by {accommodation.checkOutTime}</p>
                 </div>
               </div>
             </div>

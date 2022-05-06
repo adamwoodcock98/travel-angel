@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-import AddAccommodation from "./components/accommodation/addAccommodation";
 import { ViewAccommodation } from "./components/accommodation/accommodation";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

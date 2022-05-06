@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,7 +6,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import axios from "axios";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function AddAccommodation({
   handleOpen,
@@ -18,9 +19,9 @@ export default function AddAccommodation({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        Add Accommodation
-      </Button>
+      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Accommodation</DialogTitle>
         <DialogContent>
@@ -217,8 +218,8 @@ export default function AddAccommodation({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSubmit}>Save Accommodation Details</Button>
+          <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>

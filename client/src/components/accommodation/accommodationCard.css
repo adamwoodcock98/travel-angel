@@ -33,12 +33,13 @@
 
 .check-in-header {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .check-in-body {
   display: flex;
-  flex-direction: end;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .check-out {
@@ -48,12 +49,12 @@
 
 .check-out-header {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .check-out-body {
   display: flex;
-  flex-direction: start;
+  flex-direction: column;
 }
 
 .footer {

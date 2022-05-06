@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
+import "./accommodation.css";
 
 export const ViewAccommodation = () => {
   const [accommodation, setAccommodation] = useState([]);
@@ -114,16 +115,22 @@ export const ViewAccommodation = () => {
 
   if (accommodation.length) {
     return (
-      <div>
-        <AccommodationCard accommodation={accommodation} />
-        <AddAccommodation
-          handleOpen={handleOpen}
-          open={open}
-          handleClose={handleClose}
-          handleChange={handleChange}
-          accommodation={accommodationArray}
-          handleSubmit={handleSubmit}
-        />
+      <div className="container">
+        <div className="header">
+          <h1 className="title">Accommodation</h1>
+          <AddAccommodation
+            className="add-accomodation"
+            handleOpen={handleOpen}
+            open={open}
+            handleClose={handleClose}
+            handleChange={handleChange}
+            accommodation={accommodationArray}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+        <div className="body">
+          <AccommodationCard accommodation={accommodation} />
+        </div>
       </div>
     );
   } else {
