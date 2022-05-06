@@ -2,6 +2,7 @@ import AddPassport from './addPassport.js';
 import { DisplayPassport } from './displayPassport';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import "./passport.css"
 
 const Passport = () => {
   const [open, setOpen] = useState(false);
@@ -75,18 +76,15 @@ const Passport = () => {
     })
   }, [])
 
-  const passports = [];
+  const passportRender = [];
   displayState.forEach((pass) => {
-    passports.push(<DisplayPassport passport={pass} />)
+    passportRender.push(<DisplayPassport passport={pass} />)
   })
 
   if (displayState.length) {
     return (
       <div id="Passport">
-        {passports}
-          {/* <DisplayPassport
-          passport={displayState[0]}
-          /> */}
+        {passportRender}
           <AddPassport
           open={open}
           handleOpen={handleOpen}
