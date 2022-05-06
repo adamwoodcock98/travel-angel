@@ -13,6 +13,7 @@ export const FlightCard = (props) => {
     terminal: flightData.departureTerminal,
     gate: flightData.departureGate,
     time: flightData.departureTime,
+    isDeparture: true,
   }
 
   const arrivalData = {
@@ -20,6 +21,7 @@ export const FlightCard = (props) => {
     city: flightData.arrivalCity,
     terminal: flightData.arrivalTerminal,
     gate: flightData.arrivalGate,
+    isDeparture: false,
   }
 
   const footerData = {

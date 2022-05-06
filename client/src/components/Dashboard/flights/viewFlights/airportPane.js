@@ -19,7 +19,8 @@ export const AirportPane = (props) => {
         <h4>Terminal: {data.terminal} | Gate {data.gate}</h4>
       </div>
       <div className="airport-pane-bottom">
-        <h4>Scheduled departure</h4>
+        {data.isDeparture && <h4>Scheduled departure</h4>}
+        {!data.isDeparture && <h4>Scheduled arrival</h4>}
         <h3>{data.time}</h3>
       </div>
     </>
