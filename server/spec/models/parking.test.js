@@ -90,7 +90,7 @@ describe("Parking model", () => {
       address: mockAddressID,
       user: mockUserID,
     });
-    expect(parking.airport).toEqual("Long Stay");
+    expect(parking.type).toEqual("Long Stay");
   });
 
   it("stores the address", () => {
@@ -142,10 +142,10 @@ describe("Parking model", () => {
       startDate: mockStartDate,
       endDate: mockEndDate,
       address: mockAddressID,
-      contactNumber: 7912345678,
+      contactNumber: "07912345678",
       user: mockUserID,
     });
-    expect(parking.contactNumber).toEqual(7912345678);
+    expect(parking.contactNumber).toEqual("07912345678");
   });
 
   it("stores the booking reference", () => {
