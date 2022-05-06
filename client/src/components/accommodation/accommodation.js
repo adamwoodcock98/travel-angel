@@ -26,7 +26,7 @@ export const ViewAccommodation = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/dashboard/accommodation").then((res) => {
+    axios.get("http://localhost:8000/dashboard/accommodation").then((res) => {
       setAccommodation(res.data);
     });
   }, [accommodationArray]);
@@ -89,7 +89,7 @@ export const ViewAccommodation = () => {
     console.log(newAccommodation);
 
     await axios
-      .post("http://localhost:5000/dashboard/accommodation", newAccommodation)
+      .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
       .catch((err) => console.log(err.message))
       .then(() => {
         setAccommodationArray({
