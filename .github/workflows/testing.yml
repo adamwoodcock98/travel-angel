@@ -25,9 +25,15 @@ jobs:
         with:
           mongodb-version: "5.0"
 
-      - name: Install & Test
+      - name: Testing Server
         run: |
           cd server
+          npm install
+          npm run test
+
+      - name: Testing Client
+        run: |
+          cd client
           npm install
           npm run test
         
