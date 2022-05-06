@@ -5,17 +5,19 @@ const FlightsController = {
     const outboundFlight = await Flight.find({ isOutbound: true });
     const inboundFlight = await Flight.find({ isOutbound: false });
 
-    res.json({ outbound: outboundFlight, inbound: inboundFlight })
+    res.json({ outbound: outboundFlight, inbound: inboundFlight });
   },
 
   New: async (req, res) => {
-    const data = req.body
-    
+    const data = req.body;
+
+    console.log("the user: ", req.session.user)
+
     try {
       const flight = new Flight({
         flightNumber: data.flightNumber,
-        flightTime: data.flightTime,
-        flightDate: data.flightDate,
+        departureTime: data.departureTime,
+        departureDate: data.departureDate,
         airline: data.airline,
         departureAirport: data.departureAirport,
         departureTerminal: data.departureTerminal,
@@ -29,14 +31,13 @@ const FlightsController = {
         isOutbound: data.isOutbound,
         user: req.session.user,
       });
-  
-      const saveFlight = await Flight.save()
-      
-    } catch(err) {
+
+      const saveFlight = await flight.save();
+    } catch (err) {
       console.log(err.message);
       res.status(500).send(err);
     }
-  }
-}
+  },
+};
 
 module.exports = FlightsController;
