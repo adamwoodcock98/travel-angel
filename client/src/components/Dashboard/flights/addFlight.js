@@ -44,11 +44,11 @@ export default function AddFlight({
             onChange={handleChange}
           />
           <TextField
-            value={flight.flightTime}
+            value={flight.departureTime}
             autoFocus
             margin="dense"
-            id="flightTime"
-            name="flightTime"
+            id="departureTime"
+            name="departureTime"
             label="Time"
             type="time"
             variant="outlined"
@@ -59,11 +59,11 @@ export default function AddFlight({
             onChange={handleChange}
           />
           <TextField
-            value={flight.flightDate}
+            value={flight.departureDate}
             autoFocus
             margin="dense"
-            id="flightDate"
-            name="flightDate"
+            id="departureDate"
+            name="departureDate"
             label="Date"
             type="date"
             variant="outlined"

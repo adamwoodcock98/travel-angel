@@ -12,8 +12,8 @@ const Flights = () => {
   const [open, setOpen] = useState(false);
   const [flight, setFlight] = useState({
     flightNumber: "",
-    flightTime: "",
-    flightDate: "",
+    departureTime: "",
+    departureDate: "",
     airline: "",
     departureAirport: "",
     departureTerminal: "",
@@ -28,7 +28,7 @@ const Flights = () => {
   });
 
   const api = axios.create({
-    baseURL: "http://localhost:5000/dashboard/flights/"
+    baseURL: "http://localhost:8000/dashboard/flights/"
   })
 
   const handleChange = (e) => {
@@ -50,9 +50,9 @@ const Flights = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const { flightNumber, flightTime, flightDate, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
+    const { flightNumber, departureTime, departureDate, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
 
-    const newFlight = { flightNumber, flightTime, flightDate,  airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
+    const newFlight = { flightNumber, departureTime, departureDate,  airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
 
     await api.post("/", newFlight).then(() => {
       handleClose();
