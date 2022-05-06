@@ -134,6 +134,21 @@ export const ViewAccommodation = () => {
       </div>
     );
   } else {
-    return <p>Loading..</p>;
+    return (
+      <div className="container">
+        <div className="header">
+          <h1 className="title">Accommodation</h1>
+          <AddAccommodation
+            className="add-accomodation"
+            handleOpen={handleOpen}
+            open={open}
+            handleClose={handleClose}
+            handleChange={handleChange}
+            accommodation={accommodationArray}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+      </div>
+    );
   }
 };

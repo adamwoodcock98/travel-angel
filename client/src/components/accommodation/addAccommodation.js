@@ -31,11 +31,12 @@ export default function AddAccommodation({
           </DialogContentText>
           <TextField
             value={accommodation.name}
+            inputProps={{ "data-testid": "name" }}
             autoFocus
             margin="dense"
             id="name"
             name="name"
-            label="Accomodation Name"
+            label="Accommodation Name"
             type="text"
             variant="outlined"
             required
@@ -43,6 +44,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.contactNumber}
+            inputProps={{ "data-testid": "contactNumber" }}
             autoFocus
             margin="dense"
             id="contactNumber"
@@ -55,6 +57,8 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.checkInDate}
+            data-testid="checkInDate"
+            inputProps={{ "data-testid": "checkInDateInput" }}
             autoFocus
             margin="dense"
             id="checkInDate"
@@ -70,6 +74,8 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.checkOutDate}
+            inputProps={{ "data-testid": "checkOutDateInput" }}
+            data-testid="checkOutDate"
             autoFocus
             margin="dense"
             id="checkOutDate"
@@ -85,6 +91,8 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.checkInTime}
+            inputProps={{ "data-testid": "checkInTimeInput" }}
+            data-testid="checkInTime"
             autoFocus
             margin="dense"
             id="checkInTime"
@@ -100,6 +108,8 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.checkOutTime}
+            inputProps={{ "data-testid": "checkOutTimeInput" }}
+            data-testid="checkOutTime"
             autoFocus
             margin="dense"
             id="checkOutTime"
@@ -115,6 +125,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.bookingReference}
+            inputProps={{ "data-testid": "bookingReference" }}
             autoFocus
             margin="dense"
             id="bookingReference"
@@ -127,6 +138,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.buildingNumber}
+            inputProps={{ "data-testid": "buildingNumber" }}
             autoFocus
             margin="dense"
             id="buildingNumber"
@@ -138,6 +150,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.buildingName}
+            inputProps={{ "data-testid": "buildingName" }}
             autoFocus
             margin="dense"
             id="buildingName"
@@ -149,6 +162,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.addressLine1}
+            inputProps={{ "data-testid": "addressLine1" }}
             autoFocus
             margin="dense"
             id="addressLine1"
@@ -161,6 +175,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.addressLine2}
+            inputProps={{ "data-testid": "addressLine2" }}
             autoFocus
             margin="dense"
             id="addressLine2"
@@ -172,6 +187,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.city}
+            inputProps={{ "data-testid": "city" }}
             autoFocus
             margin="dense"
             id="city"
@@ -184,6 +200,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.stateCounty}
+            inputProps={{ "data-testid": "stateCounty" }}
             autoFocus
             margin="dense"
             id="stateCounty"
@@ -195,6 +212,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.postalCode}
+            inputProps={{ "data-testid": "postalCode" }}
             autoFocus
             margin="dense"
             id="postalCode"
@@ -207,6 +225,7 @@ export default function AddAccommodation({
           />
           <TextField
             value={accommodation.countryCode}
+            inputProps={{ "data-testid": "countryCode" }}
             autoFocus
             margin="dense"
             id="countryCode"
@@ -218,7 +237,9 @@ export default function AddAccommodation({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit}>Save Accommodation Details</Button>
+          <Button onClick={handleSubmit} data-testid="saveAccommodationDetails">
+            Save Accommodation Details
+          </Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
