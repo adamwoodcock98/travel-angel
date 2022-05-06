@@ -12,6 +12,8 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const port = process.env.PORT || 8000;
 
+dotenv.config({ path: "./config.env" });
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json({ limit: "5mb", extended: true }));
@@ -24,6 +26,25 @@ mongoose
     console.log("DB connected");
   })
   .catch((err) => console.log(err.message));
+
+const store = MongoStore.create({
+  mongoUrl: uri,
+  collection: "sessions",
+});
+
+app.use(
+  session({
+    secret: "aaahh",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+    cookie: {
+      maxAge: 600000,
+      sameSite: false,
+      secure: true,
+    },
+  })
+);
 
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
