@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const passportSchema = mongoose.Schema({
   passportNumber: {
-    Number,
+    type: String,
     required: true,
   },  
   firstName: {
