@@ -1,0 +1,26 @@
+.sidebar {
+  width: fit-content;
+  margin-top: 20%;
+}
+
+.tab-content {
+  width: 90%;
+  padding: 0%;
+  margin-top: 7%;
+}
+
+.tab-box {
+  max-width: 100vw;
+  height: auto;
+  justify-content: flex-start;
+  margin-right: 2%;
+}
+
+p {
+  margin: 0%;
+}
+
+.css-19kzrtu {
+  padding-top: 0% !important;
+  padding-bottom: 0% !important;
+}

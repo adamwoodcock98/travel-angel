@@ -13,7 +13,7 @@ export default function SignUp({
   handleClose,
   handleChange,
   user,
-  onSubmit,
+  handleSubmit,
 }) {
   return (
     <div>
@@ -24,8 +24,8 @@ export default function SignUp({
         <DialogTitle>Sign Up</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Sign Up to this site to organise your holiday. All documents in one
-            place.
+            Sign Up to Travel Angel to organise your holiday. All documents in one
+            place!
           </DialogContentText>
           <TextField
             value={user.firstName}
@@ -81,7 +81,7 @@ export default function SignUp({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Sign Up</Button>
+          <Button onClick={handleSubmit}>Sign Up</Button>
         </DialogActions>
       </Dialog>
     </div>
