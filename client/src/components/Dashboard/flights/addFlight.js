@@ -23,9 +23,6 @@ export default function AddFlight({
 }) {
   return (
     <div>
-      {/* <Button variant="outlined" onClick={handleOpen}>
-        Add Flight
-      </Button> */}
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>
@@ -52,8 +49,23 @@ export default function AddFlight({
             margin="dense"
             id="flightTime"
             name="flightTime"
-            label="Flight Time"
+            label="Time"
             type="time"
+            variant="outlined"
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
+          <TextField
+            value={flight.flightDate}
+            autoFocus
+            margin="dense"
+            id="flightDate"
+            name="flightDate"
+            label="Date"
+            type="date"
             variant="outlined"
             required
             InputLabelProps={{
@@ -150,6 +162,7 @@ export default function AddFlight({
             label="Arrival City"
             type="text"
             variant="outlined"
+            required
             onChange={handleChange}
           />
           <TextField
@@ -185,6 +198,7 @@ export default function AddFlight({
               label="Journey type"
               variant="outlined"
               onChange={handleChange}
+              required
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>

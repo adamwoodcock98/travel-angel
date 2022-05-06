@@ -13,6 +13,7 @@ const Flights = () => {
   const [flight, setFlight] = useState({
     flightNumber: "",
     flightTime: "",
+    flightDate: "",
     airline: "",
     departureAirport: "",
     departureTerminal: "",
@@ -25,6 +26,10 @@ const Flights = () => {
     bookingReference: "",
     isOutbound: ""
   });
+
+  const api = axios.create({
+    baseURL: "http://localhost:5000/dashboard/flights/"
+  })
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -45,23 +50,18 @@ const Flights = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const { flightNumber, flightTime, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
+    const { flightNumber, flightTime, flightDate, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
 
-    const newFlight = { flightNumber, flightTime, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
+    const newFlight = { flightNumber, flightTime, flightDate,  airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
 
-    await axios.post("http://localhost:8000/dashboard/flights/", newFlight).then(() => {
+    await api.post("/", newFlight).then(() => {
       handleClose();
       window.location = "/";
     });
   };
 
-  const api = axios.create({
-    baseURL: "http://localhost:5000/dashboard/flights/"
-  })
-
   useEffect(() => {
-    api.get("/").then(res => { 
-      console.log(res.data)
+    api.get("/").then(res => {
       const outbound = res.data.outbound                        //.map(flight => JSON.stringify(flight))
       const inbound = res.data.inbound
       setOutboundFlight(outbound);
