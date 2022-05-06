@@ -8,105 +8,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
 
-export default function AddAccommodation() {
-  const [open, setOpen] = useState(false);
-  const [accommodation, setAccommodation] = useState({
-    name: undefined,
-    contactNumber: undefined,
-    checkInDate: undefined,
-    checkOutDate: undefined,
-    checkInTime: undefined,
-    checkOutTime: undefined,
-    bookingReference: undefined,
-    buildingNumber: undefined,
-    buildingName: undefined,
-    addressLine1: undefined,
-    addressLine2: undefined,
-    city: undefined,
-    postalCode: undefined,
-    stateCounty: undefined,
-    countryCode: undefined,
-  });
-
-  const handleChange = (e) => {
-    const value = e.target.value ? e.target.value : undefined;
-    setAccommodation({
-      ...accommodation,
-      [e.target.name]: value,
-    });
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    const {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-    } = accommodation;
-
-    const newAccommodation = {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-    };
-
-    await axios
-      .post("http://localhost:5000/dashboard/accommodation", newAccommodation)
-      .then(() => {
-        setAccommodation({
-          name: undefined,
-          contactNumber: undefined,
-          checkInDate: undefined,
-          checkOutDate: undefined,
-          checkInTime: undefined,
-          checkOutTime: undefined,
-          bookingReference: undefined,
-          buildingNumber: undefined,
-          buildingName: undefined,
-          addressLine1: undefined,
-          addressLine2: undefined,
-          city: undefined,
-          postalCode: undefined,
-          stateCounty: undefined,
-          countryCode: undefined,
-        });
-        handleClose();
-      });
-  };
-
+export default function AddAccommodation({
+  handleOpen,
+  open,
+  handleClose,
+  handleChange,
+  accommodation,
+  handleSubmit,
+}) {
   return (
     <div>
       <Button variant="outlined" onClick={handleOpen}>
@@ -309,7 +218,7 @@ export default function AddAccommodation() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Accommodation Details</Button>
+          <Button onClick={handleSubmit}>Save Accommodation Details</Button>
         </DialogActions>
       </Dialog>
     </div>

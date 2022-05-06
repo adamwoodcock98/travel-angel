@@ -11,16 +11,16 @@ export default function AccommodationCard({ accommodation }) {
     delete addressObject.__v;
     const arrayOfAddressValues = Object.values(addressObject);
     const onlyDefinedAddressValues = arrayOfAddressValues.filter(
-      (addressValue) => addressValue !== undefined
+      (addressValue) => addressValue !== ""
     );
     return onlyDefinedAddressValues.join(", ");
   };
 
   return (
     <div className="card-container">
-      {accommodation.map((accommodation) => {
+      {accommodation.map((accommodation, index) => {
         return (
-          <div className="accommodation-card">
+          <div className="accommodation-card" key={index}>
             <div className="header">
               <h1>{accommodation.name}</h1>
             </div>
