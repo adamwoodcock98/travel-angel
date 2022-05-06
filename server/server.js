@@ -5,8 +5,10 @@ const cors = require("cors");
 const usersRouter = require("./routes/user.js");
 const flightsRouter = require("./routes/flights.js")
 const accommodationRouter = require("./routes/accommodation.js")
-const dotenv = require("dotenv");
 const passportRouter = require("./routes/passport.js");
+const dotenv = require("dotenv");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 dotenv.config({ path: "./config.env" });
 
 const app = express();

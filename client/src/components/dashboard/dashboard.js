@@ -4,12 +4,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import FlightTakeoffOutlined from '@mui/icons-material/FlightTakeoffOutlined';
 import HotelIcon from "@mui/icons-material/HotelOutlined";
 import "./dashboard.css";
 import Flights from "./flights/flights"
 import Passport from './passport/passport'
-import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+
 
 function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the tab bar itself.
   const { children, value, index, ...other } = props; //object destructuring - defining props, also ready to be 'typed'. Value of a tab must be the index if no other value passed in.
@@ -24,7 +25,7 @@ function TabPanel(props) { //Tab panel is a specific tab on the tab bar, not the
     >
       {value === index && ( // if the value is equal to the index, do the stuff after && (JSX if statement)
         <Box sx={{ p: 3 }}> {/*the sx prop allows you to provide supplementary CSS on top of the css already defined, in this case using p: 3 to set the padding*/}
-          <Typography>{children}</Typography> {/*children is a typography prop of type node (meaning any renderable type) and refers to the content of the component, so applying typography to whatever content is in the tab item*/}
+          <Typography component={'div'}>{children}</Typography> {/*children is a typography prop of type node (meaning any renderable type) and refers to the content of the component, so applying typography to whatever content is in the tab item*/}
         </Box>
       )}
     </div>
@@ -44,7 +45,7 @@ function a11yProps(index) { // a11y props brings accessibility support to React 
   };
 }
 
-export default function VerticalTabs() { // the main functional component to be rendered by index aka the sidebar
+export default function VerticalTabs() { // the main fFunctional component to be rendered by index aka the sidebar
   const [value, setValue] = React.useState(0); // setting up state for the tab bar, this is purely to render things for the tab bar, not state that we will ever get data from
 
   const handleChange = (event, newValue) => { // handling the tab bars changes, in terms of highlighting different icons, rendering the tab contents etc. we don't need to change this.

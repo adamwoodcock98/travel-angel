@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import axios from "axios";
+import React from "react"
 
-export const DisplayPassport = () => {
-  const [state, setState] = useState([])
-  useEffect(() => {
-    axios.get("http://localhost:8000/dashboard/passport")
-    .then((res) => {
-      console.log(res.data)
-      setState(res.data.passport)
-  })
-}, [])
-  
-    if (state.length) {
-      return (
-        <>
-        {state[0].gender}
-        </> )
-    } else {
+export const DisplayPassport = ({passport}) => {
+  return (
+    <div className="">
+      {passport.country}
+      {passport.passportNumber}
+      {passport.lastName}
+      {passport.firstName}
+      {passport.nationality}
+      {passport.dob}
+      {passport.gender}
+      {passport.placeOfBirth}
+      {passport.dateOfIssue}
+      {passport.dateOfExpiry}
+    </div>
+  )
 
-      return (
-        <>loading</>
-      )
-    }
-}
+};
