@@ -47,14 +47,14 @@ const Flights = () => {
     setOpen(false);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const { flightNumber, departureTime, departureDate, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
 
     const newFlight = { flightNumber, departureTime, departureDate,  airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
 
-    await api.post("/", newFlight).then(() => {
+    api.post("/", newFlight).then(res => {
       handleClose();
       window.location = "/";
     });
@@ -62,7 +62,7 @@ const Flights = () => {
 
   useEffect(() => {
     api.get("/").then(res => {
-      const outbound = res.data.outbound                        //.map(flight => JSON.stringify(flight))
+      const outbound = res.data.outbound    
       const inbound = res.data.inbound
       setOutboundFlight(outbound);
       setInboundFlight(inbound);

@@ -29,10 +29,12 @@ const FlightsController = {
         arrivalGate: data.arrivalGate,
         bookingReference: data.bookingReference,
         isOutbound: data.isOutbound,
-        user: req.session.user,
+        // user: req.session.user,
       });
 
       const saveFlight = await flight.save();
+
+      res.status(200).send();
     } catch (err) {
       console.log(err.message);
       res.status(500).send(err);
