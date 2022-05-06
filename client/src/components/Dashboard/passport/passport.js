@@ -1,4 +1,5 @@
 import AddPassport from './addPassport.js';
+import { DisplayPassport } from './displayPassport';
 import React, { useState } from 'react';
 import axios from "axios";
 
@@ -68,6 +69,8 @@ const Passport = () => {
 
   return (
     <div className="Passport">
+      <DisplayPassport />
+
       <AddPassport
         open={open}
         handleOpen={handleOpen}
