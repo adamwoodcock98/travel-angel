@@ -1,8 +1,10 @@
 const Visa = require("../models/visa.js")
 
 const VisaController = {
-  Index: (res, req) => {
-  
+  Index: async (req, res) => {
+    const visas = await Visa.find();
+    console.log(visas);
+    res.json(visas);
   },
 
   Create: async (req, res) => {

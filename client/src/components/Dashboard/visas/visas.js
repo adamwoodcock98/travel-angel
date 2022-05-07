@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect  } from 'react';
 import AddVisa from './addVisa'
+import VisaCard from './viewVisa'
 import axios from 'axios'
 
 const Visas = () => {
   const [open, setOpen] = useState(false);
-  const [visa, setVisa] = useState({
+  const [visa, setVisa] = useState([]);
+  const [visaArray, setVisaArray] = useState({
     visaNumber: "",
     startDate: "",
     endDate: "",
     issuingCountry: "",
   });
 
+  useEffect(() => {
+    axios.get("http://localhost:8000/dashboard/visas/").then(res => {
+      setVisa(res.data);
+    });
+  }, [visaArray])
+
   const handleChange = (e) => {
     const value = e.target.value;
-    setVisa({
-      ...visa,
+    setVisaArray({
+      ...visaArray,
       [e.target.name]: value,
     });
   };
@@ -27,14 +35,14 @@ const Visas = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { 
       visaNumber,
       startDate,
       endDate,
-      issuingCountry} = visa;
+      issuingCountry} = visaArray;
 
     const newVisa = { 
       visaNumber,
@@ -42,12 +50,47 @@ const Visas = () => {
       endDate,
       issuingCountry}
     
-    axios.post("http://localhost:8000/dashboard/visas/", newVisa).then(() => {
+    await axios
+      .post("http://localhost:8000/dashboard/visas/", newVisa)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setVisaArray({
+          visaNumber: "",
+          startDate: "",
+          endDate: "",
+          issuingCountry: "",
+        });
       handleClose();
     });
   };
 
-  return(
+  if (visa.length) {
+    return(
+      <div className="visas">
+          <div className="visa-header">
+            <h1>Your visas</h1>
+          </div>
+          <div className="visas-content">
+            <div className="visas-content-outbound">
+              <h1 className="visa-content-subheading"> BLOOPS </h1>
+                <VisaCard visa={visa} />
+            </div>
+          </div>
+
+      <div>
+        <AddVisa
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        handleChange={handleChange}
+        visa={visa}
+        handleSubmit={handleSubmit}
+      />
+      </div>
+
+    </div>
+    )
+  } else {
     <div>
       <AddVisa
       open={open}
@@ -57,9 +100,8 @@ const Visas = () => {
       visa={visa}
       handleSubmit={handleSubmit}
     />
-      </div>
-  )
-
+    </div>
+  } 
 }
 
 export default Visas;
