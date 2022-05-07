@@ -4,7 +4,7 @@ import SignUp from "./signUp/signUp";
 import LogIn from "./logIn/logIn";
 import { Alerts } from "../assets/snackbar";
 
-export const Authentication = () => {
+export const Authentication = ({ handleLogIn }) => {
   const url = "http://localhost:8000";
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({
@@ -82,6 +82,7 @@ export const Authentication = () => {
     const newUser = { email, password };
 
     await axios.post(`${url}/user/log-in`, newUser).then((res) => {
+      handleLogIn(res.data.user);
       handleCloseLogIn();
       handleAlert(res.data.msg, res.data.type);
     });
