@@ -6,6 +6,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FlightTakeoffOutlined from "@mui/icons-material/FlightTakeoffOutlined";
 import HotelIcon from "@mui/icons-material/HotelOutlined";
+import CommuteIcon from '@mui/icons-material/Commute';
+import "./dashboard.css";
+import Transfers from "./transfers/transfers"
+import Flights from "./flights/flights"
 import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
 import Parking from "./parking/parking"
 import "./dashboard.css";
@@ -82,7 +86,8 @@ export default function VerticalTabs() {
         />{" "}
         {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
-        <Tab icon={<LocalParkingRoundedIcon />} aria-label="parking" {...a11yProps(2)} />
+        <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
+        <Tab icon={<LocalParkingRoundedIcon />} aria-label="parking" {...a11yProps(3)} />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights />
@@ -90,7 +95,10 @@ export default function VerticalTabs() {
       <TabPanel className="tab-content" value={value} index={1}>
         <ViewAccommodation />
       </TabPanel>
-      <TabPanel  className="tab-content"value={value} index={2}>
+      <TabPanel className="tab-content"value={value} index={2}>
+        <Transfers />
+      </TabPanel>
+      <TabPanel  className="tab-content"value={value} index={3}>
         <Parking />
       </TabPanel>
     </Box>

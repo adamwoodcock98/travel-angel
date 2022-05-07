@@ -5,6 +5,7 @@ const cors = require("cors");
 const usersRouter = require("./routes/user.js");
 const flightsRouter = require("./routes/flights.js")
 const accommodationRouter = require("./routes/accommodation.js")
+const transferRouter = require("./routes/transfers.js")
 const parkingRouter = require("./routes/parking.js")
 const dotenv = require("dotenv");
 const session = require("express-session");
@@ -49,6 +50,7 @@ app.use(
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
 app.use("/dashboard/accommodation", accommodationRouter);
+app.use("/dashboard/transfers", transferRouter)
 app.use("/dashboard/parking", parkingRouter);
 
 app.listen(port, () => {
