@@ -59,13 +59,13 @@ const AddVaccine = (props) => {
           </DialogContentText>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel htmlFor="grouped-select">Grouping</InputLabel>
-            <Select defaultValue="" id="dose" label="Dose" autofocus>
+            <Select defaultValue="" name="dose" id="dose" label="Dose" autoFocus onChange={handleChange}>
               <ListSubheader>mRNA Vaccine</ListSubheader>
-              <MenuItem value={1}>1st Dose</MenuItem>
-              <MenuItem value={2}>2nd Dose</MenuItem>
-              <MenuItem value={3}>Booster</MenuItem>
+              <MenuItem value={"1st Dose"}>1st Dose</MenuItem>
+              <MenuItem value={"2nd Dose"}>2nd Dose</MenuItem>
+              <MenuItem value={"Booster"}>Booster</MenuItem>
               <ListSubheader>Carrier Vaccine</ListSubheader>
-              <MenuItem value={4}>Primary Dose</MenuItem>
+              <MenuItem value={"Primary Dose"}>Primary Dose</MenuItem>
             </Select>
           </FormControl>
           <TextField
@@ -87,7 +87,6 @@ const AddVaccine = (props) => {
             <InputLabel id="demo-select-small">Vaccine Type</InputLabel>
             <Select
               value={vaccine.type}
-              autoFocus
               margin="dense"
               id="type"
               name="type"
@@ -96,14 +95,14 @@ const AddVaccine = (props) => {
               onChange={handleChange}
               required
             >
-              <MenuItem value={false}>Novavax (Nuvaxovid)</MenuItem>
-              <MenuItem value={true}>Moderna (Spikevax)</MenuItem>
-              <MenuItem value={false}>Pfizer/BioNTech (Comirnaty)</MenuItem>
-              <MenuItem value={true}>Oxford/AstraZeneca (Vaxzevria)</MenuItem>
-              <MenuItem value={false}>Covishield (AstraZeneca formulation)</MenuItem>
-              <MenuItem value={true}>Sinopharm (Covilo)</MenuItem>
-              <MenuItem value={false}>Sinovac (CoronaVac)</MenuItem>
-              <MenuItem value={true}>Johnson & Johnson (Janssen)</MenuItem>
+              <MenuItem value="{Novavax (Nuvaxovid)">Novavax (Nuvaxovid)</MenuItem>
+              <MenuItem value={"Moderna (Spikevax)"}>Moderna (Spikevax)</MenuItem>
+              <MenuItem value={"Pfizer/BioNTech (Comirnaty)"}>Pfizer/BioNTech (Comirnaty)</MenuItem>
+              <MenuItem value={"Oxford/AstraZeneca (Vaxzevria)"}>Oxford/AstraZeneca (Vaxzevria)</MenuItem>
+              <MenuItem value={"Covishield (AstraZeneca formulation)"}>Covishield (AstraZeneca formulation)</MenuItem>
+              <MenuItem value={"Sinopharm (Covilo)"}>Sinopharm (Covilo)</MenuItem>
+              <MenuItem value={"Sinovac (CoronaVac)"}>Sinovac (CoronaVac)</MenuItem>
+              <MenuItem value={"Johnson & Johnson (Janssen)"}>Johnson & Johnson (Janssen)</MenuItem>
             </Select>
           </FormControl>
         </DialogContent>
