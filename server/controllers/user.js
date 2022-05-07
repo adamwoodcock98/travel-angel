@@ -13,11 +13,8 @@ const UsersController = {
       });
       user
         .save()
-        .then((book) =>
-          res.json({
-            msg: "You have signed up successfully!",
-            type: "success",
-          })
+        .then((user) =>
+          res.json({ msg: "User added successfully", type: "success" })
         )
         .catch((err) =>
           res.status(400).json({ error: "Unable to sign up", type: "error" })

@@ -33,7 +33,7 @@ const FlightsController = {
         // user: req.session.user,
       });
 
-      const saveFlight = await flight.save();
+      await flight.save();
 
       res.status(200).send();
     } catch (err) {
