@@ -6,9 +6,13 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import BiotechOutlinedIcon from "@mui/icons-material/BiotechOutlined";
 import NotificationAddOutlinedIcon from "@mui/icons-material/NotificationAddOutlined";
+import AddVaccine from "./vaccinations/newVaccine"
 
 const handleReminderClick = (e) => {
   console.log("clicked on reminder");
+  return(
+    <AddVaccine />
+  );
 };
 
 const handleTestClick = (e) => {
@@ -39,6 +43,8 @@ export default function PlaygroundSpeedDial() {
   const handleClose = () => setOpen(false);
 
   return (
+    <>
+    <AddVaccine />;
     <Box sx={{ transform: "translateZ(0px)", flexGrow: 1 }}>
       <Box sx={{ position: "relative", mt: 3, height: 320 }}>
         <SpeedDial
@@ -63,11 +69,12 @@ export default function PlaygroundSpeedDial() {
               icon={action.icon}
               tooltipOpen
               tooltipTitle={action.name}
-              onClick={() => {handleClose(); action.action()}}
+              onClick={() => {handleClose(); action.action();}}
             />
           ))}
         </SpeedDial>
       </Box>
     </Box>
+    </>
   );
 }
