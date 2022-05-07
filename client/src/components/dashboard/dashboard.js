@@ -13,7 +13,6 @@ import Flights from "./flights/flights"
 import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
 import Parking from "./parking/parking"
 import "./dashboard.css";
-import Flights from "./flights/flights";
 import { ViewAccommodation } from "../accommodation/accommodation";
 
 
