@@ -45,7 +45,6 @@ const AddVaccine = (props) => {
       .post("http://localhost:8000/dashboard/covid/vaccination", newDose)
       .then((res) => {
         handleClose();
-        window.location = "/";
       });
   };
 

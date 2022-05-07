@@ -5,8 +5,8 @@ const covidTestSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  isReminder: {
-    type: Boolean,
+  entryType: {
+    type: String,
     required: true,
   },
   result: String,
