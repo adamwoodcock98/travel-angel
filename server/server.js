@@ -6,11 +6,14 @@ const usersRouter = require("./routes/user.js");
 const flightsRouter = require("./routes/flights.js")
 const accommodationRouter = require("./routes/accommodation.js")
 const transferRouter = require("./routes/transfers.js")
+const parkingRouter = require("./routes/parking.js")
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
-
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 const port = process.env.PORT || 8000;
+
+dotenv.config({ path: "./config.env" });
 
 app.use(cors());
 app.use(express.json());
@@ -25,10 +28,30 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
+const store = MongoStore.create({
+  mongoUrl: uri,
+  collection: "sessions",
+});
+
+app.use(
+  session({
+    secret: "aaahh",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+    cookie: {
+      maxAge: 600000,
+      sameSite: false,
+      secure: true,
+    },
+  })
+);
+
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
 app.use("/dashboard/accommodation", accommodationRouter);
 app.use("/dashboard/transfers", transferRouter)
+app.use("/dashboard/parking", parkingRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);

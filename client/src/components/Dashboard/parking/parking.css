@@ -1,0 +1,18 @@
+.parking-window {
+  display: flex;
+  flex-direction: column;
+}
+
+  .parking-header {
+    font-size: xx-large;
+  }
+
+  .parking-content {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .parking-footer {
+    margin-top: 3%;
+    text-align: right;
+  }
