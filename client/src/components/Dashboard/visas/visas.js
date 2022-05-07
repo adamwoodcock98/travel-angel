@@ -33,15 +33,15 @@ const Visas = () => {
     const { 
       visaNumber,
       startDate,
-      endDat,
+      endDate,
       issuingCountry} = visa;
 
     const newVisa = { 
       visaNumber,
       startDate,
-      endDat,
-      issuingCountry};
-
+      endDate,
+      issuingCountry}
+    
     axios.post("http://localhost:8000/dashboard/visas/", newVisa).then(() => {
       handleClose();
     });

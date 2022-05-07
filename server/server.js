@@ -56,7 +56,7 @@ app.use("/dashboard/flights", flightsRouter);
 app.use("/dashboard/accommodation", accommodationRouter);
 app.use("/dashboard/transfers", transferRouter);
 app.use("/dashboard/parking", parkingRouter);
-app.use("./dashboard/visas", visaRouter);
+app.use("/dashboard/visas", visaRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);

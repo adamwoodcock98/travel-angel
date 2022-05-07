@@ -1,8 +1,8 @@
 const express = require("express");
-const VisasController = require("../controllers/visas.js");
+const VisaController = require("../controllers/visas.js");
 
 const VisaRouter = express.Router();
-VisaRouter.get("/", VisasController.Index);
-VisaRouter.post("/", VisasController.New);
+VisaRouter.get("/", VisaController.Index);
+VisaRouter.post("/", VisaController.Create);
 
 module.exports = VisaRouter;
