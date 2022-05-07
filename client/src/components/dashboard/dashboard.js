@@ -12,6 +12,8 @@ import Transfers from "./transfers/transfers";
 import Flights from "./flights/flights";
 import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
 import Parking from "./parking/parking";
+import CoronavirusOutlinedIcon from '@mui/icons-material/CoronavirusOutlined';
+import PlaygroundSpeedDial from "./covid/covidSpeedDial";
 import "./dashboard.css";
 import { ViewAccommodation } from "../accommodation/accommodation";
 
@@ -88,11 +90,8 @@ export default function VerticalTabs() {
         {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
         <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
-        <Tab
-          icon={<LocalParkingRoundedIcon />}
-          aria-label="parking"
-          {...a11yProps(3)}
-        />
+        <Tab icon={<LocalParkingRoundedIcon />} aria-label="parking" {...a11yProps(3)} />
+        <Tab icon={<CoronavirusOutlinedIcon />} aria-label="covid" {...a11yProps(4)} />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights />
@@ -105,6 +104,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={3}>
         <Parking />
+      </TabPanel>
+      <TabPanel className="tab-content" value={value} index={4}>
+        <PlaygroundSpeedDial />
       </TabPanel>
     </Box>
   );
