@@ -1,20 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import FlightTakeoffOutlined from "@mui/icons-material/FlightTakeoffOutlined";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
-import HotelIcon from "@mui/icons-material/HotelOutlined";
-import CommuteIcon from "@mui/icons-material/Commute";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
+import {
+  FlightTakeoff,
+  Contacts,
+  Hotel,
+  Commute,
+  LocalParkingRounded,
+} from "@mui/icons-material";
 import "./dashboard.css";
 import Transfers from "./transfers/transfers";
 import Flights from "./flights/flights";
 import Passport from "./passport/passport";
-import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
 import Parking from "./parking/parking";
-import { ViewAccommodation } from "../accommodation/accommodation";
+import { ViewAccommodation } from "./accommodation/accommodation";
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -81,21 +80,17 @@ export default function VerticalTabs() {
         textColor="secondary"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
+        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(0)} />
         <Tab
-          icon={<ImportContactsIcon />}
-          aria-label="passport"
-          {...a11yProps(0)}
-        />
-        <Tab
-          icon={<FlightTakeoffOutlined />}
+          icon={<FlightTakeoff />}
           aria-label="plane"
           {...a11yProps(1)}
         />{" "}
         {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
-        <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(2)} />
-        <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(3)} />
+        <Tab icon={<Hotel />} aria-label="hotel" {...a11yProps(2)} />
+        <Tab icon={<Commute />} aria-label="transfer" {...a11yProps(3)} />
         <Tab
-          icon={<LocalParkingRoundedIcon />}
+          icon={<LocalParkingRounded />}
           aria-label="parking"
           {...a11yProps(4)}
         />

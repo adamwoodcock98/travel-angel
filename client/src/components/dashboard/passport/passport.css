@@ -1,70 +1,61 @@
-.passport-card {
-  width: 100%;
+.pass-card {
+  width: 530px;
   flex-direction: column;
   margin: 0%;
-  height: 380px;
-  margin-bottom: 5%;
+  height: 354px;
   color: rgb(29, 29, 29);
   font-size: 16px;
   text-transform: uppercase;
-  font-family: 'Courier-New', Courier, monospace;
-  font-weight: 500;
-  padding: 10px;
+  font-family: "Courier-New", Courier, monospace;
+  font-weight: 600;
   line-height: 17px;
-  background: url('http://localhost:3000/passport-bg.png') 0 0 / 600px 424px no-repeat ;
+  background: url("http://localhost:3000/pass-bg.jpg") 0 0 / 530px 378px
+    no-repeat;
+  box-shadow: 0 2px 15px rgb(175, 175, 175);
+  border-radius: 10px;
 }
 
 .pass-num {
-  margin-top: 40px;
+  margin-top: 20px;
   text-align: right;
-  margin-right: 120px;
+  margin-right: 50px;
 }
 .pass-country {
   color: rgb(33, 27, 113);
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 25px 5px 0 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   font-size: 14px;
+  text-align: center;
+}
+
+.pass-contents {
+  padding-left: 100px;
 }
 
 .pass-gender {
   float: left;
-  margin-right: 29px;
+  margin-right: 20px;
+}
+
+.pass-footer {
+  overflow: hidden;
+  width: 524px;
+  text-transform: uppercase;
+  font-family: "Courier-New", Courier, monospace;
+  font-weight: 600;
 }
 
 img {
   width: 200px;
   height: auto;
+  max-height: 300px;
   float: left;
   padding: 60px 5px 30px 15px;
 }
 
-h1 {
-  margin: 0;
-}
-
-h2 {
-  margin: 0;
-}
-
-h3 {
-  margin: 0;
-}
-
-h4 {
-  margin: 0;
-}
-
 h5 {
-  margin: 0;
-  color: rgb(79, 104, 22);
-  font-weight: 400;
+  color: rgb(46, 66, 38);
+  font-weight: 600;
   font-size: 10px;
-}
-
-h6 {
-  margin: 0;
-}
-
-p {
-  margin: 0;
 }

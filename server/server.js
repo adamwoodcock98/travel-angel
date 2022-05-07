@@ -7,6 +7,7 @@ const flightsRouter = require("./routes/flights.js");
 const accommodationRouter = require("./routes/accommodation.js");
 const transferRouter = require("./routes/transfers.js");
 const parkingRouter = require("./routes/parking.js");
+const passportRouter = require("./routes/passport.js");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
