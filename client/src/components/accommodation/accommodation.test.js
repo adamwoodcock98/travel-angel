@@ -44,67 +44,67 @@ test("Accommodation", () => {
   ).toBeInTheDocument();
   expect(screen.getByRole("textbox", { name: "Country" })).toBeInTheDocument();
 
-  const name = "P. Sherman";
-  fireEvent.change(screen.getByTestId("name"), {
-    target: { value: name },
-  });
+  // const name = "P. Sherman";
+  // fireEvent.change(screen.getByTestId("name"), {
+  //   target: { value: name },
+  // });
 
-  const contactNumber = 98764321265;
-  fireEvent.change(screen.getByTestId("contactNumber"), {
-    target: { value: contactNumber },
-  });
+  // const contactNumber = 98764321265;
+  // fireEvent.change(screen.getByTestId("contactNumber"), {
+  //   target: { value: contactNumber },
+  // });
 
-  const checkInDate = "01/01/2023";
-  fireEvent.change(screen.getByTestId("checkInDateInput"), {
-    target: { value: checkInDate },
-  });
+  // const checkInDate = "01/01/2023";
+  // fireEvent.change(screen.getByTestId("checkInDateInput"), {
+  //   target: { value: checkInDate },
+  // });
 
-  const checkOutDate = "02/01/2023";
-  fireEvent.change(screen.getByTestId("checkOutDateInput"), {
-    target: { value: checkOutDate },
-  });
+  // const checkOutDate = "02/01/2023";
+  // fireEvent.change(screen.getByTestId("checkOutDateInput"), {
+  //   target: { value: checkOutDate },
+  // });
 
-  const checkInTime = "17:00";
-  fireEvent.change(screen.getByTestId("checkOutDateInput"), {
-    target: { value: checkInTime },
-  });
+  // const checkInTime = "17:00";
+  // fireEvent.change(screen.getByTestId("checkOutDateInput"), {
+  //   target: { value: checkInTime },
+  // });
 
-  const checkOutTime = "11:00";
-  fireEvent.change(screen.getByTestId("checkOutDateInput"), {
-    target: { value: checkOutTime },
-  });
+  // const checkOutTime = "11:00";
+  // fireEvent.change(screen.getByTestId("checkOutDateInput"), {
+  //   target: { value: checkOutTime },
+  // });
 
-  const bookingReference = "Booking Reference";
-  fireEvent.change(screen.getByTestId("bookingReference"), {
-    target: { value: bookingReference },
-  });
+  // const bookingReference = "Booking Reference";
+  // fireEvent.change(screen.getByTestId("bookingReference"), {
+  //   target: { value: bookingReference },
+  // });
 
-  const buildingNumber = "42";
-  fireEvent.change(screen.getByTestId("buildingNumber"), {
-    target: { value: buildingNumber },
-  });
+  // const buildingNumber = "42";
+  // fireEvent.change(screen.getByTestId("buildingNumber"), {
+  //   target: { value: buildingNumber },
+  // });
 
-  const addressLine1 = "Wallaby Way";
-  fireEvent.change(screen.getByTestId("addressLine1"), {
-    target: { value: addressLine1 },
-  });
+  // const addressLine1 = "Wallaby Way";
+  // fireEvent.change(screen.getByTestId("addressLine1"), {
+  //   target: { value: addressLine1 },
+  // });
 
-  const city = "Sydney";
-  fireEvent.change(screen.getByTestId("city"), {
-    target: { value: city },
-  });
+  // const city = "Sydney";
+  // fireEvent.change(screen.getByTestId("city"), {
+  //   target: { value: city },
+  // });
 
-  const postalCode = "2000";
-  fireEvent.change(screen.getByTestId("postalCode"), {
-    target: { value: postalCode },
-  });
+  // const postalCode = "2000";
+  // fireEvent.change(screen.getByTestId("postalCode"), {
+  //   target: { value: postalCode },
+  // });
 
-  const stateCounty = "NSW";
-  fireEvent.change(screen.getByTestId("stateCounty"), {
-    target: { value: stateCounty },
-  });
+  // const stateCounty = "NSW";
+  // fireEvent.change(screen.getByTestId("stateCounty"), {
+  //   target: { value: stateCounty },
+  // });
 
-  fireEvent.click(screen.getByTestId("saveAccommodationDetails"));
+  // fireEvent.click(screen.getByTestId("saveAccommodationDetails"));
 
   // expect(
   //   screen.getByText("Address: 42, Wallaby Way, Sydney, NSW, 2000")
