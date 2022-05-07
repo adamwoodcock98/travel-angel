@@ -1,6 +1,6 @@
-const mongoose = "mongoose";
+const mongoose = require("mongoose");
 
-const vaccinationsSchema = new mongoose.schema({
+const vaccinationsSchema = mongoose.Schema({
   vaccinationStatus: {
     type: String,
     default: "Unvaccinated",
@@ -8,12 +8,11 @@ const vaccinationsSchema = new mongoose.schema({
   vaccineProof: [Buffer],
   additionalDocuments: [Buffer],
   vaccineDoses: [{
-    dose: String,
-    date: Date,
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "VaccineDose"
   }],
   user: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   }
@@ -21,4 +20,4 @@ const vaccinationsSchema = new mongoose.schema({
 
 const Vaccinations = mongoose.model("Vaccinations", vaccinationsSchema);
 
-module.exports = Parking;
+module.exports = Vaccinations;
