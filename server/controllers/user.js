@@ -33,6 +33,7 @@ const UsersController = {
             res.json({
               msg: `Welcome back, ${user.firstName}!`,
               type: "success",
+              user: user._id,
             });
           } else {
             res.json({ msg: "Incorrect details entered!", type: "error" });

@@ -14,7 +14,7 @@ import {
   Grid,
 } from "@mui/material";
 
-export default function NavBar() {
+export default function NavBar({ handleLogOut }) {
   const [open, setOpen] = useState(false);
 
   const handleOpenMenu = () => {
@@ -97,7 +97,9 @@ export default function NavBar() {
 
                     <MenuItem>
                       <IconButton>
-                        <Typography textAlign="center"><LogOut /></Typography>
+                        <Typography textAlign="center">
+                          <LogOut handleLogOut={handleLogOut} />
+                        </Typography>
                       </IconButton>
                     </MenuItem>
                   </Menu>

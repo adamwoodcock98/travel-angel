@@ -4,14 +4,15 @@ const FlightsController = {
   Index: async (req, res) => {
     const outboundFlight = await Flight.find({ isOutbound: true });
     const inboundFlight = await Flight.find({ isOutbound: false });
-
-    res.json({ outbound: outboundFlight, inbound: inboundFlight });
+    res.json({
+      outbound: outboundFlight,
+      inbound: inboundFlight,
+      user: req.session.user,
+    });
   },
 
   New: async (req, res) => {
     const data = req.body;
-
-    console.log("the user: ", req.session.user)
 
     try {
       const flight = new Flight({
