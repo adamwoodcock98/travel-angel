@@ -1,20 +1,23 @@
 const Transfer = require("../models/transfer.js");
-const Address = require("../models/address.js")
+const Address = require("../models/address.js");
 
 const TransferController = {
   Index: async (req, res) => {
-      try {
-        const outboundTransfer = await Transfer.find({ isOutbound: true }).populate("pickupAddress dropoffAddress");
-        const inboundTransfer = await Transfer.find({ isOutbound: false }).populate("pickupAddress dropoffAddress");
-        // console.log(outboundTransfer, inboundTransfer)
-        res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
-      } catch(e) {
-        console.log(e.message)
-      }
-    },
+    try {
+      const outboundTransfer = await Transfer.find({
+        isOutbound: true,
+      }).populate("pickupAddress dropoffAddress");
+      const inboundTransfer = await Transfer.find({
+        isOutbound: false,
+      }).populate("pickupAddress dropoffAddress");
+      res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
+    } catch (e) {
+      console.log(e.message);
+    }
+  },
 
   Create: (req, res) => {
-    const { 
+    const {
       pickupTime,
       dropoffTime,
       pickupAddress,
@@ -22,7 +25,8 @@ const TransferController = {
       isOutbound,
       company,
       contactNumber,
-      bookingReference} = req.body
+      bookingReference,
+    } = req.body;
 
     const thePickupAddress = new Address({
       buildingNumber: pickupAddress.buildingNumber,
@@ -46,12 +50,11 @@ const TransferController = {
       countryCode: pickupAddress.countryCode,
     });
 
-    
     thePickupAddress.save().then((result) => {
-      const pickupAddressObject = result
+      const pickupAddressObject = result;
       theDropoffAddress.save().then((result) => {
         const transfer = new Transfer({
-          pickupTime: pickupTime, 
+          pickupTime: pickupTime,
           dropoffTime: dropoffTime,
           pickupAddress: pickupAddressObject,
           dropoffAddress: result,
@@ -59,18 +62,17 @@ const TransferController = {
           company: company,
           contactNumber: contactNumber,
           bookingReference: bookingReference,
-          // user: 
+          // user:
         });
         transfer
           .save()
-          .then(() => 
-            res.json({ message: "Amazing, you've just added a new transfer!"})
+          .then(() =>
+            res.json({ message: "Amazing, you've just added a new transfer!" })
           )
-          .catch((err) => console.log(err.message)
-          )
-      })
-    })
-  }
-}
+          .catch((err) => console.log(err.message));
+      });
+    });
+  },
+};
 
 module.exports = TransferController;
