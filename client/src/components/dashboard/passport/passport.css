@@ -1,28 +1,54 @@
+@font-face {
+  font-family: "Signature";
+  src: local("Signature"), url("../../assets/BrittanySignature.otf") format("opentype");
+}
+
 .pass-card {
   width: 530px;
-  flex-direction: column;
   margin: 0%;
-  height: 354px;
-  color: rgb(29, 29, 29);
+  height: 320px;
+  color: rgb(0, 0, 0);
   font-size: 16px;
   text-transform: uppercase;
   font-family: "Courier-New", Courier, monospace;
   font-weight: 600;
-  line-height: 17px;
+  line-height: 25px;
   background: url("http://localhost:3000/pass-bg.jpg") 0 0 / 530px 378px
     no-repeat;
   box-shadow: 0 2px 15px rgb(175, 175, 175);
   border-radius: 10px;
 }
 
-.pass-num {
-  margin-top: 20px;
-  text-align: right;
-  margin-right: 50px;
+.pass-passport {
+  color: rgb(85, 110, 75);
+  opacity: 50%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 14px;
+  font-size: 11px;
+  margin: 10px 0 0 120px;
 }
+
+.pass-pic {
+  float: left;
+}
+
+.pass-type {
+  float: left;
+}
+.pass-num {
+  text-align: right;
+  margin-right: 60px;
+}
+.pass-signature {
+  font-family: "Signature", Arial, serif;
+  text-transform: capitalize;
+  float: right;
+  margin: -20px 50px 0 0;
+}
+
 .pass-country {
   color: rgb(33, 27, 113);
-  padding: 25px 5px 0 10px;
+  padding: 17px 5px 0 10px;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   font-size: 14px;
@@ -30,7 +56,8 @@
 }
 
 .pass-contents {
-  padding-left: 100px;
+  padding-top: 20px;
+  padding-left: 40px;
 }
 
 .pass-gender {
@@ -40,7 +67,7 @@
 
 .pass-footer {
   overflow: hidden;
-  width: 524px;
+  width: 526px;
   text-transform: uppercase;
   font-family: "Courier-New", Courier, monospace;
   font-weight: 600;
@@ -50,12 +77,14 @@ img {
   width: 200px;
   height: auto;
   max-height: 300px;
-  float: left;
-  padding: 60px 5px 30px 15px;
+  padding: 20px 5px 30px 15px;
 }
 
 h5 {
   color: rgb(46, 66, 38);
-  font-weight: 600;
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: none;
   font-size: 10px;
+  line-height: 4px;
 }
