@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const usersRouter = require("./routes/user.js");
-const flightsRouter = require("./routes/flights.js");
-const accommodationRouter = require("./routes/accommodation.js");
+const flightsRouter = require("./routes/flights.js")
+const accommodationRouter = require("./routes/accommodation.js")
+const parkingRouter = require("./routes/parking.js")
 const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -48,6 +49,7 @@ app.use(
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
 app.use("/dashboard/accommodation", accommodationRouter);
+app.use("/dashboard/parking", parkingRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);
