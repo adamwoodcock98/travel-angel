@@ -4,12 +4,22 @@ const Vaccinations = require("../models/vaccinations.js");
 
 const CovidController = {
   Index: async (req, res) => {
-    res.json({ message: "Welcome to Covid" });
+    try {
+      const vaccinationData = await Vaccinations.find().populate("vaccineDoses");
+      console.log(vaccinationData)
+      const testData = await CovidTest.find();
+      console.log(testData);
+
+      res.json({ vaccinations: vaccinationData, tests: testData });
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
   },
 
   NewTest: async (req, res) => {
     const data = req.body
-    console.log(data)
 
     const test = new CovidTest({
       testType: data.testType,
@@ -26,7 +36,8 @@ const CovidController = {
 
     try {
       const savedTest = await test.save();
-      console.log(savedTest)
+
+      res.status(200).send()
     } catch(e) {
       console.log(e.message);
       res.status(500).send();
