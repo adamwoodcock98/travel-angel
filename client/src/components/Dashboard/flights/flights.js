@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FlightCard } from "./viewFlights/flightCard";
-import "./flights.css"
-import AddFlight from "./addFlight"
+import "./flights.css";
+import AddFlight from "./addFlight";
 
-
-const Flights = () => {
+const Flights = ({ session }) => {
+  const userId = session;
 
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
@@ -24,12 +24,13 @@ const Flights = () => {
     arrivalCity: "",
     arrivalGate: "",
     bookingReference: "",
-    isOutbound: ""
+    isOutbound: "",
+    user: userId,
   });
 
   const api = axios.create({
-    baseURL: "http://localhost:8000/dashboard/flights/"
-  })
+    baseURL: "http://localhost:8000/dashboard/flights/",
+  });
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -50,39 +51,76 @@ const Flights = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { flightNumber, departureTime, departureDate, airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound } = flight;
+    const {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    } = flight;
 
-    const newFlight = { flightNumber, departureTime, departureDate,  airline, departureAirport, departureTerminal, departureCity, departureGate, arrivalAirport, arrivalTerminal, arrivalCity, arrivalGate, bookingReference, isOutbound };
+    const newFlight = {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    };
 
-    api.post("/", newFlight).then(res => {
+    api.post("/", newFlight).then((res) => {
       handleClose();
       window.location = "/";
     });
   };
 
   useEffect(() => {
-    api.get("/").then(res => {
-      const outbound = res.data.outbound    
-      const inbound = res.data.inbound
-      setOutboundFlight(outbound);
-      setInboundFlight(inbound);
-    });
-  }, [])
+    if (userId.length) {
+      api.get(`/${userId}`).then((res) => {
+        const outbound = res.data.outbound;
+        const inbound = res.data.inbound;
+        setOutboundFlight(outbound);
+        setInboundFlight(inbound);
+      });
+    }
+  }, []);
 
   if (outboundFlight.length || inboundFlight.length) {
-
     const outboundFlights = [];
     const inboundFlights = [];
 
     outboundFlight.forEach((flight) => {
-      outboundFlights.push(<FlightCard outboundFlight={flight} key={flight._id} />)
-    })
+      outboundFlights.push(
+        <FlightCard outboundFlight={flight} key={flight._id} />
+      );
+    });
 
     inboundFlight.forEach((flight) => {
-      inboundFlights.push(<FlightCard outboundFlight={flight} key={flight._id} />)
-    })
+      inboundFlights.push(
+        <FlightCard outboundFlight={flight} key={flight._id} />
+      );
+    });
 
-    return(
+    return (
       <div className="flights-window">
         <div className="flights-header">
           <h1>Your flights</h1>
@@ -108,13 +146,21 @@ const Flights = () => {
           />
         </div>
       </div>
-    )
+    );
   } else {
-    return(
-      <>Loading</>
-    )
+    return (
+      <>
+        <AddFlight
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          flight={flight}
+          onSubmit={onSubmit}
+        />
+      </>
+    );
   }
-  
 };
 
-export default Flights; 
+export default Flights;

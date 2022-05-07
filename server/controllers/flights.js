@@ -2,8 +2,9 @@ const Flight = require("../models/flight.js");
 
 const FlightsController = {
   Index: async (req, res) => {
-    const outboundFlight = await Flight.find({ isOutbound: true });
-    const inboundFlight = await Flight.find({ isOutbound: false });
+    const user = req.params.id;
+    const outboundFlight = await Flight.find({ isOutbound: true, user: user });
+    const inboundFlight = await Flight.find({ isOutbound: false, user: user });
     res.json({
       outbound: outboundFlight,
       inbound: inboundFlight,
@@ -30,7 +31,7 @@ const FlightsController = {
         arrivalGate: data.arrivalGate,
         bookingReference: data.bookingReference,
         isOutbound: data.isOutbound,
-        // user: req.session.user,
+        user: data.user,
       });
 
       await flight.save();
