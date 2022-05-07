@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const flightSchema = mongoose.Schema({
   flightNumber: String,
   departureTime: {
+    type: String,
+    required: true,
+  },
+  departureDate: {
     type: Date,
     required: true,
   },
@@ -32,11 +36,19 @@ const flightSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+<<<<<<< HEAD
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   }
+=======
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User",
+  //   required: true,
+  // },
+>>>>>>> origin/main
 });
 
 const Flight = mongoose.model("Flight", flightSchema);

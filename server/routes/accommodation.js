@@ -1,8 +1,8 @@
 const express = require("express");
 const AccommodationController = require("../controllers/accommodation.js");
+const accommodationRouter = express.Router();
 
-const AccommodationRouter = express.Router();
-AccommodationRouter.get("/", AccommodationController.Index);
-AccommodationRouter.post("/", AccommodationController.New);
+accommodationRouter.get("/", AccommodationController.New);
+accommodationRouter.post("/", AccommodationController.Create);
 
-module.exports = AccommodationRouter;
+module.exports = accommodationRouter;

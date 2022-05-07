@@ -1,4 +1,6 @@
 import Button from "@mui/material/Button";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -21,9 +23,9 @@ export default function AddFlight({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        Add Flight
-      </Button>
+      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Flight</DialogTitle>
         <DialogContent>
@@ -42,13 +44,28 @@ export default function AddFlight({
             onChange={handleChange}
           />
           <TextField
-            value={flight.flightTime}
+            value={flight.departureTime}
             autoFocus
             margin="dense"
-            id="flightTime"
-            name="flightTime"
-            label="Flight Time"
+            id="departureTime"
+            name="departureTime"
+            label="Time"
             type="time"
+            variant="outlined"
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
+          <TextField
+            value={flight.departureDate}
+            autoFocus
+            margin="dense"
+            id="departureDate"
+            name="departureDate"
+            label="Date"
+            type="date"
             variant="outlined"
             required
             InputLabelProps={{
@@ -145,6 +162,7 @@ export default function AddFlight({
             label="Arrival City"
             type="text"
             variant="outlined"
+            required
             onChange={handleChange}
           />
           <TextField
@@ -180,6 +198,7 @@ export default function AddFlight({
               label="Journey type"
               variant="outlined"
               onChange={handleChange}
+              required
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Alerts } from "../../assets/snackbar";
 
-export const LogOut = () => {
+export const LogOut = ({ handleLogOut }) => {
   const url = "http://localhost:8000";
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -19,10 +19,8 @@ export const LogOut = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    handleLogOut();
     await axios.post(`${url}/user/log-out`).then((res) => {
-      console.log(res.data.msg);
-      console.log(res.data.type);
       handleAlert(res.data.msg, res.data.type);
     });
   };
