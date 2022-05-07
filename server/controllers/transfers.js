@@ -2,9 +2,16 @@ const Transfer = require("../models/transfer.js");
 const Address = require("../models/address.js")
 
 const TransferController = {
-  Index: (req, res) => {
-  
-  },
+  Index: async (req, res) => {
+      try {
+        const outboundTransfer = await Transfer.find({ isOutbound: true }).populate("pickupAddress dropoffAddress");
+        const inboundTransfer = await Transfer.find({ isOutbound: false }).populate("pickupAddress dropoffAddress");
+        // console.log(outboundTransfer, inboundTransfer)
+        res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
+      } catch(e) {
+        console.log(e.message)
+      }
+    },
 
   Create: (req, res) => {
     const { 

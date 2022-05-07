@@ -1,0 +1,91 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer-card {
+  background-color: var(--koala-white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  margin: auto;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-bottom: 6vh;
+}
+
+.pickup {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-right: 30px;
+}
+
+.pickup-header {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right
+}
+
+.pickup-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right
+}
+
+.dropoff {
+  display: flex;
+  flex-direction: column;
+  text-align: left
+}
+
+.dropoff-header {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left
+}
+
+.dropoff-body {
+  display: flex;
+  flex-direction: column;
+  text-align: left
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: small;
+}
+
+.booking-reference {
+  display: flex;
+  justify-content: center;
+}
+
+.address {
+  display: flex;
+  justify-content: center;
+}
+
+.company {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-number {
+  display: flex;
+  justify-content: center;
+}
