@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import "./viewVisa.css"
 
 export default function VisaCard({ visa }) {
 
@@ -12,6 +13,8 @@ export default function VisaCard({ visa }) {
             <div className="visa-card" key={index}>
               <div className="header">
                 <h3>Your entry visa to</h3>
+                <br></br>
+                <br></br>
                   <div className="country">
                     <h1>{visa.issuingCountry}</h1>
                   </div>
@@ -36,7 +39,7 @@ export default function VisaCard({ visa }) {
               </div>
               <div className="footer">
                 <div className="visaNumber">
-                  <p>{visa.visaNumber}</p>
+                  <p>Visa Number: {visa.visaNumber}</p>
                 </div>
               </div>
             </div>
