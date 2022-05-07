@@ -28,17 +28,17 @@ describe("Visa model", () => {
     expect(visa.startDate).toEqual(mockStartDate);
   });
 
-  // it("stores the start date as a required value", async () => {
-  //   advanceTo();
-  //   const mockEndDate = new Date();
-  //   const visa = new Visa({
-  //     visaNumber: "ABC123",
-  //     endDate: mockEndDate,
-  //     issuingCountry: "Australia",
-  //     user: mockUserID,
-  //   });
-  //   await expect(visa.save()).rejects.toThrow();
-  // });
+  it("stores the start date as a required value", async () => {
+    advanceTo();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      endDate: mockEndDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+    });
+    await expect(visa.save()).rejects.toThrow();
+  });
 
   it("stores the end date", () => {
     advanceTo();
@@ -54,17 +54,17 @@ describe("Visa model", () => {
     expect(visa.endDate).toEqual(mockEndDate);
   });
 
-  // it("stores the start date as a required value", async () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const visa = new Visa({
-  //     visaNumber: "ABC123",
-  //     startDate: mockStartDate,
-  //     issuingCountry: "Australia",
-  //     user: mockUserID,
-  //   });
-  //   await expect(visa.save()).rejects.toThrow();
-  // });
+  it("stores the start date as a required value", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      startDate: mockStartDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+    });
+    await expect(visa.save()).rejects.toThrow();
+  });
 
   it("stores the visa number", () => {
     advanceTo();
@@ -80,18 +80,18 @@ describe("Visa model", () => {
     expect(visa.visaNumber).toEqual("ABC123");
   });
 
-  // it("stores the visa number as a required value", async () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const mockEndDate = new Date();
-  //   const visa = new Visa({
-  //     startDate: mockStartDate,
-  //     endDate: mockEndDate,
-  //     issuingCountry: "Australia",
-  //     user: mockUserID,
-  //   });
-  //   await expect(visa.save()).rejects.toThrow();
-  // });
+  it("stores the visa number as a required value", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+    });
+    await expect(visa.save()).rejects.toThrow();
+  });
 
   it("stores the issuing country", () => {
     advanceTo();
@@ -107,18 +107,18 @@ describe("Visa model", () => {
     expect(visa.issuingCountry).toEqual("Australia");
   });
 
-  // it("stores the issuing country as a required value", async () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const mockEndDate = new Date();
-  //   const visa = new Visa({
-  //     visaNumber: "ABC123",
-  //     startDate: mockStartDate,
-  //     endDate: mockEndDate,
-  //     user: mockUserID,
-  //   });
-  //   await expect(visa.save()).rejects.toThrow();
-  // });
+  it("stores the issuing country as a required value", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      user: mockUserID,
+    });
+    await expect(visa.save()).rejects.toThrow();
+  });
 
   // it("stores the user", () => {
   //   advanceTo();
