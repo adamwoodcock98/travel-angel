@@ -44,9 +44,9 @@ const AddTest = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider } = test;
+    const { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider } = test;
 
-    const newTest = { testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider };
+    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider };
 
     axios
       .post("http://localhost:8000/dashboard/covid/test", newTest)

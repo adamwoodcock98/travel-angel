@@ -8,7 +8,29 @@ const CovidController = {
   },
 
   NewTest: async (req, res) => {
-    res.json({ message: "Welcome to Covid" });
+    const data = req.body
+    console.log(data)
+
+    const test = new CovidTest({
+      testType: data.testType,
+      entryType: data.entryType,
+      result: data.result,
+      testDate: data.testDate,
+      testFromDate: data.testFromDate,
+      resultByDate: data.resultByDate,
+      validToDate: data.validToDate,
+      testNumber: data.testNumber,
+      testCountry: data.testCountry,
+      testProvider: data.testProvider,
+    });
+
+    try {
+      const savedTest = await test.save();
+      console.log(savedTest)
+    } catch(e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
   },
 
   NewVaccination: async (req, res) => {
