@@ -2,15 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/App";
-import VerticalTabs from "./components/dashboard/dashboard"
-import NavBar from "./components/navBar/navBar"
+import VerticalTabs from "./components/dashboard/dashboard";
+import NavBar from "./components/navBar/navBar";
 import reportWebVitals from "./reportWebVitals";
 import { Authentication } from "./components/authentication/authentication";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <NavBar/>
+    <NavBar />
     <VerticalTabs />
     <Authentication />
     <App />
