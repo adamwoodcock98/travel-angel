@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AddParking from "./addParking"
-import ParkingCard from "./viewParking"
+import AddParking from "./addParking";
+import ParkingCard from "./viewParking";
 
-const Parking = () => {
+const Parking = ({ session }) => {
+  const userId = session;
+
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
   const [newParking, setNewParking] = useState({
@@ -24,6 +26,7 @@ const Parking = () => {
     postalCode: "",
     stateCounty: "",
     countryCode: "",
+    user: userId,
   });
 
   const api = axios.create({
@@ -67,6 +70,7 @@ const Parking = () => {
       postalCode,
       stateCounty,
       countryCode,
+      user,
     } = newParking;
 
     const newBooking = {
@@ -87,11 +91,12 @@ const Parking = () => {
       postalCode,
       stateCounty,
       countryCode,
+      user,
     };
 
-    api.post("/", newBooking).then((res) => {
-        handleClose();
-        setNewParking({
+    api.post(`/`, newBooking).then((res) => {
+      handleClose();
+      setNewParking({
         startDate: "",
         endDate: "",
         airport: "",
@@ -109,33 +114,35 @@ const Parking = () => {
         postalCode: "",
         stateCounty: "",
         countryCode: "",
-      })
+        user: userId,
+      });
     });
   };
 
   useEffect(() => {
-    api.get("/").then(res => {  
-      const bookings = res.data.bookings
-      setParking(bookings);
-    });
-  }, [newParking])
+    if (userId !== "null") {
+      api.get(`/${userId}`).then((res) => {
+        const bookings = res.data.bookings;
+        setParking(bookings);
+      });
+    }
+  }, [newParking]);
 
   if (parking.length) {
-
     const parkingArray = [];
 
-    parking.forEach(booking => {
-      parkingArray.push(<ParkingCard bookingData={booking} key={booking._id} />)
-    })
+    parking.forEach((booking) => {
+      parkingArray.push(
+        <ParkingCard bookingData={booking} key={booking._id} />
+      );
+    });
 
     return (
       <div className="parking-window">
         <div className="parking-header">
           <h1>Parking</h1>
         </div>
-        <div className="parking-content">
-          {parking.length && parkingArray}
-        </div>
+        <div className="parking-content">{parking.length && parkingArray}</div>
         <div className="parking-footer">
           <AddParking
             open={open}
@@ -147,9 +154,9 @@ const Parking = () => {
           />
         </div>
       </div>
-    )
+    );
   } else {
-    return(
+    return (
       <AddParking
         open={open}
         handleOpen={handleOpen}
@@ -158,7 +165,7 @@ const Parking = () => {
         parking={parking}
         onSubmit={onSubmit}
       />
-    )
+    );
   }
 };
 

@@ -8,17 +8,21 @@ const App = () => {
     window.localStorage.getItem("session")
   );
 
+  console.log(session);
+
   const handleLogIn = (user) => {
+    window.localStorage.setItem("session", user);
     setSession(user);
   };
 
   const handleLogOut = () => {
+    window.localStorage.setItem("session", null);
     setSession({});
   };
 
   useEffect(() => {
-    window.localStorage.setItem("session", session);
-  }, [session]);
+    window.localStorage.getItem("session", session);
+  }, []);
 
   return (
     <div>

@@ -1,10 +1,14 @@
 const Accommodation = require("../models/accommodation.js");
 const Address = require("../models/address.js");
+const User = require("../models/user.js");
 
 const AccommodationController = {
   New: async (req, res) => {
-    const accommodation = await Accommodation.find().populate("address");
-    res.json(accommodation);
+    userId = req.params.id;
+    const accommodation = await Accommodation.find({ user: userId }).populate(
+      "address"
+    );
+    res.json({ accommodation: accommodation });
   },
 
   Create: (req, res) => {
@@ -24,6 +28,7 @@ const AccommodationController = {
       postalCode,
       stateCounty,
       countryCode,
+      user,
     } = req.body;
 
     const address = new Address({
@@ -40,7 +45,6 @@ const AccommodationController = {
     address
       .save()
       .then((address) => {
-        console.log(address);
         const accommodation = new Accommodation({
           name: name,
           contactNumber: contactNumber,
@@ -50,6 +54,7 @@ const AccommodationController = {
           checkOutTime: checkOutTime,
           bookingReference: bookingReference,
           address: address,
+          user: user,
         });
         accommodation
           .save()
