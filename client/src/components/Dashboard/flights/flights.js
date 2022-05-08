@@ -4,6 +4,8 @@ import { FlightCard } from "./viewFlights/flightCard";
 import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 
 const Flights = ({ session }) => {
   const userId = session;
@@ -115,6 +117,9 @@ const Flights = ({ session }) => {
           </div>
         </div>
         <div className="flights-footer">
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddFlight
             open={open}
             handleOpen={handleOpen}

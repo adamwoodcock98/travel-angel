@@ -55,7 +55,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function CrudMenu(props) {
+const CrudMenu = (props) => {
   const flightData = props.flightData;
   const userId = props.userId;
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -71,6 +71,8 @@ export default function CrudMenu(props) {
   };
 
   const handleOpen = () => {
+    handleCrudClose();
+    console.log("handle open")
     setOpen(true);
   };
 
@@ -99,17 +101,9 @@ export default function CrudMenu(props) {
         open={openCrud}
         onClose={handleCrudClose}
       >
-        <MenuItem onClick={() => {handleCrudClose(); handleOpen();}} disableRipple>
+        <MenuItem onClick={handleOpen} disableRipple>
           <EditOutlinedIcon />
           Edit
-          <AddFlight 
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            flightData={flightData}
-            flightId={flightData._id}
-            user={userId}
-          />
         </MenuItem>
         <MenuItem onClick={handleCrudClose} disableRipple>
           <FileCopyOutlinedIcon />
@@ -130,6 +124,16 @@ export default function CrudMenu(props) {
           Delete
         </MenuItem>
       </StyledMenu>
+        <AddFlight 
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          flightData={flightData}
+          flightId={flightData._id}
+          user={userId}
+        />
     </div>
   );
 }
+
+export default CrudMenu;

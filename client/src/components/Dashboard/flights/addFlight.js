@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios"
 import Button from "@mui/material/Button";
-import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -124,9 +123,6 @@ const AddFlight = (props) => {
 
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Flight</DialogTitle>
         <DialogContent>
