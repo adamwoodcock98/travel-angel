@@ -1,165 +1,72 @@
 const mongoose = require("mongoose");
-const { advanceTo } = require("jest-date-mock");
 const Passport = require("../../models/passport.js");
 require("../mongodb_helper");
 
 describe("Transfer model", () => {
-  beforeEach((done) => {
-    mongoose.connection.collections.accommodations.drop(() => {
-      Accommodation.syncIndexes(() => {
+  beforeAll((done) => {
+    mongoose.connection.collections.passports.drop(() => {
+      Passport.syncIndexes(() => {
         done();
       });
     });
   });
 
-  const mockAddressID = new mongoose.Types.ObjectId();
-  // const mockDropoffID = new mongoose.Types.ObjectId();
-  // const mockUserID = new mongoose.Types.ObjectId();
-
-  it("stores the name", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-
-    const accommodation = new Accommodation({
-      name: name,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-    });
-
-    expect(accommodation.name).toEqual(name);
+  const mockDate = new Date();
+  const passport = new Passport({
+    passportNumber: "Passport Number",
+    firstName: "First Name",
+    lastName: "Last Name",
+    nationality: "Nationality",
+    country: "Country",
+    dob: mockDate,
+    gender: "M",
+    placeOfBirth: "Place of Birth",
+    dateOfIssue: mockDate,
+    dateOfExpiry: mockDate,
+    user: { name: "User Name" },
   });
 
-  it("stores the contact number", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const contactNumber = 1234567891;
-
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-    });
-
-    expect(accommodation.contactNumber).toEqual(contactNumber);
+  it("stores the passportNumber", () => {
+    expect(passport.passportNumber).toEqual("Passport Number");
   });
 
-  it("stores the check in date", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const mockCheckOutDate = new Date();
-    const contactNumber = 1234567891;
-
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockCheckOutDate,
-    });
-
-    expect(accommodation.checkInDate).toEqual(mockDate);
+  it("stores the first name", () => {
+    expect(passport.firstName).toEqual("First Name");
   });
 
-  it("stores the check out date", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const mockCheckOutDate = new Date();
-    const contactNumber = 1234567891;
-
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-    });
-
-    expect(accommodation.checkOutDate).toEqual(mockCheckOutDate);
+  it("stores the last name", () => {
+    expect(passport.lastName).toEqual("Last Name");
   });
 
-  it("stores the check in time", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const contactNumber = 1234567891;
-    const time = "11:00";
-
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-      checkInTime: time,
-    });
-
-    expect(accommodation.checkInTime).toEqual(time);
+  it("stores the nationality", () => {
+    expect(passport.nationality).toEqual("Nationality");
   });
 
-  it("stores the check out time", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const contactNumber = 1234567891;
-    const time = "11:00";
-    const checkOutTime = "10:00";
-
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-      checkInTime: time,
-      checkOutTime: checkOutTime,
-    });
-
-    expect(accommodation.checkOutTime).toEqual(checkOutTime);
+  it("stores the country", () => {
+    expect(passport.country).toEqual("Country");
   });
 
-  it("stores the booking reference", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const contactNumber = 1234567891;
-    const time = "11:00";
-    const checkOutTime = "10:00";
-    const bookingReference = "Your Booking Reference";
-
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-      checkInTime: time,
-      checkOutTime: checkOutTime,
-      bookingReference: bookingReference,
-    });
-
-    expect(accommodation.bookingReference).toEqual(bookingReference);
+  it("stores the date of birth", () => {
+    expect(passport.dob).toEqual(mockDate);
   });
 
-  it("stores the address object", () => {
-    advanceTo();
-    const name = "Hilton London";
-    const mockDate = new Date();
-    const contactNumber = 1234567891;
-    const time = "11:00";
-    const checkOutTime = "10:00";
-    const bookingReference = "Your Booking Reference";
+  it("stores the gender", () => {
+    expect(passport.gender).toEqual("M");
+  });
 
-    const accommodation = new Accommodation({
-      name: name,
-      contactNumber: contactNumber,
-      checkInDate: mockDate,
-      checkOutDate: mockDate,
-      checkInTime: time,
-      checkOutTime: checkOutTime,
-      bookingReference: bookingReference,
-      address: mockAddressID,
-    });
+  it("stores the place of birth", () => {
+    expect(passport.placeOfBirth).toEqual("Place of Birth");
+  });
 
-    expect(accommodation.address).toEqual(mockAddressID);
+  it("stores the date of issue", () => {
+    expect(passport.dateOfIssue).toEqual(mockDate);
+  });
+
+  it("stores the date of expiry", () => {
+    expect(passport.dateOfExpiry).toEqual(mockDate);
+  });
+
+  it("stores the passportNumber", () => {
+    expect(passport.user).toEqual({ name: "User Name" });
   });
 });
