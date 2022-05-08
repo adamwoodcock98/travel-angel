@@ -3,6 +3,7 @@ import axios from "axios";
 import { FlightCard } from "./viewFlights/flightCard";
 import "./flights.css";
 import AddFlight from "./addFlight";
+import { Alerts } from "../../assets/snackbar";
 
 const Flights = ({ session }) => {
   const userId = session;
@@ -27,6 +28,24 @@ const Flights = ({ session }) => {
     isOutbound: "",
     user: userId,
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/flights/",
@@ -94,14 +113,27 @@ const Flights = ({ session }) => {
   };
 
   useEffect(() => {
-    if (userId.length) {
-      api.get(`/${userId}`).then((res) => {
+    api
+      .get(`/${userId}`)
+      .then((res) => {
         const outbound = res.data.outbound;
         const inbound = res.data.inbound;
         setOutboundFlight(outbound);
         setInboundFlight(inbound);
+      })
+      .catch((error) => {
+        if (error.response.status === 500) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        }
       });
-    }
   }, []);
 
   if (outboundFlight.length || inboundFlight.length) {
@@ -158,6 +190,15 @@ const Flights = ({ session }) => {
           flight={flight}
           onSubmit={onSubmit}
         />
+        {alertMessage && (
+          <Alerts
+            message={alertMessage}
+            open={alertOpen}
+            handleClose={handleAlertClose}
+            alertPosition={alertPosition}
+            alertType={alertType}
+          />
+        )}
       </>
     );
   }

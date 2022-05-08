@@ -28,7 +28,7 @@ export const ViewAccommodation = ({ session }) => {
   });
 
   useEffect(() => {
-    if (userId.length) {
+    if (userId !== null) {
       axios
         .get(`http://localhost:8000/dashboard/accommodation/${userId}`)
         .then((res) => {

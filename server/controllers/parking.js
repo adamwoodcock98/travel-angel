@@ -3,7 +3,10 @@ const Address = require("../models/address.js");
 
 const ParkingController = {
   Index: async (req, res) => {
-    const parkingBookings = await Parking.find().populate("address");
+    const userId = req.params.id;
+    const parkingBookings = await Parking.find({ user: userId }).populate(
+      "address"
+    );
 
     res.json({ bookings: parkingBookings });
   },
@@ -35,7 +38,7 @@ const ParkingController = {
         bookingReference: data.bookingReference,
         notes: data.notes,
         address: saveAddress,
-        // user: req.session.user,
+        user: data.user,
       });
 
       await parking.save();
