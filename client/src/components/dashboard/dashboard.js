@@ -7,12 +7,14 @@ import {
   Hotel,
   Commute,
   LocalParkingRounded,
+  VpnLockOutlined,
 } from "@mui/icons-material";
 import "./dashboard.css";
 import Transfers from "./transfers/transfers";
 import Flights from "./flights/flights";
 import Passport from "./passport/passport";
 import Parking from "./parking/parking";
+import Visa from "./visas/visas"
 import { ViewAccommodation } from "./accommodation/accommodation";
 
 function TabPanel(props) {
@@ -88,7 +90,8 @@ export default function VerticalTabs() {
           aria-label="parking"
           {...a11yProps(3)}
         />
-        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(4)} />
+        <Tab icon={<VpnLockOutlined />} aria-label="visa" {...a11yProps(4)} />
+        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(5)} />
       </Tabs>
 
       <TabPanel className="tab-content" value={value} index={0}>
@@ -103,7 +106,10 @@ export default function VerticalTabs() {
       <TabPanel className="tab-content" value={value} index={3}>
         <Parking />
       </TabPanel>
-      <TabPanel className="tab-content" value={value} index={4}>
+      <TabPanel  className="tab-content"value={value} index={4}>
+        <Visa />
+      </TabPanel>
+      <TabPanel className="tab-content" value={value} index={5}>
         <Passport />
       </TabPanel>
     </Box>
