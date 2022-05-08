@@ -91,8 +91,6 @@ const Transfers = ({ session }) => {
       user,
     } = transfer;
 
-    console.log("here we go", user);
-
     const newTransfer = {
       pickupTime,
       dropoffTime,
@@ -117,7 +115,6 @@ const Transfers = ({ session }) => {
 
   useEffect(() => {
     if (userId !== "null") {
-      console.log("userId", userId);
       axios
         .get(`http://localhost:8000/dashboard/transfers/${userId}`)
         .then((res) => {

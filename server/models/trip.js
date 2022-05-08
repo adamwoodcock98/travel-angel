@@ -5,9 +5,6 @@ const tripSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  destination: {
-    type: String,
-  },
   startDate: {
     type: Date,
     required: true,

@@ -12,7 +12,6 @@ const FlightsController = {
         isOutbound: false,
         user: user,
       });
-      console.log(outboundFlight);
       res.json({
         outbound: outboundFlight,
         inbound: inboundFlight,
