@@ -134,6 +134,9 @@ const Flights = ({ session }) => {
   } else {
     return (
       <>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
         <AddFlight
           open={open}
           handleOpen={handleOpen}

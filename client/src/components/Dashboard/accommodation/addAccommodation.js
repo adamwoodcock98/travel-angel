@@ -7,30 +7,30 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
 
 const AddAccommodation = (props) => {
   const userId = props.userId;
-  const handleOpen = props.handleOpen;
+  const accommodationData = props.accommodationData;
+  console.log(accommodationData)
+  const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
   const [accommodation, setAccommodation] = useState({
-    name: "",
-    contactNumber: "",
-    checkInDate: "",
-    checkOutDate: "",
-    checkInTime: "",
-    checkOutTime: "",
-    bookingReference: "",
-    buildingNumber: "",
-    buildingName: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    postalCode: "",
-    stateCounty: "",
-    countryCode: "",
+    name: accommodationData.name,
+    contactNumber: accommodationData.contactNumber,
+    checkInDate: accommodationData.checkInDate,
+    checkOutDate: accommodationData.checkOutDate,
+    checkInTime: accommodationData.checkInTime,
+    checkOutTime: accommodationData.checkOutTime,
+    bookingReference: accommodationData.bookingReference,
+    buildingNumber: accommodationData.address.buildingNumber,
+    buildingName: accommodationData.address.buildingName,
+    addressLine1: accommodationData.address.addressLine1,
+    addressLine2: accommodationData.address.addressLine2,
+    city: accommodationData.address.city,
+    postalCode: accommodationData.address.postalCode,
+    stateCounty: accommodationData.address.stateCounty,
+    countryCode: accommodationData.address.countryCode,
     user: userId,
   });
   
@@ -112,9 +112,6 @@ const AddAccommodation = (props) => {
 
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Accommodation</DialogTitle>
         <DialogContent>

@@ -3,11 +3,33 @@ import React, { useState, useEffect } from "react";
 import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
 import "./accommodation.css";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 export const ViewAccommodation = ({ session }) => {
   const userId = session;
   const [accommodation, setAccommodation] = useState([]);
   const [open, setOpen] = useState(false);
+  const accommodationArray = {
+    name: "",
+    contactNumber: "",
+    checkInDate: "",
+    checkOutDate: "",
+    checkInTime: "",
+    checkOutTime: "",
+    bookingReference: "",
+    address: {
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+    },
+    user: userId,
+  };
 
   useEffect(() => {
     if (userId !== "null") {
@@ -37,7 +59,7 @@ export const ViewAccommodation = ({ session }) => {
             handleOpen={handleOpen}
             open={open}
             handleClose={handleClose}
-            accommodationData={accommodation}
+            accommodationData={accommodationArray}
             accommodationId={null}
             userId={userId}
           />
@@ -45,6 +67,9 @@ export const ViewAccommodation = ({ session }) => {
         <div className="body">
           <AccommodationCard accommodation={accommodation} userId={userId} />
         </div>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
       </div>
     );
   } else {
@@ -57,7 +82,7 @@ export const ViewAccommodation = ({ session }) => {
             handleOpen={handleOpen}
             open={open}
             handleClose={handleClose}
-            accommodationData={accommodation}
+            accommodationData={accommodationArray}
             accommodationId={null}
             userId={userId}
           />

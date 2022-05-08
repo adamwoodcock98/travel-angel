@@ -19,7 +19,6 @@ const AddFlight = (props) => {
   const flightId = props.flightId;
   const open = props.open;
   const userId = props.user;
-  const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
   const [flight, setFlight] = useState({
     flightNumber: flightData.flightNumber,

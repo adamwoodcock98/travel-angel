@@ -112,6 +112,14 @@ const CrudMenu = (props) => {
           Delete
         </MenuItem>
       </StyledMenu>
+      <AddAccommodation
+        handleOpen={handleOpen}
+        open={open}
+        handleClose={handleClose}
+        accommodationData={accommodationData}
+        accommodationId={accommodationData._id}
+        userId={userId}
+      />
     </div>
   );
 }
