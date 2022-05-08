@@ -3,6 +3,7 @@ import NavBar from "./navBar/navBar";
 import VerticalTabs from "./dashboard/dashboard";
 import { Authentication } from "./authentication/authentication";
 import Trips from "./trips/trips";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   const [session, setSession] = useState(
@@ -25,12 +26,13 @@ const App = () => {
 
   if (session !== "null") {
     return (
-      <div>
+      <Router>
         <NavBar handleLogOut={handleLogOut} session={session} />
-        <Trips session={session} />
-        <VerticalTabs session={session} />
-        <Authentication handleLogIn={handleLogIn} />
-      </div>
+        <Routes>
+          <Route path="/" element={<Trips session={session} />} />
+          <Route path="/:tripId" element={<VerticalTabs session={session} />} />
+        </Routes>
+      </Router>
     );
   } else {
     return (

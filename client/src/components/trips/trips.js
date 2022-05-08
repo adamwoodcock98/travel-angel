@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import ViewTrips from "./viewTrips/viewTrips";
 import AddTrip from "./addTrip/addTrip";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Trips = ({ session }) => {
   const userId = session;
+  const { tripId } = useParams;
 
   const [trip, setTrip] = useState({
     name: "",
