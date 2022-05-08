@@ -1,33 +1,20 @@
-const validator = require("validator");
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
-  firstName: {
+const tripSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
   },
-  lastName: {
+  destination: {
     type: String,
+  },
+  startDate: {
+    type: Date,
     required: true,
   },
-  email: {
-    type: String,
+  endDate: {
+    type: Date,
     required: true,
-    unique: true,
-    lowercase: true,
-    validate: {
-      validator: validator.isEmail,
-      message: "Invalid Email",
-    },
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 6,
-  },
-  profilePicture: {
-    type: String,
-    default: "/images/blank-avatar.jpg",
   },
   accommodation: [
     {
@@ -53,8 +40,12 @@ const userSchema = new mongoose.Schema({
       ref: "Transfer",
     },
   ],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
 });
 
-const User = mongoose.model("User", userSchema);
+const Trip = mongoose.model("Trip", tripSchema);
 
-module.exports = User;
+module.exports = Trip;
