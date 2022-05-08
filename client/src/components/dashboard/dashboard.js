@@ -6,7 +6,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FlightTakeoffOutlined from "@mui/icons-material/FlightTakeoffOutlined";
 import HotelIcon from "@mui/icons-material/HotelOutlined";
-import CommuteIcon from "@mui/icons-material/Commute";
+import CommuteIcon from '@mui/icons-material/Commute';
+import VpnLockOutlinedIcon from '@mui/icons-material/VpnLockOutlined';
 import "./dashboard.css";
 import Transfers from "./transfers/transfers";
 import Flights from "./flights/flights";
@@ -16,6 +17,8 @@ import CoronavirusOutlinedIcon from '@mui/icons-material/CoronavirusOutlined';
 import Covid from "./covid/covid"
 import "./dashboard.css";
 import { ViewAccommodation } from "../accommodation/accommodation";
+import Visa from "./visas/visas"
+
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -57,7 +60,7 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
+export default function VerticalTabs({ session }) {
   // the main functional component to be rendered by index aka the sidebar
   const [value, setValue] = React.useState(0); // setting up state for the tab bar, this is purely to render things for the tab bar, not state that we will ever get data from
 
@@ -82,30 +85,30 @@ export default function VerticalTabs() {
         textColor="secondary"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
-        <Tab
-          icon={<FlightTakeoffOutlined />}
-          aria-label="plane"
-          {...a11yProps(0)}
-        />{" "}
-        {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
+        <Tab icon={<FlightTakeoffOutlined />} aria-label="plane" {...a11yProps(0)} />
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
         <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
         <Tab icon={<LocalParkingRoundedIcon />} aria-label="parking" {...a11yProps(3)} />
+        <Tab icon={<VpnLockOutlinedIcon />} aria-label="visa" {...a11yProps(4)} />
         <Tab icon={<CoronavirusOutlinedIcon />} aria-label="covid" {...a11yProps(4)} />
+
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
-        <Flights />
+        <Flights session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={1}>
-        <ViewAccommodation />
+        <ViewAccommodation session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={2}>
-        <Transfers />
+        <Transfers session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={3}>
-        <Parking />
+        <Parking session={session} />
       </TabPanel>
-      <TabPanel className="tab-content" value={value} index={4}>
+      <TabPanel  className="tab-content"value={value} index={4}>
+        <Visa />
+      </TabPanel>
+      <TabPanel className="tab-content" value={value} index={5}>
         <Covid />
       </TabPanel>
     </Box>
