@@ -111,13 +111,13 @@
   text-transform: capitalize;
   height: 100px;
   width: 100%;
-  border-bottom: 7px #f8f8f8 double;
+  border-bottom: 2px #f6f6f6 solid;
   color: grey;
 }
 
 #pass-expired-btn {
   color:#dadada;
-  border-bottom: 7px #f9f9f9 double;
+  border-bottom: 2px #f6f6f6 solid;
 }
 
 #pass-btn:hover, #pass-expired-btn:hover {
