@@ -45,8 +45,6 @@ export default function PlaygroundSpeedDial() {
 
   return (
     <>
-    <Box>
-      <Box>
         <SpeedDial
           ariaLabel="SpeedDial controlled open example"
           sx={{ position: "absolute", bottom: 16, right: 16 }}
@@ -73,8 +71,6 @@ export default function PlaygroundSpeedDial() {
             />
           ))}
         </SpeedDial>
-      </Box>
-    </Box>
     </>
   );
 }

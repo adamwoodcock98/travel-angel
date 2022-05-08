@@ -1,5 +1,4 @@
 .vaccine-card {
-  border-style: solid;
   display: flex;
   flex-direction: column;
   margin-bottom: 5%;
@@ -34,6 +33,9 @@
 
   .vaccine-card-proof-content {
     flex: 1;
+    border-top: solid;
+    border-color: lightgrey;
+    border-width: 1px;
   }
 
   .vaccine-card-documents-content {

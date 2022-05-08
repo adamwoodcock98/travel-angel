@@ -3,6 +3,7 @@ import axios from "axios";
 import PlaygroundSpeedDial from "./covidSpeedDial";
 import TestCard from "./tests/testCard";
 import VaccineCard from "./vaccinations/vaccineCard";
+import "./covid.css"
 
 const Covid = () => {
   const [testData, setTestData] = useState([]);
@@ -30,9 +31,24 @@ const Covid = () => {
 
     return(
       <>
-        {testData[0] && testsArray}
-        <VaccineCard vaccinationsData={vaccineData}/>
-        <PlaygroundSpeedDial />
+        <div className="covid-window">
+          <div className="covid-header">
+            <h1>Your Coronavirus Documentation</h1>
+          </div>
+          <div className="covid-content">
+            <div className="covid-content-vaccinations">
+              <h1>Vaccinations</h1>
+              <VaccineCard vaccinationsData={vaccineData}/>
+            </div>
+            <div className="covid-content-testing">
+              <h1>Tests</h1>
+              {testData[0] && testsArray}
+            </div>
+          </div>
+          <div className="covid-footer">
+            <PlaygroundSpeedDial />
+          </div>
+        </div>
       </>
     )
   }
