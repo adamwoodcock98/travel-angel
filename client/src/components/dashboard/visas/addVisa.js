@@ -6,7 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
+import React from "react";
 
 export default function AddVisa({
   open,
@@ -80,7 +81,7 @@ export default function AddVisa({
             variant="outlined"
             required
             onChange={handleChange}
-          />  
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSubmit}>Save Visa Details</Button>

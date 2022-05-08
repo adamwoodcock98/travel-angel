@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import React from "react";
 
 export default function AddTransfer({
   open,
@@ -18,7 +19,7 @@ export default function AddTransfer({
   transfer,
   handleSubmit,
   handlePickupChange,
-  handleDropoffChange
+  handleDropoffChange,
 }) {
   return (
     <div>
@@ -97,7 +98,7 @@ export default function AddTransfer({
             }}
             onChange={handleChange}
           />
-          
+
           <TextField
             value={transfer.dropoffTime}
             autoFocus
@@ -113,9 +114,7 @@ export default function AddTransfer({
             }}
             onChange={handleChange}
           />
-          <DialogContentText>
-            Pickup Address
-          </DialogContentText>
+          <DialogContentText>Pickup Address</DialogContentText>
           <TextField
             value={transfer.pickupAddress.buildingNumber}
             autoFocus
@@ -207,9 +206,7 @@ export default function AddTransfer({
             variant="outlined"
             onChange={handlePickupChange}
           />
-          <DialogContentText>
-            Dropoff Address
-          </DialogContentText>          
+          <DialogContentText>Dropoff Address</DialogContentText>
           <TextField
             value={transfer.dropoffAddress.buildingNumber}
             autoFocus
