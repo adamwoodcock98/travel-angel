@@ -5,7 +5,6 @@ import TestCard from "./tests/testCard";
 
 const Covid = () => {
   const [testData, setTestData] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/covid/"
@@ -13,15 +12,25 @@ const Covid = () => {
 
   useEffect(() => {
     api.get("/").then(res => {
-      setTestData(res.data.testData);
-      setIsLoaded(true);
+      const tests = res.data.tests;
+      console.log(tests)
+      setTestData(tests);
+      console.log(testData)
     })
   }, []);
 
-  if (isLoaded) {
+  console.log(testData[0])
+
+  if (testData.length) {
+
+    const testsArray =[]
+    testData.forEach(test => {
+      testsArray.push(<TestCard testData={test} />);
+    })
+
     return(
       <>
-        <TestCard props={testData} />
+        {testData[0] && testsArray}
         <PlaygroundSpeedDial />
       </>
     )

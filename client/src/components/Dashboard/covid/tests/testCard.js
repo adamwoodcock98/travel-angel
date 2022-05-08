@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import "./testCard.css"
 
 const TestCard = (props) => {
   const testData = props.testData;
+
+  console.log("card", testData)
 
   return(
     <div className="test-card">

@@ -45,7 +45,6 @@ export default function PlaygroundSpeedDial() {
 
   return (
     <>
-    <AddTest />
     <Box>
       <Box>
         <SpeedDial
