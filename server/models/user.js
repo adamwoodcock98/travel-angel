@@ -29,30 +29,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "/images/blank-avatar.jpg",
   },
-  accommodation: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Accommodation",
-    },
-  ],
-  flights: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Flight",
-    },
-  ],
-  parking: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Parking",
-    },
-  ],
-  transfers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Transfer",
-    },
-  ],
 });
 
 const User = mongoose.model("User", userSchema);
