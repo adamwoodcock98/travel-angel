@@ -17,6 +17,7 @@ const App = () => {
 
   const handleLogOut = () => {
     window.localStorage.setItem("session", null);
+    window.location = "/";
     setSession({});
   };
 
