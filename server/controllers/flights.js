@@ -16,7 +16,7 @@ const FlightsController = {
       res.json({
         outbound: outboundFlight,
         inbound: inboundFlight,
-        user: req.session.user,
+        user: user,
       });
       res.status(200).send();
     } catch (e) {

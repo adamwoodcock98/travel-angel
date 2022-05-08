@@ -106,8 +106,27 @@ const Flights = ({ session }) => {
       user,
     };
 
+    console.log("new", newFlight.user)
+
     api.post("/", newFlight).then((res) => {
       handleClose();
+      setFlight({
+        flightNumber: "",
+        departureTime: "",
+        departureDate: "",
+        airline: "",
+        departureAirport: "",
+        departureTerminal: "",
+        departureCity: "",
+        departureGate: "",
+        arrivalAirport: "",
+        arrivalTerminal: "",
+        arrivalCity: "",
+        arrivalGate: "",
+        bookingReference: "",
+        isOutbound: "",
+        user: userId,
+      })
       window.location = "/";
     });
   };

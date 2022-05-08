@@ -65,7 +65,6 @@ const CovidController = {
       const savedVaccine = await vaccination.save();
 
       const userVaccinationCard = await Vaccinations.findById(req.params.id);
-      console.log(userVaccinationCard.vaccineDoses)
       
       userVaccinationCard.vaccineDoses.push(savedVaccine._id);
       userVaccinationCard.vaccinationStatus = status;

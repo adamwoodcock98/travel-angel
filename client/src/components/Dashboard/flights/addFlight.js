@@ -171,7 +171,7 @@ export default function AddFlight({
             margin="dense"
             id="arrivalGate"
             name="arrivalGate"
-            label="Arrial Gate"
+            label="Arrival Gate"
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -200,8 +200,8 @@ export default function AddFlight({
               onChange={handleChange}
               required
             >
-              <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>
+              <MenuItem value={false}>Inbound</MenuItem>
             </Select>
           </FormControl>
         </DialogContent>
