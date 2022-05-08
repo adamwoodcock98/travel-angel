@@ -14,9 +14,8 @@ import Flights from "./flights/flights"
 import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
 import Parking from "./parking/parking"
 import Visa from "./visas/visas"
-import "./dashboard.css";
-import { ViewAccommodation } from "../accommodation/accommodation";
 
+import { ViewAccommodation } from "../accommodation/accommodation";
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -32,8 +31,11 @@ function TabPanel(props) {
       {...other} // Spreader for if you want to pass in more html tags
     >
       {value === index && ( // if the value is equal to the index, do the stuff after && (JSX if statement)
-        <Box sx={{ p: 3 }}> {/*the sx prop allows you to provide supplementary CSS on top of the css already defined, in this case using p: 3 to set the padding*/}
-          <Typography component={"span"}>{children}</Typography> {/*children is a typography prop of type node (meaning any renderable type) and refers to the content of the component, so applying typography to whatever content is in the tab item*/}
+        <Box sx={{ p: 3 }}>
+          {" "}
+          {/*the sx prop allows you to provide supplementary CSS on top of the css already defined, in this case using p: 3 to set the padding*/}
+          <Typography component={"span"}>{children}</Typography>{" "}
+          {/*children is a typography prop of type node (meaning any renderable type) and refers to the content of the component, so applying typography to whatever content is in the tab item*/}
         </Box>
       )}
     </div>
@@ -88,8 +90,13 @@ export default function VerticalTabs() {
         {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
         <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
-        <Tab icon={<LocalParkingRoundedIcon />} aria-label="parking" {...a11yProps(3)} />
+        <Tab
+          icon={<LocalParkingRoundedIcon />}
+          aria-label="parking"
+          {...a11yProps(3)}
+        />
         <Tab icon={<VpnLockOutlinedIcon />} aria-label="visa" {...a11yProps(4)} />
+
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights />
@@ -97,10 +104,10 @@ export default function VerticalTabs() {
       <TabPanel className="tab-content" value={value} index={1}>
         <ViewAccommodation />
       </TabPanel>
-      <TabPanel className="tab-content"value={value} index={2}>
+      <TabPanel className="tab-content" value={value} index={2}>
         <Transfers />
       </TabPanel>
-      <TabPanel  className="tab-content"value={value} index={3}>
+      <TabPanel className="tab-content" value={value} index={3}>
         <Parking />
       </TabPanel>
       <TabPanel  className="tab-content"value={value} index={4}>
