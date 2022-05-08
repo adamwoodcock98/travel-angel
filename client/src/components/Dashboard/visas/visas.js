@@ -1,4 +1,4 @@
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import AddVisa from './addVisa'
 import VisaCard from './viewVisa'
 import axios from 'axios'
@@ -67,11 +67,21 @@ const Visas = () => {
   // LOADING SUBMIT BUTTON
   const [loading, setLoading] = useState(false);
 
+  // const textInput = useRef(null);
+
+  // const clearFields = (e) => {
+  //   setVisaArray({
+  //     ...visaArray,
+  //     [e.target.name]: "",
+  //   });
+    
+  // }
+
   useEffect(() => {
     if(loading) {
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 1000);
     }
   }, [loading])
 
