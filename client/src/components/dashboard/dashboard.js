@@ -87,21 +87,12 @@ export default function VerticalTabs() {
           {...a11yProps(1)}
         />{" "}
         {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
-<<<<<<< HEAD
         <Tab icon={<Hotel />} aria-label="hotel" {...a11yProps(2)} />
         <Tab icon={<Commute />} aria-label="transfer" {...a11yProps(3)} />
         <Tab
           icon={<LocalParkingRounded />}
           aria-label="parking"
           {...a11yProps(4)}
-=======
-        <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
-        <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
-        <Tab
-          icon={<LocalParkingRoundedIcon />}
-          aria-label="parking"
-          {...a11yProps(3)}
->>>>>>> origin/main
         />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
@@ -113,17 +104,10 @@ export default function VerticalTabs() {
       <TabPanel className="tab-content" value={value} index={2}>
         <ViewAccommodation />
       </TabPanel>
-<<<<<<< HEAD
       <TabPanel className="tab-content" value={value} index={3}>
         <Transfers />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={4}>
-=======
-      <TabPanel className="tab-content" value={value} index={2}>
-        <Transfers />
-      </TabPanel>
-      <TabPanel className="tab-content" value={value} index={3}>
->>>>>>> origin/main
         <Parking />
       </TabPanel>
     </Box>

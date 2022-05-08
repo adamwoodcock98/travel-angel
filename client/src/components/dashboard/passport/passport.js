@@ -6,7 +6,6 @@ import "./passport.css";
 
 const Passport = () => {
   const [open, setOpen] = useState(false);
-  const [openPassport, setOpenPassport] = useState(false);
   const [displayState, setDisplayState] = useState([]);
   const [passport, setPassport] = useState({
     passportNumber: "",
@@ -74,14 +73,6 @@ const Passport = () => {
       });
   };
 
-  const handleOpenPassport = () => {
-    setOpenPassport(true);
-  };
-
-  const handleClosePassport = () => {
-    setOpenPassport(false);
-  };
-
   useEffect(() => {
     axios.get("http://localhost:8000/dashboard/passport").then((res) => {
       setDisplayState(res.data.passport);
@@ -93,9 +84,6 @@ const Passport = () => {
     passportRender.push(
       <DisplayPassport
         passport={pass}
-        open={openPassport}
-        handleOpen={handleOpenPassport}
-        handleClose={handleClosePassport}
       />
     );
   });
@@ -103,8 +91,8 @@ const Passport = () => {
   if (displayState.length) {
     return (
       <div id="Passport">
+        <div id="pass-header">
         <h1>Passport</h1>
-        {passportRender}
         <AddPassport
           open={open}
           handleOpen={handleOpen}
@@ -113,6 +101,10 @@ const Passport = () => {
           passport={passport}
           onSubmit={onSubmit}
         />
+        </div>
+        <div id="pass-render">
+         {passportRender}
+        </div>
       </div>
     );
   } else {

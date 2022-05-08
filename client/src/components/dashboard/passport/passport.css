@@ -5,8 +5,8 @@
 
 .pass-card {
   width: 530px;
-  margin: 0%;
   height: 320px;
+  margin-bottom: 60px;
   color: rgb(0, 0, 0);
   font-size: 16px;
   text-transform: uppercase;
@@ -66,11 +66,45 @@
 }
 
 .pass-footer {
-  overflow: hidden;
-  width: 526px;
+
+  width: 510px;
   text-transform: uppercase;
   font-family: "Courier-New", Courier, monospace;
   font-weight: 600;
+  max-height: 100px;
+  position: fixed;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: -60px;
+  box-shadow: 0 0 15px rgb(175, 175, 175);
+  background: url("http://localhost:3000/pass-footer.jpg") 0 0 / 530px 100px
+  no-repeat;
+  padding: 10px;
+}
+
+.pass-p {
+  /* overflow-wrap: break-word; */
+  word-spacing: -8px;
+  overflow: wrap;
+  text-align: justify;
+}
+
+#pass-fab {
+  background-color: #EBA0AE;
+  float: right;
+  margin-top: -49px;
+}
+
+#pass-fab:hover {
+  background-color: #64BAAA;
+}
+
+#pass-render {
+  margin-top: 20px;
+}
+
+span {
+  overflow: hidden;
 }
 
 img {

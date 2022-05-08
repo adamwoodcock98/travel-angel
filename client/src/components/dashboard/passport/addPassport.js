@@ -11,7 +11,7 @@ export default function AddPassport({
 }) {
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+      <Fab id="pass-fab" size="medium" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>
       <Dialog open={open} onClose={handleClose}>

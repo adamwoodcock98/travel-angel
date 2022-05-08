@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import moment from "moment";
 
-export const DisplayPassport = ({
-  passport,
-  open,
-  handleOpen,
-  handleClose,
-}) => {
+export const DisplayPassport = ({ passport }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const formatPassDate = (date) => moment(date).format("DD MMM YY");
   const formatFooterDate = (date) => moment(date).format("DDMMYY");
   const formatExpiryDate = (date) => moment(date, "YYYYMMDD").fromNow();
@@ -23,11 +28,17 @@ export const DisplayPassport = ({
           <div className="pass-card">
             <div className="pass-country">{passport.country}</div>
             <div className="pass-pic">
-              <div className="pass-passport">Passport<br />Passeport</div>
+              <div className="pass-passport">
+                Passport
+                <br />
+                Passeport
+              </div>
               <img alt="Passport" src="http://localhost:3000/pass-pic.gif" />
             </div>
             <div className="pass-contents">
-              <div className="pass-type"><h5>Type/Type</h5>&nbsp;P</div>
+              <div className="pass-type">
+                <h5>Type/Type</h5>&nbsp;P
+              </div>
               <div className="pass-num">
                 <h5>Passport No./Passeport No.</h5>
                 {passport.passportNumber}
@@ -69,14 +80,18 @@ export const DisplayPassport = ({
               </div>
             </div>
           </div>
-          <div className="pass-footer">{`P<${passport.lastName}<<${
-            passport.firstName
-          }<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-          ${passport.passportNumber}${formatFooterDate(passport.dob)}${
-            passport.gender
-          }${formatFooterDate(
-            passport.dateOfExpiry
-          )}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<`}</div>
+          <div className="pass-footer">
+            <p class="pass-p">
+              {`P < ${passport.lastName} < < ${
+                passport.firstName
+              } < < < < < < < < < < < < < < < < < < < < < < < < < < < < < ${
+                passport.passportNumber
+              } ${formatFooterDate(passport.dob)} ${
+                passport.gender
+              } ${formatFooterDate(passport.dateOfExpiry)}`}{" "}
+              <span>{` < < < < < < < < < < < < < < < < < < < < < < < < < <`}</span>
+            </p>
+          </div>
         </DialogContent>
       </Dialog>
     </div>
