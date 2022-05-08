@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./testCard.css"
 
-export const TestCard = (props) => {
+const TestCard = (props) => {
   const testData = props.testData;
 
   return(
@@ -43,3 +43,5 @@ export const TestCard = (props) => {
     </div>
   )
 }
+
+export default TestCard;

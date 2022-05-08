@@ -13,10 +13,9 @@ import Flights from "./flights/flights";
 import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
 import Parking from "./parking/parking";
 import CoronavirusOutlinedIcon from '@mui/icons-material/CoronavirusOutlined';
+import Covid from "./covid/covid"
 import "./dashboard.css";
 import { ViewAccommodation } from "../accommodation/accommodation";
-
-import PlaygroundSpeedDial from "./covid/covidSpeedDial";
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -107,7 +106,7 @@ export default function VerticalTabs() {
         <Parking />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={4}>
-        <PlaygroundSpeedDial />
+        <Covid />
       </TabPanel>
     </Box>
   );
