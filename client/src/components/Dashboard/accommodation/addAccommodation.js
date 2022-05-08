@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -9,14 +10,106 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
-export default function AddAccommodation({
-  handleOpen,
-  open,
-  handleClose,
-  handleChange,
-  accommodation,
-  handleSubmit,
-}) {
+const AddAccommodation = (props) => {
+  const userId = props.userId;
+  const handleOpen = props.handleOpen;
+  const open = props.open;
+  const handleClose = props.handleClose;
+  const [accommodation, setAccommodation] = useState({
+    name: "",
+    contactNumber: "",
+    checkInDate: "",
+    checkOutDate: "",
+    checkInTime: "",
+    checkOutTime: "",
+    bookingReference: "",
+    buildingNumber: "",
+    buildingName: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    postalCode: "",
+    stateCounty: "",
+    countryCode: "",
+    user: userId,
+  });
+  
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setAccommodation({
+      ...accommodation,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const {
+      name,
+      contactNumber,
+      checkInDate,
+      checkOutDate,
+      checkInTime,
+      checkOutTime,
+      bookingReference,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    } = accommodation;
+
+    const newAccommodation = {
+      name,
+      contactNumber,
+      checkInDate,
+      checkOutDate,
+      checkInTime,
+      checkOutTime,
+      bookingReference,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    };
+
+    await axios
+      .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setAccommodation({
+          name: "",
+          contactNumber: "",
+          checkInDate: "",
+          checkOutDate: "",
+          checkInTime: "",
+          checkOutTime: "",
+          bookingReference: "",
+          buildingNumber: "",
+          buildingName: "",
+          addressLine1: "",
+          addressLine2: "",
+          city: "",
+          postalCode: "",
+          stateCounty: "",
+          countryCode: "",
+          user: userId,
+        });
+        handleClose();
+      });
+  };
+
   return (
     <div>
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
@@ -246,3 +339,5 @@ export default function AddAccommodation({
     </div>
   );
 }
+
+export default AddAccommodation;

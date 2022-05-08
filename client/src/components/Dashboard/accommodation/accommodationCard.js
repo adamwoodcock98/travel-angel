@@ -3,7 +3,9 @@ import moment from "moment";
 import CrudMenu from "./crud/crud"
 import "./accommodationCard.css";
 
-export default function AccommodationCard({ accommodation }) {
+export default function AccommodationCard(props) {
+  const userId = props.userId;
+  const accommodation = props.accommodation;
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
@@ -67,7 +69,7 @@ export default function AccommodationCard({ accommodation }) {
               </div>
             </div>
             <div className="crud-menu">
-              <CrudMenu />
+              <CrudMenu userId={userId} accommodationData={accommodation} />
             </div>
           </div>
         );
