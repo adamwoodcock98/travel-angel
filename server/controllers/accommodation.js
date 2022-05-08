@@ -64,8 +64,7 @@ const AccommodationController = {
         });
         accommodation
           .save()
-          .then((savedAccommodation) => {
-            console.log(savedAccommodation);
+          .then(() => {
             Trip.findById(trip).then((newTrip) => {
               newTrip.accommodation.push(accommodation._id);
               newTrip

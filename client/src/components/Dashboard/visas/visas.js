@@ -5,7 +5,6 @@ import axios from "axios";
 
 const Visas = ({ session }) => {
   const userId = session;
-  console.log(userId);
 
   const [open, setOpen] = useState(false);
   const [visa, setVisa] = useState([]);

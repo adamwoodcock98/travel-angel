@@ -3,7 +3,6 @@ const Visa = require("../models/visa.js");
 const VisaController = {
   Index: async (req, res) => {
     const userId = req.params.id;
-    console.log(userId);
     const visas = await Visa.find({ user: userId });
     res.json(visas);
   },
