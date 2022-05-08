@@ -16,7 +16,7 @@ import Parking from "./parking/parking";
 import CoronavirusOutlinedIcon from '@mui/icons-material/CoronavirusOutlined';
 import Covid from "./covid/covid"
 import "./dashboard.css";
-import { ViewAccommodation } from "../accommodation/accommodation";
+import { ViewAccommodation } from "./accommodation/accommodation";
 import Visa from "./visas/visas"
 
 
