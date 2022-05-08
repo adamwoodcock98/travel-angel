@@ -105,8 +105,9 @@ export default function AddPassport({
             margin="dense"
             id="dob"
             name="dob"
-            label="Date Of Birth "
+            label="Date of Birth"
             type="date"
+            inputProps={{ "data-testid": "dob-input" }}
             variant="outlined"
             required
             onChange={handleChange}
@@ -123,6 +124,7 @@ export default function AddPassport({
               id="gender"
               name="gender"
               label="Gender"
+              inputProps={{ "data-testid": "gender-input" }}
               variant="outlined"
               onChange={handleChange}
               required
@@ -150,8 +152,9 @@ export default function AddPassport({
             margin="dense"
             id="dateOfIssue"
             name="dateOfIssue"
-            label="Date of Issue "
+            label="Date of Issue"
             type="date"
+            inputProps={{ "data-testid": "dof-input" }}
             variant="outlined"
             required
             InputLabelProps={{
@@ -165,7 +168,8 @@ export default function AddPassport({
             margin="dense"
             id="dateOfExpiry"
             name="dateOfExpiry"
-            label="Date of Expiry "
+            label="Date of Expiry"
+            inputProps={{ "data-testid": "doe-input" }}
             type="date"
             variant="outlined"
             required
@@ -177,7 +181,7 @@ export default function AddPassport({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Passport Details</Button>
+          <Button onClick={onSubmit}>Save</Button>
         </DialogActions>
       </Dialog>
     </div>

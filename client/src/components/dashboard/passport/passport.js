@@ -126,7 +126,7 @@ const Passport = () => {
   if (displayState.length) {
     return (
       <div id="Passport">
-        <h1 className="pass-h1">Passport</h1>
+        
         <AddPassport
           open={open}
           handleOpen={handleOpen}
@@ -147,7 +147,8 @@ const Passport = () => {
     );
   } else {
     return (
-      // <i>You don't have your passport saved just yet. Add it now!</i>
+      <div>
+      <h1 className="pass-h1">Passport</h1>
       <AddPassport
         open={open}
         handleOpen={handleOpen}
@@ -156,6 +157,8 @@ const Passport = () => {
         passport={passport}
         onSubmit={onSubmit}
       />
+     <i>You don't have your passports saved just yet. Add it now!</i>
+    </div>
     );
   }
 };
