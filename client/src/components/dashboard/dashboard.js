@@ -9,13 +9,13 @@ import HotelIcon from "@mui/icons-material/HotelOutlined";
 import CommuteIcon from '@mui/icons-material/Commute';
 import VpnLockOutlinedIcon from '@mui/icons-material/VpnLockOutlined';
 import "./dashboard.css";
+
+import { ViewAccommodation } from "./accommodation/accommodation";
 import Transfers from "./transfers/transfers"
 import Flights from "./flights/flights"
 import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
 import Parking from "./parking/parking"
 import Visa from "./visas/visas"
-
-import { ViewAccommodation } from "../accommodation/accommodation";
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -57,7 +57,7 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
+export default function VerticalTabs({ session }) {
   // the main functional component to be rendered by index aka the sidebar
   const [value, setValue] = React.useState(0); // setting up state for the tab bar, this is purely to render things for the tab bar, not state that we will ever get data from
 
@@ -99,16 +99,16 @@ export default function VerticalTabs() {
 
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
-        <Flights />
+        <Flights session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={1}>
-        <ViewAccommodation />
+        <ViewAccommodation session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={2}>
-        <Transfers />
+        <Transfers session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={3}>
-        <Parking />
+        <Parking session={session} />
       </TabPanel>
       <TabPanel  className="tab-content"value={value} index={4}>
         <Visa />

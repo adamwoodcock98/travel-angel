@@ -3,9 +3,10 @@ const Address = require("../models/address.js");
 
 const ParkingController = {
   Index: async (req, res) => {
-    const parkingBookings = await Parking.find().populate("address");
-
-    console.log(parkingBookings)
+    const userId = req.params.id;
+    const parkingBookings = await Parking.find({ user: userId }).populate(
+      "address"
+    );
 
     res.json({ bookings: parkingBookings });
   },
@@ -22,7 +23,7 @@ const ParkingController = {
         postalCode: data.postalCode,
         stateCounty: data.stateCounty,
         countryCode: data.countryCode,
-      })
+      });
 
       const saveAddress = await address.save();
 
@@ -37,16 +38,16 @@ const ParkingController = {
         bookingReference: data.bookingReference,
         notes: data.notes,
         address: saveAddress,
-        // user: req.session.user,
-      })
+        user: data.user,
+      });
 
       await parking.save();
       res.status(200).send();
-    } catch(e) {
-      console.log(e.message)
+    } catch (e) {
+      console.log(e.message);
       res.status(500).send();
     }
-  }
-}
+  },
+};
 
 module.exports = ParkingController;
