@@ -36,16 +36,7 @@ const VaccineCard = (props) => {
       </div>
       <div className="vaccine-card-dose-content">
         <h2>Vaccine dose</h2>
-        <div className="vaccine-card-dose">
-          <h3>Dose</h3>
-          <p></p>
-        </div>
-        <div className="vaccine-card-dose-date">
-
-        </div>
-        <div className="vaccine-card-dose-type">
-
-        </div>
+        
       </div>
       <div className="vaccine-card-proof-content">
         <h2>Vaccine proof</h2>
