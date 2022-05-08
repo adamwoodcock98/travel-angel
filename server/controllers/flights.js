@@ -12,7 +12,6 @@ const FlightsController = {
         isOutbound: false,
         user: user,
       });
-      console.log(outboundFlight);
       res.json({
         outbound: outboundFlight,
         inbound: inboundFlight,
@@ -20,7 +19,6 @@ const FlightsController = {
       });
       res.status(200).send();
     } catch (e) {
-      console.log(e.message);
       res.status(500).send();
     }
   },
@@ -57,7 +55,6 @@ const FlightsController = {
 
   Update: async (req, res) => {
     const data = req.body;
-    console.log("the right one")
    try {
     const flight = await Flight.findById(req.params.id);
     console.log(flight)

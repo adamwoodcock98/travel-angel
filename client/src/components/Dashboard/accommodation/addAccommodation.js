@@ -11,7 +11,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 const AddAccommodation = (props) => {
   const userId = props.userId;
   const accommodationData = props.accommodationData;
-  console.log(accommodationData)
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
@@ -45,6 +44,13 @@ const AddAccommodation = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let url;
+    if (accommodationId) {
+      url = `http://localhost:8000/dashboard/accommodation/edit/${accommodationId}`
+    } else {
+      url = `http://localhost:8000/dashboard/accommodation`
+    }
 
     const {
       name,
@@ -85,7 +91,7 @@ const AddAccommodation = (props) => {
     };
 
     await axios
-      .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
+      .post(url, newAccommodation)
       .catch((err) => console.log(err.message))
       .then(() => {
         setAccommodation({
