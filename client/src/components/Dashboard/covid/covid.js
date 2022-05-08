@@ -13,13 +13,9 @@ const Covid = () => {
   useEffect(() => {
     api.get("/").then(res => {
       const tests = res.data.tests;
-      console.log(tests)
       setTestData(tests);
-      console.log(testData)
     })
   }, []);
-
-  console.log(testData[0])
 
   if (testData.length) {
 

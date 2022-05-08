@@ -5,5 +5,6 @@ const covidRouter = express.Router();
 covidRouter.get("/", CovidController.Index);
 covidRouter.post("/test", CovidController.NewTest);
 covidRouter.post("/vaccination", CovidController.NewVaccination);
+covidRouter.post("/test/edit", CovidController.UpdateTest);
 
 module.exports = covidRouter;

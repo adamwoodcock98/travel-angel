@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import Button from "@mui/material/Button";
@@ -15,10 +15,16 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
 const AddTest = (props) => {
-  const [open, setOpen] = useState(true);
-  const [test, setTest] = useState({
-    testType: "",
-    entryType: "",
+  const open = props.open
+  const handleClose = props.handleClose
+  const type = props.type || "";
+  const testType = props.testType || "";
+  const testID = props.testID || null
+  console.log(testID)
+
+const [test, setTest] = useState({
+    testType: testType,
+    entryType: type,
     result: "",
     testDate: "",
     testFromDate: "",
@@ -29,9 +35,6 @@ const AddTest = (props) => {
     testProvider: "",
   });
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   const handleChange = (e) => {
     const value = e.target.value;
     setTest({
@@ -45,10 +48,17 @@ const AddTest = (props) => {
 
     const { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider } = test;
 
-    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider };
+    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider, testID };
+    
+    let url;
 
+    if (testID) {
+      url = "http://localhost:8000/dashboard/covid/test/edit"
+    } else {
+      url = "http://localhost:8000/dashboard/covid/test"
+    }
     axios
-      .post("http://localhost:8000/dashboard/covid/test", newTest)
+      .post(url, newTest)
       .then((res) => {
         handleClose();
       });

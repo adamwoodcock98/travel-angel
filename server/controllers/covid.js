@@ -20,7 +20,6 @@ const CovidController = {
 
   NewTest: async (req, res) => {
     const data = req.body
-
     const test = new CovidTest({
       testType: data.testType,
       entryType: data.entryType,
@@ -35,8 +34,7 @@ const CovidController = {
     });
 
     try {
-      const savedTest = await test.save();
-
+      await test.save();
       res.status(200).send()
     } catch(e) {
       console.log(e.message);
@@ -83,6 +81,31 @@ const CovidController = {
       console.log(e.message);
       res.status(500).send();
     }
+  },
+
+  UpdateTest: async (req, res) => {
+    const data = req.body
+    try {
+      const test = await CovidTest.findById(data.testID);
+      console.log("the test", test)
+      test.testType = data.testType;
+      test.entryType = data.entryType;
+      test.result = data.result;
+      test.testDate = data.testDate;
+      test.testFromDate = data.testFromDate;
+      test.resultByDate = data.resultByDate;
+      test.validToDate = data.validToDate;
+      test.testNumber = data.testNumber;
+      test.testCountry = data.testCountry;
+      test.testProvider = data.testProvider;
+      console.log("lager test", test)
+      await test.save();
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
+
   },
 };
 
