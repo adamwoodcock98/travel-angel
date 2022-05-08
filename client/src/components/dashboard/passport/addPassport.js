@@ -1,5 +1,18 @@
-import { Button, Fab, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
-import AddIcon from '@mui/icons-material/Add';
+import {
+  Button,
+  Fab,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function AddPassport({
   open,
@@ -11,7 +24,13 @@ export default function AddPassport({
 }) {
   return (
     <div>
-      <Fab id="pass-fab" size="medium" color="secondary" aria-label="add" onClick={handleOpen}>
+      <Fab
+        id="pass-fab"
+        size="medium"
+        color="secondary"
+        aria-label="add"
+        onClick={handleOpen}
+      >
         <AddIcon />
       </Fab>
       <Dialog open={open} onClose={handleClose}>
@@ -92,21 +111,27 @@ export default function AddPassport({
             required
             onChange={handleChange}
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
           />
-          <TextField
-            value={passport.gender}
-            autoFocus
-            margin="dense"
-            id="gender"
-            name="gender"
-            label="Gender"
-            type="text"
-            variant="outlined"
-            required
-            onChange={handleChange}
-          />
+          <FormControl sx={{ m: 1, minWidth: 190 }}>
+            <InputLabel id="demo-select-small">Gender</InputLabel>
+            <Select
+              value={passport.gender}
+              autoFocus
+              margin="dense"
+              id="gender"
+              name="gender"
+              label="Gender"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value="F">Female</MenuItem>
+              <MenuItem value="M">Male</MenuItem>
+              <MenuItem value="X">Other</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             value={passport.placeOfBirth}
             autoFocus
@@ -130,7 +155,7 @@ export default function AddPassport({
             variant="outlined"
             required
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
             onChange={handleChange}
           />
@@ -145,11 +170,10 @@ export default function AddPassport({
             variant="outlined"
             required
             InputLabelProps={{
-              shrink: true
+              shrink: true,
             }}
             onChange={handleChange}
           />
-
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

@@ -1,6 +1,7 @@
 import AddPassport from "./addPassport.js";
 import { DisplayPassport } from "./displayPassport";
 import React, { useState, useEffect } from "react";
+import { Alerts } from "../../assets/snackbar";
 import axios from "axios";
 import "./passport.css";
 
@@ -36,6 +37,21 @@ const Passport = () => {
     setOpen(false);
   };
 
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const [alertType, setAlertType] = useState("success");
+
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -67,10 +83,28 @@ const Passport = () => {
 
     await axios
       .post("http://localhost:8000/dashboard/passport/", newPassport)
-      .then(() => {
+      .then((res) => {
+        setPassport({
+          passportNumber: "",
+          firstName: "",
+          lastName: "",
+          nationality: "",
+          country: "",
+          dob: "",
+          gender: "",
+          placeOfBirth: "",
+          dateOfIssue: "",
+          dateOfExpiry: "",
+        });
         handleClose();
-        window.location = "/";
+        handleAlert(res.data.msg, res.data.type);
       });
+  };
+
+  const handleAlert = (msg, type) => {
+    setAlertOpen(true);
+    setAlertMessage(msg);
+    setAlertType(type);
   };
 
   useEffect(() => {
@@ -81,11 +115,7 @@ const Passport = () => {
 
   const passportRender = [];
   displayState.forEach((pass) => {
-    passportRender.push(
-      <DisplayPassport
-        passport={pass}
-      />
-    );
+    passportRender.push(<DisplayPassport passport={pass} />);
   });
 
   if (displayState.length) {
@@ -100,9 +130,14 @@ const Passport = () => {
           passport={passport}
           onSubmit={onSubmit}
         />
-        <div id="pass-render">
-         {passportRender}
-         </div>
+        <div id="pass-render">{passportRender}</div>
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
       </div>
     );
   } else {
