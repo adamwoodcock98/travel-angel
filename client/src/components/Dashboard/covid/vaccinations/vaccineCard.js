@@ -9,7 +9,6 @@ const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
   const vaccinationsData = props.vaccinationsData;
   const doses = vaccinationsData.vaccineDoses;
-  console.log(doses)
 
   const handleOpen = () => {
     setOpen(true);
@@ -39,6 +38,10 @@ const VaccineCard = (props) => {
         </div>
         <div className="vaccine-card-dose-pane">
           {vaccinationsData.vaccineDoses && dosesArray}
+        </div>
+        <div className="vaccine-card-dose-button">
+          {dosesArray.length < 3 && <Button color="secondary" startIcon={<VaccinesOutlinedIcon />} onClick={handleOpen}>Add dose</Button>}
+          <AddVaccine open={open} handleOpen={handleOpen} handleClose={handleClose} vaccinationsID={vaccinationsData._id} />
         </div>
       </div>
       <div className="vaccine-card-proof-content">

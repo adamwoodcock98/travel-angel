@@ -28,6 +28,10 @@
       flex: 1;
     }
 
+    .vaccine-card-dose-button {
+      flex: 1;
+    }
+
   .vaccine-card-proof-content {
     flex: 1;
   }

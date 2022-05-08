@@ -16,16 +16,16 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
 const AddVaccine = (props) => {
-  const [open, setOpen] = useState(true);
+  const open = props.open;
+  const handleClose = props.handleClose;
+  const vaccinationsID = props.vaccinationsID;
+
   const [vaccine, setVaccine] = useState({
     dose: "",
     date: "",
     type: "",
   });
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   const handleChange = (e) => {
     const value = e.target.value;
     setVaccine({
@@ -42,7 +42,7 @@ const AddVaccine = (props) => {
     const newDose = { dose, date, type };
 
     axios
-      .post("http://localhost:8000/dashboard/covid/vaccination", newDose)
+      .post(`http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/new`, newDose)
       .then((res) => {
         handleClose();
       });
@@ -94,7 +94,7 @@ const AddVaccine = (props) => {
               onChange={handleChange}
               required
             >
-              <MenuItem value="{Novavax (Nuvaxovid)">Novavax (Nuvaxovid)</MenuItem>
+              <MenuItem value={"Novavax (Nuvaxovid)"}>Novavax (Nuvaxovid)</MenuItem>
               <MenuItem value={"Moderna (Spikevax)"}>Moderna (Spikevax)</MenuItem>
               <MenuItem value={"Pfizer/BioNTech (Comirnaty)"}>Pfizer/BioNTech (Comirnaty)</MenuItem>
               <MenuItem value={"Oxford/AstraZeneca (Vaxzevria)"}>Oxford/AstraZeneca (Vaxzevria)</MenuItem>

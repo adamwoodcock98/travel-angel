@@ -63,23 +63,13 @@ const CovidController = {
 
     try {
       const savedVaccine = await vaccination.save();
-      console.log("dose: ", savedVaccine);
 
-      const userVaccinationCard = await Vaccinations.find();
-      console.log("the cards:", userVaccinationCard);
-      if (userVaccinationCard.length) {
-        userVaccinationCard[0].vaccineDoses.push(savedVaccine._id);
-        userVaccinationCard[0].vaccinationStatus = status;
-        const savedVaccinationCard = await userVaccinationCard[0].save();
-        console.log("card update: ", savedVaccinationCard[0]);
-      } else {
-        const newVaccinationCard = new Vaccinations({
-          vaccineDoses: savedVaccine._id,
-          vaccinationStatus: status,
-        });
-        const savedVaccinationCard = await newVaccinationCard.save();
-        console.log("card new: ", savedVaccinationCard[0]);
-      }
+      const userVaccinationCard = await Vaccinations.findById(req.params.id);
+      console.log(userVaccinationCard.vaccineDoses)
+      
+      userVaccinationCard.vaccineDoses.push(savedVaccine._id);
+      userVaccinationCard.vaccinationStatus = status;
+      await userVaccinationCard.save();
 
       res.status(200).send();
     } catch (e) {
