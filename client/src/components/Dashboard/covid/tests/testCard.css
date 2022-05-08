@@ -1,0 +1,60 @@
+.test-card {
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+  text-align: left;
+}
+
+  .test-card-header {
+    border-style: solid;
+    flex: 1;
+  }
+
+  .test-card-primary-content {
+    border-style: solid;
+    flex: 1;
+    display: flex;
+  }
+
+    .test-card-primary-left {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .test-card-primary-right {
+      border-style: solid;
+      flex: 1;
+    }
+
+  .test-card-secondary-content {
+    border-style: solid;
+    flex: 1;
+    display: flex;
+  }
+
+    .test-card-secondary-left {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .test-card-secondary-right {
+      border-style: solid;
+      flex: 1;
+    }
+
+  .test-card-tertiary-content {
+    border-style: solid;
+    flex: 1;
+    display: flex;
+  }
+
+    .test-card-tertiary-left {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .test-card-tertiary-right {
+      border-style: solid;
+      flex: 1;
+    }

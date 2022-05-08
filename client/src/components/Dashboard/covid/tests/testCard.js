@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./testCard.css"
 
 export const TestCard = (props) => {
   const testData = props.testData;
@@ -7,7 +8,7 @@ export const TestCard = (props) => {
   return(
     <div className="test-card">
       <div className="test-card-header">
-
+        
       </div>  
       <div className="test-card-primary-content">
         <div className="test-card-primary-left">
