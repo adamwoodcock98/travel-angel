@@ -300,7 +300,8 @@ const AddFlight = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Flight Details</Button>
+          {flightId && <Button onClick={onSubmit}>Update Flight Details</Button>}
+          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
         </DialogActions>
       </Dialog>
     </div>
