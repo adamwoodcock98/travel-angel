@@ -1,13 +1,16 @@
 const Accommodation = require("../models/accommodation.js");
 const Address = require("../models/address.js");
 const User = require("../models/user.js");
+const Trip = require("../models/trip.js");
 
 const AccommodationController = {
   New: async (req, res) => {
+    tripId = req.params.tripId;
     userId = req.params.id;
-    const accommodation = await Accommodation.find({ user: userId }).populate(
-      "address"
-    );
+    const accommodation = await Accommodation.find({
+      user: userId,
+      trip: tripId,
+    }).populate("address");
     res.json({ accommodation: accommodation });
   },
 
@@ -29,6 +32,7 @@ const AccommodationController = {
       stateCounty,
       countryCode,
       user,
+      trip,
     } = req.body;
 
     const address = new Address({
@@ -40,6 +44,7 @@ const AccommodationController = {
       postalCode: postalCode,
       stateCounty: stateCounty,
       countryCode: countryCode,
+      trip: trip,
     });
 
     address
@@ -55,12 +60,19 @@ const AccommodationController = {
           bookingReference: bookingReference,
           address: address,
           user: user,
+          trip: trip,
         });
         accommodation
           .save()
-          .then((accommodation) =>
-            res.json({ msg: "Accommodation added successfully" })
-          )
+          .then((savedAccommodation) => {
+            console.log(savedAccommodation);
+            Trip.findById(trip).then((newTrip) => {
+              newTrip.accommodation.push(accommodation._id);
+              newTrip
+                .save()
+                .then(res.json({ msg: "Accommodation added successfully" }));
+            });
+          })
           .catch((err) =>
             res.status(400).json({ error: "Unable to add this accommodation" })
           );
