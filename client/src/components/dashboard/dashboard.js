@@ -6,13 +6,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FlightTakeoffOutlined from "@mui/icons-material/FlightTakeoffOutlined";
 import HotelIcon from "@mui/icons-material/HotelOutlined";
-import CommuteIcon from "@mui/icons-material/Commute";
+import CommuteIcon from '@mui/icons-material/Commute';
+import VpnLockOutlinedIcon from '@mui/icons-material/VpnLockOutlined';
 import "./dashboard.css";
-import Transfers from "./transfers/transfers";
-import Flights from "./flights/flights";
-import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
-import Parking from "./parking/parking";
-import "./dashboard.css";
+import Transfers from "./transfers/transfers"
+import Flights from "./flights/flights"
+import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
+import Parking from "./parking/parking"
+import Visa from "./visas/visas"
+
 import { ViewAccommodation } from "../accommodation/accommodation";
 
 function TabPanel(props) {
@@ -93,6 +95,8 @@ export default function VerticalTabs() {
           aria-label="parking"
           {...a11yProps(3)}
         />
+        <Tab icon={<VpnLockOutlinedIcon />} aria-label="visa" {...a11yProps(4)} />
+
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights />
@@ -105,6 +109,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={3}>
         <Parking />
+      </TabPanel>
+      <TabPanel  className="tab-content"value={value} index={4}>
+        <Visa />
       </TabPanel>
     </Box>
   );
