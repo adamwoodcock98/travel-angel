@@ -129,6 +129,80 @@ const Transfers = ({ session }) => {
     }
   }, [transfer]);
 
+  // LOADING SUBMIT BUTTON
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if(loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [loading])
+
+  const handleLoadingClick = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const {
+      pickupTime,
+      dropoffTime,
+      pickupAddress,
+      dropoffAddress,
+      isOutbound,
+      company,
+      contactNumber,
+      bookingReference,
+      user,
+    } = transfer;
+
+    const newTransfer = {
+      pickupTime,
+      dropoffTime,
+      pickupAddress,
+      dropoffAddress,
+      isOutbound,
+      company,
+      contactNumber,
+      bookingReference,
+      user,
+    };
+
+    await axios
+      .post("http://localhost:8000/dashboard/transfers/", newTransfer)
+      .catch((err) => console.log(err.message))
+      // .then(() => {
+      //   setTransfer({
+      //       pickupTime: "",
+      //       dropoffTime: "",
+      //       pickupAddress: {
+      //         buildingNumber: "",
+      //         buildingName: "",
+      //         addressLine1: "",
+      //         addressLine2: "",
+      //         city: "",
+      //         postalCode: "",
+      //         stateCounty: "",
+      //         countryCode: "",
+      //       },
+      //       dropoffAddress: {
+      //         buildingNumber: "",
+      //         buildingName: "",
+      //         addressLine1: "",
+      //         addressLine2: "",
+      //         city: "",
+      //         postalCode: "",
+      //         stateCounty: "",
+      //         countryCode: "",
+      //       },
+      //       isOutbound: "",
+      //       company: "",
+      //       contactNumber: "",
+      //       bookingReference: "",
+      //   });
+      // });
+    };
+  
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
       <div className="transfers">
@@ -155,6 +229,8 @@ const Transfers = ({ session }) => {
             handleSubmit={handleSubmit}
             handlePickupChange={handlePickupChange}
             handleDropoffChange={handleDropoffChange}
+            handleLoadingClick={handleLoadingClick}
+            loading={loading}
           />
         </div>
       </div>
@@ -171,6 +247,7 @@ const Transfers = ({ session }) => {
           handleSubmit={handleSubmit}
           handlePickupChange={handlePickupChange}
           handleDropoffChange={handleDropoffChange}
+          loading={loading}
         />
       </div>
     );

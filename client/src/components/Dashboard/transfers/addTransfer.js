@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function AddTransfer({
   open,
@@ -18,7 +19,9 @@ export default function AddTransfer({
   transfer,
   handleSubmit,
   handlePickupChange,
-  handleDropoffChange
+  handleDropoffChange,
+  handleLoadingClick,
+  loading
 }) {
   return (
     <div>
@@ -303,8 +306,17 @@ export default function AddTransfer({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          
           <Button onClick={handleSubmit}>Save Transfer Details</Button>
+          <LoadingButton
+            onClick={handleLoadingClick}
+            loading={loading}
+            loadingIndicator="Saved"
+          > 
+            Save and Add Another
+          </LoadingButton>
+          <Button onClick={handleClose}>Cancel</Button>
+
         </DialogActions>
       </Dialog>
     </div>
