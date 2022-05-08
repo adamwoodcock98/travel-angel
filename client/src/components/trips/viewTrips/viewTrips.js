@@ -25,19 +25,6 @@ const ViewTrips = ({ trips }) => {
               </div>
               <div className="body">{formatDate(trip.startDate)}</div>
               <div className="footer">
-                {console.log(
-                  `The fucking date now ${formatLongDate(
-                    new Date(Date.now())
-                  )}`,
-                  `The stupid trip date for fuck sake ${formatLongDate(
-                    trip.startDate
-                  )}`
-                )}
-                {console.log(
-                  moment(formatLongDate(new Date(Date.now()))).isBefore(
-                    formatLongDate(trip.startDate)
-                  )
-                )}
                 {formatLongDate(new Date(Date.now())) <
                   formatLongDate(trip.startDate) && (
                   <p>

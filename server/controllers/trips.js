@@ -3,7 +3,6 @@ const Trip = require("../models/trip.js");
 const TripController = {
   Index: async (req, res) => {
     const userId = req.params.id;
-    console.log(userId);
     try {
       const trips = await Trip.find({ user: userId })
         .populate("accommodation")
@@ -12,7 +11,6 @@ const TripController = {
         .populate("transfers");
 
       res.json({ trips: trips });
-      console.log(trips);
     } catch (e) {
       console.log(e.message);
     }

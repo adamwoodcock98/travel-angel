@@ -19,7 +19,6 @@ const Trips = ({ session }) => {
     if (userId !== "null") {
       axios.get(`http://localhost:8000/trips/${userId}`).then((res) => {
         setTripArray(res.data.trips);
-        console.log(tripArray);
       });
     } else {
       console.log("not logged in");
