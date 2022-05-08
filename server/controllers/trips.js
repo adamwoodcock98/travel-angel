@@ -3,6 +3,7 @@ const Trip = require("../models/trip.js");
 const TripController = {
   Index: async (req, res) => {
     const userId = req.params.id;
+    console.log(userId);
     try {
       const trips = await Trip.find({ user: userId })
         .populate("accommodation")

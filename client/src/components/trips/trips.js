@@ -15,6 +15,17 @@ const Trips = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [tripArray, setTripArray] = useState([]);
 
+  useEffect(() => {
+    if (userId !== "null") {
+      axios.get(`http://localhost:8000/trips/${userId}`).then((res) => {
+        setTripArray(res.data.trips);
+        console.log(tripArray);
+      });
+    } else {
+      console.log("not logged in");
+    }
+  }, [trip]);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -61,9 +72,6 @@ const Trips = ({ session }) => {
     <div className="container">
       <div className="header">
         <h1>Your Trips</h1>
-      </div>
-      <div className="body">
-        <ViewTrips trip={tripArray} />
         <AddTrip
           className="add-accomodation"
           handleOpen={handleOpen}
@@ -73,6 +81,9 @@ const Trips = ({ session }) => {
           trip={trip}
           handleSubmit={handleSubmit}
         />
+      </div>
+      <div className="trip-body">
+        <ViewTrips trips={tripArray} />
       </div>
     </div>
   );
