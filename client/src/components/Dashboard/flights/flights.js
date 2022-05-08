@@ -51,84 +51,12 @@ const Flights = ({ session }) => {
     baseURL: "http://localhost:8000/dashboard/flights/",
   });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setFlight({
-      ...flight,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-    } = flight;
-
-    const newFlight = {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-    };
-
-    console.log("new", newFlight.user)
-
-    api.post("/", newFlight).then((res) => {
-      handleClose();
-      setFlight({
-        flightNumber: "",
-        departureTime: "",
-        departureDate: "",
-        airline: "",
-        departureAirport: "",
-        departureTerminal: "",
-        departureCity: "",
-        departureGate: "",
-        arrivalAirport: "",
-        arrivalTerminal: "",
-        arrivalCity: "",
-        arrivalGate: "",
-        bookingReference: "",
-        isOutbound: "",
-        user: userId,
-      })
-      window.location = "/";
-    });
   };
 
   useEffect(() => {
@@ -161,13 +89,13 @@ const Flights = ({ session }) => {
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
       );
     });
 
@@ -191,9 +119,9 @@ const Flights = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            flight={flight}
-            onSubmit={onSubmit}
+            flightData={flight}
+            flightId={null}
+            user={userId}
           />
         </div>
       </div>
@@ -205,9 +133,9 @@ const Flights = ({ session }) => {
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}
-          handleChange={handleChange}
-          flight={flight}
-          onSubmit={onSubmit}
+          flightData={flight}
+          flightId={null}
+          user={userId}
         />
         {alertMessage && (
           <Alerts

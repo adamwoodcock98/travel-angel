@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,7 +10,8 @@ import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import AutorenewOutlinedIcon from '@mui/icons-material/AutorenewOutlined';
-import "./crudMenu.css"
+import "./crud.css"
+import AddFlight from "../../addFlight"
 
 const StyledMenu = styled((props) => (
 
@@ -55,16 +56,26 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CrudMenu(props) {
+  const flightData = props.flightData;
+  const userId = props.userId;
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const openCrud = Boolean(anchorEl);
+  const [open, setOpen] = useState(false);
 
-  const modalToRender = props.modal;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleCrudClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -72,8 +83,8 @@ export default function CrudMenu(props) {
       <IconButton
         aria-label="more"
         id="demo-customized-button"
-        aria-controls={open ? 'demo-customized-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+        aria-controls={openCrud ? 'demo-customized-menu' : undefined}
+        aria-expanded={openCrud ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -85,29 +96,36 @@ export default function CrudMenu(props) {
           'aria-labelledby': 'demo-customized-button',
         }}
         anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
+        open={openCrud}
+        onClose={handleCrudClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={() => {handleCrudClose(); handleOpen();}} disableRipple>
           <EditOutlinedIcon />
           Edit
-          {modalToRender}
+          <AddFlight 
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            flightData={flightData}
+            flightId={flightData._id}
+            user={userId}
+          />
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleCrudClose} disableRipple>
           <FileCopyOutlinedIcon />
           Duplicate
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleCrudClose} disableRipple>
           <AutorenewOutlinedIcon />
           Add return
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleCrudClose} disableRipple>
           <FileDownloadOutlinedIcon />
           Add to calendar
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple className="MenuItem">
+        <MenuItem onClick={handleCrudClose} disableRipple className="MenuItem">
           <DeleteOutlinedIcon style={{ color: '#FF4949' }} />
           Delete
         </MenuItem>

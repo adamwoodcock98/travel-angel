@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import axios from "axios"
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
@@ -13,14 +15,113 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
-export default function AddFlight({
-  open,
-  handleOpen,
-  handleClose,
-  handleChange,
-  flight,
-  onSubmit,
-}) {
+const AddFlight = (props) => {
+  const flightData = props.flightData;
+  const flightId = props.flightId;
+  const open = props.open;
+  const userId = props.user;
+  const handleOpen = props.handleOpen;
+  const handleClose = props.handleClose;
+  const [flight, setFlight] = useState({
+    flightNumber: flightData.flightNumber,
+    departureTime: flightData.departureTime,
+    departureDate: flightData.departureDate,
+    airline: flightData.airline,
+    departureAirport: flightData.departureAirport,
+    departureTerminal: flightData.departureTerminal,
+    departureCity: flightData.departureCity,
+    departureGate: flightData.departureGate,
+    arrivalAirport: flightData.arrivalAirport,
+    arrivalTerminal: flightData.arrivalTerminal,
+    arrivalCity: flightData.arrivalCity,
+    arrivalGate: flightData.arrivalGate,
+    bookingReference: flightData.bookingReference,
+    isOutbound: flightData.isOutbound,
+    user: userId,
+  });
+  console.log(userId)
+  console.log(flight.user)
+
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setFlight({
+      ...flight,
+      [e.target.name]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    let url;
+    if (flightId) {
+      url = `http://localhost:8000/dashboard/flights/edit/${userId}`
+    } else {
+      url = `http://localhost:8000/dashboard/flights/`
+    }
+
+    const {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    } = flight;
+
+    console.log(user)
+
+    const newFlight = {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    };
+
+    axios.post(url, newFlight).then((res) => {
+      handleClose();
+      setFlight({
+        flightNumber: "",
+        departureTime: "",
+        departureDate: "",
+        airline: "",
+        departureAirport: "",
+        departureTerminal: "",
+        departureCity: "",
+        departureGate: "",
+        arrivalAirport: "",
+        arrivalTerminal: "",
+        arrivalCity: "",
+        arrivalGate: "",
+        bookingReference: "",
+        isOutbound: "",
+        user: userId,
+      })
+      window.location = "/";
+    });
+  };
+
   return (
     <div>
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
@@ -213,3 +314,5 @@ export default function AddFlight({
     </div>
   );
 }
+
+export default AddFlight;
