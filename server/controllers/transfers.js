@@ -3,12 +3,15 @@ const Address = require("../models/address.js");
 
 const TransferController = {
   Index: async (req, res) => {
+    const userId = req.params.id;
     try {
       const outboundTransfer = await Transfer.find({
         isOutbound: true,
+        user: userId,
       }).populate("pickupAddress dropoffAddress");
       const inboundTransfer = await Transfer.find({
         isOutbound: false,
+        user: userId,
       }).populate("pickupAddress dropoffAddress");
       res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
     } catch (e) {
@@ -26,6 +29,7 @@ const TransferController = {
       company,
       contactNumber,
       bookingReference,
+      user,
     } = req.body;
 
     const thePickupAddress = new Address({
@@ -62,7 +66,7 @@ const TransferController = {
           company: company,
           contactNumber: contactNumber,
           bookingReference: bookingReference,
-          // user:
+          user: user,
         });
         transfer
           .save()

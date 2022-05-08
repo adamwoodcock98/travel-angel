@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import AddTransfer from './addTransfer'
-import axios from 'axios'
+import { useState, useEffect } from "react";
+import AddTransfer from "./addTransfer";
+import axios from "axios";
 import { OutboundTransferCard } from "./outboundTransferCard";
 import { InboundTransferCard } from "./inboundTransferCard";
 
-const Transfers = () => {
+const Transfers = ({ session }) => {
+  const userId = session;
+
   const [open, setOpen] = useState(false);
   const [transfer, setTransfer] = useState({
     pickupTime: "",
@@ -33,6 +35,7 @@ const Transfers = () => {
     company: "",
     contactNumber: "",
     bookingReference: "",
+    user: userId,
   });
 
   const handlePickupChange = (e) => {
@@ -41,10 +44,10 @@ const Transfers = () => {
       ...prevState,
       pickupAddress: {
         ...prevState.pickupAddress,
-        [e.target.name]: value
+        [e.target.name]: value,
       },
     }));
-  }
+  };
 
   const handleDropoffChange = (e) => {
     const value = e.target.value;
@@ -52,10 +55,10 @@ const Transfers = () => {
       ...prevState,
       dropoffAddress: {
         ...prevState.dropoffAddress,
-        [e.target.name]: value
+        [e.target.name]: value,
       },
     }));
-  }
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -76,7 +79,7 @@ const Transfers = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { 
+    const {
       pickupTime,
       dropoffTime,
       pickupAddress,
@@ -84,9 +87,13 @@ const Transfers = () => {
       isOutbound,
       company,
       contactNumber,
-      bookingReference} = transfer;
+      bookingReference,
+      user,
+    } = transfer;
 
-    const newTransfer = { 
+    console.log("here we go", user);
+
+    const newTransfer = {
       pickupTime,
       dropoffTime,
       pickupAddress,
@@ -94,60 +101,52 @@ const Transfers = () => {
       isOutbound,
       company,
       contactNumber,
-      bookingReference };
+      bookingReference,
+      user,
+    };
 
-    axios.post("http://localhost:8000/dashboard/transfers/", newTransfer).then(() => {
-      handleClose();
-    });
+    axios
+      .post("http://localhost:8000/dashboard/transfers/", newTransfer)
+      .then(() => {
+        handleClose();
+      });
   };
 
   const [outboundTransfer, setOutboundTransfer] = useState([]);
   const [inboundTransfer, setInboundTransfer] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/dashboard/transfers/").then(res => {
-      const outbound = res.data.outbound
-      const inbound = res.data.inbound
-      setOutboundTransfer(outbound);
-      setInboundTransfer(inbound);
-    });
-  }, [])
+    if (userId !== "null") {
+      console.log("userId", userId);
+      axios
+        .get(`http://localhost:8000/dashboard/transfers/${userId}`)
+        .then((res) => {
+          const outbound = res.data.outbound;
+          const inbound = res.data.inbound;
+          setOutboundTransfer(outbound);
+          setInboundTransfer(inbound);
+        });
+    }
+  }, [transfer]);
 
   if (outboundTransfer.length || inboundTransfer.length) {
-    return(
+    return (
       <div className="transfers">
-          <div className="transfer-header">
-            <h1>Your transfers</h1>
-          </div>
-          <div className="transfers-content">
-            <div className="transfers-content-outbound">
-              <h1 className="transfer-content-subheading">Outbound</h1>
-              <OutboundTransferCard outboundTransfer={outboundTransfer}/>
-            </div>
-            <div className="transfers-content-inbound">
-              <h1 className="transfers-content-subheading">Inbound</h1>
-              <InboundTransferCard inboundTransfer={inboundTransfer}/>
-            </div>
-          </div>
-      <div>
-      
-        <AddTransfer
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            handleChange={handleChange}
-            transfer={transfer}
-            handleSubmit={handleSubmit}
-            handlePickupChange={handlePickupChange}
-            handleDropoffChange={handleDropoffChange}
-          />
+        <div className="transfer-header">
+          <h1>Your transfers</h1>
         </div>
-      </div> 
-    )
-    } else {
-      return(
+        <div className="transfers-content">
+          <div className="transfers-content-outbound">
+            <h1 className="transfer-content-subheading">Outbound</h1>
+            <OutboundTransferCard outboundTransfer={outboundTransfer} />
+          </div>
+          <div className="transfers-content-inbound">
+            <h1 className="transfers-content-subheading">Inbound</h1>
+            <InboundTransferCard inboundTransfer={inboundTransfer} />
+          </div>
+        </div>
         <div>
-        <AddTransfer
+          <AddTransfer
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
@@ -158,8 +157,24 @@ const Transfers = () => {
             handleDropoffChange={handleDropoffChange}
           />
         </div>
-      )
-    }
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <AddTransfer
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          transfer={transfer}
+          handleSubmit={handleSubmit}
+          handlePickupChange={handlePickupChange}
+          handleDropoffChange={handleDropoffChange}
+        />
+      </div>
+    );
+  }
 };
 
 export default Transfers;
