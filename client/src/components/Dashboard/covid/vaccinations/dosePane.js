@@ -1,25 +1,27 @@
 import React from "react";
 import moment from "moment";
-import "./vaccineCard.css"
+import "./dosePane.css"
 
 const DosePane = (props) => {
-  const [dose, date, type] = props.doseData;
+  const dose = props.doseData
+
+  const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
   return(
-    <>
+    <div className="doses">
       <div className="vaccine-card-dose">
-        <h3>Dose</h3>
-        <p>{dose}</p>
+        <h4>Dose</h4>
+        <p>{dose.dose}</p>
       </div>
       <div className="vaccine-card-dose-date">
-        <h3>Date</h3>
-        <p>{date}</p>
+        <h4>Date</h4>
+        <p>{formatDate(dose.date)}</p>
       </div>
       <div className="vaccine-card-dose-type">
-        <h3>Type</h3>
-        <p>{type}</p>
+        <h4>Type</h4>
+        <p>{dose.type}</p>
       </div>
-    </>
+    </div>
   )
 }
 
