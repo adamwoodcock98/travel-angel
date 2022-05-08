@@ -97,6 +97,7 @@ const Passport = () => {
           dateOfExpiry: "",
         });
         handleClose();
+        setDisplayState([...displayState, res.data.passport]);
         handleAlert(res.data.msg, res.data.type);
       });
   };
@@ -114,6 +115,10 @@ const Passport = () => {
   }, []);
 
   const passportRender = [];
+  displayState.sort(
+    (pass1, pass2) =>
+      new Date(pass2.dateOfExpiry) - new Date(pass1.dateOfExpiry)
+  );
   displayState.forEach((pass) => {
     passportRender.push(<DisplayPassport passport={pass} />);
   });

@@ -14,7 +14,7 @@ const PassportController = {
   New: (req, res) => {
     const passport = new Passport(req.body);
     // passport.user = req.sessions.user;
-    passport.save((err) => {
+    passport.save((err, passport) => {
       if (err) {
         throw err;
       }
