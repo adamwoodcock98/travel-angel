@@ -13,9 +13,10 @@ import Flights from "./flights/flights";
 import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
 import Parking from "./parking/parking";
 import CoronavirusOutlinedIcon from '@mui/icons-material/CoronavirusOutlined';
-import PlaygroundSpeedDial from "./covid/covidSpeedDial";
 import "./dashboard.css";
 import { ViewAccommodation } from "../accommodation/accommodation";
+
+import PlaygroundSpeedDial from "./covid/covidSpeedDial";
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
