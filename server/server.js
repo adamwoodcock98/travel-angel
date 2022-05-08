@@ -35,7 +35,7 @@ mongoose
 app.use(
   session({
     key: "user_sid",
-    secret: "super_secret",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: {
