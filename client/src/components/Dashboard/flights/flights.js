@@ -4,8 +4,11 @@ import { FlightCard } from "./viewFlights/flightCard";
 import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
+import { useParams } from "react-router-dom";
 
 const Flights = ({ session }) => {
+  const { tripId } = useParams();
+
   const userId = session;
 
   const [inboundFlight, setInboundFlight] = useState([]);
@@ -27,6 +30,7 @@ const Flights = ({ session }) => {
     bookingReference: "",
     isOutbound: "",
     user: userId,
+    trip: tripId,
   });
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -86,6 +90,7 @@ const Flights = ({ session }) => {
       bookingReference,
       isOutbound,
       user,
+      trip,
     } = flight;
 
     const newFlight = {
@@ -104,6 +109,7 @@ const Flights = ({ session }) => {
       bookingReference,
       isOutbound,
       user,
+      trip,
     };
 
     api.post("/", newFlight).then((res) => {
@@ -114,7 +120,7 @@ const Flights = ({ session }) => {
 
   useEffect(() => {
     api
-      .get(`/${userId}`)
+      .get(`/${userId}/${tripId}`)
       .then((res) => {
         const outbound = res.data.outbound;
         const inbound = res.data.inbound;
