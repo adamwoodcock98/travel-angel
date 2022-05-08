@@ -41,21 +41,21 @@ describe("Vaccinations model", () => {
     expect(vaccinations.vaccineDoses).toEqual([mockVaccineDose]);
   });
 
-  it("Stores a user", () => {
-    const vaccinations = new Vaccinations({
-      vaccinationStatus: "Partially vaccinated",
-      user: mockUserID,
-    });
+  // it("Stores a user", () => {
+  //   const vaccinations = new Vaccinations({
+  //     vaccinationStatus: "Partially vaccinated",
+  //     user: mockUserID,
+  //   });
 
-    expect(vaccinations.user).toEqual(mockUserID);
-  });
+  //   expect(vaccinations.user).toEqual(mockUserID);
+  // });
 
-  it("Stores a user as a required field", async () => {
-    const vaccinations = new Vaccinations({
-      vaccinationStatus: "Partially vaccinated",
-    });
+  // it("Stores a user as a required field", async () => {
+  //   const vaccinations = new Vaccinations({
+  //     vaccinationStatus: "Partially vaccinated",
+  //   });
 
-    await expect(vaccinations.save()).rejects.toThrow();
-  });
+  //   await expect(vaccinations.save()).rejects.toThrow();
+  // });
 
 });

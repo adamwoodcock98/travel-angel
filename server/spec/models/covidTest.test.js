@@ -35,23 +35,6 @@ describe("Covid test model", () => {
     await expect(test.save()).rejects.toThrow();
   });
 
-  it("Stores if its a reminder or results", () => {
-    const test = new CovidTest({
-      testType: "PCR",
-      isReminder: false
-    });
-
-    expect(test.isReminder).toEqual(false);
-  });
-
-  it("Stores if its a reminder or results as a required field", async () => {
-    const test = new CovidTest({
-      testType: "PCR",
-    });
-
-    await expect(test.save()).rejects.toThrow();
-  });
-
   it("Stores a result", () => {
     const test = new CovidTest({
       testType: "PCR",
