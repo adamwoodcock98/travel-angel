@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./vaccineCard.css";
 import moment from "moment";
 import Button from '@mui/material/Button';
 import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";

@@ -1,0 +1,48 @@
+.vaccine-card {
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+  text-align: left;
+}
+
+  .vaccine-card-header {
+    border-style: solid;
+    flex: 1;
+  }
+
+  .vaccine-card-status-content {
+    border-style: solid;
+    flex: 1;
+  }
+
+  .vaccine-card-dose-content {
+    border-style: solid;
+    flex: 1;
+    display: flex;
+  }
+
+    .vaccine-card-dose {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .vaccine-card-dose-date {
+      border-style: solid;
+      flex: 1;
+    }
+
+    .vaccine-card-dose-type {
+      border-style: solid;
+      flex: 1;
+    }
+
+  .vaccine-card-proof-content {
+    border-style: solid;
+    flex: 1;
+  }
+
+  .vaccine-card-documents-content {
+    border-style: solid;
+    flex: 1;
+  }
