@@ -8,8 +8,6 @@ const App = () => {
     window.localStorage.getItem("session")
   );
 
-  console.log(session);
-
   const handleLogIn = (user) => {
     window.localStorage.setItem("session", user);
     setSession(user);

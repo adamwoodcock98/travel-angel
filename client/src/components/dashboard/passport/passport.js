@@ -5,7 +5,8 @@ import { Alerts } from "../../assets/snackbar";
 import axios from "axios";
 import "./passport.css";
 
-const Passport = () => {
+const Passport = ({ session }) => {
+  const userId = session;
   const [open, setOpen] = useState(false);
   const [displayState, setDisplayState] = useState([]);
   const [passport, setPassport] = useState({
@@ -19,6 +20,7 @@ const Passport = () => {
     placeOfBirth: "",
     dateOfIssue: "",
     dateOfExpiry: "",
+    user: userId,
   });
 
   const handleChange = (e) => {
@@ -66,6 +68,7 @@ const Passport = () => {
       placeOfBirth,
       dateOfIssue,
       dateOfExpiry,
+      user,
     } = passport;
 
     const newPassport = {
@@ -79,6 +82,7 @@ const Passport = () => {
       placeOfBirth,
       dateOfIssue,
       dateOfExpiry,
+      user,
     };
 
     await axios
@@ -109,9 +113,11 @@ const Passport = () => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:8000/dashboard/passport").then((res) => {
-      setDisplayState(res.data.passport);
-    });
+    axios
+      .get(`http://localhost:8000/dashboard/passport/${userId}`)
+      .then((res) => {
+        setDisplayState(res.data.passport);
+      });
   }, []);
 
   const passportRender = [];
@@ -126,7 +132,7 @@ const Passport = () => {
   if (displayState.length) {
     return (
       <div id="Passport">
-        
+        <h1 className="pass-h1">Passport</h1>
         <AddPassport
           open={open}
           handleOpen={handleOpen}
@@ -148,17 +154,17 @@ const Passport = () => {
   } else {
     return (
       <div>
-      <h1 className="pass-h1">Passport</h1>
-      <AddPassport
-        open={open}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        handleChange={handleChange}
-        passport={passport}
-        onSubmit={onSubmit}
-      />
-     <i>You don't have your passports saved just yet. Add it now!</i>
-    </div>
+        <h1 className="pass-h1">Passport</h1>
+        <AddPassport
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          passport={passport}
+          onSubmit={onSubmit}
+        />
+        <i>You don't have your passports saved just yet. Add it now!</i>
+      </div>
     );
   }
 };

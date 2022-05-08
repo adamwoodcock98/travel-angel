@@ -2,8 +2,8 @@ const Passport = require("../models/passport.js");
 
 const PassportController = {
   Index: (req, res) => {
-    const user = req.session.user;
-    Passport.find({}, (err, passport) => {
+    const user = req.params.id;
+    Passport.find({ user: user }, (err, passport) => {
       if (err) {
         throw err;
       }
@@ -13,7 +13,6 @@ const PassportController = {
 
   New: (req, res) => {
     const passport = new Passport(req.body);
-    // passport.user = req.sessions.user;
     passport.save((err, passport) => {
       if (err) {
         throw err;

@@ -42,8 +42,10 @@ const passportSchema = mongoose.Schema({
     required: true,
   },
   user: {
-    type: Object,
-  }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const Passport = mongoose.model("Passport", passportSchema);
