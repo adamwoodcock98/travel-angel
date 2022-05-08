@@ -1,0 +1,49 @@
+.test-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5%;
+  text-align: left;
+}
+
+  .test-card-header {
+    flex: 1;
+  }
+
+  .test-card-primary-content {
+    flex: 1;
+    display: flex;
+  }
+
+    .test-card-primary-left {
+      flex: 1;
+    }
+
+    .test-card-primary-right {
+      flex: 1;
+    }
+
+  .test-card-secondary-content {
+    flex: 1;
+    display: flex;
+  }
+
+    .test-card-secondary-left {
+      flex: 1;
+    }
+
+    .test-card-secondary-right {
+      flex: 1;
+    }
+
+  .test-card-tertiary-content {
+    flex: 1;
+    display: flex;
+  }
+
+    .test-card-tertiary-left {
+      flex: 1;
+    }
+
+    .test-card-tertiary-right {
+      flex: 1;
+    }
