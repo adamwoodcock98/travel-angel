@@ -38,8 +38,6 @@ const AddFlight = (props) => {
     isOutbound: flightData.isOutbound,
     user: userId,
   });
-  console.log(userId)
-  console.log(flight.user)
 
 
   const handleChange = (e) => {
@@ -55,7 +53,7 @@ const AddFlight = (props) => {
 
     let url;
     if (flightId) {
-      url = `http://localhost:8000/dashboard/flights/edit/${userId}`
+      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`
     } else {
       url = `http://localhost:8000/dashboard/flights/`
     }
@@ -77,8 +75,6 @@ const AddFlight = (props) => {
       isOutbound,
       user,
     } = flight;
-
-    console.log(user)
 
     const newFlight = {
       flightNumber,

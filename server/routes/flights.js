@@ -4,5 +4,6 @@ const FlightController = require("../controllers/flights.js");
 const flightsRouter = express.Router();
 flightsRouter.get("/:id", FlightController.Index);
 flightsRouter.post("/", FlightController.New);
+flightsRouter.post("/edit/:id", FlightController.Update);
 
 module.exports = flightsRouter;
