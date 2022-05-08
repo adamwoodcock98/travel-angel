@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import AddVisa from "./addVisa";
 import VisaCard from "./viewVisa";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Visas = ({ session }) => {
+  const { tripId } = useParams();
+
   const userId = session;
 
   const [open, setOpen] = useState(false);
@@ -14,12 +17,15 @@ const Visas = ({ session }) => {
     endDate: "",
     issuingCountry: "",
     user: userId,
+    trip: tripId,
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/dashboard/visas/${userId}`).then((res) => {
-      setVisa(res.data);
-    });
+    axios
+      .get(`http://localhost:8000/dashboard/visas/${userId}/${tripId}`)
+      .then((res) => {
+        setVisa(res.data);
+      });
   }, [visaArray]);
 
   const handleChange = (e) => {
@@ -41,7 +47,8 @@ const Visas = ({ session }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { visaNumber, startDate, endDate, issuingCountry, user } = visaArray;
+    const { visaNumber, startDate, endDate, issuingCountry, user, trip } =
+      visaArray;
 
     const newVisa = {
       visaNumber,
@@ -49,6 +56,7 @@ const Visas = ({ session }) => {
       endDate,
       issuingCountry,
       user,
+      trip,
     };
 
     await axios
@@ -61,6 +69,7 @@ const Visas = ({ session }) => {
           endDate: "",
           issuingCountry: "",
           user: userId,
+          trip: tripId,
         });
         handleClose();
       });

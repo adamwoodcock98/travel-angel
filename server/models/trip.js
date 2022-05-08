@@ -37,6 +37,12 @@ const tripSchema = new mongoose.Schema({
       ref: "Transfer",
     },
   ],
+  visas: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Visa",
+    },
+  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
