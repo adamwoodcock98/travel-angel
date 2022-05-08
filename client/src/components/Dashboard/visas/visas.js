@@ -64,6 +64,46 @@ const Visas = () => {
     });
   };
 
+  // LOADING SUBMIT BUTTON
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if(loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+    }
+  }, [loading])
+
+  const handleLoadingClick = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const { 
+      visaNumber,
+      startDate,
+      endDate,
+      issuingCountry} = visaArray;
+
+    const newVisa = { 
+      visaNumber,
+      startDate,
+      endDate,
+      issuingCountry}
+    
+    await axios
+      .post("http://localhost:8000/dashboard/visas/", newVisa)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setVisaArray({
+          visaNumber: "",
+          startDate: "",
+          endDate: "",
+          issuingCountry: "",
+        });
+      });
+    };
+
   if (visa.length) {
     return(
       <div className="visas">
@@ -72,7 +112,6 @@ const Visas = () => {
           </div>
           <div className="visas-content">
             <div className="visas-content-outbound">
-              <h1 className="visa-content-subheading"> BLOOPS </h1>
                 <VisaCard visa={visa} />
             </div>
           </div>
@@ -85,6 +124,8 @@ const Visas = () => {
         handleChange={handleChange}
         visa={visa}
         handleSubmit={handleSubmit}
+        handleLoadingClick={handleLoadingClick}
+        loading={loading}
       />
       </div>
 
@@ -99,6 +140,8 @@ const Visas = () => {
       handleChange={handleChange}
       visa={visa}
       handleSubmit={handleSubmit}
+      handleLoadingClick={handleLoadingClick}
+      loading={loading}
     />
     </div>
   } 

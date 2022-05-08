@@ -7,6 +7,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
+import SaveIcon from '@mui/icons-material/Save';
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function AddVisa({
   open,
@@ -15,6 +18,8 @@ export default function AddVisa({
   handleChange,
   visa,
   handleSubmit,
+  handleLoadingClick,
+  loading
 }) {
   return (
     <div>
@@ -83,7 +88,28 @@ export default function AddVisa({
           />  
         </DialogContent>
         <DialogActions>
+      
           <Button onClick={handleSubmit}>Save Visa Details</Button>
+          {/* <LoadingButton
+            disabled
+            // loading
+            // onclick={!loading ? handleLoadingClick : null}
+            onclick={handleLoadingClick}
+            loadingPosition="start"
+            startIcon={<SaveIcon />}
+            variant="outlined"
+          >
+            {loading ? 'Loading…' : 'Save and Add Another'} 
+          </LoadingButton> */}
+         
+          <LoadingButton
+            onClick={handleLoadingClick}
+            loading={loading}
+            loadingIndicator="Saved"
+          >
+            Save and Add Another
+          </LoadingButton>
+
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
