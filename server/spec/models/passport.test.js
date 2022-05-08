@@ -12,6 +12,7 @@ describe("Transfer model", () => {
   });
 
   const mockDate = new Date();
+  const mockUser = mongoose.Types.ObjectId();
   const passport = new Passport({
     passportNumber: "Passport Number",
     firstName: "First Name",
@@ -23,7 +24,7 @@ describe("Transfer model", () => {
     placeOfBirth: "Place of Birth",
     dateOfIssue: mockDate,
     dateOfExpiry: mockDate,
-    user: { name: "User Name" },
+    user: mockUser,
   });
 
   it("stores the passportNumber", () => {
@@ -67,6 +68,6 @@ describe("Transfer model", () => {
   });
 
   it("stores the passportNumber", () => {
-    expect(passport.user).toEqual({ name: "User Name" });
+    expect(passport.user).toEqual(mockUser);
   });
 });
