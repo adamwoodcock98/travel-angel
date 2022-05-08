@@ -6,16 +6,16 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import FlightTakeoffOutlined from "@mui/icons-material/FlightTakeoffOutlined";
 import HotelIcon from "@mui/icons-material/HotelOutlined";
-import CommuteIcon from '@mui/icons-material/Commute';
-import VpnLockOutlinedIcon from '@mui/icons-material/VpnLockOutlined';
+import CommuteIcon from "@mui/icons-material/Commute";
+import VpnLockOutlinedIcon from "@mui/icons-material/VpnLockOutlined";
 import "./dashboard.css";
 
 import { ViewAccommodation } from "./accommodation/accommodation";
-import Transfers from "./transfers/transfers"
-import Flights from "./flights/flights"
-import LocalParkingRoundedIcon from '@mui/icons-material/LocalParkingRounded';
-import Parking from "./parking/parking"
-import Visa from "./visas/visas"
+import Transfers from "./transfers/transfers";
+import Flights from "./flights/flights";
+import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
+import Parking from "./parking/parking";
+import Visa from "./visas/visas";
 
 function TabPanel(props) {
   //Tab panel is a specific tab on the tab bar, not the tab bar itself.
@@ -95,8 +95,11 @@ export default function VerticalTabs({ session }) {
           aria-label="parking"
           {...a11yProps(3)}
         />
-        <Tab icon={<VpnLockOutlinedIcon />} aria-label="visa" {...a11yProps(4)} />
-
+        <Tab
+          icon={<VpnLockOutlinedIcon />}
+          aria-label="visa"
+          {...a11yProps(4)}
+        />
       </Tabs>
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights session={session} />
@@ -110,8 +113,8 @@ export default function VerticalTabs({ session }) {
       <TabPanel className="tab-content" value={value} index={3}>
         <Parking session={session} />
       </TabPanel>
-      <TabPanel  className="tab-content"value={value} index={4}>
-        <Visa />
+      <TabPanel className="tab-content" value={value} index={4}>
+        <Visa session={session} />
       </TabPanel>
     </Box>
   );

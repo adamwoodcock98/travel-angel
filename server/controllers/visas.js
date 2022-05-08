@@ -2,7 +2,9 @@ const Visa = require("../models/visa.js");
 
 const VisaController = {
   Index: async (req, res) => {
-    const visas = await Visa.find();
+    const userId = req.params.id;
+    console.log(userId);
+    const visas = await Visa.find({ user: userId });
     res.json(visas);
   },
 
@@ -15,6 +17,7 @@ const VisaController = {
         startDate: data.startDate,
         endDate: data.endDate,
         issuingCountry: data.issuingCountry,
+        user: data.user,
       });
 
       await visa.save();
