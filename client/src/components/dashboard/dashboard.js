@@ -9,12 +9,14 @@ import HotelIcon from "@mui/icons-material/HotelOutlined";
 import CommuteIcon from "@mui/icons-material/Commute";
 import VpnLockOutlinedIcon from "@mui/icons-material/VpnLockOutlined";
 import "./dashboard.css";
-
-import { ViewAccommodation } from "./accommodation/accommodation";
 import Transfers from "./transfers/transfers";
 import Flights from "./flights/flights";
 import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
 import Parking from "./parking/parking";
+import CoronavirusOutlinedIcon from "@mui/icons-material/CoronavirusOutlined";
+import Covid from "./covid/covid";
+import "./dashboard.css";
+import { ViewAccommodation } from "./accommodation/accommodation";
 import Visa from "./visas/visas";
 
 function TabPanel(props) {
@@ -86,8 +88,7 @@ export default function VerticalTabs({ session }) {
           icon={<FlightTakeoffOutlined />}
           aria-label="plane"
           {...a11yProps(0)}
-        />{" "}
-        {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
+        />
         <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
         <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
         <Tab
@@ -98,6 +99,11 @@ export default function VerticalTabs({ session }) {
         <Tab
           icon={<VpnLockOutlinedIcon />}
           aria-label="visa"
+          {...a11yProps(4)}
+        />
+        <Tab
+          icon={<CoronavirusOutlinedIcon />}
+          aria-label="covid"
           {...a11yProps(4)}
         />
       </Tabs>
@@ -115,6 +121,9 @@ export default function VerticalTabs({ session }) {
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={4}>
         <Visa session={session} />
+      </TabPanel>
+      <TabPanel className="tab-content" value={value} index={5}>
+        <Covid />
       </TabPanel>
     </Box>
   );
