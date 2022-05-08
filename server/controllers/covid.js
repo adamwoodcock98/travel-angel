@@ -5,12 +5,17 @@ const Vaccinations = require("../models/vaccinations.js");
 const CovidController = {
   Index: async (req, res) => {
     try {
+      let vaccineToPass;
       const vaccinationData = await Vaccinations.find().populate("vaccineDoses");
-      console.log(vaccinationData)
-      const testData = await CovidTest.find();
-      console.log(testData);
+      if (vaccinationData) {
+        vaccineToPass = vaccinationData;
+      } else {
+        vaccineToPass = await new Vaccinations({vaccinationStatus: "Unvaccinated"}).save();
+      }
 
-      res.json({ vaccinations: vaccinationData, tests: testData });
+      const testData = await CovidTest.find();
+
+      res.json({ vaccinations: vaccineToPass, tests: testData });
       res.status(200).send();
     } catch(e) {
       console.log(e.message);

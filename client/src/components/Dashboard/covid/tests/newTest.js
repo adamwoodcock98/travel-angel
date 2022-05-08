@@ -20,7 +20,6 @@ const AddTest = (props) => {
   const type = props.type || "";
   const testType = props.testType || "";
   const testID = props.testID || null
-  console.log(testID)
 
 const [test, setTest] = useState({
     testType: testType,

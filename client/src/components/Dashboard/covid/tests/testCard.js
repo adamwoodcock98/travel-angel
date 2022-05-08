@@ -7,6 +7,7 @@ import AddTest from "./newTest";
 
 const TestCard = (props) => {
   const [open, setOpen] = useState(false);
+  const testData = props.testData;
 
   const handleOpen = () => {
     setOpen(true);
@@ -15,8 +16,6 @@ const TestCard = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const testData = props.testData;
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
