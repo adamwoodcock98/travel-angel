@@ -19,7 +19,7 @@ const FlightsController = {
       res.json({
         outbound: outboundFlight,
         inbound: inboundFlight,
-        user: req.session.user,
+        user: user,
       });
       res.status(200).send();
     } catch (e) {
@@ -56,7 +56,7 @@ const FlightsController = {
 
       trip.flights.push(flight);
 
-      trip.save();
+      await trip.save();
 
       res.status(200).send();
     } catch (err) {
