@@ -19,9 +19,8 @@ export const DisplayPassport = ({ passport }) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>
-        View your passport for {passport.country} (expires{" "}
-        {formatExpiryDate(passport.dateOfExpiry)} )
+      <Button onClick={handleOpen} id="pass-btn">
+        View your passport for&nbsp;<i>{passport.country}</i>&nbsp;(expires&nbsp;<i>{formatExpiryDate(passport.dateOfExpiry)}</i> )
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>

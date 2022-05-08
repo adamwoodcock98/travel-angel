@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Signature";
-  src: local("Signature"), url("../../assets/BrittanySignature.otf") format("opentype");
+  src: local("Signature"),
+    url("../../assets/BrittanySignature.otf") format("opentype");
 }
 
 .pass-card {
@@ -13,7 +14,7 @@
   font-family: "Courier-New", Courier, monospace;
   font-weight: 600;
   line-height: 25px;
-  background: url("http://localhost:3000/pass-bg.jpg") 0 0 / 530px 378px
+  background: url("http://localhost:3000/pass-bg-2.jpg") 0 0 / 530px 378px
     no-repeat;
   box-shadow: 0 2px 15px rgb(175, 175, 175);
   border-radius: 10px;
@@ -43,7 +44,8 @@
   font-family: "Signature", Arial, serif;
   text-transform: capitalize;
   float: right;
-  margin: -20px 50px 0 0;
+  font-size: 17px;
+  margin: -25px 50px 0 0;
 }
 
 .pass-country {
@@ -66,7 +68,6 @@
 }
 
 .pass-footer {
-
   width: 510px;
   text-transform: uppercase;
   font-family: "Courier-New", Courier, monospace;
@@ -78,7 +79,7 @@
   margin-top: -60px;
   box-shadow: 0 0 15px rgb(175, 175, 175);
   background: url("http://localhost:3000/pass-footer.jpg") 0 0 / 530px 100px
-  no-repeat;
+    no-repeat;
   padding: 10px;
 }
 
@@ -90,17 +91,33 @@
 }
 
 #pass-fab {
-  background-color: #EBA0AE;
+  background-color: #eba0ae;
   float: right;
-  margin-top: -49px;
+  margin-top: -60px;
 }
 
 #pass-fab:hover {
-  background-color: #64BAAA;
+  background-color: #f22771;
 }
 
 #pass-render {
   margin-top: 20px;
+  text-align: left;
+}
+
+#pass-btn {
+  background-color: white;
+  text-align: justify;
+  text-transform: capitalize;
+  height: 100px;
+  width: 100%;
+  border-bottom: 7px #f0f0f0 double;
+  color: grey;
+}
+
+#pass-btn:hover {
+  background-color: #fafafa;
+  color: #f272a1;
 }
 
 span {
@@ -112,6 +129,13 @@ img {
   height: auto;
   max-height: 300px;
   padding: 20px 5px 30px 15px;
+}
+
+h1 {
+  text-align: center;
+  color: #64baaa;
+  letter-spacing: 2px;
+  border-bottom: 7px double #f0f0f0;
 }
 
 h5 {
