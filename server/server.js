@@ -8,6 +8,7 @@ const accommodationRouter = require("./routes/accommodation.js");
 const transferRouter = require("./routes/transfers.js");
 const parkingRouter = require("./routes/parking.js");
 const tripRouter = require("./routes/trips.js");
+const visaRouter = require("./routes/visas.js");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -57,6 +58,7 @@ app.use("/dashboard/accommodation", accommodationRouter);
 app.use("/dashboard/transfers", transferRouter);
 app.use("/dashboard/parking", parkingRouter);
 app.use("/trips", tripRouter);
+app.use("/dashboard/visas", visaRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);
