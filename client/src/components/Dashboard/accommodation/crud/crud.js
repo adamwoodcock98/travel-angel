@@ -9,7 +9,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import "./crud.css"
-import AddFlight from "../../addFlight"
+import AddAccommodation from "../addAccommodation"
 
 const StyledMenu = styled((props) => (
 
@@ -54,7 +54,7 @@ const StyledMenu = styled((props) => (
 }));
 
 const CrudMenu = (props) => {
-  const flightData = props.flightData;
+  const accommodationData = props.accommodationData;
   const userId = props.userId;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
@@ -70,7 +70,6 @@ const CrudMenu = (props) => {
 
   const handleOpen = () => {
     handleCrudClose();
-    console.log("handle open")
     setOpen(true);
   };
 
@@ -113,14 +112,6 @@ const CrudMenu = (props) => {
           Delete
         </MenuItem>
       </StyledMenu>
-        <AddFlight 
-          open={open}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          flightData={flightData}
-          flightId={flightData._id}
-          user={userId}
-        />
     </div>
   );
 }
