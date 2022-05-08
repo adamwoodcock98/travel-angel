@@ -105,33 +105,38 @@
   text-align: left;
 }
 
-#pass-btn {
+#pass-btn, #pass-expired-btn {
   background-color: white;
   text-align: justify;
   text-transform: capitalize;
   height: 100px;
   width: 100%;
-  border-bottom: 7px #f0f0f0 double;
+  border-bottom: 7px #f8f8f8 double;
   color: grey;
 }
 
-#pass-btn:hover {
+#pass-expired-btn {
+  color:#dadada;
+  border-bottom: 7px #f9f9f9 double;
+}
+
+#pass-btn:hover, #pass-expired-btn:hover {
   background-color: #fafafa;
   color: #f272a1;
 }
 
-span {
-  overflow: hidden;
+#pass-expired-btn:hover {
+  color:#ffb9d3;;
 }
 
-img {
+img.pass-img {
   width: 200px;
   height: auto;
   max-height: 300px;
   padding: 20px 5px 30px 15px;
 }
 
-h1 {
+h1.pass-h1 {
   text-align: center;
   color: #64baaa;
   letter-spacing: 2px;

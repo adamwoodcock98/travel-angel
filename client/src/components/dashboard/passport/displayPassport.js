@@ -16,12 +16,22 @@ export const DisplayPassport = ({ passport }) => {
   const formatPassDate = (date) => moment(date).format("DD MMM YY");
   const formatFooterDate = (date) => moment(date).format("DDMMYY");
   const formatExpiryDate = (date) => moment(date, "YYYYMMDD").fromNow();
+  const expired = () => moment().diff(passport.dateOfExpiry) > 0;
 
   return (
     <div>
-      <Button onClick={handleOpen} id="pass-btn">
-        View your passport for&nbsp;<i>{passport.country}</i>&nbsp;(expires&nbsp;<i>{formatExpiryDate(passport.dateOfExpiry)}</i> )
-      </Button>
+      {!expired() && (
+        <Button onClick={handleOpen} id="pass-btn">
+          View your passport for&nbsp;<i>{passport.country}</i>
+          &nbsp;(expires&nbsp;<i>{formatExpiryDate(passport.dateOfExpiry)}</i> )
+        </Button>
+      )}
+      {expired() && (
+        <Button onClick={handleOpen} id="pass-expired-btn">
+          View your passport for&nbsp;<i>{passport.country}</i>
+          &nbsp;(expired&nbsp;<i>{formatExpiryDate(passport.dateOfExpiry)}</i> )
+        </Button>
+      )}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <div className="pass-card">
@@ -32,7 +42,7 @@ export const DisplayPassport = ({ passport }) => {
                 <br />
                 Passeport
               </div>
-              <img alt="Passport" src="http://localhost:3000/pass-pic.gif" />
+              <img className="pass-img" alt="Passport" src="http://localhost:3000/pass-pic.gif" />
             </div>
             <div className="pass-contents">
               <div className="pass-type">

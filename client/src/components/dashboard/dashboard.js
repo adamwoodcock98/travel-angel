@@ -80,35 +80,31 @@ export default function VerticalTabs() {
         textColor="secondary"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
-        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(0)} />
-        <Tab
-          icon={<FlightTakeoff />}
-          aria-label="plane"
-          {...a11yProps(1)}
-        />{" "}
-        {/* ... is spreading out all key-value pairs (the id and aria controls from the a11yProps function component*/}
-        <Tab icon={<Hotel />} aria-label="hotel" {...a11yProps(2)} />
-        <Tab icon={<Commute />} aria-label="transfer" {...a11yProps(3)} />
+        <Tab icon={<FlightTakeoff />} aria-label="plane" {...a11yProps(0)} />
+        <Tab icon={<Hotel />} aria-label="hotel" {...a11yProps(1)} />
+        <Tab icon={<Commute />} aria-label="transfer" {...a11yProps(2)} />
         <Tab
           icon={<LocalParkingRounded />}
           aria-label="parking"
-          {...a11yProps(4)}
+          {...a11yProps(3)}
         />
+        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(4)} />
       </Tabs>
+
       <TabPanel className="tab-content" value={value} index={0}>
-        <Passport />
-      </TabPanel>
-      <TabPanel className="tab-content" value={value} index={1}>
         <Flights />
       </TabPanel>
-      <TabPanel className="tab-content" value={value} index={2}>
+      <TabPanel className="tab-content" value={value} index={1}>
         <ViewAccommodation />
       </TabPanel>
-      <TabPanel className="tab-content" value={value} index={3}>
+      <TabPanel className="tab-content" value={value} index={2}>
         <Transfers />
       </TabPanel>
-      <TabPanel className="tab-content" value={value} index={4}>
+      <TabPanel className="tab-content" value={value} index={3}>
         <Parking />
+      </TabPanel>
+      <TabPanel className="tab-content" value={value} index={4}>
+        <Passport />
       </TabPanel>
     </Box>
   );

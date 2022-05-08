@@ -91,8 +91,7 @@ const Passport = () => {
   if (displayState.length) {
     return (
       <div id="Passport">
-        <div id="pass-header">
-        <h1>Passport</h1>
+        <h1 className="pass-h1">Passport</h1>
         <AddPassport
           open={open}
           handleOpen={handleOpen}
@@ -101,10 +100,9 @@ const Passport = () => {
           passport={passport}
           onSubmit={onSubmit}
         />
-        </div>
         <div id="pass-render">
          {passportRender}
-        </div>
+         </div>
       </div>
     );
   } else {
