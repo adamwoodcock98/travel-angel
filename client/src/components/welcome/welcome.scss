@@ -38,25 +38,23 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   padding: 1rem;
   transition: 0.3s;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.6);
   opacity: 1;
   color: #64baaa;
   z-index: 4;
   width: 30vw;
-  // letter-spacing: 0.4rem;
   border: none;
-  // font-size: 2rem;
   font-weight: normal;
   letter-spacing: 0.2ch;
   text-transform: uppercase;
 
   &:hover {
     opacity: 0.5;
-    color: #fff;
-    background-color: rgb(16, 16, 16);
+    color: rgb(255, 255, 255);
+    background-color: #ac558954;
   }
 
   &:focus {

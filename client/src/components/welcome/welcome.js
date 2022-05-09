@@ -3,39 +3,35 @@ import "./welcome.scss";
 import { Signup } from "../authentication/authentication";
 const slides = [
   {
-    title: "Machu Picchu",
-    subtitle: "Peru",
+    title: "Travel Angel",
+    subtitle: "",
     description: "Adventure is never far away",
-    image:
-      "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    image: "/slides/slide-2.jpg",
   },
   {
-    title: "Chamonix",
-    subtitle: "France",
-    description: "Let your dreams come true",
-    image:
-      "https://images.pexels.com/photos/11054377/pexels-photo-11054377.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    title: "Store Your",
+    subtitle: "Details",
+    description: "In a safe & secure environment",
+    image: "/slides/slide-1.jpg",
+  },
+
+  {
+    title: "Upload &",
+    subtitle: "Download",
+    description: "Your documents, plane tickets and booking confirmations",
+    image: "/slides/slide-4.jpg",
   },
   {
-    title: "Mimisa Rocks",
-    subtitle: "Australia",
-    description: "A piece of heaven",
-    image:
-      "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+    title: "View Your",
+    subtitle: "Trips",
+    description: "Whether it is upcoming, in progress or a thing in a past.",
+    image: "/slides/slide-5.jpg",
   },
   {
-    title: "Four",
-    subtitle: "Australia",
-    description: "A piece of heaven",
-    image:
-      "https://images.pexels.com/photos/1076885/pexels-photo-1076885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    title: "Five",
-    subtitle: "Australia",
-    description: "A piece of heaven",
-    image:
-      "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    title: "Plan Your",
+    subtitle: "Holidays",
+    description: "Have everything you need in one place",
+    image: "/slides/slide-3.jpg",
   },
 ];
 
