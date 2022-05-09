@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddParking from "./addParking";
-import ParkingCard from "./viewParking";
+import ParkingCard from "./viewParking/viewParking";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import { useParams } from "react-router-dom";
@@ -63,7 +63,7 @@ const Parking = ({ session }) => {
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} userId={userId} />
+        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} />
       );
     });
 
@@ -84,12 +84,17 @@ const Parking = ({ session }) => {
             parkingData={newParking}
             parkingId={null}
             userId={userId}
+            tripId={tripId}
           />
         </div>
       </div>
     );
   } else {
     return (
+      <>
+      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <AddParking
         open={open}
         handleOpen={handleOpen}
@@ -97,7 +102,9 @@ const Parking = ({ session }) => {
         parkingData={newParking}
         parkingId={null}
         userId={userId}
+        tripId={tripId}
       />
+      </>
     );
   }
 };

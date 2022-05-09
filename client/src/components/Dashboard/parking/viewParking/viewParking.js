@@ -6,6 +6,7 @@ import CrudMenu from "./crud/crud"
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
   const userId = props.userId
+  const tripId = props.tripId
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
@@ -46,7 +47,7 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
-      <CrudMenu userId={userId} parkingData={parkingData} />
+      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} />
     </div>
   )
 

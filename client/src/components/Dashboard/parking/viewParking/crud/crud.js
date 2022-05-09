@@ -9,7 +9,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import "./crud.css"
-import AddParking from "../../addParking/addParking"
+import AddParking from "../../addParking"
 
 const StyledMenu = styled((props) => (
 

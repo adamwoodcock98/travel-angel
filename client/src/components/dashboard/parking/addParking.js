@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const AddParking = (props) => {
   const userId = props.userId;
+  const tripId = props.tripId;
   const open = props.open;
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
@@ -34,6 +35,7 @@ const AddParking = (props) => {
     stateCounty: parkingData.address.stateCounty,
     countryCode: parkingData.address.countryCode,
     user: userId,
+    trip: tripId,
   });
 
   const handleChange = (e) => {
@@ -93,6 +95,7 @@ const AddParking = (props) => {
       stateCounty,
       countryCode,
       user: userId,
+      trip: tripId,
     };
 
 
