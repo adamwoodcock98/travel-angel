@@ -18,8 +18,10 @@ const TransferController = {
         trip: tripId,
       }).populate("pickupAddress dropoffAddress");
       res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
+      res.status(200).send();
     } catch (e) {
       console.log(e.message);
+      res.status(500).send();
     }
   },
 

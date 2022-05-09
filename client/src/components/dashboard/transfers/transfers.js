@@ -4,6 +4,8 @@ import axios from "axios";
 import { OutboundTransferCard } from "./outboundTransferCard";
 import { InboundTransferCard } from "./inboundTransferCard";
 import { useParams } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
@@ -160,7 +162,7 @@ const Transfers = ({ session }) => {
           setInboundTransfer(inbound);
         });
     }
-  }, [transfer]);
+  }, []);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
@@ -179,6 +181,9 @@ const Transfers = ({ session }) => {
           </div>
         </div>
         <div>
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddTransfer
             open={open}
             handleOpen={handleOpen}
@@ -195,6 +200,9 @@ const Transfers = ({ session }) => {
   } else {
     return (
       <div>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+        </Fab>
         <AddTransfer
           open={open}
           handleOpen={handleOpen}

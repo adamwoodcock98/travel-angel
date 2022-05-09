@@ -22,9 +22,6 @@ export default function AddTransfer({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        Add Transfer
-      </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Transfer</DialogTitle>
         <DialogContent>
