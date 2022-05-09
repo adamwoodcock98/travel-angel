@@ -131,6 +131,7 @@ const Flights = ({ session }) => {
             flightData={flight}
             flightId={null}
             user={userId}
+            tripId={tripId}
           />
         </div>
       </div>
@@ -148,6 +149,7 @@ const Flights = ({ session }) => {
           flightData={flight}
           flightId={null}
           user={userId}
+          tripId={tripId}
         />
         {alertMessage && (
           <Alerts

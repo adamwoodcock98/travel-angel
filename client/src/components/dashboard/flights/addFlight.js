@@ -16,6 +16,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 const AddFlight = (props) => {
   const flightData = props.flightData;
+  const tripId = props.tripId;
   const flightId = props.flightId;
   const open = props.open;
   const userId = props.user;
@@ -36,6 +37,7 @@ const AddFlight = (props) => {
     bookingReference: flightData.bookingReference,
     isOutbound: flightData.isOutbound,
     user: userId,
+    trip: tripId,
   });
 
 
@@ -91,6 +93,7 @@ const AddFlight = (props) => {
       bookingReference,
       isOutbound,
       user,
+      trip: tripId,
     };
 
     axios.post(url, newFlight).then((res) => {
@@ -112,7 +115,6 @@ const AddFlight = (props) => {
         isOutbound: "",
         user: userId,
       })
-      window.location = "/";
     });
   };
 
