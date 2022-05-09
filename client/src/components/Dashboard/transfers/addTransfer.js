@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import LoadingButton from '@mui/lab/LoadingButton';
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function AddTransfer({
   open,
@@ -25,9 +27,9 @@ export default function AddTransfer({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        Add Transfer
-      </Button>
+      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Transfer</DialogTitle>
         <DialogContent>
