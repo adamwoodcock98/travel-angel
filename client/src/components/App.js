@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./navBar/navBar";
 import VerticalTabs from "./dashboard/dashboard";
-import { Authentication } from "./authentication/authentication";
 import Trips from "./trips/trips";
 import { Welcome } from "./welcome/welcome"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -39,9 +38,8 @@ const App = () => {
   } else {
     return (
       <div>
-        <NavBar />
+        <NavBar handleLogIn={handleLogIn} />
         <Welcome />
-        <Authentication handleLogIn={handleLogIn} />
       </div>
     );
   }

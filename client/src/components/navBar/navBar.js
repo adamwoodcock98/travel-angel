@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { LogOut } from "../authentication/logOut/logOut";
 import { Profile } from "./profile/profile"
 import { Settings } from "./profile/settings"
+import { Authentication } from "../authentication/authentication";
 import {
   AppBar,
   Box,
@@ -15,7 +16,7 @@ import {
 } from "@mui/material";
 import axios from "axios"
 
-export default function NavBar({ handleLogOut, session }) {
+export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({})
 
@@ -57,7 +58,8 @@ export default function NavBar({ handleLogOut, session }) {
 
             <Grid container justifyContent="flex-end">
             <div>
-                <Typography
+              {session && (
+                  <Typography
                   id="nav-user"
                   aria-label="nav-user"
                   style={{ flex: 1 }}
@@ -66,6 +68,10 @@ export default function NavBar({ handleLogOut, session }) {
                 >
                   {user.firstName} {user.lastName}
                 </Typography>
+              )}
+              {!session && (
+                <Authentication handleLogIn={handleLogIn} />
+              )}
               </div>
               <div>
                 <Box sx={{ flexGrow: 0 }}>
