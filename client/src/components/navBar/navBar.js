@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LogOut } from "../authentication/logOut/logOut";
+import { Profile } from "./profile/profile"
 import {
   AppBar,
   Box,
@@ -24,7 +25,6 @@ export default function NavBar({ handleLogOut }) {
   const handleCloseMenu = () => {
     setOpen(false);
   };
-
   return (
     <div className="navbar">
       <Box sx={{ flexGrow: 1 }}>
@@ -85,7 +85,7 @@ export default function NavBar({ handleLogOut }) {
                   >
                     <MenuItem>
                       <IconButton>
-                        <Typography textAlign="center">Account</Typography>
+                        <Typography textAlign="center"><Profile /></Typography>
                       </IconButton>
                     </MenuItem>
 
