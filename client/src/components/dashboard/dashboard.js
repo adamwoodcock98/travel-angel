@@ -1,22 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import FlightTakeoffOutlined from "@mui/icons-material/FlightTakeoffOutlined";
-import HotelIcon from "@mui/icons-material/HotelOutlined";
-import CommuteIcon from "@mui/icons-material/Commute";
-import VpnLockOutlinedIcon from "@mui/icons-material/VpnLockOutlined";
-import "./dashboard.css";
-import Transfers from "./transfers/transfers";
-import Flights from "./flights/flights";
-import LocalParkingRoundedIcon from "@mui/icons-material/LocalParkingRounded";
-import Parking from "./parking/parking";
-import CoronavirusOutlinedIcon from "@mui/icons-material/CoronavirusOutlined";
-import Covid from "./covid/covid";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
+import {
+  FlightTakeoff,
+  Contacts,
+  Hotel,
+  Commute,
+  LocalParkingRounded,
+  VpnLockOutlined,
+  CoronavirusOutlined,
+} from "@mui/icons-material";
 import "./dashboard.css";
 import { ViewAccommodation } from "./accommodation/accommodation";
+import Transfers from "./transfers/transfers";
+import Flights from "./flights/flights";
+import Passport from "./passport/passport";
+import Parking from "./parking/parking";
+import Covid from "./covid/covid";
 import Visa from "./visas/visas";
 
 function TabPanel(props) {
@@ -84,6 +84,23 @@ export default function VerticalTabs({ session }) {
         textColor="secondary"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
+<<<<<<< HEAD
+        <Tab icon={<FlightTakeoff />} aria-label="plane" {...a11yProps(0)} />
+        <Tab icon={<Hotel />} aria-label="hotel" {...a11yProps(1)} />
+        <Tab icon={<Commute />} aria-label="transfer" {...a11yProps(2)} />
+        <Tab
+          icon={<LocalParkingRounded />}
+          aria-label="parking"
+          {...a11yProps(3)}
+        />
+        <Tab icon={<VpnLockOutlined />} aria-label="visa" {...a11yProps(4)} />
+        <Tab
+          icon={<CoronavirusOutlined />}
+          aria-label="covid"
+          {...a11yProps(5)}
+        />
+        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(6)} />
+=======
         <Tab
           icon={<FlightTakeoffOutlined />}
           aria-label="plane"
@@ -106,7 +123,9 @@ export default function VerticalTabs({ session }) {
           aria-label="covid"
           {...a11yProps(4)}
         />
+>>>>>>> origin/main
       </Tabs>
+
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights session={session} />
       </TabPanel>
@@ -120,10 +139,17 @@ export default function VerticalTabs({ session }) {
         <Parking session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={4}>
+<<<<<<< HEAD
+        <Visa />
+=======
         <Visa session={session} />
+>>>>>>> origin/main
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={5}>
         <Covid />
+      </TabPanel>
+      <TabPanel className="tab-content" value={value} index={6}>
+        <Passport session={session} />
       </TabPanel>
     </Box>
   );

@@ -30,6 +30,7 @@ const UsersController = {
         bcrypt.compare(password, user.password).then((result) => {
           if (result) {
             req.session.user = user;
+            console.log(req.session.user);
             res.json({
               msg: `Welcome back, ${user.firstName}!`,
               type: "success",
