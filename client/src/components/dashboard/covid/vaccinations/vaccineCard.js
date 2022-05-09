@@ -20,7 +20,7 @@ const VaccineCard = (props) => {
 
   const dosesArray = [];
   vaccinationsData.vaccineDoses.forEach(dose => {
-    dosesArray.push(<DosePane doseData={dose} />)
+    dosesArray.push(<DosePane doseData={dose} vaccinationsID={vaccinationsData._id} />)
   })
 
   return(
