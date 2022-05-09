@@ -39,6 +39,7 @@ const slides = [
         "https://images.unsplash.com/photo-1579130781921-76e18892b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
     }
   ];
+
   function useTilt(active) {
     const ref = React.useRef(null);
   
@@ -140,14 +141,16 @@ export const Welcome = () => {
   const [state, dispatch] = React.useReducer(slidesReducer, initialState);
   return ( 
    <div id="welcome-container">
-    <div className="slides">
-      <button onClick={() => dispatch({ type: "PREV" })}>‹</button>
+     <div id="welcome-slide-show">
+      <div className="slides">
+        <button onClick={() => dispatch({ type: "PREV" })}>‹</button>
 
-      {[...slides, ...slides, ...slides].map((slide, i) => {
-        let offset = slides.length + (state.slideIndex - i);
-        return <Slide slide={slide} offset={offset} key={i} />;
-      })}
-      <button onClick={() => dispatch({ type: "NEXT" })}>›</button>
+        {[...slides, ...slides, ...slides].map((slide, i) => {
+          let offset = slides.length + (state.slideIndex - i);
+          return <Slide slide={slide} offset={offset} key={i} />;
+        })}
+        <button onClick={() => dispatch({ type: "NEXT" })}>›</button>
+      </div>
     </div>
    </div>
  )
