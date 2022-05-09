@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LogOut } from "../authentication/logOut/logOut";
 import { Profile } from "./profile/profile"
+import { Settings } from "./profile/settings"
 import {
   AppBar,
   Box,
@@ -15,7 +16,7 @@ import {
   Grid,
 } from "@mui/material";
 
-export default function NavBar({ handleLogOut }) {
+export default function NavBar({ handleLogOut, session }) {
   const [open, setOpen] = useState(false);
 
   const handleOpenMenu = () => {
@@ -87,13 +88,13 @@ export default function NavBar({ handleLogOut }) {
                   >
                     <MenuItem>
                       <IconButton>
-                        <Typography textAlign="center"><Profile /></Typography>
+                        <Typography textAlign="center"><Profile session={session} /></Typography>
                       </IconButton>
                     </MenuItem>
 
                     <MenuItem>
                       <IconButton>
-                        <Typography textAlign="center">Settings</Typography>
+                        <Typography textAlign="center"><Settings session={session} /></Typography>
                       </IconButton>
                     </MenuItem>
 
