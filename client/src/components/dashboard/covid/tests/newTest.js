@@ -17,21 +17,26 @@ import InputLabel from "@mui/material/InputLabel";
 const AddTest = (props) => {
   const open = props.open
   const handleClose = props.handleClose
-  const type = props.type || "";
-  const testType = props.testType || "";
-  const testID = props.testID || null
+  const testData = props.testData;
+  const testID = props.testID;
+  const handleOpen = props.handleOpen;
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const entryType = props.entryType;
+
+ 
 
 const [test, setTest] = useState({
-    testType: testType,
-    entryType: type,
-    result: "",
-    testDate: "",
-    testFromDate: "",
-    resultByDate: "",
-    validToDate: "",
-    testNumber: "",
-    testCountry: "",
-    testProvider: "",
+    testType: testData.testType,
+    entryType: entryType,
+    result: testData.result,
+    testDate: testData.testDate,
+    testFromDate: testData.testFromDate,
+    resultByDate: testData.resultByDate,
+    validToDate: testData.validToDate,
+    testNumber: testData.testNumber,
+    testCountry: testData.testCountry,
+    testProvider: testData.testProvider,
   });
 
   const handleChange = (e) => {
@@ -47,10 +52,9 @@ const [test, setTest] = useState({
 
     const { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider } = test;
 
-    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider, testID };
+    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider, testID, user: userId };
     
     let url;
-
     if (testID) {
       url = "http://localhost:8000/dashboard/covid/test/edit"
     } else {
@@ -60,8 +64,22 @@ const [test, setTest] = useState({
       .post(url, newTest)
       .then((res) => {
         handleClose();
+        setTest({
+          testType: "",
+          entryType: "",
+          result: "",
+          testDate: "",
+          testFromDate: "",
+          resultByDate: "",
+          validToDate: "",
+          testNumber: "",
+          testCountry: "",
+          testProvider: "",
+        });
       });
   };
+
+  console.log("entry type: ", test.entryType)
 
   return (
     <div>
