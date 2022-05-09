@@ -84,7 +84,6 @@ export default function VerticalTabs({ session }) {
         textColor="secondary"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
-<<<<<<< HEAD
         <Tab icon={<FlightTakeoff />} aria-label="plane" {...a11yProps(0)} />
         <Tab icon={<Hotel />} aria-label="hotel" {...a11yProps(1)} />
         <Tab icon={<Commute />} aria-label="transfer" {...a11yProps(2)} />
@@ -100,30 +99,6 @@ export default function VerticalTabs({ session }) {
           {...a11yProps(5)}
         />
         <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(6)} />
-=======
-        <Tab
-          icon={<FlightTakeoffOutlined />}
-          aria-label="plane"
-          {...a11yProps(0)}
-        />
-        <Tab icon={<HotelIcon />} aria-label="hotel" {...a11yProps(1)} />
-        <Tab icon={<CommuteIcon />} aria-label="transfer" {...a11yProps(2)} />
-        <Tab
-          icon={<LocalParkingRoundedIcon />}
-          aria-label="parking"
-          {...a11yProps(3)}
-        />
-        <Tab
-          icon={<VpnLockOutlinedIcon />}
-          aria-label="visa"
-          {...a11yProps(4)}
-        />
-        <Tab
-          icon={<CoronavirusOutlinedIcon />}
-          aria-label="covid"
-          {...a11yProps(4)}
-        />
->>>>>>> origin/main
       </Tabs>
 
       <TabPanel className="tab-content" value={value} index={0}>
@@ -139,11 +114,7 @@ export default function VerticalTabs({ session }) {
         <Parking session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={4}>
-<<<<<<< HEAD
-        <Visa />
-=======
         <Visa session={session} />
->>>>>>> origin/main
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={5}>
         <Covid />
