@@ -99,7 +99,9 @@ const CovidController = {
   },
 
   DeleteVaccination: async (req, res) => {
+    const id = req.params.doseId;
 
+    await VaccineDose.deleteOne({ _id: id });
   },
 
   UpdateTest: async (req, res) => {
