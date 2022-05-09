@@ -56,6 +56,15 @@ const UsersController = {
     }
     res.json({ msg: "You have logged out successfully!", type: "success" });
   },
+
+  Profile: (req, res) => {
+    const userId = req.params.id
+    User.findOne({ _id: userId }).then((user) => {
+      res.json({
+        user: user
+      });
+    })
+  },
 };
 
 module.exports = UsersController;
