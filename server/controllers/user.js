@@ -75,12 +75,27 @@ const UsersController = {
     })
   },
 
-  Save: (req, res) => {
+  Save: async (req, res) => {
     const userId = req.params.id
-    User.findOne({ _id: userId }).then((user) => {
-      res.json({
-        user: user
-      });
+    const userDetails = req.body;
+    const password = req.body.password;
+    const hashedPassword = await bcrypt.hash(password, 10)
+    await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $set: {
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
+          email: userDetails.email,
+          password: hashedPassword,
+          profilePicture: userDetails.profilePicture,
+        },
+      }, {
+        new: true
+      })
+    await res.json({
+      msg: "Congrats! You've updated your details!",
+      type: "success",
     })
   },
 };
