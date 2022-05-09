@@ -135,6 +135,19 @@ const CovidController = {
     }
 
   },
+
+  DeleteTest: async (req, res) => {
+    const id = req.params.id;
+
+    try {
+      await CovidTest.deleteOne({ _id: id });
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+      res.status(200).send();
+    }
+  }
 };
 
 module.exports = CovidController;
