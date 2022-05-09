@@ -9,7 +9,7 @@ export const DisplayProfile = ({ user }) => {
       <DialogContent>
         <img alt="Profile" src={user.profilePicture} />
           <DialogContentText>
-            Email: {user.email}
+            E-mail: {user.email}
           </DialogContentText>
       </DialogContent>
     </div>
