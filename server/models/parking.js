@@ -25,6 +25,11 @@ const parkingSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Trip",
+    required: true,
+  },
 });
 
 const Parking = mongoose.model("Parking", parkingSchema);

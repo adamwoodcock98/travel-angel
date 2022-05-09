@@ -29,6 +29,11 @@ const transferSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Trip",
+    required: true,
+  },
 });
 
 const Transfer = mongoose.model("Transfer", transferSchema);

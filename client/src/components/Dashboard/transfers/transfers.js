@@ -3,8 +3,11 @@ import AddTransfer from "./addTransfer";
 import axios from "axios";
 import { OutboundTransferCard } from "./outboundTransferCard";
 import { InboundTransferCard } from "./inboundTransferCard";
+import { useParams } from "react-router-dom";
 
 const Transfers = ({ session }) => {
+  const { tripId } = useParams();
+
   const userId = session;
 
   const [open, setOpen] = useState(false);
@@ -36,6 +39,7 @@ const Transfers = ({ session }) => {
     contactNumber: "",
     bookingReference: "",
     user: userId,
+    trip: tripId,
   });
 
   const handlePickupChange = (e) => {
@@ -89,9 +93,8 @@ const Transfers = ({ session }) => {
       contactNumber,
       bookingReference,
       user,
+      trip,
     } = transfer;
-
-    console.log("here we go", user);
 
     const newTransfer = {
       pickupTime,
@@ -103,11 +106,42 @@ const Transfers = ({ session }) => {
       contactNumber,
       bookingReference,
       user,
+      trip,
     };
 
     axios
       .post("http://localhost:8000/dashboard/transfers/", newTransfer)
       .then(() => {
+        setTransfer({
+          pickupTime: "",
+          dropoffTime: "",
+          pickupAddress: {
+            buildingNumber: "",
+            buildingName: "",
+            addressLine1: "",
+            addressLine2: "",
+            city: "",
+            postalCode: "",
+            stateCounty: "",
+            countryCode: "",
+          },
+          dropoffAddress: {
+            buildingNumber: "",
+            buildingName: "",
+            addressLine1: "",
+            addressLine2: "",
+            city: "",
+            postalCode: "",
+            stateCounty: "",
+            countryCode: "",
+          },
+          isOutbound: "",
+          company: "",
+          contactNumber: "",
+          bookingReference: "",
+          user: userId,
+          trip: tripId,
+        });
         handleClose();
       });
   };
@@ -117,9 +151,8 @@ const Transfers = ({ session }) => {
 
   useEffect(() => {
     if (userId !== "null") {
-      console.log("userId", userId);
       axios
-        .get(`http://localhost:8000/dashboard/transfers/${userId}`)
+        .get(`http://localhost:8000/dashboard/transfers/${userId}/${tripId}`)
         .then((res) => {
           const outbound = res.data.outbound;
           const inbound = res.data.inbound;

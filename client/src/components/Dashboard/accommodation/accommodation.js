@@ -2,10 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
+import { useParams } from "react-router-dom";
 import "./accommodation.css";
 
 export const ViewAccommodation = ({ session }) => {
+  const { tripId } = useParams();
+
   const userId = session;
+
   const [accommodation, setAccommodation] = useState([]);
   const [open, setOpen] = useState(false);
   const [accommodationArray, setAccommodationArray] = useState({
@@ -25,12 +29,15 @@ export const ViewAccommodation = ({ session }) => {
     stateCounty: "",
     countryCode: "",
     user: userId,
+    trip: tripId,
   });
 
   useEffect(() => {
     if (userId !== "null") {
       axios
-        .get(`http://localhost:8000/dashboard/accommodation/${userId}`)
+        .get(
+          `http://localhost:8000/dashboard/accommodation/${userId}/${tripId}`
+        )
         .then((res) => {
           setAccommodation(res.data.accommodation);
         });
@@ -73,6 +80,7 @@ export const ViewAccommodation = ({ session }) => {
       stateCounty,
       countryCode,
       user,
+      trip,
     } = accommodationArray;
 
     const newAccommodation = {
@@ -92,6 +100,7 @@ export const ViewAccommodation = ({ session }) => {
       stateCounty,
       countryCode,
       user,
+      trip,
     };
 
     await axios
@@ -115,6 +124,7 @@ export const ViewAccommodation = ({ session }) => {
           stateCounty: "",
           countryCode: "",
           user: userId,
+          trip: tripId,
         });
         handleClose();
       });
