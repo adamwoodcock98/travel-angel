@@ -29,13 +29,11 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
     setOpen(false);
   };
 
-  // useEffect(() => {
-  //   if (session !== "null") {
-  //     axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
-  //       setUser(res.data.user);
-  //     });
-  //   }
-  // }, [user]);
+  const getUser = () => {
+    axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
+      setUser(res.data.user);
+    });
+  };
 
   return (
     <div className="navbar">
@@ -74,6 +72,7 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
               </div>
               {session && (
                 <div>
+                  {getUser()}
                   <Box sx={{ flexGrow: 0 }}>
                     <IconButton
                       className="avatar"
