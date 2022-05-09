@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AddParking from "./addParking";
+import AddParking from "./addParking/addParking";
 import ParkingCard from "./viewParking";
 
 const Parking = ({ session }) => {
