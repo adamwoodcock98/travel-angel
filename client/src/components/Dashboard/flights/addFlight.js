@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function AddFlight({
   open,
@@ -20,6 +21,8 @@ export default function AddFlight({
   handleChange,
   flight,
   onSubmit,
+  handleLoadingClick,
+  loading
 }) {
   return (
     <div>
@@ -206,8 +209,17 @@ export default function AddFlight({
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          
           <Button onClick={onSubmit}>Save Flight Details</Button>
+          <LoadingButton
+            onClick={handleLoadingClick}
+            loading={loading}
+            loadingIndicator="Saved"
+          > 
+            Save and Add Another
+          </LoadingButton>
+          <Button onClick={handleClose}>Cancel</Button>
+          
         </DialogActions>
       </Dialog>
     </div>

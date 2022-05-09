@@ -212,7 +212,7 @@ export const ViewAccommodation = ({ session }) => {
             accommodation={accommodationArray}
             handleSubmit={handleSubmit}
             handleLoadingClick={handleLoadingClick}
-        loading={loading}
+            loading={loading}
           />
         </div>
         <div className="body">

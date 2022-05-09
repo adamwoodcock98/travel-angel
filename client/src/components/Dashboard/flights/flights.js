@@ -136,6 +136,82 @@ const Flights = ({ session }) => {
       });
   }, []);
 
+  // LOADING SUBMIT BUTTON
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if(loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [loading])
+
+  const handleLoadingClick = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    } = flight;
+
+    const newFlight = {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    };
+
+    await axios
+      .post("http://localhost:8000/dashboard/flights/", newFlight)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setFlight({
+          flightNumber: "",
+          departureTime: "",
+          departureDate: "",
+          airline: "",
+          departureAirport: "",
+          departureTerminal: "",
+          departureCity: "",
+          departureGate: "",
+          arrivalAirport: "",
+          arrivalTerminal: "",
+          arrivalCity: "",
+          arrivalGate: "",
+          bookingReference: "",
+          isOutbound: "",
+          user: userId,
+        });
+      });
+    };
+
+
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
     const inboundFlights = [];
@@ -175,6 +251,8 @@ const Flights = ({ session }) => {
             handleChange={handleChange}
             flight={flight}
             onSubmit={onSubmit}
+            handleLoadingClick={handleLoadingClick}
+            loading={loading}
           />
         </div>
       </div>
@@ -189,6 +267,8 @@ const Flights = ({ session }) => {
           handleChange={handleChange}
           flight={flight}
           onSubmit={onSubmit}
+          handleLoadingClick={handleLoadingClick}
+          loading={loading}
         />
         {alertMessage && (
           <Alerts
