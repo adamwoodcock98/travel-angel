@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import SignUp from "./signUp/signUp";
+import SignUp, { UnstyledSignUp } from "./signUp/signUp";
 import LogIn from "./logIn/logIn";
 import { Alerts } from "../assets/snackbar";
 
@@ -111,6 +111,83 @@ export const Authentication = ({ handleLogIn }) => {
         handleChange={handleChangeLogIn}
         user={userLogIn}
         handleSubmit={handleSubmitLogIn}
+      />
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
+    </div>
+  );
+};
+
+export const Signup = () => {
+  const url = "http://localhost:8000";
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUser({
+      ...user,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { firstName, lastName, email, password } = user;
+    const newUser = { firstName, lastName, email, password };
+
+    await axios.post(`${url}/user/sign-up`, newUser).then((res) => {
+      handleClose();
+      handleAlert(res.data.msg, res.data.type);
+    });
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  return (
+    <div>
+      <UnstyledSignUp
+        open={open}
+        handleOpen={handleOpen}
+        handleClose={handleClose}
+        handleChange={handleChange}
+        user={user}
+        handleSubmit={handleSubmit}
       />
       <Alerts
         message={alertMessage}

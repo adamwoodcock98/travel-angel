@@ -1,7 +1,6 @@
 import React from "react";
 import "./welcome.scss";
-// import { } from '@mui/material'
-// import { Slide } from "./slide/slide"
+import { Signup } from "../authentication/authentication";
 const slides = [
   {
     title: "Machu Picchu",
@@ -138,20 +137,35 @@ function Slide({ slide, offset }) {
   );
 }
 
-export const Welcome = () => {
+export const Welcome = (handleClick) => {
   const [state, dispatch] = React.useReducer(slidesReducer, initialState);
   return (
     <div id="welcome-container">
       <div id="welcome-slide-show">
         <div className="slides">
-          <button className="slides-btn" onClick={() => dispatch({ type: "PREV" })}>‹</button>
+          <button
+            className="slides-btn"
+            onClick={() => dispatch({ type: "PREV" })}
+          >
+            ‹
+          </button>
 
           {[...slides, ...slides, ...slides].map((slide, i) => {
             let offset = slides.length + (state.slideIndex - i);
             return <Slide slide={slide} offset={offset} key={i} />;
           })}
-          <button className="slides-btn" onClick={() => dispatch({ type: "NEXT" })}>›</button>
+          <button
+            className="slides-btn"
+            onClick={() => dispatch({ type: "NEXT" })}
+          >
+            ›
+          </button>
         </div>
+      </div>
+      <div id="get-started">
+        <button id="get-started-btn">
+          <Signup />
+        </button>
       </div>
     </div>
   );
