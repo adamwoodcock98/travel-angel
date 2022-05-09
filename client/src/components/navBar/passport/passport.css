@@ -93,7 +93,7 @@
 #pass-fab {
   background-color: #eba0ae;
   float: right;
-  margin-top: -60px;
+  margin: 20px;
 }
 
 #pass-fab:hover {
