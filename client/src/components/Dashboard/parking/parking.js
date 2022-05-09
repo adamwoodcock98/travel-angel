@@ -128,6 +128,90 @@ const Parking = ({ session }) => {
     }
   }, [newParking]);
 
+  // LOADING SUBMIT BUTTON
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if(loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [loading])
+
+  const handleLoadingClick = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const {
+      startDate,
+      endDate,
+      airport,
+      type,
+      regPlate,
+      company,
+      contactNumber,
+      bookingReference,
+      notes,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    } = newParking;
+
+    const newBooking = {
+      startDate,
+      endDate,
+      airport,
+      type,
+      regPlate,
+      company,
+      contactNumber,
+      bookingReference,
+      notes,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    };
+
+    await axios
+      .post("http://localhost:8000/dashboard/parking/", newBooking)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setNewParking({
+          startDate: "",
+          endDate: "",
+          airport: "",
+          type: "",
+          regPlate: "",
+          company: "",
+          contactNumber: "",
+          bookingReference: "",
+          notes: "",
+          buildingNumber: "",
+          buildingName: "",
+          addressLine1: "",
+          addressLine2: "",
+          city: "",
+          postalCode: "",
+          stateCounty: "",
+          countryCode: "",
+          user: userId,
+        });
+      });
+    };
+
   if (parking.length) {
     const parkingArray = [];
 
@@ -151,6 +235,8 @@ const Parking = ({ session }) => {
             handleChange={handleChange}
             parking={parking}
             onSubmit={onSubmit}
+            handleLoadingClick={handleLoadingClick}
+            loading={loading}
           />
         </div>
       </div>
@@ -164,6 +250,8 @@ const Parking = ({ session }) => {
         handleChange={handleChange}
         parking={parking}
         onSubmit={onSubmit}
+        handleLoadingClick={handleLoadingClick}
+        loading={loading}
       />
     );
   }

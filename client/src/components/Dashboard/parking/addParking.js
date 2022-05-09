@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function AddParking(
   {
@@ -16,6 +17,8 @@ export default function AddParking(
   handleChange,
   parking,
   onSubmit,
+  handleLoadingClick,
+  loading
 }) {
   return (
     <div>
@@ -236,8 +239,16 @@ export default function AddParking(
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          
           <Button onClick={onSubmit}>Save Parking Details</Button>
+          <LoadingButton
+            onClick={handleLoadingClick}
+            loading={loading}
+            loadingIndicator="Saved"
+          > 
+            Save and Add Another
+          </LoadingButton>
+          <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>
