@@ -138,19 +138,18 @@ const Flights = ({ session }) => {
   }, []);
   
   // FLIGHT API
-  // const [populateApi, setPopulateApi] = useState([])
-
-  // const handleApiSearch = () => {
     
   const formatDate = (date) => moment(date).format("YYYY-MM-DD");
+  const formatTime = (time) => moment(time).format("hh:ss");
     const flightNumber = flight.flightNumber;
     const flightDate = formatDate(flight.departureDate);
-    console.log(flightNumber)
+    // console.log(flightNumber)
+    // console.log(flightDate)
 
     const options = {
       headers: {
         'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
-        'X-RapidAPI-Key': process.env.FLIGHTS_API_KEY
+        'X-RapidAPI-Key': process.env.FLIGHTS_API_KEY,
       }
     }
     const flightApi = axios.create({
@@ -160,12 +159,27 @@ const Flights = ({ session }) => {
 
 
     useEffect(() => {
+      // const handleApiSearch = () => {
       flightApi.get('/', options).then((res) => {
+        const data  = res.data[0]
+        // console.log(data)
 
-    console.log(res.data[0])
-  }, [])
-});
-
+        setFlight({
+          ...flight, 
+          departureTime: formatTime(data.airport.scheduledTimeLocal),
+          airline: data.airline.name,
+          departureAirport: data.departure.airport.name,
+          departureTerminal: data.departure.terminal,
+          departureCity: data.departure.airport.municipalityName,
+          departureGate: data.departure.gate,
+          arrivalAirport: data.arrival.airport.name,
+          arrivalTerminal: data.arrival.terminal,
+          arrivalCity: data.arrival.airport.municipalityName,
+          arrivalGate: data.arrival.gate,
+        })
+  })
+// }
+}, [flight]);
 
   // FLIGHT API
 
