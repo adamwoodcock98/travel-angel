@@ -8,6 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function AddAccommodation({
   handleOpen,
@@ -16,6 +17,8 @@ export default function AddAccommodation({
   handleChange,
   accommodation,
   handleSubmit,
+  handleLoadingClick,
+  loading
 }) {
   return (
     <div>
@@ -240,6 +243,13 @@ export default function AddAccommodation({
           <Button onClick={handleSubmit} data-testid="saveAccommodationDetails">
             Save Accommodation Details
           </Button>
+          <LoadingButton
+            onClick={handleLoadingClick}
+            loading={loading}
+            loadingIndicator="Saved"
+          > 
+            Save and Add Another
+          </LoadingButton>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>

@@ -120,6 +120,84 @@ export const ViewAccommodation = ({ session }) => {
       });
   };
 
+  // LOADING SUBMIT BUTTON
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if(loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, [loading])
+
+  const handleLoadingClick = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const {
+      name,
+      contactNumber,
+      checkInDate,
+      checkOutDate,
+      checkInTime,
+      checkOutTime,
+      bookingReference,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    } = accommodationArray;
+
+    const newAccommodation = {
+      name,
+      contactNumber,
+      checkInDate,
+      checkOutDate,
+      checkInTime,
+      checkOutTime,
+      bookingReference,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    };
+
+    await axios
+      .post("http://localhost:8000/dashboard/accommodation/", newAccommodation)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setAccommodationArray({
+          name: "",
+          contactNumber: "",
+          checkInDate: "",
+          checkOutDate: "",
+          checkInTime: "",
+          checkOutTime: "",
+          bookingReference: "",
+          buildingNumber: "",
+          buildingName: "",
+          addressLine1: "",
+          addressLine2: "",
+          city: "",
+          postalCode: "",
+          stateCounty: "",
+          countryCode: "",
+          user: userId,
+        });
+      });
+    };
+
   if (accommodation.length) {
     return (
       <div className="container">
@@ -133,6 +211,8 @@ export const ViewAccommodation = ({ session }) => {
             handleChange={handleChange}
             accommodation={accommodationArray}
             handleSubmit={handleSubmit}
+            handleLoadingClick={handleLoadingClick}
+        loading={loading}
           />
         </div>
         <div className="body">
@@ -153,6 +233,8 @@ export const ViewAccommodation = ({ session }) => {
             handleChange={handleChange}
             accommodation={accommodationArray}
             handleSubmit={handleSubmit}
+            handleLoadingClick={handleLoadingClick}
+            loading={loading}
           />
         </div>
       </div>
