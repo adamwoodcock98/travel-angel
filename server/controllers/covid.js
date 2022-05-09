@@ -77,6 +77,31 @@ const CovidController = {
     }
   },
 
+  UpdateVaccination: async (req, res) => {
+    const data = req.body;
+    const vaccinationCardId = req.params.id;
+    const doseId = req.params.doseId;
+    console.log(doseId)
+
+    try {
+      const dose = await VaccineDose.findById(doseId);
+      dose.dose = data.dose;
+      dose.date = data.date;
+      dose.type = data.type;
+
+      await dose.save();
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
+  },
+
+  DeleteVaccination: async (req, res) => {
+
+  },
+
   UpdateTest: async (req, res) => {
     const data = req.body
     try {

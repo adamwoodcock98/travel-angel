@@ -79,8 +79,6 @@ const [test, setTest] = useState({
       });
   };
 
-  console.log("entry type: ", test.entryType)
-
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
