@@ -4,6 +4,7 @@ import { FlightCard } from "./viewFlights/flightCard";
 import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
+import moment from "moment";
 
 const Flights = ({ session }) => {
   const userId = session;
@@ -135,6 +136,39 @@ const Flights = ({ session }) => {
         }
       });
   }, []);
+  
+  // FLIGHT API
+  // const [populateApi, setPopulateApi] = useState([])
+
+  // const handleApiSearch = () => {
+    
+  const formatDate = (date) => moment(date).format("YYYY-MM-DD");
+    const flightNumber = flight.flightNumber;
+    const flightDate = formatDate(flight.departureDate);
+    console.log(flightNumber)
+
+    const options = {
+      headers: {
+        'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
+        'X-RapidAPI-Key': process.env.FLIGHTS_API_KEY
+      }
+    }
+    const flightApi = axios.create({
+      baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`
+      // baseURL: "https://aerodatabox.p.rapidapi.com/flights/number/EZY8862/2022-05-09/",
+    });
+
+
+    useEffect(() => {
+      flightApi.get('/', options).then((res) => {
+
+    console.log(res.data[0])
+  }, [])
+});
+
+
+  // FLIGHT API
+
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
@@ -148,9 +182,9 @@ const Flights = ({ session }) => {
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard outboundFlight={flight} key={flight._id}/>
       );
-    });
+    })
 
     return (
       <div className="flights-window">
@@ -175,6 +209,7 @@ const Flights = ({ session }) => {
             handleChange={handleChange}
             flight={flight}
             onSubmit={onSubmit}
+            // handleApiSearch={handleApiSearch}
           />
         </div>
       </div>
@@ -189,6 +224,7 @@ const Flights = ({ session }) => {
           handleChange={handleChange}
           flight={flight}
           onSubmit={onSubmit}
+          // handleApiSearch={handleApiSearch}
         />
         {alertMessage && (
           <Alerts
@@ -200,8 +236,7 @@ const Flights = ({ session }) => {
           />
         )}
       </>
-    );
-  }
+    )}
 };
 
 export default Flights;
