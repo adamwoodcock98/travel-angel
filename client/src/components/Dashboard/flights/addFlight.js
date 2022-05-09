@@ -20,6 +20,7 @@ export default function AddFlight({
   handleChange,
   flight,
   onSubmit,
+  handleApiSearch
 }) {
   return (
     <div>
@@ -42,21 +43,7 @@ export default function AddFlight({
             type="text"
             variant="outlined"
             onChange={handleChange}
-          />
-          <TextField
-            value={flight.departureTime}
-            autoFocus
-            margin="dense"
-            id="departureTime"
-            name="departureTime"
-            label="Time"
-            type="time"
-            variant="outlined"
             required
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
           />
           <TextField
             value={flight.departureDate}
@@ -73,6 +60,29 @@ export default function AddFlight({
             }}
             onChange={handleChange}
           />
+          </DialogContent>
+
+          <DialogActions>
+            <Button onclick={handleApiSearch}>Search</Button>
+          </DialogActions>
+          
+          <DialogContent>
+          <TextField
+            value={flight.departureTime}
+            autoFocus
+            margin="dense"
+            id="departureTime"
+            name="departureTime"
+            label="Time"
+            type="time"
+            variant="outlined"
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
+          
           <TextField
             value={flight.airline}
             autoFocus
