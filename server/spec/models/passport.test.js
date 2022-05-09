@@ -24,7 +24,7 @@ describe("Transfer model", () => {
     placeOfBirth: "Place of Birth",
     dateOfIssue: mockDate,
     dateOfExpiry: mockDate,
-    user: { mockUser },
+    user: mockUser,
   });
 
   it("stores the passportNumber", () => {
@@ -68,6 +68,6 @@ describe("Transfer model", () => {
   });
 
   it("stores the passportNumber", () => {
-    expect(passport.user).toEqual({ mockUser });
+    expect(passport.user).toEqual(mockUser);
   });
 });
