@@ -58,12 +58,27 @@ const Parking = ({ session }) => {
     }
   }, []);
 
+  const formatAddressMaps = (address) => {
+    const addressObject = address;
+    delete addressObject._id;
+    delete addressObject.__v;
+    const arrayOfAddressValues = Object.values(addressObject);
+    const onlyDefinedAddressValues = arrayOfAddressValues.filter(
+      (addressValue) => addressValue !== ""
+    );
+    return onlyDefinedAddressValues.join("+");
+  };
+
+  const handleDirections = (address) => {
+    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
+   }
+
   if (parking.length) {
     const parkingArray = [];
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} />
+        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} />
       );
     });
 

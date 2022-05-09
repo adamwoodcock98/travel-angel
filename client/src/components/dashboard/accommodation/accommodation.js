@@ -73,7 +73,7 @@ export const ViewAccommodation = ({ session }) => {
           />
         </div>
         <div className="body">
-          <AccommodationCard accommodation={accommodation} userId={userId} />
+          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
         </div>
         <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
           <AddIcon />

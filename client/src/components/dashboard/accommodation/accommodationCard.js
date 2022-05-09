@@ -2,10 +2,13 @@ import React from "react";
 import moment from "moment";
 import CrudMenu from "./crud/crud"
 import "./accommodationCard.css";
+import Button from "@mui/material/Button";
+import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 
 export default function AccommodationCard(props) {
   const userId = props.userId;
   const accommodation = props.accommodation;
+  const handleDirections = props.handleDirections;
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
@@ -66,6 +69,9 @@ export default function AccommodationCard(props) {
                     <p>Contact Number: {accommodation.contactNumber}</p>
                   )}
                 </div>
+                  <div className="directions">
+                    <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={handleDirections(accommodation.address)}>Get Directions</Button>
+                  </div>
               </div>
             </div>
             <div className="crud-menu">

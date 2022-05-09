@@ -2,6 +2,8 @@ import React from "react";
 import "./viewParking.css";
 import moment from "moment";
 import CrudMenu from "./crud/crud"
+import Button from "@mui/material/Button";
+import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
@@ -48,6 +50,9 @@ const ParkingCard = (props) => {
         <p>{parkingData.notes}</p>
       </div>
       <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} />
+      <div className="directions">
+        <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={props.handleDirections(parkingData.address)}>Get Directions</Button>
+      </div>
     </div>
   )
 
