@@ -120,7 +120,7 @@ export default function VerticalTabs({ session }) {
         <Covid />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={6}>
-        <Passport />
+        <Passport session={session} />
       </TabPanel>
     </Box>
   );
