@@ -42,7 +42,7 @@ export const FlightCard = (props) => {
         </div>
       </div>
       <div className="flight-card-footer">
-        <FooterPane data={footerData} />
+        <FooterPane data={footerData} airport={departureData.airport} />
       </div>
     </div>
   )

@@ -130,6 +130,21 @@ export const ViewAccommodation = ({ session }) => {
       });
   };
 
+  const formatAddressMaps = (address) => {
+    const addressObject = address;
+    delete addressObject._id;
+    delete addressObject.__v;
+    const arrayOfAddressValues = Object.values(addressObject);
+    const onlyDefinedAddressValues = arrayOfAddressValues.filter(
+      (addressValue) => addressValue !== ""
+    );
+    return onlyDefinedAddressValues.join("+");
+  };
+
+  const handleDirections = (address) => {
+    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
+   }
+
   if (accommodation.length) {
     return (
       <div className="container">
@@ -146,7 +161,7 @@ export const ViewAccommodation = ({ session }) => {
           />
         </div>
         <div className="body">
-          <AccommodationCard accommodation={accommodation} />
+          <AccommodationCard accommodation={accommodation} handleDirections={handleDirections} />
         </div>
       </div>
     );
