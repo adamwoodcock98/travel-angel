@@ -3,6 +3,7 @@ import axios from "axios";
 import SignUp, { UnstyledSignUp } from "./signUp/signUp";
 import LogIn from "./logIn/logIn";
 import { Alerts } from "../assets/snackbar";
+import "./authentication.css";
 
 export const Authentication = ({ handleLogIn }) => {
   const url = "http://localhost:8000";
@@ -96,22 +97,26 @@ export const Authentication = ({ handleLogIn }) => {
 
   return (
     <div id="Authentication">
-      <SignUp
-        open={open}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        handleChange={handleChange}
-        user={user}
-        handleSubmit={handleSubmit}
-      />
-      <LogIn
-        open={openLogIn}
-        handleOpen={handleOpenLogIn}
-        handleClose={handleCloseLogIn}
-        handleChange={handleChangeLogIn}
-        user={userLogIn}
-        handleSubmit={handleSubmitLogIn}
-      />
+      <div id="sign-up">
+        <SignUp
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          user={user}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+      <div id="log-in">
+        <LogIn
+          open={openLogIn}
+          handleOpen={handleOpenLogIn}
+          handleClose={handleCloseLogIn}
+          handleChange={handleChangeLogIn}
+          user={userLogIn}
+          handleSubmit={handleSubmitLogIn}
+        />
+      </div>
       <Alerts
         message={alertMessage}
         open={alertOpen}

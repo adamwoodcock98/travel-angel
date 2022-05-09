@@ -73,7 +73,7 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                 <Authentication handleLogIn={handleLogIn} />
               )}
               </div>
-              <div>
+              {session && (<div>
                 <Box sx={{ flexGrow: 0 }}>
                     <IconButton
                       className="avatar"
@@ -120,7 +120,7 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                     </MenuItem>
                   </Menu>
                 </Box>
-              </div>
+              </div>)}
             </Grid>
           </Toolbar>
         </AppBar>
