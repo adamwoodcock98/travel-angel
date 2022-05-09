@@ -10,6 +10,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import "./crud.css"
 import AddVisa from "../addVisa"
+import DeleteDialogue from '../../../assets/deleteConfirmation';
 
 const StyledMenu = styled((props) => (
 
@@ -61,6 +62,7 @@ const CrudMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
 
   const handleClick = (event) => {
@@ -77,6 +79,16 @@ const CrudMenu = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleDeletePromptOpen = () => {
+    handleCrudClose();
+    setDeleteOpen(true);
+  }
+
+  const handleDeletePromptClose = () => {
+    handleCrudClose();
+    setDeleteOpen(false);
   };
 
   return (
@@ -109,11 +121,12 @@ const CrudMenu = (props) => {
           Add to calendar
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleCrudClose} disableRipple className="MenuItem">
+        <MenuItem onClick={handleDeletePromptOpen} disableRipple className="MenuItem">
           <DeleteOutlinedIcon style={{ color: '#FF4949' }} />
           Delete
         </MenuItem>
       </StyledMenu>
+      <DeleteDialogue open={deleteOpen} handleDeletePromptClose={handleDeletePromptClose} dataType="visas" objectId={visaId} />
       <AddVisa
         open={open}
         handleOpen={handleOpen}
