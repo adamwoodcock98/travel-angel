@@ -44,108 +44,12 @@ const Transfers = ({ session }) => {
     trip: tripId,
   });
 
-  const handlePickupChange = (e) => {
-    const value = e.target.value;
-    setTransfer((prevState) => ({
-      ...prevState,
-      pickupAddress: {
-        ...prevState.pickupAddress,
-        [e.target.name]: value,
-      },
-    }));
-  };
-
-  const handleDropoffChange = (e) => {
-    const value = e.target.value;
-    setTransfer((prevState) => ({
-      ...prevState,
-      dropoffAddress: {
-        ...prevState.dropoffAddress,
-        [e.target.name]: value,
-      },
-    }));
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setTransfer({
-      ...transfer,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      pickupTime,
-      dropoffTime,
-      pickupAddress,
-      dropoffAddress,
-      isOutbound,
-      company,
-      contactNumber,
-      bookingReference,
-      user,
-      trip,
-    } = transfer;
-
-    const newTransfer = {
-      pickupTime,
-      dropoffTime,
-      pickupAddress,
-      dropoffAddress,
-      isOutbound,
-      company,
-      contactNumber,
-      bookingReference,
-      user,
-      trip,
-    };
-
-    axios
-      .post("http://localhost:8000/dashboard/transfers/", newTransfer)
-      .then(() => {
-        setTransfer({
-          pickupTime: "",
-          dropoffTime: "",
-          pickupAddress: {
-            buildingNumber: "",
-            buildingName: "",
-            addressLine1: "",
-            addressLine2: "",
-            city: "",
-            postalCode: "",
-            stateCounty: "",
-            countryCode: "",
-          },
-          dropoffAddress: {
-            buildingNumber: "",
-            buildingName: "",
-            addressLine1: "",
-            addressLine2: "",
-            city: "",
-            postalCode: "",
-            stateCounty: "",
-            countryCode: "",
-          },
-          isOutbound: "",
-          company: "",
-          contactNumber: "",
-          bookingReference: "",
-          user: userId,
-          trip: tripId,
-        });
-        handleClose();
-      });
   };
 
   const [outboundTransfer, setOutboundTransfer] = useState([]);
@@ -188,11 +92,10 @@ const Transfers = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            transfer={transfer}
-            handleSubmit={handleSubmit}
-            handlePickupChange={handlePickupChange}
-            handleDropoffChange={handleDropoffChange}
+            transferData={transfer}
+            userId={userId}
+            tripId={tripId}
+            transferId={null}
           />
         </div>
       </div>
@@ -207,11 +110,10 @@ const Transfers = ({ session }) => {
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}
-          handleChange={handleChange}
-          transfer={transfer}
-          handleSubmit={handleSubmit}
-          handlePickupChange={handlePickupChange}
-          handleDropoffChange={handleDropoffChange}
+          transferData={transfer}
+          userId={userId}
+          tripId={tripId}
+          transferId={null}
         />
       </div>
     );
