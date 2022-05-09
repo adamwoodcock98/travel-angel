@@ -84,6 +84,13 @@ const AddTransfer = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let url;
+    if (transferId) {
+      url = `http://localhost:8000/dashboard/transfers/edit/${transferId}`;
+    } else {
+      url = `http://localhost:8000/dashboard/transfers/`;
+    }
+
     const {
       pickupTime,
       dropoffTime,
@@ -111,7 +118,7 @@ const AddTransfer = (props) => {
     };
 
     axios
-      .post("http://localhost:8000/dashboard/transfers/", newTransfer)
+      .post(url, newTransfer)
       .then(() => {
         setTransfer({
           pickupTime: "",

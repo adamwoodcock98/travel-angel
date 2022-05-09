@@ -77,11 +77,11 @@ const Transfers = ({ session }) => {
         <div className="transfers-content">
           <div className="transfers-content-outbound">
             <h1 className="transfer-content-subheading">Outbound</h1>
-            <OutboundTransferCard outboundTransfer={outboundTransfer} userId={userId} />
+            <OutboundTransferCard outboundTransfer={outboundTransfer} userId={userId} tripId={tripId} />
           </div>
           <div className="transfers-content-inbound">
             <h1 className="transfers-content-subheading">Inbound</h1>
-            <InboundTransferCard inboundTransfer={inboundTransfer} userId={userId} />
+            <InboundTransferCard inboundTransfer={inboundTransfer} userId={userId} tripId={tripId} />
           </div>
         </div>
         <div>

@@ -57,6 +57,7 @@ const CrudMenu = (props) => {
   const transferData = props.transferData;
   const transferId = transferData._id
   const userId = props.userId;
+  const tripId = props.tripId;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
@@ -118,8 +119,9 @@ const CrudMenu = (props) => {
         handleOpen={handleOpen}
         handleClose={handleClose}
         transferData={transferData}
-        transferId={transferId}
         userId={userId}
+        tripId={tripId}
+        transferId={transferId}
       />
     </div>
   );
