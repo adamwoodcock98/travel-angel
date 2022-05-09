@@ -80,7 +80,7 @@ const UsersController = {
     const userDetails = req.body;
     const password = req.body.password;
     const hashedPassword = await bcrypt.hash(password, 10)
-    await User.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       { _id: userId },
       {
         $set: {
@@ -96,6 +96,7 @@ const UsersController = {
     await res.json({
       msg: "Congrats! You've updated your details!",
       type: "success",
+      user: "user",
     })
   },
 };
