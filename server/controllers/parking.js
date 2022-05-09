@@ -1,6 +1,5 @@
 const Parking = require("../models/parking.js");
 const Address = require("../models/address.js");
-const { default: AddAccommodation } = require("../../client/src/components/dashboard/accommodation/addAccommodation.js");
 
 const ParkingController = {
   Index: async (req, res) => {
