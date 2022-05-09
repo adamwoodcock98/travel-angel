@@ -69,6 +69,7 @@ export const ViewAccommodation = ({ session }) => {
             accommodationData={accommodationArray}
             accommodationId={null}
             userId={userId}
+            tripId={tripId}
           />
         </div>
         <div className="body">
@@ -84,6 +85,9 @@ export const ViewAccommodation = ({ session }) => {
       <div className="container">
         <div className="header">
           <h1 className="title">Accommodation</h1>
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddAccommodation
             className="add-accomodation"
             handleOpen={handleOpen}
@@ -92,6 +96,7 @@ export const ViewAccommodation = ({ session }) => {
             accommodationData={accommodationArray}
             accommodationId={null}
             userId={userId}
+            tripId={tripId}
           />
         </div>
       </div>

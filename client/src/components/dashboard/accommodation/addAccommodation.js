@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const AddAccommodation = (props) => {
   const userId = props.userId;
+  const tripId = props.tripId;
   const accommodationData = props.accommodationData;
   const accommodationId = props.accommodationId;
   const open = props.open;
@@ -31,6 +32,7 @@ const AddAccommodation = (props) => {
     stateCounty: accommodationData.address.stateCounty,
     countryCode: accommodationData.address.countryCode,
     user: userId,
+    trip: tripId, 
   });
   
 
@@ -88,6 +90,7 @@ const AddAccommodation = (props) => {
       stateCounty,
       countryCode,
       user,
+      trip: tripId,
     };
 
     await axios
