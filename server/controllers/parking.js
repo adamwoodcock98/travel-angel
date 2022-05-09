@@ -1,12 +1,15 @@
 const Parking = require("../models/parking.js");
 const Address = require("../models/address.js");
+const Trip = require("../models/trip.js");
 
 const ParkingController = {
   Index: async (req, res) => {
     const userId = req.params.id;
-    const parkingBookings = await Parking.find({ user: userId }).populate(
-      "address"
-    );
+    const tripId = req.params.tripId;
+    const parkingBookings = await Parking.find({
+      user: userId,
+      trip: tripId,
+    }).populate("address");
 
     res.json({ bookings: parkingBookings });
   },
@@ -39,9 +42,17 @@ const ParkingController = {
         notes: data.notes,
         address: saveAddress,
         user: data.user,
+        trip: data.trip,
       });
 
       await parking.save();
+
+      const trip = await Trip.findById(data.trip);
+
+      trip.parking.push(parking);
+
+      await trip.save();
+
       res.status(200).send();
     } catch (e) {
       console.log(e.message);
