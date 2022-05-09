@@ -1,17 +1,21 @@
 const Transfer = require("../models/transfer.js");
 const Address = require("../models/address.js");
+const Trip = require("../models/trip.js");
 
 const TransferController = {
   Index: async (req, res) => {
     const userId = req.params.id;
+    const tripId = req.params.tripId;
     try {
       const outboundTransfer = await Transfer.find({
         isOutbound: true,
         user: userId,
+        trip: tripId,
       }).populate("pickupAddress dropoffAddress");
       const inboundTransfer = await Transfer.find({
         isOutbound: false,
         user: userId,
+        trip: tripId,
       }).populate("pickupAddress dropoffAddress");
       res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
     } catch (e) {
@@ -30,6 +34,7 @@ const TransferController = {
       contactNumber,
       bookingReference,
       user,
+      trip,
     } = req.body;
 
     const thePickupAddress = new Address({
@@ -67,11 +72,19 @@ const TransferController = {
           contactNumber: contactNumber,
           bookingReference: bookingReference,
           user: user,
+          trip: trip,
         });
         transfer
           .save()
           .then(() =>
-            res.json({ message: "Amazing, you've just added a new transfer!" })
+            Trip.findById(trip).then((thisTrip) => {
+              thisTrip.transfers.push(transfer);
+              thisTrip.save().then(
+                res.json({
+                  message: "Amazing, you've just added a new transfer!",
+                })
+              );
+            })
           )
           .catch((err) => console.log(err.message));
       });

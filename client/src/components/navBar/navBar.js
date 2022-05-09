@@ -31,16 +31,18 @@ export default function NavBar({ handleLogOut }) {
         <AppBar position="static" sx={{ backgroundColor: "#f22771" }}>
           <Toolbar>
             <div>
-              <Typography
-                className="logo"
-                aria-label="logo"
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ display: { xs: "none", md: "flex" } }}
-              >
-                TRAVEL ANGEL
-              </Typography>
+              <a href="/">
+                <Typography
+                  className="logo"
+                  aria-label="logo"
+                  variant="h6"
+                  noWrap
+                  component="div"
+                  sx={{ display: { xs: "none", md: "flex" } }}
+                >
+                  TRAVEL ANGEL
+                </Typography>
+              </a>
             </div>
 
             <Grid container justifyContent="flex-end">
