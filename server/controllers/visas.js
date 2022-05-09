@@ -36,6 +36,25 @@ const VisaController = {
       res.status(500).send();
     }
   },
+
+  Update: async (req, res) => {
+    const data = req.body;
+    const visaId = req.params.id;
+    try {
+      const visa = await Visa.findById(visaId);
+      visa.visaNumber = data.visaNumber;
+      visa.startDate = data.startDate;
+      visa.endDate = data.endDate;
+      visa.issuingCountry = data.issuingCountry;
+
+      await visa.save();
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
+  },
 };
 
 module.exports = VisaController;

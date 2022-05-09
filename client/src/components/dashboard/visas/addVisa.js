@@ -7,8 +7,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
 
 const AddVisa = (props) => {
   const userId = props.userId;
@@ -38,7 +36,14 @@ const AddVisa = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { visaNumber, startDate, endDate, issuingCountry, user, trip } =
+    let url;
+    if (visaId) {
+      url = `http://localhost:8000/dashboard/visas/edit/${visaId}`
+    } else {
+      url = `http://localhost:8000/dashboard/visas/`
+    }
+
+    const { visaNumber, startDate, endDate, issuingCountry } =
       visa;
 
     const newVisa = {
@@ -51,7 +56,7 @@ const AddVisa = (props) => {
     };
 
     await axios
-      .post("http://localhost:8000/dashboard/visas/", newVisa)
+      .post(url, newVisa)
       .catch((err) => console.log(err.message))
       .then(() => {
         setVisa({
@@ -68,9 +73,6 @@ const AddVisa = (props) => {
 
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Visa</DialogTitle>
         <DialogContent>
