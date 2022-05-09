@@ -65,6 +65,24 @@ const UsersController = {
       });
     })
   },
+
+  Settings: (req, res) => {
+    const userId = req.params.id
+    User.findOne({ _id: userId }).then((user) => {
+      res.json({
+        user: user
+      });
+    })
+  },
+
+  Save: (req, res) => {
+    const userId = req.params.id
+    User.findOne({ _id: userId }).then((user) => {
+      res.json({
+        user: user
+      });
+    })
+  },
 };
 
 module.exports = UsersController;
