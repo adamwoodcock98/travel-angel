@@ -7,35 +7,35 @@ const slides = [
     subtitle: "Peru",
     description: "Adventure is never far away",
     image:
-      "https://images.unsplash.com/photo-1571771019784-3ff35f4f4277?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      "https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
     title: "Chamonix",
     subtitle: "France",
     description: "Let your dreams come true",
     image:
-      "https://images.unsplash.com/photo-1581836499506-4a660b39478a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      "https://images.pexels.com/photos/11054377/pexels-photo-11054377.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   },
   {
     title: "Mimisa Rocks",
     subtitle: "Australia",
     description: "A piece of heaven",
     image:
-      "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
   },
   {
     title: "Four",
     subtitle: "Australia",
     description: "A piece of heaven",
     image:
-      "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      "https://images.pexels.com/photos/1076885/pexels-photo-1076885.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
     title: "Five",
     subtitle: "Australia",
     description: "A piece of heaven",
     image:
-      "https://images.unsplash.com/photo-1579130781921-76e18892b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      "https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
 ];
 
@@ -145,7 +145,7 @@ export const Welcome = (handleClick) => {
         <div className="slides">
           <button
             className="slides-btn"
-            onClick={() => dispatch({ type: "PREV" })}
+            onClick={() => dispatch({ type: "NEXT" })}
           >
             ‹
           </button>
@@ -156,7 +156,7 @@ export const Welcome = (handleClick) => {
           })}
           <button
             className="slides-btn"
-            onClick={() => dispatch({ type: "NEXT" })}
+            onClick={() => dispatch({ type: "PREV" })}
           >
             ›
           </button>
