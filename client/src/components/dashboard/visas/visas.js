@@ -28,51 +28,12 @@ const Visas = ({ session }) => {
       });
   }, [visaArray]);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setVisaArray({
-      ...visaArray,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { visaNumber, startDate, endDate, issuingCountry, user, trip } =
-      visaArray;
-
-    const newVisa = {
-      visaNumber,
-      startDate,
-      endDate,
-      issuingCountry,
-      user,
-      trip,
-    };
-
-    await axios
-      .post("http://localhost:8000/dashboard/visas/", newVisa)
-      .catch((err) => console.log(err.message))
-      .then(() => {
-        setVisaArray({
-          visaNumber: "",
-          startDate: "",
-          endDate: "",
-          issuingCountry: "",
-          user: userId,
-          trip: tripId,
-        });
-        handleClose();
-      });
   };
 
   if (visa.length) {
@@ -93,9 +54,10 @@ const Visas = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            visa={visa}
-            handleSubmit={handleSubmit}
+            visaData={visaArray}
+            userId={userId}
+            tripId={tripId}
+            visaId={null}
           />
         </div>
       </div>
@@ -111,9 +73,10 @@ const Visas = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            visa={visa}
-            handleSubmit={handleSubmit}
+            visaData={visaArray}
+            userId={userId}
+            tripId={tripId}
+            visaId={null} 
           />
         </div>
       </div>
