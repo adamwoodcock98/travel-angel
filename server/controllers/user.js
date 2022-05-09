@@ -78,8 +78,8 @@ const UsersController = {
   Save: async (req, res) => {
     const userId = req.params.id
     const userDetails = req.body;
-    const password = req.body.password;
-    const hashedPassword = await bcrypt.hash(password, 10)
+    // const password = req.body.password;
+    // const hashedPassword = await bcrypt.hash(password, 10)
     const user = await User.findOneAndUpdate(
       { _id: userId },
       {
@@ -87,7 +87,7 @@ const UsersController = {
           firstName: userDetails.firstName,
           lastName: userDetails.lastName,
           email: userDetails.email,
-          password: hashedPassword,
+          // password: hashedPassword,
           profilePicture: userDetails.profilePicture,
         },
       }, {

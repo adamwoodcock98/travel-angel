@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LogOut } from "../authentication/logOut/logOut";
 import { Profile } from "./profile/profile"
 import { Settings } from "./profile/settings"
@@ -10,14 +10,14 @@ import {
   Typography,
   Menu,
   Avatar,
-  Button,
-  Tooltip,
   MenuItem,
   Grid,
 } from "@mui/material";
+import axios from "axios"
 
 export default function NavBar({ handleLogOut, session }) {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState({})
 
   const handleOpenMenu = () => {
     setOpen(true);
@@ -26,6 +26,15 @@ export default function NavBar({ handleLogOut, session }) {
   const handleCloseMenu = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (session !== "null") {
+      axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
+        setUser(res.data.user);
+      });
+    }
+  }, [user]);
+
   return (
     <div className="navbar">
       <Box sx={{ flexGrow: 1 }}>
@@ -47,28 +56,26 @@ export default function NavBar({ handleLogOut, session }) {
             </div>
 
             <Grid container justifyContent="flex-end">
-              <div>
-                <Button
-                  className="dashboard-btn"
-                  aria-label="dashboard-btn"
+            <div>
+                <Typography
+                  id="nav-user"
+                  aria-label="nav-user"
                   style={{ flex: 1 }}
                   color="inherit"
                   sx={{ mt: "4px", mx: 3 }}
                 >
-                  Dashboard
-                </Button>
+                  {user.firstName} {user.lastName}
+                </Typography>
               </div>
               <div>
                 <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Open user menu">
                     <IconButton
                       className="avatar"
                       sx={{ p: 0 }}
                       onClick={handleOpenMenu}
                     >
-                      <Avatar src="/static/images/avatar/2.jpg" />
+                      <Avatar src={user.profilePicture} />
                     </IconButton>
-                  </Tooltip>
 
                   <Menu
                     open={open}

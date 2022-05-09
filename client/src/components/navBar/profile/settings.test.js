@@ -1,15 +1,15 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { Profile } from "./profile";
+import { Settings } from "./settings";
 
-test("profile", () => {
-  render(<Profile />);
+test("settings", () => {
+  render(<Settings />);
 
-  const account = "Account"
+  const settings = "Settings";
   const newValue = "New value";
 
-  expect(screen.getByText(acu)).toBeInTheDocument();
+  expect(screen.getByText(settings)).toBeInTheDocument();
 
   fireEvent.click(screen.getByRole("button", { name: "add" }));
 

@@ -116,7 +116,7 @@ export const Settings = ({
               required
               onChange={handleChange}
             />
-            <TextField
+            {/* <TextField
               value={user.password}
               autoFocus
               fullWidth
@@ -128,7 +128,7 @@ export const Settings = ({
               variant="outlined"
               required
               onChange={handleChange}
-            />
+            /> */}
             <TextField
               value={user.profilePicture}
               autoFocus
