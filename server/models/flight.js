@@ -36,11 +36,16 @@ const flightSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true,
-  // },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Trip",
+    required: true,
+  },
 });
 
 const Flight = mongoose.model("Flight", flightSchema);

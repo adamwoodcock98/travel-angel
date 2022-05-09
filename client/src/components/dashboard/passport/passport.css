@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "Signature";
+  src: local("Signature"),
+    url("../../assets/BrittanySignature.otf") format("opentype");
+}
+
+.pass-card {
+  width: 530px;
+  height: 320px;
+  margin-bottom: 60px;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  text-transform: uppercase;
+  font-family: "Courier-New", Courier, monospace;
+  font-weight: 600;
+  line-height: 25px;
+  background: url("http://localhost:3000/pass-bg-2.jpg") 0 0 / 530px 378px
+    no-repeat;
+  box-shadow: 0 2px 15px rgb(175, 175, 175);
+  border-radius: 10px;
+}
+
+.pass-passport {
+  color: rgb(85, 110, 75);
+  opacity: 50%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 14px;
+  font-size: 11px;
+  margin: 10px 0 0 120px;
+}
+
+.pass-pic {
+  float: left;
+}
+
+.pass-type {
+  float: left;
+}
+.pass-num {
+  text-align: right;
+  margin-right: 60px;
+}
+.pass-signature {
+  font-family: "Signature", Arial, serif;
+  text-transform: capitalize;
+  float: right;
+  font-size: 17px;
+  margin: -25px 50px 0 0;
+}
+
+.pass-country {
+  color: rgb(33, 27, 113);
+  padding: 17px 5px 0 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.pass-contents {
+  padding-top: 20px;
+  padding-left: 40px;
+}
+
+.pass-gender {
+  float: left;
+  margin-right: 20px;
+}
+
+.pass-footer {
+  width: 510px;
+  text-transform: uppercase;
+  font-family: "Courier-New", Courier, monospace;
+  font-weight: 600;
+  max-height: 100px;
+  position: fixed;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-top: -60px;
+  box-shadow: 0 0 15px rgb(175, 175, 175);
+  background: url("http://localhost:3000/pass-footer.jpg") 0 0 / 530px 100px
+    no-repeat;
+  padding: 10px;
+}
+
+.pass-p {
+  /* overflow-wrap: break-word; */
+  word-spacing: -8px;
+  overflow: wrap;
+  text-align: justify;
+}
+
+#pass-fab {
+  background-color: #eba0ae;
+  float: right;
+  margin-top: -60px;
+}
+
+#pass-fab:hover {
+  background-color: #f22771;
+}
+
+#pass-render {
+  margin-top: 20px;
+  text-align: left;
+}
+
+#pass-btn, #pass-expired-btn {
+  background-color: white;
+  text-align: justify;
+  text-transform: capitalize;
+  height: 100px;
+  width: 100%;
+  border-bottom: 2px #f6f6f6 solid;
+  color: grey;
+}
+
+#pass-expired-btn {
+  color:#dadada;
+  border-bottom: 2px #f6f6f6 solid;
+}
+
+#pass-btn:hover, #pass-expired-btn:hover {
+  background-color: #fafafa;
+  color: #f272a1;
+}
+
+#pass-expired-btn:hover {
+  color:#ffb9d3;;
+}
+
+img.pass-img {
+  width: 200px;
+  height: auto;
+  max-height: 300px;
+  padding: 20px 5px 30px 15px;
+}
+
+h1.pass-h1 {
+  text-align: center;
+  color: #64baaa;
+  letter-spacing: 2px;
+  border-bottom: 7px double #f0f0f0;
+}
+
+h5 {
+  color: rgb(46, 66, 38);
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: none;
+  font-size: 10px;
+  line-height: 4px;
+}
+
+i.pass-i {
+  text-align: center;
+}

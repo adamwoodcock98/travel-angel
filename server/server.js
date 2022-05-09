@@ -7,6 +7,15 @@ const flightsRouter = require("./routes/flights.js");
 const accommodationRouter = require("./routes/accommodation.js");
 const transferRouter = require("./routes/transfers.js");
 const parkingRouter = require("./routes/parking.js");
+<<<<<<< HEAD
+const passportRouter = require("./routes/passport.js");
+const covidRouter = require("./routes/covid.js")
+const visaRouter = require("./routes/visas.js")
+=======
+const tripRouter = require("./routes/trips.js");
+const covidRouter = require("./routes/covid.js");
+const visaRouter = require("./routes/visas.js");
+>>>>>>> origin/main
 const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -96,8 +105,12 @@ app.post("/upload", upload.single("uploaded_file"), async (req, res) => {
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
 app.use("/dashboard/accommodation", accommodationRouter);
+app.use("/dashboard/passport", passportRouter);
 app.use("/dashboard/transfers", transferRouter);
 app.use("/dashboard/parking", parkingRouter);
+app.use("/trips", tripRouter);
+app.use("/dashboard/covid", covidRouter);
+app.use("/dashboard/visas", visaRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on PORT: ${port}`);

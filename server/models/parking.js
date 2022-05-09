@@ -20,11 +20,16 @@ const parkingSchema = new mongoose.Schema({
   contactNumber: String,
   bookingReference: String,
   notes: String,
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true
-  // },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Trip",
+    required: true,
+  },
 });
 
 const Parking = mongoose.model("Parking", parkingSchema);

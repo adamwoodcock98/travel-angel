@@ -1,19 +1,35 @@
 const Flight = require("../models/flight.js");
+const Trip = require("../models/trip.js");
 
 const FlightsController = {
   Index: async (req, res) => {
-    const outboundFlight = await Flight.find({ isOutbound: true });
-    const inboundFlight = await Flight.find({ isOutbound: false });
-    res.json({
-      outbound: outboundFlight,
-      inbound: inboundFlight,
-      user: req.session.user,
-    });
+    try {
+      const user = req.params.id;
+      const tripId = req.params.tripId;
+      const outboundFlight = await Flight.find({
+        isOutbound: true,
+        user: user,
+        trip: tripId,
+      });
+      const inboundFlight = await Flight.find({
+        isOutbound: false,
+        user: user,
+        trip: tripId,
+      });
+      res.json({
+        outbound: outboundFlight,
+        inbound: inboundFlight,
+        user: user,
+      });
+      res.status(200).send();
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
   },
 
   New: async (req, res) => {
     const data = req.body;
-
     try {
       const flight = new Flight({
         flightNumber: data.flightNumber,
@@ -30,10 +46,17 @@ const FlightsController = {
         arrivalGate: data.arrivalGate,
         bookingReference: data.bookingReference,
         isOutbound: data.isOutbound,
-        // user: req.session.user,
+        user: data.user,
+        trip: data.trip,
       });
 
       await flight.save();
+
+      const trip = await Trip.findById(data.trip);
+
+      trip.flights.push(flight);
+
+      await trip.save();
 
       res.status(200).send();
     } catch (err) {

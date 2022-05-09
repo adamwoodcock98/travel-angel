@@ -2,9 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
+import { useParams } from "react-router-dom";
 import "./accommodation.css";
 
-export const ViewAccommodation = () => {
+export const ViewAccommodation = ({ session }) => {
+  const { tripId } = useParams();
+
+  const userId = session;
+
   const [accommodation, setAccommodation] = useState([]);
   const [open, setOpen] = useState(false);
   const [accommodationArray, setAccommodationArray] = useState({
@@ -23,12 +28,20 @@ export const ViewAccommodation = () => {
     postalCode: "",
     stateCounty: "",
     countryCode: "",
+    user: userId,
+    trip: tripId,
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8000/dashboard/accommodation").then((res) => {
-      setAccommodation(res.data);
-    });
+    if (userId !== "null") {
+      axios
+        .get(
+          `http://localhost:8000/dashboard/accommodation/${userId}/${tripId}`
+        )
+        .then((res) => {
+          setAccommodation(res.data.accommodation);
+        });
+    }
   }, [accommodationArray]);
 
   const handleOpen = () => {
@@ -66,6 +79,8 @@ export const ViewAccommodation = () => {
       postalCode,
       stateCounty,
       countryCode,
+      user,
+      trip,
     } = accommodationArray;
 
     const newAccommodation = {
@@ -84,9 +99,9 @@ export const ViewAccommodation = () => {
       postalCode,
       stateCounty,
       countryCode,
+      user,
+      trip,
     };
-
-    console.log(newAccommodation);
 
     await axios
       .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
@@ -108,6 +123,8 @@ export const ViewAccommodation = () => {
           postalCode: "",
           stateCounty: "",
           countryCode: "",
+          user: userId,
+          trip: tripId,
         });
         handleClose();
       });

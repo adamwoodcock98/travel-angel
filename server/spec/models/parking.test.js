@@ -14,6 +14,7 @@ describe("Parking model", () => {
 
   const mockAddressID = mongoose.Types.ObjectId();
   const mockUserID = mongoose.Types.ObjectId();
+  const mockTripID = mongoose.Types.ObjectId();
 
   it("stores the start date", () => {
     advanceTo();
@@ -173,32 +174,60 @@ describe("Parking model", () => {
       notes: "Take the second exit on the left, then press the yellow button",
       user: mockUserID,
     });
-    expect(parking.notes).toEqual("Take the second exit on the left, then press the yellow button");
+    expect(parking.notes).toEqual(
+      "Take the second exit on the left, then press the yellow button"
+    );
   });
 
-  // it("stores the user", () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const mockEndDate = new Date();
-  //   const parking = new Parking({
-  //     startDate: mockStartDate,
-  //     endDate: mockEndDate,
-  //     address: mockAddressID,
-  //     user: mockUserID,
-  //   });
-  //   expect(parking.user).toEqual(mockUserID);
-  // });
+  it("stores the user", () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const parking = new Parking({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      address: mockAddressID,
+      user: mockUserID,
+    });
+    expect(parking.user).toEqual(mockUserID);
+  });
 
-  // it("stores the user as a required field", async () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const mockEndDate = new Date();
-  //   const parking = new Parking({
-  //     startDate: mockStartDate,
-  //     endDate: mockEndDate,
-  //     address: mockAddressID,
-  //   });
-  //   await expect(parking.save()).rejects.toThrow();
-  // });
+  it("stores the trip", () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const parking = new Parking({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      address: mockAddressID,
+      user: mockUserID,
+      trip: mockTripID,
+    });
+    expect(parking.trip).toEqual(mockTripID);
+  });
 
+  it("stores the user as a required field", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const parking = new Parking({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      address: mockAddressID,
+    });
+    await expect(parking.save()).rejects.toThrow();
+  });
+
+  it("stores the trip as a required field", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const parking = new Parking({
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      address: mockAddressID,
+      user: mockUserID,
+    });
+    await expect(parking.save()).rejects.toThrow();
+  });
 });
