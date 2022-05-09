@@ -52,6 +52,13 @@ const AddParking = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    let url;
+    if (parkingId) {
+      url = `http://localhost:8000/dashboard/parking/edit/${parkingId}`
+    } else {
+      url = `http://localhost:8000/dashboard/parking/`
+    }
+
     const {
       startDate,
       endDate,
@@ -95,7 +102,7 @@ const AddParking = (props) => {
 
 
 
-    axios.post(`http://localhost:8000/dashboard/parking/`, newBooking).then((res) => {
+    axios.post(url, newBooking).then((res) => {
       handleClose();
       setParking({
         startDate: "",
