@@ -2,6 +2,7 @@ import React from "react";
 import "./viewParking.css";
 import moment from "moment";
 import Button from "@mui/material/Button";
+import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 
 const ParkingCard = (props) => {
 
@@ -46,7 +47,7 @@ const ParkingCard = (props) => {
         <p>{parkingData.notes}</p>
       </div>
       <div className="directions">
-        <Button href={props.handleDirections(parkingData.address)}>Get Directions</Button>
+        <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={props.handleDirections(parkingData.address)}>Get Directions</Button>
       </div>
     </div>
   )
