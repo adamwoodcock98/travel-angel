@@ -52,23 +52,37 @@ app.use((req, res, next) => {
   next();
 });
 
+const getExtension = (filename) => {
+  return filename.split(".").pop();
+};
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public/uploads/");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + "-" + uniqueSuffix);
+    cb(
+      null,
+      file.fieldname +
+        "-" +
+        uniqueSuffix +
+        "." +
+        getExtension(file.originalname)
+    );
   },
 });
+
+app.use(express.static("public"));
 
 const upload = multer({ storage: storage });
 
 app.post("/upload", upload.single("uploaded_file"), async (req, res) => {
-  const file = req.body;
-  console.log(file);
+  const file = req.file.filename;
+  console.log(req.file);
+  // console.log(file);
   try {
-    const upload = new Upload(file);
+    const upload = new Upload({ file: file });
 
     await upload.save();
 
@@ -77,10 +91,6 @@ app.post("/upload", upload.single("uploaded_file"), async (req, res) => {
     console.log(err.message);
     res.status(500).send(err);
   }
-  // req.file is the name of your file in the form above, here 'uploaded_file'
-
-  // console.log(file);
-  // req.body will hold the text fields, if there were any
 });
 
 app.use("/user", usersRouter);

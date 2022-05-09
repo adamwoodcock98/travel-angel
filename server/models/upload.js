@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const uploadSchema = mongoose.Schema({
   file: {
-    type: Buffer,
+    type: String,
     required: true,
   },
 });
