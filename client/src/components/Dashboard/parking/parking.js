@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddParking from "./addParking/addParking";
-import ParkingCard from "./viewParking";
+import ParkingCard from "./viewParking/crud/viewParking";
 
 const Parking = ({ session }) => {
   const userId = session;
 
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
-  const [newParking, setNewParking] = useState({
+  const newParking = {
     startDate: "",
     endDate: "",
     airport: "",
@@ -18,28 +18,22 @@ const Parking = ({ session }) => {
     contactNumber: "",
     bookingReference: "",
     notes: "",
-    buildingNumber: "",
-    buildingName: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    postalCode: "",
-    stateCounty: "",
-    countryCode: "",
+    address: {
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+    },
     user: userId,
-  });
+  };
 
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/parking/",
   });
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setNewParking({
-      ...newParking,
-      [e.target.name]: value,
-    });
-  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -49,76 +43,6 @@ const Parking = ({ session }) => {
     setOpen(false);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      startDate,
-      endDate,
-      airport,
-      type,
-      regPlate,
-      company,
-      contactNumber,
-      bookingReference,
-      notes,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-    } = newParking;
-
-    const newBooking = {
-      startDate,
-      endDate,
-      airport,
-      type,
-      regPlate,
-      company,
-      contactNumber,
-      bookingReference,
-      notes,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-    };
-
-    api.post(`/`, newBooking).then((res) => {
-      handleClose();
-      setNewParking({
-        startDate: "",
-        endDate: "",
-        airport: "",
-        type: "",
-        regPlate: "",
-        company: "",
-        contactNumber: "",
-        bookingReference: "",
-        notes: "",
-        buildingNumber: "",
-        buildingName: "",
-        addressLine1: "",
-        addressLine2: "",
-        city: "",
-        postalCode: "",
-        stateCounty: "",
-        countryCode: "",
-        user: userId,
-      });
-    });
-  };
-
   useEffect(() => {
     if (userId !== "null") {
       api.get(`/${userId}`).then((res) => {
@@ -126,7 +50,7 @@ const Parking = ({ session }) => {
         setParking(bookings);
       });
     }
-  }, [newParking]);
+  }, []);
 
   if (parking.length) {
     const parkingArray = [];
@@ -148,9 +72,9 @@ const Parking = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            parking={parking}
-            onSubmit={onSubmit}
+            parkingData={newParking}
+            parkingId={null}
+            userId={userId}
           />
         </div>
       </div>
@@ -161,9 +85,9 @@ const Parking = ({ session }) => {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        handleChange={handleChange}
-        parking={parking}
-        onSubmit={onSubmit}
+        parkingData={newParking}
+        parkingId={null}
+        userId={userId}
       />
     );
   }

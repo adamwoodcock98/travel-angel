@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import axios from "axios";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
@@ -10,116 +8,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-const AddParking = (props) => {
-  const userId = props.userId;
-  console.log(userId)
-  const open = props.open;
-  const handleOpen = props.handleOpen;
-  const handleClose = props.handleClose;
-  const parkingData = props.parkingData;
-  const parkingId = props.parkingId;
-  const [parking, setParking] = useState({
-    startDate: parkingData.startDate,
-    endDate: parkingData.endDate,
-    airport: parkingData.airport,
-    type: parkingData.type,
-    regPlate: parkingData.regPlate,
-    company: parkingData.company,
-    contactNumber: parkingData.contactNumber,
-    bookingReference: parkingData.bookingReference,
-    notes: parkingData.notes,
-    buildingNumber: parkingData.address.buildingNumber,
-    buildingName: parkingData.address.buildingName,
-    addressLine1: parkingData.address.addressLine1,
-    addressLine2: parkingData.address.addressLine2,
-    city: parkingData.address.city,
-    postalCode: parkingData.address.postalCode,
-    stateCounty: parkingData.address.stateCounty,
-    countryCode: parkingData.address.countryCode,
-    user: userId,
-  });
-
-  console.log(parking.user)
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setParking({
-      ...parking,
-      [e.target.name]: value,
-    });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      startDate,
-      endDate,
-      airport,
-      type,
-      regPlate,
-      company,
-      contactNumber,
-      bookingReference,
-      notes,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-    } = parking;
-
-    const newBooking = {
-      startDate,
-      endDate,
-      airport,
-      type,
-      regPlate,
-      company,
-      contactNumber,
-      bookingReference,
-      notes,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user: userId,
-    };
-
-
-
-    axios.post(`http://localhost:8000/dashboard/parking/`, newBooking).then((res) => {
-      handleClose();
-      setParking({
-        startDate: "",
-        endDate: "",
-        airport: "",
-        type: "",
-        regPlate: "",
-        company: "",
-        contactNumber: "",
-        bookingReference: "",
-        notes: "",
-        buildingNumber: "",
-        buildingName: "",
-        addressLine1: "",
-        addressLine2: "",
-        city: "",
-        postalCode: "",
-        stateCounty: "",
-        countryCode: "",
-        user: userId,
-      });
-    });
-  };
-
+export default function AddParking(
+  {
+  open,
+  handleOpen,
+  handleClose,
+  handleChange,
+  parking,
+  onSubmit,
+}) {
   return (
     <div>
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
@@ -346,5 +243,3 @@ const AddParking = (props) => {
     </div>
   );
 }
-
-export default AddParking;
