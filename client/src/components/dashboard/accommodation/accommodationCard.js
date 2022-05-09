@@ -1,8 +1,9 @@
 import React from "react";
 import moment from "moment";
 import "./accommodationCard.css";
+import Button from "@mui/material/Button";
 
-export default function AccommodationCard({ accommodation }) {
+export default function AccommodationCard({ accommodation, handleDirections }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
@@ -61,6 +62,9 @@ export default function AccommodationCard({ accommodation }) {
                 {accommodation.contactNumber && (
                   <p>Contact Number: {accommodation.contactNumber}</p>
                 )}
+              </div>
+              <div className="directions">
+                  <Button href={handleDirections(accommodation.address)}>Get Directions</Button>
               </div>
             </div>
           </div>
