@@ -1,6 +1,7 @@
 import React from "react";
 import "./viewParking.css";
 import moment from "moment";
+import Button from "@mui/material/Button";
 
 const ParkingCard = (props) => {
 
@@ -43,6 +44,9 @@ const ParkingCard = (props) => {
       <div className="parking-card-notes-footer">
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
+      </div>
+      <div className="directions">
+        <Button href={props.handleDirections(parkingData.address)}>Get Directions</Button>
       </div>
     </div>
   )
