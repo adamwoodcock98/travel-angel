@@ -1,16 +1,20 @@
 const Flight = require("../models/flight.js");
+const Trip = require("../models/trip.js");
 
 const FlightsController = {
   Index: async (req, res) => {
     try {
       const user = req.params.id;
+      const tripId = req.params.tripId;
       const outboundFlight = await Flight.find({
         isOutbound: true,
         user: user,
+        trip: tripId,
       });
       const inboundFlight = await Flight.find({
         isOutbound: false,
         user: user,
+        trip: tripId,
       });
       res.json({
         outbound: outboundFlight,
@@ -42,9 +46,16 @@ const FlightsController = {
         bookingReference: data.bookingReference,
         isOutbound: data.isOutbound,
         user: data.user,
+        trip: data.trip,
       });
 
       await flight.save();
+
+      const trip = await Trip.findById(data.trip);
+
+      trip.flights.push(flight);
+
+      await trip.save();
 
       res.status(200).send();
     } catch (err) {

@@ -17,11 +17,16 @@ const visaSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true
-  // },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Trip",
+    required: true,
+  },
 });
 
 const Visa = mongoose.model("Visa", visaSchema);

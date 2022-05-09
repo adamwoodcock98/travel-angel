@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AddParking from "./addParking/addParking";
-import ParkingCard from "./viewParking/viewParking";
+import AddParking from "./addParking";
+import ParkingCard from "./viewParking";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
+import { useParams } from "react-router-dom";
 
 const Parking = ({ session }) => {
+  const { tripId } = useParams();
+
   const userId = session;
 
   const [open, setOpen] = useState(false);
@@ -31,6 +34,7 @@ const Parking = ({ session }) => {
       countryCode: "",
     },
     user: userId,
+    trip: tripId,
   };
 
   const api = axios.create({
@@ -47,7 +51,7 @@ const Parking = ({ session }) => {
 
   useEffect(() => {
     if (userId !== "null") {
-      api.get(`/${userId}`).then((res) => {
+      api.get(`/${userId}/${tripId}`).then((res) => {
         const bookings = res.data.bookings;
         setParking(bookings);
       });

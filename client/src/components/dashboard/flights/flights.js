@@ -6,8 +6,11 @@ import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
+import { useParams } from "react-router-dom";
 
 const Flights = ({ session }) => {
+  const { tripId } = useParams();
+
   const userId = session;
 
   const [inboundFlight, setInboundFlight] = useState([]);
@@ -29,6 +32,7 @@ const Flights = ({ session }) => {
     bookingReference: "",
     isOutbound: "",
     user: userId,
+    trip: tripId,
   });
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -63,7 +67,7 @@ const Flights = ({ session }) => {
 
   useEffect(() => {
     api
-      .get(`/${userId}`)
+      .get(`/${userId}/${tripId}`)
       .then((res) => {
         const outbound = res.data.outbound;
         const inbound = res.data.inbound;
