@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -12,7 +10,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 const AddParking = (props) => {
   const userId = props.userId;
-  console.log(userId)
   const open = props.open;
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
@@ -38,8 +35,6 @@ const AddParking = (props) => {
     countryCode: parkingData.address.countryCode,
     user: userId,
   });
-
-  console.log(parking.user)
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -129,9 +124,6 @@ const AddParking = (props) => {
 
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Parking</DialogTitle>
         <DialogContent>

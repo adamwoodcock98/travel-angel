@@ -1,10 +1,11 @@
 import React from "react";
 import "./viewParking.css";
 import moment from "moment";
+import CrudMenu from "./crud/crud"
 
 const ParkingCard = (props) => {
-
   const parkingData = props.bookingData;
+  const userId = props.userId
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
@@ -12,6 +13,7 @@ const ParkingCard = (props) => {
     <div className="parking-card">
       <div className="parking-card-header">
         <h1>Your booking{parkingData.bookingReference && `: ${parkingData.bookingReference}`}</h1>
+        
       </div>
       <div className="parking-card-dates-content">
         <div className="parking-card-dates-arrival">
@@ -44,6 +46,7 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
+      <CrudMenu userId={userId} parkingData={parkingData} />
     </div>
   )
 

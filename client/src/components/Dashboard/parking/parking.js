@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddParking from "./addParking/addParking";
-import ParkingCard from "./viewParking/crud/viewParking";
+import ParkingCard from "./viewParking/viewParking";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 
 const Parking = ({ session }) => {
   const userId = session;
@@ -57,7 +59,7 @@ const Parking = ({ session }) => {
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} />
+        <ParkingCard bookingData={booking} key={booking._id} userId={userId} />
       );
     });
 
@@ -68,6 +70,9 @@ const Parking = ({ session }) => {
         </div>
         <div className="parking-content">{parking.length && parkingArray}</div>
         <div className="parking-footer">
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddParking
             open={open}
             handleOpen={handleOpen}

@@ -68,7 +68,7 @@ const ParkingController = {
     
       await parking.save();
 
-      const address = await Address.findById(data.address._id);
+      const address = await Address.findById(parking.address._id);
       address.buildingNumber = data.buildingNumber;
       address.buildingName = data.buildingName;
       address.addressLine1 = data.addressLine1;

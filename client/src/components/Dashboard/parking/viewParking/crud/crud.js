@@ -9,7 +9,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import "./crud.css"
-import AddAccommodation from "../../addParking/addParking"
+import AddParking from "../../addParking/addParking"
 
 const StyledMenu = styled((props) => (
 
@@ -54,7 +54,8 @@ const StyledMenu = styled((props) => (
 }));
 
 const CrudMenu = (props) => {
-  const parkingData = props.accommodationData;
+  const parkingData = props.parkingData;
+  const parkingId = parkingData._id
   const userId = props.userId;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
@@ -112,12 +113,12 @@ const CrudMenu = (props) => {
           Delete
         </MenuItem>
       </StyledMenu>
-      <AddAccommodation
-        handleOpen={handleOpen}
+      <AddParking
         open={open}
+        handleOpen={handleOpen}
         handleClose={handleClose}
-        accommodationData={parkingData}
-        accommodationId={parkingData._id}
+        parkingData={parkingData}
+        parkingId={parkingId}
         userId={userId}
       />
     </div>
