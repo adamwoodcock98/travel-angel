@@ -5,6 +5,7 @@ import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
+// require("dotenv").config({ path: "./config.env" });
 
 const Flights = ({ session }) => {
   const userId = session;
@@ -136,11 +137,12 @@ const Flights = ({ session }) => {
         }
       });
   }, []);
+
   
   // FLIGHT API
     
   const formatDate = (date) => moment(date).format("YYYY-MM-DD");
-  const formatTime = (time) => moment(time).format("hh:ss");
+  const formatTime = (time) => moment(time).format("hh:mm");
     const flightNumber = flight.flightNumber;
     const flightDate = formatDate(flight.departureDate);
     // console.log(flightNumber)
@@ -149,7 +151,7 @@ const Flights = ({ session }) => {
     const options = {
       headers: {
         'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
-        'X-RapidAPI-Key': process.env.FLIGHTS_API_KEY,
+        'X-RapidAPI-Key': process.env.REACT_APP_FLIGHT_API_KEY,
       }
     }
     const flightApi = axios.create({
@@ -157,29 +159,30 @@ const Flights = ({ session }) => {
       // baseURL: "https://aerodatabox.p.rapidapi.com/flights/number/EZY8862/2022-05-09/",
     });
 
-
-    useEffect(() => {
-      // const handleApiSearch = () => {
-      flightApi.get('/', options).then((res) => {
-        const data  = res.data[0]
-        // console.log(data)
-
-        setFlight({
-          ...flight, 
-          departureTime: formatTime(data.airport.scheduledTimeLocal),
-          airline: data.airline.name,
-          departureAirport: data.departure.airport.name,
-          departureTerminal: data.departure.terminal,
-          departureCity: data.departure.airport.municipalityName,
-          departureGate: data.departure.gate,
-          arrivalAirport: data.arrival.airport.name,
-          arrivalTerminal: data.arrival.terminal,
-          arrivalCity: data.arrival.airport.municipalityName,
-          arrivalGate: data.arrival.gate,
-        })
-  })
-// }
-}, [flight]);
+    // useEffect(() => {
+      const handleApiSearch = async () => {
+        await flightApi.get('/', options).then((res) => {
+          const data  = res.data[0]
+          console.log(data.departure)
+  
+          setFlight({
+            ...flight, 
+            departureTime: formatTime(data.departure.scheduledTimeLocal),
+            airline: data.airline.name,
+            departureAirport: data.departure.airport.shortName,
+            departureTerminal: data.departure.terminal,
+            departureCity: data.departure.airport.municipalityName,
+            departureGate: data.departure.gate,
+            arrivalAirport: data.arrival.airport.name,
+            arrivalTerminal: data.arrival.terminal,
+            arrivalCity: data.arrival.airport.municipalityName,
+            arrivalGate: data.arrival.gate,
+          })
+      })
+      }
+        
+      
+// }, [flight]);
 
   // FLIGHT API
 
@@ -223,7 +226,8 @@ const Flights = ({ session }) => {
             handleChange={handleChange}
             flight={flight}
             onSubmit={onSubmit}
-            // handleApiSearch={handleApiSearch}
+            handleApiSearch={handleApiSearch}
+           
           />
         </div>
       </div>
@@ -238,7 +242,8 @@ const Flights = ({ session }) => {
           handleChange={handleChange}
           flight={flight}
           onSubmit={onSubmit}
-          // handleApiSearch={handleApiSearch}
+          handleApiSearch={handleApiSearch}
+      
         />
         {alertMessage && (
           <Alerts
