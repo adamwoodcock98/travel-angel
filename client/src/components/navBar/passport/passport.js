@@ -9,6 +9,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  CircularProgress
 } from "@mui/material";
 
 export const Passport = ({ session }) => {
