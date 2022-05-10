@@ -60,42 +60,7 @@ const getExtension = (filename) => {
   return filename.split(".").pop();
 };
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./public/uploads/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(
-      null,
-      file.fieldname +
-        "-" +
-        uniqueSuffix +
-        "." +
-        getExtension(file.originalname)
-    );
-  },
-});
-
 app.use(express.static("public"));
-
-const upload = multer({ storage: storage });
-
-app.post("/upload", upload.single("uploaded_file"), async (req, res) => {
-  const file = req.file.filename;
-  console.log(req.file);
-  // console.log(file);
-  try {
-    const upload = new Upload({ file: file });
-
-    await upload.save();
-
-    res.json({ msg: "Upload Successful", type: "success", file: file });
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).send(err);
-  }
-});
 
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
