@@ -11,6 +11,7 @@ const Transfers = ({ session }) => {
   const userId = session;
 
   const [open, setOpen] = useState(false);
+  const [emptyFields, setEmptyFields] = useState([])
   const [transfer, setTransfer] = useState({
     pickupTime: "",
     dropoffTime: "",
@@ -109,6 +110,11 @@ const Transfers = ({ session }) => {
       trip,
     };
 
+    if (company === "" || contactNumber === "" || pickupTime === "" || dropoffTime === "" || pickupAddress.addressLine1 === "" || pickupAddress.city === "" || pickupAddress.postalCode === "" || dropoffAddress.addressLine1 === "" || dropoffAddress.city === "" || dropoffAddress.postalCode){
+      setEmptyFields(['company', 'contactNumber', 'pickupTime', 'dropoffTime', 'pickupAddress.addressLine1', 'pickupAddress.city', 'pickupAddress.postalCode', 'dropoffAddress.addressLine1', 'dropoffAddress.city', 'dropoffAddress.postalCode'])
+      return
+    }
+
     axios
       .post("http://localhost:8000/dashboard/transfers/", newTransfer)
       .then(() => {
@@ -188,6 +194,7 @@ const Transfers = ({ session }) => {
             handleSubmit={handleSubmit}
             handlePickupChange={handlePickupChange}
             handleDropoffChange={handleDropoffChange}
+            emptyFields={emptyFields}
           />
         </div>
       </div>
@@ -204,6 +211,7 @@ const Transfers = ({ session }) => {
           handleSubmit={handleSubmit}
           handlePickupChange={handlePickupChange}
           handleDropoffChange={handleDropoffChange}
+          emptyFields={emptyFields}
         />
       </div>
     );
