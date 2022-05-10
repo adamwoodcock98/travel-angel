@@ -9,7 +9,7 @@ const ParkingCard = (props) => {
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
   const handleSubmit = async (id) => {
-    window.open(`http://localhost:8000/dashboard/accommodation/download/${id}`);
+    window.open(`http://localhost:8000/dashboard/parking/download/${id}`);
   };
 
   return (

@@ -1,21 +1,25 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
 import "./transferCard.css";
+import Upload from "../../upload/upload";
 
-export const InboundTransferCard = ({inboundTransfer}) => {
+export const InboundTransferCard = ({ inboundTransfer }) => {
+  const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
+  const formatTime = (time) => moment(time).format("HH:mm");
 
-    const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
-    const formatTime = (time) => moment(time).format('HH:mm');
-
-    const formatAddress = (address) => {
-      const addressObject = address;
-      delete addressObject._id;
-      delete addressObject.__v;
-      const arrayOfAddressValues = Object.values(addressObject);
-      const onlyDefinedAddressValues = arrayOfAddressValues.filter(
-        (addressValue) => addressValue !== ""
-      );
+  const formatAddress = (address) => {
+    const addressObject = address;
+    delete addressObject._id;
+    delete addressObject.__v;
+    const arrayOfAddressValues = Object.values(addressObject);
+    const onlyDefinedAddressValues = arrayOfAddressValues.filter(
+      (addressValue) => addressValue !== ""
+    );
     return onlyDefinedAddressValues.join(", ");
+  };
+
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/transfers/download/${id}`);
   };
 
   return (
@@ -37,10 +41,12 @@ export const InboundTransferCard = ({inboundTransfer}) => {
                   <p>{formatTime(inboundTransfer.pickupTime)}</p>
                 </div>
                 <div className="pickup-address">
-                {inboundTransfer.pickupAddress && (
-                  <p>Address: {formatAddress(inboundTransfer.pickupAddress)}</p>
-                )}
-              </div>
+                  {inboundTransfer.pickupAddress && (
+                    <p>
+                      Address: {formatAddress(inboundTransfer.pickupAddress)}
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="dropoff">
                 <div className="dropoff-header">
@@ -52,10 +58,12 @@ export const InboundTransferCard = ({inboundTransfer}) => {
                   <p>{formatTime(inboundTransfer.dropoffTime)}</p>
                 </div>
                 <div className="dropoff-address">
-                {inboundTransfer.dropoffAddress && (
-                  <p>Address: {formatAddress(inboundTransfer.dropoffAddress)}</p>
-                )}
-              </div>
+                  {inboundTransfer.dropoffAddress && (
+                    <p>
+                      Address: {formatAddress(inboundTransfer.dropoffAddress)}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
             <div className="footer">
@@ -65,9 +73,7 @@ export const InboundTransferCard = ({inboundTransfer}) => {
                 )}
               </div>
               <div className="company">
-                {inboundTransfer.company && (
-                  <p>{inboundTransfer.company}</p>
-                )}
+                {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
               </div>
               <div className="contact-number">
                 {inboundTransfer.contactNumber && (
@@ -75,9 +81,23 @@ export const InboundTransferCard = ({inboundTransfer}) => {
                 )}
               </div>
             </div>
+            <div className="uploads">
+              <Upload cardId={inboundTransfer._id} url="dashboard/transfers" />
+              {inboundTransfer.uploads.length &&
+                inboundTransfer.uploads.map((upload, index) => {
+                  return (
+                    <button
+                      onClick={() => handleSubmit(upload._id)}
+                      key={index}
+                    >
+                      {upload.name}
+                    </button>
+                  );
+                })}
+            </div>
           </div>
         );
       })}
     </div>
   );
-}
+};
