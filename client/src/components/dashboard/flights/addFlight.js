@@ -14,13 +14,17 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
-const AddFlight = (props) => {
-  const flightData = props.flightData;
-  const tripId = props.tripId;
-  const flightId = props.flightId;
-  const open = props.open;
-  const userId = props.user;
-  const handleClose = props.handleClose;
+const AddFlight = ({
+  flightData,
+  tripId,
+  flightId,
+  open,
+  userId,
+  handleClose,
+  handleClear,
+  handleApiSearch
+}) => {
+
   const [flight, setFlight] = useState({
     flightNumber: flightData.flightNumber,
     departureTime: flightData.departureTime,
@@ -138,21 +142,6 @@ const AddFlight = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={flight.departureTime}
-            autoFocus
-            margin="dense"
-            id="departureTime"
-            name="departureTime"
-            label="Time"
-            type="time"
-            variant="outlined"
-            required
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-          />
-          <TextField
             value={flight.departureDate}
             autoFocus
             margin="dense"
@@ -167,6 +156,46 @@ const AddFlight = (props) => {
             }}
             onChange={handleChange}
           />
+          </DialogContent>
+          
+          <DialogActions>
+            <Button onClick={handleApiSearch}>Search</Button>
+          </DialogActions>
+          
+          <DialogContent>
+          <FormControl sx={{ m: 1, minWidth: 190 }}>
+            <InputLabel id="demo-select-small">Journey Type</InputLabel>
+            <Select
+              value={flight.isOutbound}
+              autoFocus
+              margin="dense"
+              id="isOutbound"
+              name="isOutbound"
+              label="Journey type"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value={false}>Inbound</MenuItem>
+              <MenuItem value={true}>Outbound</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            value={flight.departureTime}
+            autoFocus
+            margin="dense"
+            id="departureTime"
+            name="departureTime"
+            label="Time"
+            type="time"
+            variant="outlined"
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
+          
           <TextField
             value={flight.airline}
             autoFocus
@@ -281,28 +310,13 @@ const AddFlight = (props) => {
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
-            <Select
-              value={flight.isOutbound}
-              autoFocus
-              margin="dense"
-              id="isOutbound"
-              name="isOutbound"
-              label="Journey type"
-              variant="outlined"
-              onChange={handleChange}
-              required
-            >
-              <MenuItem value={true}>Outbound</MenuItem>
-              <MenuItem value={false}>Inbound</MenuItem>
-            </Select>
-          </FormControl>
+          
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
           {flightId && <Button onClick={onSubmit}>Update Flight Details</Button>}
           {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
+          <Button onClick={handleClear}>Clear</Button>
+          <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>
