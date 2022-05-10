@@ -25,8 +25,8 @@ Travel Angel is a MERN-stack web application used to safely and securely store t
 
 - [Mongoose](https://mongoosejs.com) - Object Data Mapper for MongoDB.
 - [Nodemon](https://nodemon.io/) - reloads the server automatically on file-change (Not CSS though!).
-- [Jest](https://jestjs.io/) - back-end unit tests.
-- [React Testing Library](https://www.cypress.io/) - front-end unit tests.
+- [Jest](https://jestjs.io/) - back-end unit testing.
+- [React Testing Library](https://github.com/testing-library/react-testing-library/) - front-end unit testing.
 - [Sketch](https://sketch.com/) - wireframing and mock-ups.
 - [GitHub Actions](https://github.com/features/actions) - continuous integration and automated deployment
 
