@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import { Alerts } from "../../assets/snackbar";
 
 const AddTransfer = (props) => {
   const userId = props.userId;
@@ -50,6 +51,24 @@ const AddTransfer = (props) => {
     user: userId,
     trip: tripId,
   })
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handlePickupChange = (e) => {
     const value = e.target.value;
@@ -151,6 +170,8 @@ const AddTransfer = (props) => {
           trip: tripId,
         });
         handleClose();
+      }).catch(() => {
+        handleAlert("Whoops! We couldn't add your transfer, please try again.", "error");
       });
   };
 
@@ -438,6 +459,13 @@ const AddTransfer = (props) => {
           <Button onClick={handleSubmit}>Save Transfer Details</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

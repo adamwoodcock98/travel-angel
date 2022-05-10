@@ -136,8 +136,6 @@ const AddFlight = (props) => {
         isOutbound: "",
         user: userId,
       })
-    }).catch(() => {
-      handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
     });
   };
 

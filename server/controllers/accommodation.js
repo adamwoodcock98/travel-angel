@@ -69,12 +69,12 @@ const AccommodationController = {
               newTrip.accommodation.push(accommodation._id);
               newTrip
                 .save()
-                .then(res.json({ msg: "Accommodation added successfully" }));
+                .then(res.status(500).send());
             });
           })
-          .catch((err) =>
-            res.status(400).json({ error: "Unable to add this accommodation" })
-          );
+          .catch((err) =>{
+            res.status(500).send()
+      ``});
       })
       .catch((err) =>
         res.status(400).json({ error: "Unable to add this address" })
