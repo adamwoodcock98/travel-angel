@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Alerts } from "../../assets/snackbar";
 import {
   Button,
   Fab,
@@ -36,6 +37,24 @@ export default function AddPassport({
     dateOfExpiry: passportData.dateOfExpiry,
     user: user,
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -86,6 +105,7 @@ export default function AddPassport({
     await axios
       .post(url, newPassport)
       .then((res) => {
+        handleAlert("Passport added successfully.", "success");
         setPassport({
           passportNumber: "",
           firstName: "",
@@ -98,9 +118,13 @@ export default function AddPassport({
           dateOfIssue: "",
           dateOfExpiry: "",
           user: user,
-        });
+        })
         handleClose();
-      });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        handleAlert("Whoops! We couldn't add your passport, please try again.", "error");
+      });;;
   };
 
 
@@ -257,6 +281,13 @@ export default function AddPassport({
           <Button onClick={onSubmit}>Save</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
     </div>
   );
 }

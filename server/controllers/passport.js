@@ -3,12 +3,13 @@ const Passport = require("../models/passport.js");
 const PassportController = {
   Index: (req, res) => {
     const user = req.params.id;
-    Passport.find({user: user}, (err, passport) => {
-      if (err) {
-        throw err;
+    Passport.find({user: user}, (e, passport) => {
+      if (e) {
+        console.log(e.message);
+        res.status(500).send();
       }
       res.json({ passport: passport });
-    });
+    })
   },
 
   New: (req, res) => {

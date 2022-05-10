@@ -6,10 +6,12 @@ import axios from "axios";
 import "./passport.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Passport = ({ session }) => {
   const userId = session;
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [displayState, setDisplayState] = useState([]);
   const [passport, setPassport] = useState({
     passportNumber: "",
@@ -45,10 +47,25 @@ const Passport = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     if (userId !== "null") {
       axios.get(`http://localhost:8000/dashboard/passport/${userId}`).then((res) => {
         setDisplayState(res.data.passport);
-      });
+      })
+      .catch((error) => {
+        if (error.response.status) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert(
+            "There was a problem connecting to the server.",
+            "error"
+          );
+        }
+      })
+      .finally(() => setLoading(false));;
     }
   }, []);
 
@@ -76,24 +93,27 @@ const Passport = ({ session }) => {
   if (displayState.length) {
     return (
       <div id="Passport">
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
+        </div>
         <h1 className="pass-h1">Passport</h1>
-        <Fab
-        id="pass-fab"
-        size="medium"
-        color="secondary"
-        aria-label="add"
-        onClick={handleOpen}
-      >
-        <AddIcon />
-      </Fab>
-      <AddPassport
-          open={open}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          passportData={passport}
-          passportId={null}
-          user={userId}
-        />
+          <Fab
+            id="pass-fab"
+            size="medium"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+            >
+            <AddIcon />
+          </Fab>
+          <AddPassport
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            passportData={passport}
+            passportId={null}
+            user={userId}
+          />
         <div id="pass-render">{passportRender}</div>
         <Alerts
           message={alertMessage}
