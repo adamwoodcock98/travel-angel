@@ -1,0 +1,19 @@
+.doses {
+  display: flex;
+}
+
+.vaccine-card-dose {
+  flex: 1;
+}
+
+.vaccine-card-dose-date {
+  flex: 1;
+}
+
+.vaccine-card-dose-type {
+  flex: 1;
+}
+
+.vaccine-card-buttons {
+  display: flex;
+}

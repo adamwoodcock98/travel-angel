@@ -30,6 +30,7 @@ const UsersController = {
         bcrypt.compare(password, user.password).then((result) => {
           if (result) {
             req.session.user = user;
+            console.log(req.session.user);
             res.json({
               msg: `Welcome back, ${user.firstName}!`,
               type: "success",
@@ -54,6 +55,51 @@ const UsersController = {
       req.session.destroy();
     }
     res.json({ msg: "You have logged out successfully!", type: "success" });
+  },
+
+  Profile: (req, res) => {
+    const userId = req.params.id;
+    User.findById(userId).then((user) => {
+      res.json({
+        user: user,
+      });
+    });
+  },
+
+  Settings: (req, res) => {
+    const userId = req.params.id;
+    User.findOne({ _id: userId }).then((user) => {
+      res.json({
+        user: user,
+      });
+    });
+  },
+
+  Save: async (req, res) => {
+    const userId = req.params.id;
+    const userDetails = req.body;
+    // const password = req.body.password;
+    // const hashedPassword = await bcrypt.hash(password, 10)
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      {
+        $set: {
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
+          email: userDetails.email,
+          // password: hashedPassword,
+          profilePicture: userDetails.profilePicture,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    await res.json({
+      msg: "Congrats! You've updated your details!",
+      type: "success",
+      user: "user",
+    });
   },
 };
 

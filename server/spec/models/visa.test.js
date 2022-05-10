@@ -8,11 +8,12 @@ describe("Visa model", () => {
     mongoose.connection.collections.visas.drop(() => {
       Visa.syncIndexes(() => {
         done();
-      })
+      });
     });
   });
 
   const mockUserID = new mongoose.Types.ObjectId();
+  const mockTripID = new mongoose.Types.ObjectId();
 
   it("stores the start date", () => {
     advanceTo();
@@ -120,32 +121,60 @@ describe("Visa model", () => {
     await expect(visa.save()).rejects.toThrow();
   });
 
-  // it("stores the user", () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const mockEndDate = new Date();
-  //   const visa = new Visa({
-    // visaNumber: "ABC123",
-    // startDate: mockStartDate,
-    // endDate: mockEndDate,
-    // issuingCountry: "Australia",
-    // user: mockUserID,
-  //   });
-  //   expect(visa.user).toEqual(mockUserID);
-  // });
+  it("stores the user", () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+    });
+    expect(visa.user).toEqual(mockUserID);
+  });
 
-  // it("stores the user as a required field", async () => {
-  //   advanceTo();
-  //   const mockStartDate = new Date();
-  //   const mockEndDate = new Date();
-  //   const visa = new visa({
-    // visaNumber: "ABC123",
-    // startDate: mockStartDate,
-    // endDate: mockEndDate,
-    // issuingCountry: "Australia",
-    // user: mockUserID,
-  //   });
-  //   await expect(visa.save()).rejects.toThrow();
-  // });
+  it("stores the trip", () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+      trip: mockTripID,
+    });
+    expect(visa.trip).toEqual(mockTripID);
+  });
 
+  it("stores the user as a required field", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+    });
+    await expect(visa.save()).rejects.toThrow();
+  });
+
+  it("stores the trip as a required field", async () => {
+    advanceTo();
+    const mockStartDate = new Date();
+    const mockEndDate = new Date();
+    const visa = new Visa({
+      visaNumber: "ABC123",
+      startDate: mockStartDate,
+      endDate: mockEndDate,
+      issuingCountry: "Australia",
+      user: mockUserID,
+    });
+    await expect(visa.save()).rejects.toThrow();
+  });
 });

@@ -7,8 +7,10 @@ const flightsRouter = require("./routes/flights.js");
 const accommodationRouter = require("./routes/accommodation.js");
 const transferRouter = require("./routes/transfers.js");
 const parkingRouter = require("./routes/parking.js");
-const covidRouter = require("./routes/covid.js")
-const visaRouter = require("./routes/visas.js")
+const passportRouter = require("./routes/passport.js");
+const tripRouter = require("./routes/trips.js");
+const covidRouter = require("./routes/covid.js");
+const visaRouter = require("./routes/visas.js");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -55,8 +57,10 @@ app.use((req, res, next) => {
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);
 app.use("/dashboard/accommodation", accommodationRouter);
+app.use("/dashboard/passport", passportRouter);
 app.use("/dashboard/transfers", transferRouter);
 app.use("/dashboard/parking", parkingRouter);
+app.use("/trips", tripRouter);
 app.use("/dashboard/covid", covidRouter);
 app.use("/dashboard/visas", visaRouter);
 

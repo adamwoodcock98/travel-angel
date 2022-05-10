@@ -1,26 +1,28 @@
 const Flight = require("../models/flight.js");
+const Trip = require("../models/trip.js");
 
 const FlightsController = {
   Index: async (req, res) => {
     try {
       const user = req.params.id;
+      const tripId = req.params.tripId;
       const outboundFlight = await Flight.find({
         isOutbound: true,
         user: user,
+        trip: tripId,
       });
       const inboundFlight = await Flight.find({
         isOutbound: false,
         user: user,
+        trip: tripId,
       });
-      console.log(outboundFlight);
       res.json({
         outbound: outboundFlight,
         inbound: inboundFlight,
-        user: req.session.user,
+        user: user,
       });
       res.status(200).send();
     } catch (e) {
-      console.log(e.message);
       res.status(500).send();
     }
   },
@@ -44,9 +46,16 @@ const FlightsController = {
         bookingReference: data.bookingReference,
         isOutbound: data.isOutbound,
         user: data.user,
+        trip: data.trip,
       });
 
       await flight.save();
+
+      const trip = await Trip.findById(data.trip);
+
+      trip.flights.push(flight);
+
+      await trip.save();
 
       res.status(200).send();
     } catch (err) {
@@ -54,6 +63,48 @@ const FlightsController = {
       res.status(500).send(err);
     }
   },
+
+  Update: async (req, res) => {
+    const data = req.body;
+   try {
+    const flight = await Flight.findById(req.params.id);
+    console.log(flight)
+    flight.flightNumber = data.flightNumber;
+    flight.departureTime = data.departureTime;
+    flight.departureDate = data.departureDate;
+    flight.airline = data.airline;
+    flight.departureAirport = data.departureAirport;
+    flight.departureTerminal = data.departureTerminal;
+    flight.departureCity = data.departureCity;
+    flight.departureGate = data.departureGate;
+    flight.arrivalAirport = data.arrivalAirport;
+    flight.arrivalTerminal = data.arrivalTerminal;
+    flight.arrivalCity = data.arrivalCity;
+    flight.arrivalGate = data.arrivalGate;
+    flight.bookingReference = data.bookingReference;
+    flight.isOutbound = data.isOutbound;
+    await flight.save();
+
+    res.status(200).send();
+   } catch(e) {
+     console.log(e.message);
+     res.status(500).send();
+   }
+  },
+
+  Delete: async (req, res) => {
+    const id = req.params.id;
+
+    try {
+      await Flight.deleteOne({ _id: id });
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+
+      res.status(500).send();
+    }
+  }
 };
 
 module.exports = FlightsController;
