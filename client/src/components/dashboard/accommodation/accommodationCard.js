@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "./accommodationCard.css";
+import Upload from "../../upload/upload";
 
 export default function AccommodationCard({ accommodation }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
+  const [state, setState] = useState(0);
+
+  useEffect(() => {
+    console.log("rerendered, successfully");
+  }, [state]);
 
   const formatAddress = (address) => {
     const addressObject = address;
@@ -16,6 +22,11 @@ export default function AccommodationCard({ accommodation }) {
     return onlyDefinedAddressValues.join(", ");
   };
 
+  const handleSubmit = async (id) => {
+    setState((prev) => prev + 1);
+    window.open(`http://localhost:8000/dashboard/accommodation/download/${id}`);
+  };
+
   return (
     <div className="card-container">
       {accommodation.map((accommodation, index) => {
@@ -23,6 +34,10 @@ export default function AccommodationCard({ accommodation }) {
           <div className="accommodation-card" key={index}>
             <div className="header">
               <h1>{accommodation.name}</h1>
+              <Upload
+                cardId={accommodation._id}
+                url="dashboard/accommodation"
+              />
             </div>
             <div className="body">
               <div className="check-in">
@@ -44,6 +59,20 @@ export default function AccommodationCard({ accommodation }) {
                   <br></br>
                   <p>Check-out by {accommodation.checkOutTime}</p>
                 </div>
+              </div>
+              <div className="uploads">
+                Download Your fields
+                {accommodation.uploads.length &&
+                  accommodation.uploads.map((upload, index) => {
+                    return (
+                      <button
+                        onClick={() => handleSubmit(upload._id)}
+                        key={index}
+                      >
+                        {upload.name}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
             <div className="footer">

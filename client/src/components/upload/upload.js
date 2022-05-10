@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Upload() {
+function Upload({ cardId, url }) {
   const [selectedFile, setSelectedFile] = useState();
 
   const changeHandler = (event) => {
@@ -16,7 +16,7 @@ function Upload() {
     formData.append("uploaded_file", selectedFile);
     if (selectedFile) {
       await axios
-        .post("http://localhost:8000/upload", formData)
+        .post(`http://localhost:8000/${url}/upload/${cardId}`, formData)
         .then((result) => {
           console.log("Success:", result);
         })
