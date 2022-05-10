@@ -110,8 +110,8 @@ const Transfers = ({ session }) => {
       trip,
     };
 
-    if (company === "" || contactNumber === "" || pickupTime === "" || dropoffTime === "" || pickupAddress.addressLine1 === "" || pickupAddress.city === "" || pickupAddress.postalCode === "" || dropoffAddress.addressLine1 === "" || dropoffAddress.city === "" || dropoffAddress.postalCode){
-      setEmptyFields(['company', 'contactNumber', 'pickupTime', 'dropoffTime', 'pickupAddress.addressLine1', 'pickupAddress.city', 'pickupAddress.postalCode', 'dropoffAddress.addressLine1', 'dropoffAddress.city', 'dropoffAddress.postalCode'])
+    if (company === "" || contactNumber === "" || pickupTime === "" || dropoffTime === "" || pickupAddress.addressLine1 === "" || pickupAddress.city === "" || pickupAddress.postalCode === "" || dropoffAddress.addressLine1 === "" || dropoffAddress.city === "" || dropoffAddress.postalCode === "" || isOutbound === ""){
+      setEmptyFields(['company', 'contactNumber', 'pickupTime', 'dropoffTime', 'pickupAddress.addressLine1', 'pickupAddress.city', 'pickupAddress.postalCode', 'dropoffAddress.addressLine1', 'dropoffAddress.city', 'dropoffAddress.postalCode', 'isOutbound'])
       return
     }
 

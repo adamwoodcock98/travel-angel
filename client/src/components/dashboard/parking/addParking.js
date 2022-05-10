@@ -16,6 +16,7 @@ export default function AddParking(
   handleChange,
   parking,
   onSubmit,
+  emptyFields,
 }) {
   return (
     <div>
@@ -38,6 +39,7 @@ export default function AddParking(
             type="datetime-local"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -53,6 +55,7 @@ export default function AddParking(
             type="datetime-local"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -170,6 +173,7 @@ export default function AddParking(
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('addressLine1') ? '1px solid red' : '' }}
             onChange={handleChange}
           />
           <TextField
@@ -195,6 +199,7 @@ export default function AddParking(
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('city') ? '1px solid red' : '' }}
             onChange={handleChange}
           />
           <TextField
@@ -220,6 +225,7 @@ export default function AddParking(
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('postalCode') ? '1px solid red' : '' }}
             onChange={handleChange}
           />
           <TextField

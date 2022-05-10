@@ -53,6 +53,8 @@ export default function AddTransfer({
               name="isOutbound"
               label="Journey type"
               variant="outlined"
+              required
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' }}
               onChange={handleChange}
             >
               <MenuItem value={false}>Inbound</MenuItem>
@@ -250,7 +252,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('dropoffAddress.address') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('dropoffAddress.addressLine1') ? '1px solid red' : '' }}
             onChange={handleDropoffChange}
           />
           <TextField

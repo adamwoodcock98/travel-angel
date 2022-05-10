@@ -11,6 +11,7 @@ const Parking = ({ session }) => {
 
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
+  const [emptyFields, setEmptyFields] = useState([]);
   const [newParking, setNewParking] = useState({
     startDate: "",
     endDate: "",
@@ -100,6 +101,11 @@ const Parking = ({ session }) => {
       trip,
     };
 
+    if(startDate === "" || endDate === "" || addressLine1 === "" || city === "" || postalCode === ""){
+      setEmptyFields(['startDate', 'endDate', 'addressLine1', 'city', 'postalCode'])
+      return
+    }
+
     api.post(`/`, newBooking).then((res) => {
       handleClose();
       setNewParking({
@@ -173,6 +179,7 @@ const Parking = ({ session }) => {
             handleChange={handleChange}
             parking={parking}
             onSubmit={onSubmit}
+            emptyFields={emptyFields}
           />
         </div>
       </div>
@@ -186,6 +193,7 @@ const Parking = ({ session }) => {
         handleChange={handleChange}
         parking={parking}
         onSubmit={onSubmit}
+        emptyFields={emptyFields}
       />
     );
   }
