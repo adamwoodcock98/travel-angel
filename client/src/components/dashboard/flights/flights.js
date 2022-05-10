@@ -17,6 +17,7 @@ const Flights = ({ session }) => {
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
   const [flight, setFlight] = useState({
     flightNumber: "",
@@ -65,6 +66,7 @@ const Flights = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   useEffect(() => {
@@ -91,7 +93,7 @@ const Flights = ({ session }) => {
         }
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [didUpdate]);
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
