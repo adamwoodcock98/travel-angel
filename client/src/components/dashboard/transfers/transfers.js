@@ -16,6 +16,7 @@ const Transfers = ({ session }) => {
   const userId = session;
 
   const [open, setOpen] = useState(false);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [transfer, setTransfer] = useState({
     pickupTime: "",
     dropoffTime: "",
@@ -71,6 +72,7 @@ const Transfers = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   const [outboundTransfer, setOutboundTransfer] = useState([]);
@@ -102,7 +104,7 @@ const Transfers = ({ session }) => {
         })
         .finally(() => setLoading(false));;
     }
-  }, [transfer]);
+  }, [didUpdate]);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (

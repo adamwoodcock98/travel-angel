@@ -16,6 +16,7 @@ const Visas = ({ session }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [visa, setVisa] = useState([]);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [visaArray, setVisaArray] = useState({
     visaNumber: "",
     startDate: "",
@@ -63,7 +64,7 @@ const Visas = ({ session }) => {
         }
       })
       .finally(() => setLoading(false));
-  }, [visa]);
+  }, [didUpdate]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -71,6 +72,7 @@ const Visas = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   if (visa.length) {

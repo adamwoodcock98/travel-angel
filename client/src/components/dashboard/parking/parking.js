@@ -15,6 +15,7 @@ const Parking = ({ session }) => {
 
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
   const newParking = {
     startDate: "",
@@ -68,6 +69,7 @@ const Parking = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   useEffect(() => {
@@ -92,7 +94,7 @@ const Parking = ({ session }) => {
       })
       .finally(() => setLoading(false));;
     }
-  }, []);
+  }, [didUpdate]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;

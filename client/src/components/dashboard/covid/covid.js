@@ -11,6 +11,7 @@ import AddTest from "./tests/newTest"
 const Covid = (props) => {
   const [testData, setTestData] = useState([]);
   const [vaccineData, setVaccineData] = useState([]);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [open, setOpen] = useState(false);
   // const { tripId } = useParams();
   const userId = props.session;
@@ -37,6 +38,7 @@ const Covid = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const Covid = (props) => {
       setTestData(tests);
       setVaccineData(vaccines[0]);
     })
-  }, []);
+  }, [didUpdate]);
 
   if (testData.length) {
 

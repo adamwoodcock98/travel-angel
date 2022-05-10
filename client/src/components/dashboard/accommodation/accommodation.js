@@ -41,6 +41,7 @@ export const ViewAccommodation = ({ session }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
+  const [didUpdate, setDidUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
   const alertPosition = {
     vertical: "top",
@@ -63,6 +64,7 @@ export const ViewAccommodation = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   useEffect(() => {
@@ -90,7 +92,7 @@ export const ViewAccommodation = ({ session }) => {
         })
         .finally(() => setLoading(false));
     }
-  }, []);
+  }, [didUpdate]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
