@@ -85,11 +85,6 @@ const Trips = ({ session }) => {
       (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
     );
 
-  const tripCountdown = moment(
-    upcomingTrips[0].startDate,
-    "YYYYMMDD"
-  ).fromNow();
-
   return (
     <div className="container">
       <div className="header">
@@ -107,7 +102,10 @@ const Trips = ({ session }) => {
       {tripArray.length && (
         <div className="trip-body">
           {upcomingTrips.length > 0 && (
-            <h2 className="countdown">The next trip is {tripCountdown}!</h2>
+            <h2 className="countdown">
+              The next trip is{" "}
+              {moment(upcomingTrips[0].startDate, "YYYYMMDD").fromNow()}!
+            </h2>
           )}
           <ViewTrips trips={upcomingTrips} />
           <div id="expired">
