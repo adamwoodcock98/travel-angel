@@ -6,9 +6,12 @@ import { InboundTransferCard } from "./inboundTransferCard";
 import { useParams } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import CircularProgress from '@mui/material/CircularProgress';
+import { Alerts } from "../../assets/snackbar"
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
+  const [loading, setLoading] = useState(false);
 
   const userId = session;
 
@@ -44,6 +47,24 @@ const Transfers = ({ session }) => {
     trip: tripId,
   });
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -56,6 +77,7 @@ const Transfers = ({ session }) => {
   const [inboundTransfer, setInboundTransfer] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     if (userId !== "null") {
       axios
         .get(`http://localhost:8000/dashboard/transfers/${userId}/${tripId}`)
@@ -64,12 +86,30 @@ const Transfers = ({ session }) => {
           const inbound = res.data.inbound;
           setOutboundTransfer(outbound);
           setInboundTransfer(inbound);
-        });
+        })
+        .catch((error) => {
+          if (error.response.status) {
+            handleAlert(
+              error.response.status + " - " + error.response.statusText,
+              "error"
+            );
+          } else {
+            handleAlert(
+              "There was a problem connecting to the server.",
+              "error"
+            );
+          }
+        })
+        .finally(() => setLoading(false));;
     }
   }, []);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
+      <>
+      <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <CircularProgress color="secondary" />
+      </div>
       <div className="transfers">
         <div className="transfer-header">
           <h1>Your transfers</h1>
@@ -99,6 +139,7 @@ const Transfers = ({ session }) => {
           />
         </div>
       </div>
+      </>
     );
   } else {
     return (

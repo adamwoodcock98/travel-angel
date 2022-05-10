@@ -7,7 +7,7 @@ import "./accommodation.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -56,16 +56,17 @@ export const ViewAccommodation = ({ session }) => {
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
-  
+
   const handleOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     if (userId !== "null") {
       axios
         .get(
@@ -103,13 +104,16 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
   if (accommodation.length) {
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <div className="loading" style={{ display: loading ? "" : "none" }}>
           <CircularProgress color="secondary" />
         </div>
         <div className="container">
@@ -127,9 +131,18 @@ export const ViewAccommodation = ({ session }) => {
             />
           </div>
           <div className="body">
-            <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
+            <AccommodationCard
+              accommodation={accommodation}
+              userId={userId}
+              handleDirections={handleDirections}
+            />
           </div>
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
           <Alerts
@@ -147,8 +160,15 @@ export const ViewAccommodation = ({ session }) => {
       <div className="container">
         <div className="header">
           <h1 className="title">Accommodation</h1>
-          <h1>Looks like you don't have any saved flights, add your first one now!</h1>
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <h1>
+            Looks like you don't have any saved flights, add your first one now!
+          </h1>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
           <AddAccommodation
