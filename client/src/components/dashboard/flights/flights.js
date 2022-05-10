@@ -7,6 +7,7 @@ import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import { useParams } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
@@ -16,6 +17,8 @@ const Flights = ({ session }) => {
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [failedLoad, setFailedLoad] = useState(false);
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -66,27 +69,31 @@ const Flights = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     api
       .get(`/${userId}/${tripId}`)
       .then((res) => {
+        setFailedLoad(false);
         const outbound = res.data.outbound;
         const inbound = res.data.inbound;
         setOutboundFlight(outbound);
         setInboundFlight(inbound);
       })
       .catch((error) => {
-        if (error.response.status === 500) {
+        if (error.response.status) {
+          setFailedLoad(true);
           handleAlert(
             error.response.status + " - " + error.response.statusText,
             "error"
           );
         } else {
           handleAlert(
-            error.response.status + " - " + error.response.statusText,
+            "There was a problem connecting to the server.",
             "error"
           );
         }
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   if (outboundFlight.length || inboundFlight.length) {
@@ -106,39 +113,45 @@ const Flights = ({ session }) => {
     });
 
     return (
-      <div className="flights-window">
-        <div className="flights-header">
-          <h1>Your flights</h1>
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
         </div>
-        <div className="flights-content">
-          <div className="flights-content-outbound">
-            <h1 className="flights-content-subheading">Outbound</h1>
-            {outboundFlight[0] && outboundFlights}
+        <div className="flights-window" style={{ display: loading ? "none" : "" }}>
+          <div className="flights-header">
+            <h1>Your flights</h1>
           </div>
-          <div className="flights-content-inbound">
-            <h1 className="flights-content-subheading">Inbound</h1>
-            {inboundFlight[0] && inboundFlights}
+          <div className="flights-content">
+            <div className="flights-content-outbound">
+              <h1 className="flights-content-subheading">Outbound</h1>
+              {outboundFlight[0] && outboundFlights}
+            </div>
+            <div className="flights-content-inbound">
+              <h1 className="flights-content-subheading">Inbound</h1>
+              {inboundFlight[0] && inboundFlights}
+            </div>
+          </div>
+          <div className="flights-footer">
+            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+              <AddIcon />
+            </Fab>
+            <AddFlight
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              flightData={flight}
+              flightId={null}
+              user={userId}
+              tripId={tripId}
+            />
           </div>
         </div>
-        <div className="flights-footer">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-          <AddFlight
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            flightData={flight}
-            flightId={null}
-            user={userId}
-            tripId={tripId}
-          />
-        </div>
-      </div>
+      </>
     );
   } else {
     return (
       <>
+      <h1>Looks like you don't have any saved flights, add your first one now!</h1>
         <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
           <AddIcon />
         </Fab>

@@ -14,6 +14,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
+import { Alerts } from "../../assets/snackbar";
+
 const AddFlight = (props) => {
   const flightData = props.flightData;
   const tripId = props.tripId;
@@ -39,6 +41,24 @@ const AddFlight = (props) => {
     user: userId,
     trip: tripId,
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
 
   const handleChange = (e) => {
@@ -97,6 +117,7 @@ const AddFlight = (props) => {
     };
 
     axios.post(url, newFlight).then((res) => {
+      handleAlert("Flight added successfully.", "success");
       handleClose();
       setFlight({
         flightNumber: "",
@@ -115,6 +136,8 @@ const AddFlight = (props) => {
         isOutbound: "",
         user: userId,
       })
+    }).catch(() => {
+      handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
     });
   };
 
@@ -305,6 +328,13 @@ const AddFlight = (props) => {
           {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
         </DialogActions>
       </Dialog>
+      <Alerts
+            message={alertMessage}
+            open={alertOpen}
+            handleClose={handleAlertClose}
+            alertPosition={alertPosition}
+            alertType={alertType}
+          />
     </div>
   );
 }
