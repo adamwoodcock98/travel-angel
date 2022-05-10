@@ -7,8 +7,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import moment from "moment";
 
 const AddVisa = (props) => {
+
+  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const visaId = props.visaId;
@@ -73,6 +77,7 @@ const AddVisa = (props) => {
 
   return (
     <div>
+      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Visa</DialogTitle>
         <DialogContent>
@@ -92,7 +97,7 @@ const AddVisa = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={visa.startDate}
+            value={formatDate(visa.startDate)}
             autoFocus
             margin="dense"
             id="startDate"
@@ -107,7 +112,7 @@ const AddVisa = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={visa.endDate}
+            value={formatDate(visa.endDate)}
             autoFocus
             margin="dense"
             id="endDate"

@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import moment from 'moment';
 
 const AddFlight = ({
   flightData,
@@ -44,6 +45,7 @@ const AddFlight = ({
     trip: tripId,
   });
 
+  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -142,7 +144,7 @@ const AddFlight = ({
             onChange={handleChange}
           />
           <TextField
-            value={flight.departureDate}
+            value={formatDate(flight.departureDate)}
             autoFocus
             margin="dense"
             id="departureDate"

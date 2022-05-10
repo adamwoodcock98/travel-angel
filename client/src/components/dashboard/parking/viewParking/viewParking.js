@@ -11,6 +11,7 @@ const ParkingCard = (props) => {
   const tripId = props.tripId
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
+  const formatTime = (time) => moment(time).format("hh:mm");
 
   return(
     <div className="parking-card">
@@ -22,10 +23,12 @@ const ParkingCard = (props) => {
         <div className="parking-card-dates-arrival">
           <h3>From</h3>
           <h2>{parkingData.startDate && formatDate(parkingData.startDate)}</h2>
+          <h2>{parkingData.startDate && formatTime(parkingData.startDate)}</h2>
         </div>
         <div className="parking-card-dates-departure">
           <h3>Until</h3>
           <h2>{parkingData.endDate && formatDate(parkingData.endDate)}</h2>
+          <h2>{parkingData.endDate && formatTime(parkingData.endDate)}</h2>
         </div>
       </div>
       <div className="parking-card-contact-content">
