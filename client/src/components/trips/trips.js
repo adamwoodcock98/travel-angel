@@ -70,20 +70,32 @@ const Trips = ({ session }) => {
       });
   };
 
-  
+  const expired = (trip) => (new Date(trip.startDate) - new Date()) < 0;
+
+  const expiredTrips = tripArray.filter(trip => expired(trip)).sort(
+    (trip1, trip2) => new Date(trip2.startDate) - new Date(trip1.startDate)
+  )
+  const upcomingTrips = tripArray.filter(trip => !expired(trip)).sort(
+    (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
+  )
+
+  const sortedTrips = upcomingTrips + expiredTrips;
+
+  const tripCountdown = moment(tripArray[0].startDate, "YYYYMMDD").fromNow();
 
   if (tripArray.length) {
-    tripArray.sort(
-      (trip1, trip2) => new Date(trip2.startDate) - new Date(trip1.startDate)
-    )
-    const tripCountdown = moment(tripArray[0].startDate, "YYYYMMDD").fromNow();
-    const compareDates = new Date(tripArray[0].startDate) - new Date() > 0;
+
+    // tripArray.sort(
+    //   (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
+    // )
+
+    
 
     return (
       <div className="container">
         <div className="header">
           <h1>Your Trips</h1>
-          {compareDates && (<h2>The next trip is {tripCountdown}!</h2>)}
+          {!expired(sortedTrips[0]) && (<h2>The next trip is {tripCountdown}!</h2>)}
           <AddTrip
             className="add-accomodation"
             handleOpen={handleOpen}
@@ -95,7 +107,7 @@ const Trips = ({ session }) => {
           />
         </div>
         <div className="trip-body">
-          <ViewTrips trips={tripArray} />
+          <ViewTrips trips={sortedTrips} />
         </div>
       </div>
       )
