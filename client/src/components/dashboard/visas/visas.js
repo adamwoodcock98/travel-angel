@@ -63,7 +63,7 @@ const Visas = ({ session }) => {
         }
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [visa]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -94,7 +94,7 @@ const Visas = ({ session }) => {
           <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
-            <AddVisa
+            <AddVisa 
               open={open}
               handleOpen={handleOpen}
               handleClose={handleClose}
@@ -106,7 +106,7 @@ const Visas = ({ session }) => {
           </div>
         </div>
       </>
-    );
+    )
   } else {
     return (
       <div className="visas">
@@ -114,6 +114,9 @@ const Visas = ({ session }) => {
           <h1>Your visas</h1>
         </div>
         <div>
+         <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddVisa
             open={open}
             handleOpen={handleOpen}
@@ -132,7 +135,7 @@ const Visas = ({ session }) => {
           alertType={alertType}
         />
       </div>
-    );
+    )
   }
 };
 

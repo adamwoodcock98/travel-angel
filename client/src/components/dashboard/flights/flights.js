@@ -91,7 +91,7 @@ const Flights = ({ session }) => {
         }
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [flight]);
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];

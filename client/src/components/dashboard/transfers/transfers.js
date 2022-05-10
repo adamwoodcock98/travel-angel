@@ -102,7 +102,7 @@ const Transfers = ({ session }) => {
         })
         .finally(() => setLoading(false));;
     }
-  }, []);
+  }, [transfer]);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
