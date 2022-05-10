@@ -138,6 +138,25 @@ const Flights = ({ session }) => {
       });
   }, []);
 
+  const handleClear = () => {
+    setFlight({
+      flightNumber: "",
+      departureTime: "",
+      departureDate: "",
+      airline: "",
+      departureAirport: "",
+      departureTerminal: "",
+      departureCity: "",
+      departureGate: "",
+      arrivalAirport: "",
+      arrivalTerminal: "",
+      arrivalCity: "",
+      arrivalGate: "",
+      bookingReference: "",
+      isOutbound: "",
+      user: userId,
+    })
+  }
   
   // FLIGHT API
     
@@ -227,7 +246,7 @@ const Flights = ({ session }) => {
             flight={flight}
             onSubmit={onSubmit}
             handleApiSearch={handleApiSearch}
-           
+            handleClear={handleClear}
           />
         </div>
       </div>
@@ -243,7 +262,7 @@ const Flights = ({ session }) => {
           flight={flight}
           onSubmit={onSubmit}
           handleApiSearch={handleApiSearch}
-      
+          handleClear={handleClear}
         />
         {alertMessage && (
           <Alerts

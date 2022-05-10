@@ -20,7 +20,8 @@ export default function AddFlight({
   handleChange,
   flight,
   onSubmit,
-  handleApiSearch
+  handleApiSearch,
+  handleClear
 }) {
   return (
     <div>
@@ -43,7 +44,6 @@ export default function AddFlight({
             type="text"
             variant="outlined"
             onChange={handleChange}
-            required
           />
           <TextField
             value={flight.departureDate}
@@ -61,12 +61,29 @@ export default function AddFlight({
             onChange={handleChange}
           />
           </DialogContent>
-
+          
           <DialogActions>
-            <Button onclick={handleApiSearch}>Search</Button>
+            <Button onClick={handleApiSearch}>Search</Button>
           </DialogActions>
           
           <DialogContent>
+          <FormControl sx={{ m: 1, minWidth: 190 }}>
+            <InputLabel id="demo-select-small">Journey Type</InputLabel>
+            <Select
+              value={flight.isOutbound}
+              autoFocus
+              margin="dense"
+              id="isOutbound"
+              name="isOutbound"
+              label="Journey type"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            >
+              <MenuItem value={false}>Inbound</MenuItem>
+              <MenuItem value={true}>Outbound</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             value={flight.departureTime}
             autoFocus
@@ -181,7 +198,7 @@ export default function AddFlight({
             margin="dense"
             id="arrivalGate"
             name="arrivalGate"
-            label="Arrial Gate"
+            label="Arrival Gate"
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -197,27 +214,12 @@ export default function AddFlight({
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
-            <Select
-              value={flight.isOutbound}
-              autoFocus
-              margin="dense"
-              id="isOutbound"
-              name="isOutbound"
-              label="Journey type"
-              variant="outlined"
-              onChange={handleChange}
-              required
-            >
-              <MenuItem value={false}>Inbound</MenuItem>
-              <MenuItem value={true}>Outbound</MenuItem>
-            </Select>
-          </FormControl>
+         
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={onSubmit}>Save Flight Details</Button>
+          <Button onClick={handleClear}>Clear</Button>
+          <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>
