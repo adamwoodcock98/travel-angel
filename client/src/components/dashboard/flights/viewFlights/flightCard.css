@@ -18,10 +18,14 @@
 }
 
 .flight-card-arrival-pane {
-  flex: 1;
+  flex: 4;
 }
 
 .flight-card-departure-pane {
+  flex: 4;
+}
+
+.flight-card-crud {
   flex: 1;
 }
 

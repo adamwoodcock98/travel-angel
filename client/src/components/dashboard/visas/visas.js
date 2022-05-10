@@ -3,6 +3,8 @@ import AddVisa from "./addVisa";
 import VisaCard from "./viewVisa";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 
 const Visas = ({ session }) => {
   const { tripId } = useParams();
@@ -28,51 +30,12 @@ const Visas = ({ session }) => {
       });
   }, [visaArray]);
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setVisaArray({
-      ...visaArray,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { visaNumber, startDate, endDate, issuingCountry, user, trip } =
-      visaArray;
-
-    const newVisa = {
-      visaNumber,
-      startDate,
-      endDate,
-      issuingCountry,
-      user,
-      trip,
-    };
-
-    await axios
-      .post("http://localhost:8000/dashboard/visas/", newVisa)
-      .catch((err) => console.log(err.message))
-      .then(() => {
-        setVisaArray({
-          visaNumber: "",
-          startDate: "",
-          endDate: "",
-          issuingCountry: "",
-          user: userId,
-          trip: tripId,
-        });
-        handleClose();
-      });
   };
 
   if (visa.length) {
@@ -84,18 +47,22 @@ const Visas = ({ session }) => {
         <div className="visas-content">
           <div className="visas-content-outbound">
             <h1 className="visa-content-subheading"> BLOOPS </h1>
-            <VisaCard visa={visa} />
+            <VisaCard visa={visa} userId={userId} tripId={tripId} />
           </div>
         </div>
 
         <div>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
           <AddVisa
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            visa={visa}
-            handleSubmit={handleSubmit}
+            visaData={visaArray}
+            userId={userId}
+            tripId={tripId}
+            visaId={null}
           />
         </div>
       </div>
@@ -111,9 +78,10 @@ const Visas = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            visa={visa}
-            handleSubmit={handleSubmit}
+            visaData={visaArray}
+            userId={userId}
+            tripId={tripId}
+            visaId={null} 
           />
         </div>
       </div>

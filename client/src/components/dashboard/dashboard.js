@@ -114,7 +114,7 @@ export default function VerticalTabs({ session }) {
         <Visa session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={5}>
-        <Covid />
+        <Covid session={session} />
       </TabPanel>
     </Box>
   );

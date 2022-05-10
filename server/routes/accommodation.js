@@ -4,5 +4,7 @@ const accommodationRouter = express.Router();
 
 accommodationRouter.get("/:id/:tripId", AccommodationController.New);
 accommodationRouter.post("/", AccommodationController.Create);
+accommodationRouter.post("/edit/:id", AccommodationController.Update);
+accommodationRouter.post("/delete/:id", AccommodationController.Delete);
 
 module.exports = accommodationRouter;
