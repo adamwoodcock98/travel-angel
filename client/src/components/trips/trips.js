@@ -3,6 +3,7 @@ import ViewTrips from "./viewTrips/viewTrips";
 import AddTrip from "./addTrip/addTrip";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const Trips = ({ session }) => {
   const userId = session;
@@ -69,25 +70,50 @@ const Trips = ({ session }) => {
       });
   };
 
-  return (
-    <div className="container">
-      <div className="header">
-        <h1>Your Trips</h1>
-        <AddTrip
-          className="add-accomodation"
-          handleOpen={handleOpen}
-          open={open}
-          handleClose={handleClose}
-          handleChange={handleChange}
-          trip={trip}
-          handleSubmit={handleSubmit}
-        />
+  
+
+  if (tripArray.length) {
+    tripArray.sort(
+      (trip1, trip2) => new Date(trip2.startDate) - new Date(trip1.startDate)
+    )
+    const tripCountdown = moment(tripArray[0].startDate, "YYYYMMDD").fromNow();
+    const compareDates = new Date(tripArray[0].startDate) - new Date() > 0;
+
+    return (
+      <div className="container">
+        <div className="header">
+          <h1>Your Trips</h1>
+          {compareDates && (<h2>The next trip is {tripCountdown}!</h2>)}
+          <AddTrip
+            className="add-accomodation"
+            handleOpen={handleOpen}
+            open={open}
+            handleClose={handleClose}
+            handleChange={handleChange}
+            trip={trip}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+        <div className="trip-body">
+          <ViewTrips trips={tripArray} />
+        </div>
       </div>
-      <div className="trip-body">
-        <ViewTrips trips={tripArray} />
+      )
+    } else {
+      return (
+      <div className="container">
+      <h2>Nothing here. Add your trip now!</h2>
+      <AddTrip
+        className="add-accomodation"
+        handleOpen={handleOpen}
+        open={open}
+        handleClose={handleClose}
+        handleChange={handleChange}
+        trip={trip}
+        handleSubmit={handleSubmit}
+      />
       </div>
-    </div>
-  );
+    )}
 };
 
 export default Trips;
