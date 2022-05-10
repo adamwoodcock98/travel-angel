@@ -4,6 +4,7 @@ import AddTrip from "./addTrip/addTrip";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import "./trips.css";
 
 const Trips = ({ session }) => {
   const userId = session;
@@ -70,62 +71,53 @@ const Trips = ({ session }) => {
       });
   };
 
-  const expired = (trip) => (new Date(trip.startDate) - new Date()) < 0;
+  const isExpired = (trip) => new Date(trip.startDate) - new Date() < 0;
 
-  const expiredTrips = tripArray.filter(trip => expired(trip)).sort(
-    (trip1, trip2) => new Date(trip2.startDate) - new Date(trip1.startDate)
-  )
-  const upcomingTrips = tripArray.filter(trip => !expired(trip)).sort(
-    (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
-  )
+  const expiredTrips = tripArray
+    .filter((trip) => isExpired(trip))
+    .sort(
+      (trip1, trip2) => new Date(trip2.startDate) - new Date(trip1.startDate)
+    );
 
-  const sortedTrips = upcomingTrips + expiredTrips;
+  const upcomingTrips = tripArray
+    .filter((trip) => !expiredTrips.includes(trip))
+    .sort(
+      (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
+    );
 
-  const tripCountdown = moment(tripArray[0].startDate, "YYYYMMDD").fromNow();
+  const tripCountdown = moment(
+    upcomingTrips[0].startDate,
+    "YYYYMMDD"
+  ).fromNow();
 
-  if (tripArray.length) {
-
-    // tripArray.sort(
-    //   (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
-    // )
-
-    
-
-    return (
-      <div className="container">
-        <div className="header">
-          <h1>Your Trips</h1>
-          {!expired(sortedTrips[0]) && (<h2>The next trip is {tripCountdown}!</h2>)}
-          <AddTrip
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            handleChange={handleChange}
-            trip={trip}
-            handleSubmit={handleSubmit}
-          />
-        </div>
+  return (
+    <div className="container">
+      <div className="header">
+        <h1>Your Trips</h1>
+        <AddTrip
+          className="add-accomodation"
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          trip={trip}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+      {tripArray.length && (
         <div className="trip-body">
-          <ViewTrips trips={sortedTrips} />
+          {upcomingTrips.length > 0 && (
+            <h2 className="countdown">The next trip is {tripCountdown}!</h2>
+          )}
+          <ViewTrips trips={upcomingTrips} />
+          <div id="expired">
+            <ViewTrips trips={expiredTrips} />
+          </div>
         </div>
-      </div>
-      )
-    } else {
-      return (
-      <div className="container">
-      <h2>Nothing here. Add your trip now!</h2>
-      <AddTrip
-        className="add-accomodation"
-        handleOpen={handleOpen}
-        open={open}
-        handleClose={handleClose}
-        handleChange={handleChange}
-        trip={trip}
-        handleSubmit={handleSubmit}
-      />
-      </div>
-    )}
+      )}
+      {!tripArray.length && <h2>Nothing here. Add your trip now!</h2>}
+    </div>
+  );
 };
 
 export default Trips;
