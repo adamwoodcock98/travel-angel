@@ -9,6 +9,7 @@ const Passport = ({ session }) => {
   const userId = session;
   const [open, setOpen] = useState(false);
   const [displayState, setDisplayState] = useState([]);
+  const [emptyFields, setEmptyFields] = useState([])
   const [passport, setPassport] = useState({
     passportNumber: "",
     firstName: "",
@@ -85,6 +86,11 @@ const Passport = ({ session }) => {
       user,
     };
 
+    if(passportNumber === "" || firstName === "" || lastName === "" || nationality === "" || country === "" || dob === ""){
+      setEmptyFields(['passportNumber', 'firstName', 'lastName', 'nationality', 'country', 'dob'])
+      return
+    }
+
     await axios
       .post("http://localhost:8000/dashboard/passport/", newPassport)
       .then((res) => {
@@ -141,6 +147,7 @@ const Passport = ({ session }) => {
           handleChange={handleChange}
           passport={passport}
           onSubmit={onSubmit}
+          emptyFields={emptyFields}
         />
         <div id="pass-render">{passportRender}</div>
         <Alerts
@@ -163,6 +170,7 @@ const Passport = ({ session }) => {
         handleChange={handleChange}
         passport={passport}
         onSubmit={onSubmit}
+        emptyFields={emptyFields}
       />
      <br /><i className="pass-i">You don't have your passports saved just yet. Add it now!</i>
     </div>
