@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function Upload({ cardId, url }) {
+function Upload({ cardId, url, handleUpload }) {
   const [selectedFile, setSelectedFile] = useState();
+
+  console.log("2nd", handleUpload);
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-  console.log(selectedFile);
 
   const handleSubmission = async (e) => {
     e.preventDefault();
@@ -19,6 +20,8 @@ function Upload({ cardId, url }) {
         .post(`http://localhost:8000/${url}/upload/${cardId}`, formData)
         .then((result) => {
           console.log("Success:", result);
+          handleUpload();
+          setSelectedFile(null);
         })
         .catch((error) => {
           console.log("Error:", error.message);

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./flightCard.css";
 import { AirportPane } from "./airportPane";
 import { FooterPane } from "./footerPane";
 import Upload from "../../../upload/upload";
 
 export const FlightCard = (props) => {
+  const handleUpload = props.handleUpload;
+
+  console.log("ugvugvuytvygv", handleUpload);
+
   const flightData = props.outboundFlight;
 
   const departureData = {
@@ -32,7 +36,6 @@ export const FlightCard = (props) => {
   };
 
   const handleSubmit = async (id) => {
-    // setState((prev) => prev + 1);
     window.open(`http://localhost:8000/dashboard/flights/download/${id}`);
   };
 
@@ -40,7 +43,11 @@ export const FlightCard = (props) => {
     <div className="flight-card">
       <div className="flight-card-content">
         <div className="upload">
-          <Upload cardId={flightData._id} url="dashboard/flights" />
+          <Upload
+            cardId={flightData._id}
+            url="dashboard/flights"
+            handleUpload={handleUpload}
+          />
           <div className="uploads">
             Download Your Documents
             {flightData.uploads.length &&

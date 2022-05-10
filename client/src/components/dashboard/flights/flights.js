@@ -8,6 +8,11 @@ import { useParams } from "react-router-dom";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -157,7 +162,7 @@ const Flights = ({ session }) => {
           );
         }
       });
-  }, [flight]);
+  }, [flight, state]);
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
@@ -165,13 +170,21 @@ const Flights = ({ session }) => {
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard
+          outboundFlight={flight}
+          key={flight._id}
+          handleUpload={handleUpload}
+        />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard
+          outboundFlight={flight}
+          key={flight._id}
+          handleUpload={handleUpload}
+        />
       );
     });
 
