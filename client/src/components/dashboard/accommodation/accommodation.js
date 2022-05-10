@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import "./accommodation.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import { Alerts } from "../../assets/snackbar";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -36,6 +37,33 @@ export const ViewAccommodation = ({ session }) => {
     trip: tripId,
   };
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const [loading, setLoading] = useState(false);
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+  
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   useEffect(() => {
     if (userId !== "null") {
       axios
@@ -44,17 +72,23 @@ export const ViewAccommodation = ({ session }) => {
         )
         .then((res) => {
           setAccommodation(res.data.accommodation);
-        });
+        })
+        .catch((error) => {
+          if (error.response.status) {
+            handleAlert(
+              error.response.status + " - " + error.response.statusText,
+              "error"
+            );
+          } else {
+            handleAlert(
+              "There was a problem connecting to the server.",
+              "error"
+            );
+          }
+        })
+        .finally(() => setLoading(false));
     }
   }, []);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const formatAddressMaps = (address) => {
     const addressObject = address;

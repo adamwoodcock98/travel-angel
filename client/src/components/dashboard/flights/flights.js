@@ -18,7 +18,6 @@ const Flights = ({ session }) => {
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [failedLoad, setFailedLoad] = useState(false);
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -73,7 +72,6 @@ const Flights = ({ session }) => {
     api
       .get(`/${userId}/${tripId}`)
       .then((res) => {
-        setFailedLoad(false);
         const outbound = res.data.outbound;
         const inbound = res.data.inbound;
         setOutboundFlight(outbound);
@@ -81,7 +79,6 @@ const Flights = ({ session }) => {
       })
       .catch((error) => {
         if (error.response.status) {
-          setFailedLoad(true);
           handleAlert(
             error.response.status + " - " + error.response.statusText,
             "error"
