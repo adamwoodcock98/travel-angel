@@ -24,6 +24,33 @@ const PassportController = {
       });
     });
   },
+
+  Edit: async (req, res) => {
+    const passContents = req.body;
+    const passId = req.params.id;
+    try {
+      const passport = await Passport.findById(passId);
+      passport = passContents
+      await passport.save()
+      res.status(200).send();
+     } catch(e) {
+       res.status(500).send();
+     }
+  },
+
+  Delete: async (req, res) => {
+    const id = req.params.id;
+
+    try {
+      await Passport.deleteOne({ _id: id });
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+
+      res.status(500).send();
+    }
+  },
 };
 
 module.exports = PassportController;

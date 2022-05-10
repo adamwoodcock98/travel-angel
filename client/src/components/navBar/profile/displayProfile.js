@@ -1,6 +1,5 @@
 import React from "react";
-import { Dialog, DialogContentText } from "@mui/material";
-import moment from "moment";
+import { DialogContentText } from "@mui/material";
 
 export const DisplayProfile = ({ user }) => {
   return (

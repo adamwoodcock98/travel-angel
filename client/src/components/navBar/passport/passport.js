@@ -9,7 +9,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  CircularProgress
 } from "@mui/material";
 
 export const Passport = ({ session }) => {
@@ -145,7 +144,7 @@ export const Passport = ({ session }) => {
       new Date(pass2.dateOfExpiry) - new Date(pass1.dateOfExpiry)
   );
   displayState.forEach((pass) => {
-    passportRender.push(<DisplayPassport passport={pass} />);
+    passportRender.push(<DisplayPassport passport={pass} user={userId} />);
   });
 
   if (displayState.length) {
