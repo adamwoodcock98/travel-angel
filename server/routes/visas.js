@@ -34,5 +34,7 @@ VisaRouter.post(
   upload.single("uploaded_file"),
   VisaController.Upload
 );
+VisaRouter.post("/edit/:id", VisaController.Update);
+VisaRouter.post("/delete/:id", VisaController.Delete);
 
 module.exports = VisaRouter;

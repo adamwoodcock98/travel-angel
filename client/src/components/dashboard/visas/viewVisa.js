@@ -2,8 +2,9 @@ import React from "react";
 import moment from "moment";
 import "./viewVisa.css";
 import Upload from "../../upload/upload";
+import CrudMenu from "./crud/crud";
 
-export default function VisaCard({ visa, handleUpload }) {
+export default function VisaCard({ visa, handleUpload, userId, tripId }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const handleSubmit = async (id) => {
@@ -17,8 +18,12 @@ export default function VisaCard({ visa, handleUpload }) {
           <div className="visa-card" key={index}>
             <div className="header">
               <h3>Your entry visa to</h3>
-              <br></br>
-              <br></br>
+              <CrudMenu
+                visaData={visa}
+                visaId={visa._id}
+                userId={userId}
+                tripId={tripId}
+              />
               <div className="country">
                 <h1>{visa.issuingCountry}</h1>
               </div>

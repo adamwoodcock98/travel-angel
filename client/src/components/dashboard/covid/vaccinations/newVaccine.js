@@ -19,11 +19,13 @@ const AddVaccine = (props) => {
   const open = props.open;
   const handleClose = props.handleClose;
   const vaccinationsID = props.vaccinationsID;
+  const doseData = props.doseData;
+  const doseId = props.doseId;
 
   const [vaccine, setVaccine] = useState({
-    dose: "",
-    date: "",
-    type: "",
+    dose: doseData.dose,
+    date: doseData.date,
+    type: doseData.type,
   });
 
   const handleChange = (e) => {
@@ -37,12 +39,19 @@ const AddVaccine = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    let url;
+    if (doseData._id) {
+      url = `http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/edit/${doseId}`
+    } else {
+      url = `http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/new`
+    }
+
     const { dose, date, type } = vaccine;
 
     const newDose = { dose, date, type };
 
     axios
-      .post(`http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/new`, newDose)
+      .post(url, newDose)
       .then((res) => {
         handleClose();
       });

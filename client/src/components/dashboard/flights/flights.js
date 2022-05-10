@@ -4,7 +4,10 @@ import { FlightCard } from "./viewFlights/flightCard";
 import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
@@ -60,84 +63,12 @@ const Flights = ({ session }) => {
     baseURL: "http://localhost:8000/dashboard/flights/",
   });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setFlight({
-      ...flight,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    } = flight;
-
-    const newFlight = {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    };
-
-    api.post("/", newFlight).then((res) => {
-      handleClose();
-      setFlight({
-        flightNumber: "",
-        departureTime: "",
-        departureDate: "",
-        airline: "",
-        departureAirport: "",
-        departureTerminal: "",
-        departureCity: "",
-        departureGate: "",
-        arrivalAirport: "",
-        arrivalTerminal: "",
-        arrivalCity: "",
-        arrivalGate: "",
-        bookingReference: "",
-        isOutbound: "",
-        user: userId,
-        trip: tripId,
-      });
-    });
   };
 
   useEffect(() => {
@@ -164,6 +95,64 @@ const Flights = ({ session }) => {
       });
   }, [flight, state]);
 
+  const handleClear = () => {
+    setFlight({
+      flightNumber: "",
+      departureTime: "",
+      departureDate: "",
+      airline: "",
+      departureAirport: "",
+      departureTerminal: "",
+      departureCity: "",
+      departureGate: "",
+      arrivalAirport: "",
+      arrivalTerminal: "",
+      arrivalCity: "",
+      arrivalGate: "",
+      bookingReference: "",
+      isOutbound: "",
+      user: userId,
+    });
+  };
+
+  const formatDate = (date) => moment(date).format("YYYY-MM-DD");
+  const formatTime = (time) => moment(time).format("hh:mm");
+  const flightNumber = flight.flightNumber;
+  const flightDate = formatDate(flight.departureDate);
+  // console.log(flightNumber)
+  // console.log(flightDate)
+
+  const options = {
+    headers: {
+      "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com",
+      "X-RapidAPI-Key": process.env.REACT_APP_FLIGHT_API_KEY,
+    },
+  };
+  const flightApi = axios.create({
+    baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`,
+  });
+
+  const handleApiSearch = async () => {
+    await flightApi.get("/", options).then((res) => {
+      const data = res.data[0];
+      console.log(data.departure);
+
+      setFlight({
+        ...flight,
+        departureTime: formatTime(data.departure.scheduledTimeLocal),
+        airline: data.airline.name,
+        departureAirport: data.departure.airport.shortName,
+        departureTerminal: data.departure.terminal,
+        departureCity: data.departure.airport.municipalityName,
+        departureGate: data.departure.gate,
+        arrivalAirport: data.arrival.airport.name,
+        arrivalTerminal: data.arrival.terminal,
+        arrivalCity: data.arrival.airport.municipalityName,
+        arrivalGate: data.arrival.gate,
+      });
+    });
+  };
+
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
     const inboundFlights = [];
@@ -174,6 +163,7 @@ const Flights = ({ session }) => {
           outboundFlight={flight}
           key={flight._id}
           handleUpload={handleUpload}
+          userId={userId}
         />
       );
     });
@@ -184,6 +174,7 @@ const Flights = ({ session }) => {
           outboundFlight={flight}
           key={flight._id}
           handleUpload={handleUpload}
+          userId={userId}
         />
       );
     });
@@ -204,13 +195,24 @@ const Flights = ({ session }) => {
           </div>
         </div>
         <div className="flights-footer">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
           <AddFlight
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            flight={flight}
-            onSubmit={onSubmit}
+            flightData={flight}
+            flightId={null}
+            user={userId}
+            tripId={tripId}
+            handleApiSearch={handleApiSearch}
+            handleClear={handleClear}
           />
         </div>
       </div>
@@ -218,13 +220,24 @@ const Flights = ({ session }) => {
   } else {
     return (
       <>
+        <Fab
+          size="large"
+          color="secondary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <AddIcon />
+        </Fab>
         <AddFlight
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}
-          handleChange={handleChange}
-          flight={flight}
-          onSubmit={onSubmit}
+          flightData={flight}
+          flightId={null}
+          user={userId}
+          tripId={tripId}
+          handleApiSearch={handleApiSearch}
+          handleClear={handleClear}
         />
         {alertMessage && (
           <Alerts

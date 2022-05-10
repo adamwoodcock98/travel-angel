@@ -34,5 +34,7 @@ flightsRouter.post(
   upload.single("uploaded_file"),
   FlightController.Upload
 );
+flightsRouter.post("/edit/:id", FlightController.Update);
+flightsRouter.post("/delete/:id", FlightController.Delete);
 
 module.exports = flightsRouter;

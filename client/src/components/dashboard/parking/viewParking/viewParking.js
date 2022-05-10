@@ -1,10 +1,16 @@
 import React from "react";
 import "./viewParking.css";
 import moment from "moment";
-import Upload from "../../upload/upload";
+import Upload from "../../../upload/upload";
+import CrudMenu from "./crud/crud";
+import Button from "@mui/material/Button";
+import DirectionsOutlinedIcon from "@mui/icons-material/DirectionsOutlined";
 
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const handleUpload = props.handleUpload;
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
@@ -61,7 +67,7 @@ const ParkingCard = (props) => {
         <Upload
           cardId={parkingData._id}
           url="dashboard/parking"
-          handleUpload={props.handleUpload}
+          handleUpload={handleUpload}
         />
         {parkingData.uploads.length &&
           parkingData.uploads.map((upload, index) => {
@@ -71,6 +77,17 @@ const ParkingCard = (props) => {
               </button>
             );
           })}
+      </div>
+      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} />
+      <div className="directions">
+        <Button
+          color="secondary"
+          startIcon={<DirectionsOutlinedIcon />}
+          target="_blank"
+          href={props.handleDirections(parkingData.address)}
+        >
+          Get Directions
+        </Button>
       </div>
     </div>
   );

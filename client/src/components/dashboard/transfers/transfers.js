@@ -4,6 +4,8 @@ import axios from "axios";
 import { OutboundTransferCard } from "./outboundTransferCard";
 import { InboundTransferCard } from "./inboundTransferCard";
 import { useParams } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
@@ -47,108 +49,12 @@ const Transfers = ({ session }) => {
     trip: tripId,
   });
 
-  const handlePickupChange = (e) => {
-    const value = e.target.value;
-    setTransfer((prevState) => ({
-      ...prevState,
-      pickupAddress: {
-        ...prevState.pickupAddress,
-        [e.target.name]: value,
-      },
-    }));
-  };
-
-  const handleDropoffChange = (e) => {
-    const value = e.target.value;
-    setTransfer((prevState) => ({
-      ...prevState,
-      dropoffAddress: {
-        ...prevState.dropoffAddress,
-        [e.target.name]: value,
-      },
-    }));
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setTransfer({
-      ...transfer,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      pickupTime,
-      dropoffTime,
-      pickupAddress,
-      dropoffAddress,
-      isOutbound,
-      company,
-      contactNumber,
-      bookingReference,
-      user,
-      trip,
-    } = transfer;
-
-    const newTransfer = {
-      pickupTime,
-      dropoffTime,
-      pickupAddress,
-      dropoffAddress,
-      isOutbound,
-      company,
-      contactNumber,
-      bookingReference,
-      user,
-      trip,
-    };
-
-    axios
-      .post("http://localhost:8000/dashboard/transfers/", newTransfer)
-      .then(() => {
-        setTransfer({
-          pickupTime: "",
-          dropoffTime: "",
-          pickupAddress: {
-            buildingNumber: "",
-            buildingName: "",
-            addressLine1: "",
-            addressLine2: "",
-            city: "",
-            postalCode: "",
-            stateCounty: "",
-            countryCode: "",
-          },
-          dropoffAddress: {
-            buildingNumber: "",
-            buildingName: "",
-            addressLine1: "",
-            addressLine2: "",
-            city: "",
-            postalCode: "",
-            stateCounty: "",
-            countryCode: "",
-          },
-          isOutbound: "",
-          company: "",
-          contactNumber: "",
-          bookingReference: "",
-          user: userId,
-          trip: tripId,
-        });
-        handleClose();
-      });
   };
 
   const [outboundTransfer, setOutboundTransfer] = useState([]);
@@ -179,6 +85,8 @@ const Transfers = ({ session }) => {
             <OutboundTransferCard
               outboundTransfer={outboundTransfer}
               handleUpload={handleUpload}
+              userId={userId}
+              tripId={tripId}
             />
           </div>
           <div className="transfers-content-inbound">
@@ -186,19 +94,28 @@ const Transfers = ({ session }) => {
             <InboundTransferCard
               inboundTransfer={inboundTransfer}
               handleUpload={handleUpload}
+              userId={userId}
+              tripId={tripId}
             />
           </div>
         </div>
         <div>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
           <AddTransfer
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            transfer={transfer}
-            handleSubmit={handleSubmit}
-            handlePickupChange={handlePickupChange}
-            handleDropoffChange={handleDropoffChange}
+            transferData={transfer}
+            userId={userId}
+            tripId={tripId}
+            transferId={null}
           />
         </div>
       </div>
@@ -206,15 +123,22 @@ const Transfers = ({ session }) => {
   } else {
     return (
       <div>
+        <Fab
+          size="large"
+          color="secondary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <AddIcon />
+        </Fab>
         <AddTransfer
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}
-          handleChange={handleChange}
-          transfer={transfer}
-          handleSubmit={handleSubmit}
-          handlePickupChange={handlePickupChange}
-          handleDropoffChange={handleDropoffChange}
+          transferData={transfer}
+          userId={userId}
+          tripId={tripId}
+          transferId={null}
         />
       </div>
     );

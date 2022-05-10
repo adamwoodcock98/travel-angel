@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./flightCard.css";
 import { AirportPane } from "./airportPane";
 import { FooterPane } from "./footerPane";
+import CrudMenu from "./crud/crud";
 import Upload from "../../../upload/upload";
 
 export const FlightCard = (props) => {
@@ -10,6 +11,7 @@ export const FlightCard = (props) => {
   console.log("ugvugvuytvygv", handleUpload);
 
   const flightData = props.outboundFlight;
+  const userId = props.userId;
 
   const departureData = {
     airport: flightData.departureAirport,
@@ -66,9 +68,12 @@ export const FlightCard = (props) => {
         <div className="flight-card-departure-pane">
           <AirportPane data={arrivalData} />
         </div>
+        <div className="flight-card-crud">
+          <CrudMenu userId={userId} flightData={flightData} />
+        </div>
       </div>
       <div className="flight-card-footer">
-        <FooterPane data={footerData} />
+        <FooterPane data={footerData} airport={departureData.airport} />
       </div>
     </div>
   );

@@ -1,9 +1,14 @@
 import React from "react";
 import moment from "moment";
 import "./transferCard.css";
+import CrudMenu from "./crud/crud";
 import Upload from "../../upload/upload";
 
-export const InboundTransferCard = ({ inboundTransfer, handleUpload }) => {
+export const InboundTransferCard = (props) => {
+  const inboundTransfer = props.inboundTransfer;
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const handleUpload = props.handleUpload;
   const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
   const formatTime = (time) => moment(time).format("HH:mm");
 
@@ -51,6 +56,12 @@ export const InboundTransferCard = ({ inboundTransfer, handleUpload }) => {
               <div className="dropoff">
                 <div className="dropoff-header">
                   <h3>Dropoff</h3>
+                  <CrudMenu
+                    transferData={inboundTransfer}
+                    transferId={inboundTransfer._id}
+                    userId={userId}
+                    tripId={tripId}
+                  />
                 </div>
                 <div className="dropoff-body">
                   <p>{formatDate(inboundTransfer.dropoffTime)}</p>

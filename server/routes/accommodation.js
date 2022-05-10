@@ -34,5 +34,7 @@ accommodationRouter.post(
   upload.single("uploaded_file"),
   AccommodationController.Upload
 );
+accommodationRouter.post("/edit/:id", AccommodationController.Update);
+accommodationRouter.post("/delete/:id", AccommodationController.Delete);
 
 module.exports = accommodationRouter;

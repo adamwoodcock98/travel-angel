@@ -34,5 +34,7 @@ parkingRouter.post(
   upload.single("uploaded_file"),
   ParkingController.Upload
 );
+parkingRouter.post("/edit/:id", ParkingController.Update);
+parkingRouter.post("/delete/:id", ParkingController.Delete);
 
 module.exports = parkingRouter;

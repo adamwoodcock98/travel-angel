@@ -34,5 +34,6 @@ TransferRouter.post(
   upload.single("uploaded_file"),
   TransferController.Upload
 );
+TransferRouter.post("/edit/:id", TransferController.Update);
 
 module.exports = TransferRouter;

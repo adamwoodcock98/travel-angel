@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Tabs, Tab, Typography, Box } from "@mui/material";
 import {
   FlightTakeoff,
-  Contacts,
   Hotel,
   Commute,
   LocalParkingRounded,
@@ -14,7 +13,6 @@ import "./dashboard.css";
 import { ViewAccommodation } from "./accommodation/accommodation";
 import Transfers from "./transfers/transfers";
 import Flights from "./flights/flights";
-import Passport from "./passport/passport";
 import Parking from "./parking/parking";
 import Covid from "./covid/covid";
 import Visa from "./visas/visas";
@@ -60,6 +58,8 @@ function a11yProps(index) {
 }
 
 export default function VerticalTabs({ session }) {
+  console.log("This is the rendering of the sidebar");
+
   // the main functional component to be rendered by index aka the sidebar
   const [value, setValue] = React.useState(0); // setting up state for the tab bar, this is purely to render things for the tab bar, not state that we will ever get data from
 
@@ -98,7 +98,6 @@ export default function VerticalTabs({ session }) {
           aria-label="covid"
           {...a11yProps(5)}
         />
-        <Tab icon={<Contacts />} aria-label="passport" {...a11yProps(6)} />
       </Tabs>
 
       <TabPanel className="tab-content" value={value} index={0}>
@@ -117,10 +116,7 @@ export default function VerticalTabs({ session }) {
         <Visa session={session} />
       </TabPanel>
       <TabPanel className="tab-content" value={value} index={5}>
-        <Covid />
-      </TabPanel>
-      <TabPanel className="tab-content" value={value} index={6}>
-        <Passport session={session} />
+        <Covid session={session} />
       </TabPanel>
     </Box>
   );
