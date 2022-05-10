@@ -9,6 +9,7 @@ export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
 
   const userId = session;
+  const [state, setState] = useState(0);
 
   const [accommodation, setAccommodation] = useState([]);
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ export const ViewAccommodation = ({ session }) => {
           setAccommodation(res.data.accommodation);
         });
     }
-  }, [accommodationArray]);
+  }, [accommodationArray, state]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -130,6 +131,10 @@ export const ViewAccommodation = ({ session }) => {
       });
   };
 
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   if (accommodation.length) {
     return (
       <div className="container">
@@ -146,7 +151,10 @@ export const ViewAccommodation = ({ session }) => {
           />
         </div>
         <div className="body">
-          <AccommodationCard accommodation={accommodation} />
+          <AccommodationCard
+            accommodation={accommodation}
+            handleUpload={handleUpload}
+          />
         </div>
       </div>
     );

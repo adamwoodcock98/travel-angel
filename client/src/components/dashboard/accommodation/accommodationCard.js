@@ -3,13 +3,8 @@ import moment from "moment";
 import "./accommodationCard.css";
 import Upload from "../../upload/upload";
 
-export default function AccommodationCard({ accommodation }) {
+export default function AccommodationCard({ accommodation, handleUpload }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
-  const [state, setState] = useState(0);
-
-  useEffect(() => {
-    console.log("rerendered, successfully");
-  }, [state]);
 
   const formatAddress = (address) => {
     const addressObject = address;
@@ -23,7 +18,6 @@ export default function AccommodationCard({ accommodation }) {
   };
 
   const handleSubmit = async (id) => {
-    setState((prev) => prev + 1);
     window.open(`http://localhost:8000/dashboard/accommodation/download/${id}`);
   };
 
@@ -37,6 +31,7 @@ export default function AccommodationCard({ accommodation }) {
               <Upload
                 cardId={accommodation._id}
                 url="dashboard/accommodation"
+                handleUpload={handleUpload}
               />
             </div>
             <div className="body">
