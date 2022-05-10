@@ -35,6 +35,8 @@ const AddAccommodation = (props) => {
     user: userId,
     trip: tripId, 
   });
+  
+  console.log(userId)
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -89,7 +91,6 @@ const AddAccommodation = (props) => {
       postalCode,
       stateCounty,
       countryCode,
-      user,
     } = accommodation;
 
     const newAccommodation = {
@@ -108,9 +109,11 @@ const AddAccommodation = (props) => {
       postalCode,
       stateCounty,
       countryCode,
-      user,
+      user: userId,
       trip: tripId,
     };
+
+    console.log(newAccommodation.user)
 
     await axios
       .post(url, newAccommodation)

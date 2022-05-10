@@ -144,6 +144,7 @@ const Transfers = ({ session }) => {
   } else {
     return (
       <div>
+        <h1>Looks like you don't have any saved transfers, add your first one now!</h1>
         <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
         </Fab>
