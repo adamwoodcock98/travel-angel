@@ -175,36 +175,28 @@ const Flights = ({ session }) => {
     }
     const flightApi = axios.create({
       baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`
-      // baseURL: "https://aerodatabox.p.rapidapi.com/flights/number/EZY8862/2022-05-09/",
     });
-
-    // useEffect(() => {
-      const handleApiSearch = async () => {
-        await flightApi.get('/', options).then((res) => {
-          const data  = res.data[0]
-          console.log(data.departure)
   
-          setFlight({
-            ...flight, 
-            departureTime: formatTime(data.departure.scheduledTimeLocal),
-            airline: data.airline.name,
-            departureAirport: data.departure.airport.shortName,
-            departureTerminal: data.departure.terminal,
-            departureCity: data.departure.airport.municipalityName,
-            departureGate: data.departure.gate,
-            arrivalAirport: data.arrival.airport.name,
-            arrivalTerminal: data.arrival.terminal,
-            arrivalCity: data.arrival.airport.municipalityName,
-            arrivalGate: data.arrival.gate,
-          })
-      })
-      }
-        
-      
-// }, [flight]);
+    const handleApiSearch = async () => {
+      await flightApi.get('/', options).then((res) => {
+        const data  = res.data[0]
+        console.log(data.departure)
 
-  // FLIGHT API
-
+        setFlight({
+          ...flight, 
+          departureTime: formatTime(data.departure.scheduledTimeLocal),
+          airline: data.airline.name,
+          departureAirport: data.departure.airport.shortName,
+          departureTerminal: data.departure.terminal,
+          departureCity: data.departure.airport.municipalityName,
+          departureGate: data.departure.gate,
+          arrivalAirport: data.arrival.airport.name,
+          arrivalTerminal: data.arrival.terminal,
+          arrivalCity: data.arrival.airport.municipalityName,
+          arrivalGate: data.arrival.gate,
+        })
+    })
+    }
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
