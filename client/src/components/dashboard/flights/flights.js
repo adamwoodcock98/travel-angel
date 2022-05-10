@@ -14,6 +14,7 @@ const Flights = ({ session }) => {
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
+  const [emptyFields, setEmptyFields] = useState([])
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -112,6 +113,11 @@ const Flights = ({ session }) => {
       trip,
     };
 
+    if (departureTime === "" || departureDate === "" || departureAirport === "" || departureCity === "" || arrivalAirport === "" || arrivalCity === "" || isOutbound === "") {
+      setEmptyFields(['departureTime', 'departureDate', 'departureAirport', 'departureCity', 'arrivalAirport', 'arrivalCity', 'isOutbound'])
+      return
+    }
+
     api.post("/", newFlight).then((res) => {
       handleClose();
       setFlight({
@@ -199,6 +205,7 @@ const Flights = ({ session }) => {
             handleChange={handleChange}
             flight={flight}
             onSubmit={onSubmit}
+            emptyFields={emptyFields}
           />
         </div>
       </div>
@@ -213,6 +220,7 @@ const Flights = ({ session }) => {
           handleChange={handleChange}
           flight={flight}
           onSubmit={onSubmit}
+          emptyFields={emptyFields}
         />
         {alertMessage && (
           <Alerts
