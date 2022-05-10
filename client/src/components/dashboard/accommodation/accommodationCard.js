@@ -61,7 +61,7 @@ export default function AccommodationCard({ accommodation }) {
                 </div>
               </div>
               <div className="uploads">
-                Download Your fields
+                Download Your files
                 {accommodation.uploads.length &&
                   accommodation.uploads.map((upload, index) => {
                     return (

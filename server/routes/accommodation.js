@@ -25,11 +25,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-//localhost:8000/dashboard/accommodation/download/:id
-http: accommodationRouter.get(
-  "/download/:id",
-  AccommodationController.Download
-);
+
+accommodationRouter.get("/download/:id", AccommodationController.Download);
 accommodationRouter.get("/:id/:tripId", AccommodationController.New);
 accommodationRouter.post("/", AccommodationController.Create);
 accommodationRouter.post(
