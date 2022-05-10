@@ -1,11 +1,14 @@
 const Visa = require("../models/visa.js");
 const Trip = require("../models/trip.js");
+const Upload = require("../models/upload.js");
 
 const VisaController = {
   Index: async (req, res) => {
     const tripId = req.params.tripId;
     const userId = req.params.id;
-    const visas = await Visa.find({ user: userId, trip: tripId });
+    const visas = await Visa.find({ user: userId, trip: tripId }).populate(
+      "uploads"
+    );
     res.json(visas);
   },
 
@@ -35,6 +38,37 @@ const VisaController = {
       console.log(e.message);
       res.status(500).send();
     }
+  },
+  Upload: async (req, res) => {
+    const visaId = req.params.id;
+    const file = req.file.filename;
+    const filename = req.file.originalname;
+
+    try {
+      const upload = new Upload({ name: filename, file: file });
+
+      await upload.save();
+
+      const foundVisa = await Visa.findById(visaId);
+
+      foundVisa.uploads.push(upload);
+
+      await foundVisa.save();
+
+      res.json({ msg: "Upload Successful", type: "success", file: file });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send(err);
+    }
+  },
+  Download: async (req, res) => {
+    const fileId = req.params.id;
+
+    const file = await Upload.findById(fileId);
+
+    const filename = file.file;
+
+    res.download(`./public/uploads/${filename}`); // this is the absolute path to the file
   },
 };
 
