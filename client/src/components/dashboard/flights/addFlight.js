@@ -329,12 +329,12 @@ const AddFlight = (props) => {
         </DialogActions>
       </Dialog>
       <Alerts
-            message={alertMessage}
-            open={alertOpen}
-            handleClose={handleAlertClose}
-            alertPosition={alertPosition}
-            alertType={alertType}
-          />
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

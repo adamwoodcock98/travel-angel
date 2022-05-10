@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Alerts } from "../../assets/snackbar";
 
 const AddAccommodation = (props) => {
   const userId = props.userId;
@@ -34,6 +35,24 @@ const AddAccommodation = (props) => {
     user: userId,
     trip: tripId, 
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
   
 
   const handleChange = (e) => {
@@ -95,8 +114,8 @@ const AddAccommodation = (props) => {
 
     await axios
       .post(url, newAccommodation)
-      .catch((err) => console.log(err.message))
       .then(() => {
+        handleAlert("Accommodation added successfully.", "success");
         setAccommodation({
           name: "",
           contactNumber: "",
@@ -116,6 +135,10 @@ const AddAccommodation = (props) => {
           user: userId,
         });
         handleClose();
+      })
+      .catch((err) => {
+        console.log(err.message);
+        handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
       });
   };
 
@@ -342,6 +365,13 @@ const AddAccommodation = (props) => {
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }
