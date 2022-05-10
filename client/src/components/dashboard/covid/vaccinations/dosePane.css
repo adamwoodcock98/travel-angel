@@ -13,3 +13,7 @@
 .vaccine-card-dose-type {
   flex: 1;
 }
+
+.vaccine-card-buttons {
+  display: flex;
+}

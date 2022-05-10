@@ -1,6 +1,6 @@
+import React, { useState } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
-import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,20 +8,125 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function AddParking(
-  {
-  open,
-  handleOpen,
-  handleClose,
-  handleChange,
-  parking,
-  onSubmit,
-}) {
+const AddParking = (props) => {
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const open = props.open;
+  const handleOpen = props.handleOpen;
+  const handleClose = props.handleClose;
+  const parkingData = props.parkingData;
+  const parkingId = props.parkingId;
+  const [parking, setParking] = useState({
+    startDate: parkingData.startDate,
+    endDate: parkingData.endDate,
+    airport: parkingData.airport,
+    type: parkingData.type,
+    regPlate: parkingData.regPlate,
+    company: parkingData.company,
+    contactNumber: parkingData.contactNumber,
+    bookingReference: parkingData.bookingReference,
+    notes: parkingData.notes,
+    buildingNumber: parkingData.address.buildingNumber,
+    buildingName: parkingData.address.buildingName,
+    addressLine1: parkingData.address.addressLine1,
+    addressLine2: parkingData.address.addressLine2,
+    city: parkingData.address.city,
+    postalCode: parkingData.address.postalCode,
+    stateCounty: parkingData.address.stateCounty,
+    countryCode: parkingData.address.countryCode,
+    user: userId,
+    trip: tripId,
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setParking({
+      ...parking,
+      [e.target.name]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    let url;
+    if (parkingId) {
+      url = `http://localhost:8000/dashboard/parking/edit/${parkingId}`
+    } else {
+      url = `http://localhost:8000/dashboard/parking/`
+    }
+
+    const {
+      startDate,
+      endDate,
+      airport,
+      type,
+      regPlate,
+      company,
+      contactNumber,
+      bookingReference,
+      notes,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+    } = parking;
+
+    const newBooking = {
+      startDate,
+      endDate,
+      airport,
+      type,
+      regPlate,
+      company,
+      contactNumber,
+      bookingReference,
+      notes,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user: userId,
+      trip: tripId,
+    };
+
+
+
+    axios.post(url, newBooking).then((res) => {
+      handleClose();
+      setParking({
+        startDate: "",
+        endDate: "",
+        airport: "",
+        type: "",
+        regPlate: "",
+        company: "",
+        contactNumber: "",
+        bookingReference: "",
+        notes: "",
+        buildingNumber: "",
+        buildingName: "",
+        addressLine1: "",
+        addressLine2: "",
+        city: "",
+        postalCode: "",
+        stateCounty: "",
+        countryCode: "",
+        user: userId,
+      });
+    });
+  };
+
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Parking</DialogTitle>
         <DialogContent>
@@ -243,3 +348,5 @@ export default function AddParking(
     </div>
   );
 }
+
+export default AddParking;

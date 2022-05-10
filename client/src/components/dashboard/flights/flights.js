@@ -4,6 +4,8 @@ import { FlightCard } from "./viewFlights/flightCard";
 import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 import { useParams } from "react-router-dom";
 
 const Flights = ({ session }) => {
@@ -55,85 +57,12 @@ const Flights = ({ session }) => {
     baseURL: "http://localhost:8000/dashboard/flights/",
   });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setFlight({
-      ...flight,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    } = flight;
-
-    const newFlight = {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    };
-
-    api.post("/", newFlight).then((res) => {
-      handleClose();
-      setFlight({
-        flightNumber: "",
-        departureTime: "",
-        departureDate: "",
-        airline: "",
-        departureAirport: "",
-        departureTerminal: "",
-        departureCity: "",
-        departureGate: "",
-        arrivalAirport: "",
-        arrivalTerminal: "",
-        arrivalCity: "",
-        arrivalGate: "",
-        bookingReference: "",
-        isOutbound: "",
-        user: userId,
-        trip: tripId,
-      });
-      window.location = "/";
-    });
   };
 
   useEffect(() => {
@@ -166,13 +95,13 @@ const Flights = ({ session }) => {
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
       );
     });
 
@@ -192,13 +121,17 @@ const Flights = ({ session }) => {
           </div>
         </div>
         <div className="flights-footer">
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddFlight
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            flight={flight}
-            onSubmit={onSubmit}
+            flightData={flight}
+            flightId={null}
+            user={userId}
+            tripId={tripId}
           />
         </div>
       </div>
@@ -206,13 +139,17 @@ const Flights = ({ session }) => {
   } else {
     return (
       <>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
         <AddFlight
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}
-          handleChange={handleChange}
-          flight={flight}
-          onSubmit={onSubmit}
+          flightData={flight}
+          flightId={null}
+          user={userId}
+          tripId={tripId}
         />
         {alertMessage && (
           <Alerts

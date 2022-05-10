@@ -1,6 +1,7 @@
+import React, { useState } from "react";
+import axios from "axios"
 import Button from "@mui/material/Button";
-import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,19 +14,112 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
-export default function AddFlight({
-  open,
-  handleOpen,
-  handleClose,
-  handleChange,
-  flight,
-  onSubmit,
-}) {
+const AddFlight = (props) => {
+  const flightData = props.flightData;
+  const tripId = props.tripId;
+  const flightId = props.flightId;
+  const open = props.open;
+  const userId = props.user;
+  const handleClose = props.handleClose;
+  const [flight, setFlight] = useState({
+    flightNumber: flightData.flightNumber,
+    departureTime: flightData.departureTime,
+    departureDate: flightData.departureDate,
+    airline: flightData.airline,
+    departureAirport: flightData.departureAirport,
+    departureTerminal: flightData.departureTerminal,
+    departureCity: flightData.departureCity,
+    departureGate: flightData.departureGate,
+    arrivalAirport: flightData.arrivalAirport,
+    arrivalTerminal: flightData.arrivalTerminal,
+    arrivalCity: flightData.arrivalCity,
+    arrivalGate: flightData.arrivalGate,
+    bookingReference: flightData.bookingReference,
+    isOutbound: flightData.isOutbound,
+    user: userId,
+    trip: tripId,
+  });
+
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setFlight({
+      ...flight,
+      [e.target.name]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    let url;
+    if (flightId) {
+      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`
+    } else {
+      url = `http://localhost:8000/dashboard/flights/`
+    }
+
+    const {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+    } = flight;
+
+    const newFlight = {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+      trip: tripId,
+    };
+
+    axios.post(url, newFlight).then((res) => {
+      handleClose();
+      setFlight({
+        flightNumber: "",
+        departureTime: "",
+        departureDate: "",
+        airline: "",
+        departureAirport: "",
+        departureTerminal: "",
+        departureCity: "",
+        departureGate: "",
+        arrivalAirport: "",
+        arrivalTerminal: "",
+        arrivalCity: "",
+        arrivalGate: "",
+        bookingReference: "",
+        isOutbound: "",
+        user: userId,
+      })
+    });
+  };
+
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Flight</DialogTitle>
         <DialogContent>
@@ -171,7 +265,7 @@ export default function AddFlight({
             margin="dense"
             id="arrivalGate"
             name="arrivalGate"
-            label="Arrial Gate"
+            label="Arrival Gate"
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -200,16 +294,19 @@ export default function AddFlight({
               onChange={handleChange}
               required
             >
-              <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>
+              <MenuItem value={false}>Inbound</MenuItem>
             </Select>
           </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Flight Details</Button>
+          {flightId && <Button onClick={onSubmit}>Update Flight Details</Button>}
+          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
         </DialogActions>
       </Dialog>
     </div>
   );
 }
+
+export default AddFlight;

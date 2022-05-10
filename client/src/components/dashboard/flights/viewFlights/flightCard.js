@@ -2,10 +2,13 @@ import React from "react";
 import "./flightCard.css"
 import { AirportPane } from "./airportPane"
 import { FooterPane } from "./footerPane"
+import CrudMenu from "./crud/crud"
+import AddFlight from "../addFlight"
 
 export const FlightCard = (props) => {
 
   const flightData = props.outboundFlight;
+  const userId = props.userId;
 
   const departureData = {
     airport: flightData.departureAirport,
@@ -39,6 +42,9 @@ export const FlightCard = (props) => {
         </div>
         <div className="flight-card-departure-pane">
           <AirportPane data={arrivalData} />
+        </div>
+        <div className="flight-card-crud">
+          <CrudMenu userId={userId} flightData={flightData}/>
         </div>
       </div>
       <div className="flight-card-footer">

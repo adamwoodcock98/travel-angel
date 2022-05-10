@@ -4,6 +4,8 @@ import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
 import { useParams } from "react-router-dom";
 import "./accommodation.css";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -12,7 +14,7 @@ export const ViewAccommodation = ({ session }) => {
 
   const [accommodation, setAccommodation] = useState([]);
   const [open, setOpen] = useState(false);
-  const [accommodationArray, setAccommodationArray] = useState({
+  const accommodationArray = {
     name: "",
     contactNumber: "",
     checkInDate: "",
@@ -20,17 +22,19 @@ export const ViewAccommodation = ({ session }) => {
     checkInTime: "",
     checkOutTime: "",
     bookingReference: "",
-    buildingNumber: "",
-    buildingName: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    postalCode: "",
-    stateCounty: "",
-    countryCode: "",
+    address: {
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+    },
     user: userId,
     trip: tripId,
-  });
+  };
 
   useEffect(() => {
     if (userId !== "null") {
@@ -42,7 +46,7 @@ export const ViewAccommodation = ({ session }) => {
           setAccommodation(res.data.accommodation);
         });
     }
-  }, [accommodationArray]);
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -50,84 +54,6 @@ export const ViewAccommodation = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setAccommodationArray({
-      ...accommodationArray,
-      [e.target.name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    } = accommodationArray;
-
-    const newAccommodation = {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    };
-
-    await axios
-      .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
-      .catch((err) => console.log(err.message))
-      .then(() => {
-        setAccommodationArray({
-          name: "",
-          contactNumber: "",
-          checkInDate: "",
-          checkOutDate: "",
-          checkInTime: "",
-          checkOutTime: "",
-          bookingReference: "",
-          buildingNumber: "",
-          buildingName: "",
-          addressLine1: "",
-          addressLine2: "",
-          city: "",
-          postalCode: "",
-          stateCounty: "",
-          countryCode: "",
-          user: userId,
-          trip: tripId,
-        });
-        handleClose();
-      });
   };
 
   const formatAddressMaps = (address) => {
@@ -155,14 +81,18 @@ export const ViewAccommodation = ({ session }) => {
             handleOpen={handleOpen}
             open={open}
             handleClose={handleClose}
-            handleChange={handleChange}
-            accommodation={accommodationArray}
-            handleSubmit={handleSubmit}
+            accommodationData={accommodationArray}
+            accommodationId={null}
+            userId={userId}
+            tripId={tripId}
           />
         </div>
         <div className="body">
-          <AccommodationCard accommodation={accommodation} handleDirections={handleDirections} />
+          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
         </div>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
       </div>
     );
   } else {
@@ -170,14 +100,18 @@ export const ViewAccommodation = ({ session }) => {
       <div className="container">
         <div className="header">
           <h1 className="title">Accommodation</h1>
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddAccommodation
             className="add-accomodation"
             handleOpen={handleOpen}
             open={open}
             handleClose={handleClose}
-            handleChange={handleChange}
-            accommodation={accommodationArray}
-            handleSubmit={handleSubmit}
+            accommodationData={accommodationArray}
+            accommodationId={null}
+            userId={userId}
+            tripId={tripId}
           />
         </div>
       </div>

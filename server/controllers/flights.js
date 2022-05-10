@@ -23,7 +23,6 @@ const FlightsController = {
       });
       res.status(200).send();
     } catch (e) {
-      console.log(e.message);
       res.status(500).send();
     }
   },
@@ -64,6 +63,48 @@ const FlightsController = {
       res.status(500).send(err);
     }
   },
+
+  Update: async (req, res) => {
+    const data = req.body;
+   try {
+    const flight = await Flight.findById(req.params.id);
+    console.log(flight)
+    flight.flightNumber = data.flightNumber;
+    flight.departureTime = data.departureTime;
+    flight.departureDate = data.departureDate;
+    flight.airline = data.airline;
+    flight.departureAirport = data.departureAirport;
+    flight.departureTerminal = data.departureTerminal;
+    flight.departureCity = data.departureCity;
+    flight.departureGate = data.departureGate;
+    flight.arrivalAirport = data.arrivalAirport;
+    flight.arrivalTerminal = data.arrivalTerminal;
+    flight.arrivalCity = data.arrivalCity;
+    flight.arrivalGate = data.arrivalGate;
+    flight.bookingReference = data.bookingReference;
+    flight.isOutbound = data.isOutbound;
+    await flight.save();
+
+    res.status(200).send();
+   } catch(e) {
+     console.log(e.message);
+     res.status(500).send();
+   }
+  },
+
+  Delete: async (req, res) => {
+    const id = req.params.id;
+
+    try {
+      await Flight.deleteOne({ _id: id });
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+
+      res.status(500).send();
+    }
+  }
 };
 
 module.exports = FlightsController;

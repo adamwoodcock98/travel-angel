@@ -4,10 +4,13 @@ import moment from "moment";
 import Button from '@mui/material/Button';
 import BiotechOutlinedIcon from "@mui/icons-material/BiotechOutlined";
 import AddTest from "./newTest";
+import CrudMenu from "./crud/crud";
 
 const TestCard = (props) => {
   const [open, setOpen] = useState(false);
   const testData = props.testData;
+  const userId = props.userId;
+  const testId = testData._id;
 
   const handleOpen = () => {
     setOpen(true);
@@ -23,6 +26,7 @@ const TestCard = (props) => {
     <div className="test-card">
       <div className="test-card-header">
         <h1>{testData.testType} {testData.entryType}</h1>
+        <CrudMenu testData={testData} testId={testId} userId={userId} />
       </div>
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
         <div className="test-card-primary-content">
@@ -71,7 +75,7 @@ const TestCard = (props) => {
           <Button color="secondary" startIcon={<BiotechOutlinedIcon />} onClick={handleOpen}>
             Add results
           </Button>
-          <AddTest open={open} handleOpen={handleOpen} handleClose={handleClose} testType={testData.testType} type={"Result"} testID={testData._id}/>
+          <AddTest open={open} handleOpen={handleOpen} handleClose={handleClose} entryType="Result" testData={testData} testID={testData._id}/>
         </div>
       </div>
     </div>

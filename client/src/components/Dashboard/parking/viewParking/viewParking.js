@@ -1,12 +1,14 @@
 import React from "react";
 import "./viewParking.css";
 import moment from "moment";
+import CrudMenu from "./crud/crud"
 import Button from "@mui/material/Button";
 import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 
 const ParkingCard = (props) => {
-
   const parkingData = props.bookingData;
+  const userId = props.userId
+  const tripId = props.tripId
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
@@ -14,6 +16,7 @@ const ParkingCard = (props) => {
     <div className="parking-card">
       <div className="parking-card-header">
         <h1>Your booking{parkingData.bookingReference && `: ${parkingData.bookingReference}`}</h1>
+        
       </div>
       <div className="parking-card-dates-content">
         <div className="parking-card-dates-arrival">
@@ -46,6 +49,7 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
+      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} />
       <div className="directions">
         <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={props.handleDirections(parkingData.address)}>Get Directions</Button>
       </div>
