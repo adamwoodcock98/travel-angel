@@ -7,6 +7,7 @@ export default function VisaCard(props) {
   const visa = props.visa;
   const userId = props.userId;
   const tripId = props.tripId
+  const refresh = props.refresh;
 
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
@@ -17,7 +18,7 @@ export default function VisaCard(props) {
             <div className="visa-card" key={index}>
               <div className="header">
                 <h3>Your entry visa to</h3>
-                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} />
+                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
                   <div className="country">
                     <h1>{visa.issuingCountry}</h1>
                   </div>

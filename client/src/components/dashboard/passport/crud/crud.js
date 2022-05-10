@@ -57,6 +57,7 @@ const StyledMenu = styled((props) => (
 const CrudMenu = ({
   passportData,
   userId,
+  refresh,
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
@@ -89,6 +90,7 @@ const CrudMenu = ({
   const handleDeletePromptClose = () => {
     handleCrudClose();
     setDeleteOpen(false);
+    refresh();
   };
 
   return (

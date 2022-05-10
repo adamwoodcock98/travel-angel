@@ -9,6 +9,7 @@ export default function AccommodationCard(props) {
   const userId = props.userId;
   const accommodation = props.accommodation;
   const handleDirections = props.handleDirections;
+  const refresh = props.refresh;
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
@@ -75,7 +76,7 @@ export default function AccommodationCard(props) {
               </div>
             </div>
             <div className="crud-menu">
-              <CrudMenu userId={userId} accommodationData={accommodation} />
+              <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
             </div>
           </div>
         );

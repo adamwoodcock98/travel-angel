@@ -54,7 +54,7 @@ const Covid = (props) => {
 
     const testsArray =[]
     testData.forEach(test => {
-      testsArray.push(<TestCard testData={test} userId={userId} />);
+      testsArray.push(<TestCard testData={test} userId={userId} refresh={handleClose} />);
     })
 
     return(
@@ -66,7 +66,7 @@ const Covid = (props) => {
           <div className="covid-content">
             <div className="covid-content-vaccinations">
               <h1>Vaccinations</h1>
-              <VaccineCard vaccinationsData={vaccineData}/>
+              <VaccineCard vaccinationsData={vaccineData} refresh={handleClose} />
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>

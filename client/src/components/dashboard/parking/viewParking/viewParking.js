@@ -7,8 +7,9 @@ import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
-  const userId = props.userId
-  const tripId = props.tripId
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const refresh = props.refresh;
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
@@ -49,7 +50,7 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
-      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} />
+      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
       <div className="directions">
         <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={props.handleDirections(parkingData.address)}>Get Directions</Button>
       </div>

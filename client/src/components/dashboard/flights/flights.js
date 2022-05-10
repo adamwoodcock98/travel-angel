@@ -101,13 +101,13 @@ const Flights = ({ session }) => {
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
       );
     });
 

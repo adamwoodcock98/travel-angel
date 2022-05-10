@@ -13,6 +13,7 @@ const Passport = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [displayState, setDisplayState] = useState([]);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [passport, setPassport] = useState({
     passportNumber: "",
     firstName: "",
@@ -33,6 +34,7 @@ const Passport = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -67,7 +69,7 @@ const Passport = ({ session }) => {
       })
       .finally(() => setLoading(false));;
     }
-  }, []);
+  }, [didUpdate]);
 
   const handleAlert = (message, type) => {
     setAlertOpen(true);
@@ -86,7 +88,7 @@ const Passport = ({ session }) => {
   );
   displayState.forEach((pass) => {
     console.log("the pass", pass)
-    passportRender.push(<DisplayPassport passport={pass} userId={userId} />);
+    passportRender.push(<DisplayPassport passport={pass} userId={userId} refresh={handleClose} />);
   });
 
 

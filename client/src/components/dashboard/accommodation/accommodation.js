@@ -137,6 +137,7 @@ export const ViewAccommodation = ({ session }) => {
               accommodation={accommodation}
               userId={userId}
               handleDirections={handleDirections}
+              refresh={handleClose}
             />
           </div>
           <Fab
