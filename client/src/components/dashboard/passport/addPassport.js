@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import axios from "axios";
 import {
   Button,
   Fab,
@@ -12,27 +14,98 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 
 export default function AddPassport({
   open,
   handleOpen,
   handleClose,
-  handleChange,
-  passport,
-  onSubmit,
+  passportId,
+  passportData,
+  user,
 }) {
+  const [passport, setPassport] = useState({
+    passportNumber: passportData.passportNumber,
+    firstName: passportData.firstName,
+    lastName: passportData.lastName,
+    nationality: passportData.nationality,
+    country: passportData.country,
+    dob: passportData.dob,
+    gender: passportData.gender,
+    placeOfBirth: passportData.placeOfBirth,
+    dateOfIssue: passportData.dateOfIssue,
+    dateOfExpiry: passportData.dateOfExpiry,
+    user: user,
+  });
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setPassport({
+      ...passport,
+      [e.target.name]: value,
+    });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    let url;
+    if (passportId) {
+      url = `http://localhost:8000/dashboard/passport/edit/${passportId}`
+    } else {
+      url = `http://localhost:8000/dashboard/passport/`
+    }
+
+    const {
+      passportNumber,
+      firstName,
+      lastName,
+      nationality,
+      country,
+      dob,
+      gender,
+      placeOfBirth,
+      dateOfIssue,
+      dateOfExpiry,
+      user,
+    } = passport;
+
+    const newPassport = {
+      passportNumber,
+      firstName,
+      lastName,
+      nationality,
+      country,
+      dob,
+      gender,
+      placeOfBirth,
+      dateOfIssue,
+      dateOfExpiry,
+      user,
+    };
+
+    await axios
+      .post(url, newPassport)
+      .then((res) => {
+        setPassport({
+          passportNumber: "",
+          firstName: "",
+          lastName: "",
+          nationality: "",
+          country: "",
+          dob: "",
+          gender: "",
+          placeOfBirth: "",
+          dateOfIssue: "",
+          dateOfExpiry: "",
+          user: user,
+        });
+        handleClose();
+      });
+  };
+
+
   return (
     <div>
-      <Fab
-        id="pass-fab"
-        size="medium"
-        color="secondary"
-        aria-label="add"
-        onClick={handleOpen}
-      >
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Passport</DialogTitle>
         <DialogContent>

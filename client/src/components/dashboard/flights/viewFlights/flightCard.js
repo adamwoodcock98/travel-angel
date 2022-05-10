@@ -3,7 +3,6 @@ import "./flightCard.css"
 import { AirportPane } from "./airportPane"
 import { FooterPane } from "./footerPane"
 import CrudMenu from "./crud/crud"
-import AddFlight from "../addFlight"
 
 export const FlightCard = (props) => {
 

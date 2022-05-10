@@ -90,7 +90,7 @@ export const ViewAccommodation = ({ session }) => {
         })
         .finally(() => setLoading(false));
     }
-  }, [accommodation]);
+  }, []);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
