@@ -132,7 +132,6 @@ const Flights = ({ session }) => {
         user: userId,
         trip: tripId,
       });
-      window.location = "/";
     });
   };
 
@@ -158,7 +157,7 @@ const Flights = ({ session }) => {
           );
         }
       });
-  }, []);
+  }, [flight]);
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];

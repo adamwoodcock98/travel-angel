@@ -106,8 +106,6 @@ const AccommodationController = {
     }
   },
   Download: async (req, res) => {
-    console.log(req.params.id);
-    console.log("HERE IS THE STRING");
     const fileId = req.params.id;
 
     const file = await Upload.findById(fileId);
