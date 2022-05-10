@@ -58,25 +58,25 @@ const UsersController = {
   },
 
   Profile: (req, res) => {
-    const userId = req.params.id
-    User.findOne({ _id: userId }).then((user) => {
+    const userId = req.params.id;
+    User.findById(userId).then((user) => {
       res.json({
-        user: user
+        user: user,
       });
-    })
+    });
   },
 
   Settings: (req, res) => {
-    const userId = req.params.id
+    const userId = req.params.id;
     User.findOne({ _id: userId }).then((user) => {
       res.json({
-        user: user
+        user: user,
       });
-    })
+    });
   },
 
   Save: async (req, res) => {
-    const userId = req.params.id
+    const userId = req.params.id;
     const userDetails = req.body;
     // const password = req.body.password;
     // const hashedPassword = await bcrypt.hash(password, 10)
@@ -90,14 +90,16 @@ const UsersController = {
           // password: hashedPassword,
           profilePicture: userDetails.profilePicture,
         },
-      }, {
-        new: true
-      })
+      },
+      {
+        new: true,
+      }
+    );
     await res.json({
       msg: "Congrats! You've updated your details!",
       type: "success",
       user: "user",
-    })
+    });
   },
 };
 
