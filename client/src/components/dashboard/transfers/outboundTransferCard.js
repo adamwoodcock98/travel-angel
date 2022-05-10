@@ -3,7 +3,7 @@ import moment from "moment";
 import "./transferCard.css";
 import Upload from "../../upload/upload";
 
-export const OutboundTransferCard = ({ outboundTransfer }) => {
+export const OutboundTransferCard = ({ outboundTransfer, handleUpload }) => {
   const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
   const formatTime = (time) => moment(time).format("HH:mm");
 
@@ -82,7 +82,11 @@ export const OutboundTransferCard = ({ outboundTransfer }) => {
               </div>
             </div>
             <div className="uploads">
-              <Upload cardId={outboundTransfer._id} url="dashboard/transfers" />
+              <Upload
+                cardId={outboundTransfer._id}
+                url="dashboard/transfers"
+                handleUpload={handleUpload}
+              />
               {outboundTransfer.uploads.length &&
                 outboundTransfer.uploads.map((upload, index) => {
                   return (
