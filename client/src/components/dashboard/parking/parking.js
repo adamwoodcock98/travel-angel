@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddParking from "./addParking";
-import ParkingCard from "./viewParking";
+import ParkingCard from "./viewParking/viewParking";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
 import { useParams } from "react-router-dom";
 
 const Parking = ({ session }) => {
@@ -12,7 +14,7 @@ const Parking = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [newParking, setNewParking] = useState({
+  const newParking = {
     startDate: "",
     endDate: "",
     airport: "",
@@ -22,29 +24,23 @@ const Parking = ({ session }) => {
     contactNumber: "",
     bookingReference: "",
     notes: "",
-    buildingNumber: "",
-    buildingName: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    postalCode: "",
-    stateCounty: "",
-    countryCode: "",
+    address: {
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+    },
     user: userId,
     trip: tripId,
-  });
+  };
 
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/parking/",
   });
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setNewParking({
-      ...newParking,
-      [e.target.name]: value,
-    });
-  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -108,7 +104,7 @@ const Parking = ({ session }) => {
 
     api.post(`/`, newBooking).then((res) => {
       handleClose();
-      setNewParking({
+      setParking({
         startDate: "",
         endDate: "",
         airport: "",
@@ -139,7 +135,7 @@ const Parking = ({ session }) => {
         setParking(bookings);
       });
     }
-  }, [newParking]);
+  }, []);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
@@ -161,7 +157,7 @@ const Parking = ({ session }) => {
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} handleDirections={handleDirections} />
+        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} />
       );
     });
 
@@ -172,13 +168,17 @@ const Parking = ({ session }) => {
         </div>
         <div className="parking-content">{parking.length && parkingArray}</div>
         <div className="parking-footer">
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddParking
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            parking={parking}
-            onSubmit={onSubmit}
+            parkingData={newParking}
+            parkingId={null}
+            userId={userId}
+            tripId={tripId}
             emptyFields={emptyFields}
           />
         </div>
@@ -186,15 +186,21 @@ const Parking = ({ session }) => {
     );
   } else {
     return (
+      <>
+      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <AddIcon />
+      </Fab>
       <AddParking
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        handleChange={handleChange}
-        parking={parking}
-        onSubmit={onSubmit}
+        parkingData={newParking}
+        parkingId={null}
+        userId={userId}
+        tripId={tripId}
         emptyFields={emptyFields}
       />
+      </>
     );
   }
 };

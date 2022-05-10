@@ -4,6 +4,8 @@ import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
 import { useParams } from "react-router-dom";
 import "./accommodation.css";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -21,17 +23,19 @@ export const ViewAccommodation = ({ session }) => {
     checkInTime: "",
     checkOutTime: "",
     bookingReference: "",
-    buildingNumber: "",
-    buildingName: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    postalCode: "",
-    stateCounty: "",
-    countryCode: "",
+    address: {
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+    },
     user: userId,
     trip: tripId,
-  });
+  })
 
   useEffect(() => {
     if (userId !== "null") {
@@ -43,7 +47,7 @@ export const ViewAccommodation = ({ session }) => {
           setAccommodation(res.data.accommodation);
         });
     }
-  }, [accommodationArray]);
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -168,7 +172,7 @@ export const ViewAccommodation = ({ session }) => {
       </div>
       {accommodation.length &&
         <div className="body">
-          <AccommodationCard accommodation={accommodation} handleDirections={handleDirections} />
+          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
         </div>
       }
     </div>

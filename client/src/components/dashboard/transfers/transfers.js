@@ -4,6 +4,8 @@ import axios from "axios";
 import { OutboundTransferCard } from "./outboundTransferCard";
 import { InboundTransferCard } from "./inboundTransferCard";
 import { useParams } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
@@ -42,36 +44,6 @@ const Transfers = ({ session }) => {
     user: userId,
     trip: tripId,
   });
-
-  const handlePickupChange = (e) => {
-    const value = e.target.value;
-    setTransfer((prevState) => ({
-      ...prevState,
-      pickupAddress: {
-        ...prevState.pickupAddress,
-        [e.target.name]: value,
-      },
-    }));
-  };
-
-  const handleDropoffChange = (e) => {
-    const value = e.target.value;
-    setTransfer((prevState) => ({
-      ...prevState,
-      dropoffAddress: {
-        ...prevState.dropoffAddress,
-        [e.target.name]: value,
-      },
-    }));
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setTransfer({
-      ...transfer,
-      [e.target.name]: value,
-    });
-  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -166,7 +138,7 @@ const Transfers = ({ session }) => {
           setInboundTransfer(inbound);
         });
     }
-  }, [transfer]);
+  }, []);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
@@ -177,23 +149,25 @@ const Transfers = ({ session }) => {
         <div className="transfers-content">
           <div className="transfers-content-outbound">
             <h1 className="transfer-content-subheading">Outbound</h1>
-            <OutboundTransferCard outboundTransfer={outboundTransfer} />
+            <OutboundTransferCard outboundTransfer={outboundTransfer} userId={userId} tripId={tripId} />
           </div>
           <div className="transfers-content-inbound">
             <h1 className="transfers-content-subheading">Inbound</h1>
-            <InboundTransferCard inboundTransfer={inboundTransfer} />
+            <InboundTransferCard inboundTransfer={inboundTransfer} userId={userId} tripId={tripId} />
           </div>
         </div>
         <div>
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
           <AddTransfer
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            transfer={transfer}
-            handleSubmit={handleSubmit}
-            handlePickupChange={handlePickupChange}
-            handleDropoffChange={handleDropoffChange}
+            transferData={transfer}
+            userId={userId}
+            tripId={tripId}
+            transferId={null}
             emptyFields={emptyFields}
           />
         </div>
@@ -202,15 +176,17 @@ const Transfers = ({ session }) => {
   } else {
     return (
       <div>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+        </Fab>
         <AddTransfer
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}
-          handleChange={handleChange}
-          transfer={transfer}
-          handleSubmit={handleSubmit}
-          handlePickupChange={handlePickupChange}
-          handleDropoffChange={handleDropoffChange}
+          transferData={transfer}
+          userId={userId}
+          tripId={tripId}
+          transferId={null}
           emptyFields={emptyFields}
         />
       </div>

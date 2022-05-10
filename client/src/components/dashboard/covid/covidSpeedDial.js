@@ -9,39 +9,52 @@ import NotificationAddOutlinedIcon from "@mui/icons-material/NotificationAddOutl
 import AddVaccine from "./vaccinations/newVaccine"
 import AddTest from "./tests/newTest"
 
-const handleReminderClick = (e) => {
-  console.log("clicked on reminder");
-  return(
-    <AddVaccine />
-  );
-};
-
-const handleTestClick = (e) => {
-  console.log("clicked on test");
-};
-
-const handleVaccineClick = (e) => {
-  console.log("clicked on vaccine");
-};
-
-const actions = [
-  {
-    icon: <NotificationAddOutlinedIcon />,
-    name: "Reminder",
-    action: handleReminderClick,
-  },
-  { icon: <BiotechOutlinedIcon />, name: "Test", action: handleTestClick },
-  {
-    icon: <VaccinesOutlinedIcon />,
-    name: "Vaccination",
-    action: handleVaccineClick,
-  },
-];
-
 export default function PlaygroundSpeedDial() {
+  const actions = [
+    {
+      icon: <NotificationAddOutlinedIcon />,
+      name: "Reminder",
+      action: handleReminderClick,
+    },
+    { icon: <BiotechOutlinedIcon />, name: "Test", action: handleTestClick },
+    {
+      icon: <VaccinesOutlinedIcon />,
+      name: "Vaccination",
+      action: handleVaccineClick,
+    },
+  ];
+
   const [open, setOpen] = useState(false);
+  const [testOpen, setTestOpen] = useState(false);
+  const [vaccineOpen, setVaccineOpen] = useState(false);
+  const [reminderOpen, setReminderOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleReminderClick = (e) => {
+    handleClose()
+    console.log("clicked on reminder");
+    setReminderOpen(true);
+    setVaccineOpen(false);
+    setTestOpen(false);
+  };
+  
+  const handleTestClick = (e) => {
+    handleClose()
+    console.log("clicked on test");
+    setReminderOpen(false);
+    setVaccineOpen(false);
+    setTestOpen(true);
+  };
+  
+  const handleVaccineClick = (e) => {
+    handleClose()
+    console.log("clicked on vaccine");
+    setReminderOpen(false);
+    setVaccineOpen(true);
+    setTestOpen(false);
+  };
 
   return (
     <>
@@ -67,10 +80,11 @@ export default function PlaygroundSpeedDial() {
               icon={action.icon}
               tooltipOpen
               tooltipTitle={action.name}
-              onClick={() => {handleClose(); action.action();}}
+              onClick={action.action}
             />
           ))}
         </SpeedDial>
+        <AddTest open={testOpen}/>
     </>
   );
 }

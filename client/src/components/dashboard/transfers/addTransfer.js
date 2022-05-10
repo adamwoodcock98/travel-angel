@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -9,23 +11,153 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import { getThemeProps } from "@mui/system";
 
-export default function AddTransfer({
-  open,
-  handleOpen,
-  handleClose,
-  handleChange,
-  transfer,
-  handleSubmit,
-  handlePickupChange,
-  handleDropoffChange,
-  emptyFields,
-}) {
+const AddTransfer = (props) => {
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const transferId = props.transferId;
+  const open = props.open;
+  const handleOpen = props.handleOpen;
+  const handleClose = props.handleClose;
+  const transferData = props.transferData;
+  const emptyFields = getThemeProps.emptyFields;
+  const [transfer, setTransfer] = useState({
+    pickupTime: transferData.pickupTime,
+    dropoffTime: transferData.dropoffTime,
+    pickupAddress: {
+      buildingNumber: transferData.pickupAddress.buildingNumber,
+      buildingName: transferData.pickupAddress.buildingName,
+      addressLine1: transferData.pickupAddress.addressLine1,
+      addressLine2: transferData.pickupAddress.addressLine2,
+      city: transferData.pickupAddress.city,
+      postalCode: transferData.pickupAddress.postalCode,
+      stateCounty: transferData.pickupAddress.stateCounty,
+      countryCode: transferData.pickupAddress.countryCode,
+    },
+    dropoffAddress: {
+      buildingNumber: transferData.dropoffAddress.buildingNumber,
+      buildingName: transferData.dropoffAddress.buildingName,
+      addressLine1: transferData.dropoffAddress.addressLine1,
+      addressLine2: transferData.dropoffAddress.addressLine2,
+      city: transferData.dropoffAddress.city,
+      postalCode: transferData.dropoffAddress.postalCode,
+      stateCounty: transferData.dropoffAddress.stateCounty,
+      countryCode: transferData.dropoffAddress.countryCode,
+    },
+    isOutbound: transferData.isOutbound,
+    company: transferData.company,
+    contactNumber: transferData.contactNumber,
+    bookingReference: transferData.bookingReference,
+    user: userId,
+    trip: tripId,
+  })
+
+  const handlePickupChange = (e) => {
+    const value = e.target.value;
+    setTransfer((prevState) => ({
+      ...prevState,
+      pickupAddress: {
+        ...prevState.pickupAddress,
+        [e.target.name]: value,
+      },
+    }));
+  };
+
+  const handleDropoffChange = (e) => {
+    const value = e.target.value;
+    setTransfer((prevState) => ({
+      ...prevState,
+      dropoffAddress: {
+        ...prevState.dropoffAddress,
+        [e.target.name]: value,
+      },
+    }));
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setTransfer({
+      ...transfer,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let url;
+    if (transferId) {
+      url = `http://localhost:8000/dashboard/transfers/edit/${transferId}`;
+    } else {
+      url = `http://localhost:8000/dashboard/transfers/`;
+    }
+
+    const {
+      pickupTime,
+      dropoffTime,
+      pickupAddress,
+      dropoffAddress,
+      isOutbound,
+      company,
+      contactNumber,
+      bookingReference,
+      user,
+      trip,
+    } = transfer;
+
+    const newTransfer = {
+      pickupTime,
+      dropoffTime,
+      pickupAddress,
+      dropoffAddress,
+      isOutbound,
+      company,
+      contactNumber,
+      bookingReference,
+      user,
+      trip,
+    };
+
+    axios
+      .post(url, newTransfer)
+      .then(() => {
+        setTransfer({
+          pickupTime: "",
+          dropoffTime: "",
+          pickupAddress: {
+            buildingNumber: "",
+            buildingName: "",
+            addressLine1: "",
+            addressLine2: "",
+            city: "",
+            postalCode: "",
+            stateCounty: "",
+            countryCode: "",
+          },
+          dropoffAddress: {
+            buildingNumber: "",
+            buildingName: "",
+            addressLine1: "",
+            addressLine2: "",
+            city: "",
+            postalCode: "",
+            stateCounty: "",
+            countryCode: "",
+          },
+          isOutbound: "",
+          company: "",
+          contactNumber: "",
+          bookingReference: "",
+          user: userId,
+          trip: tripId,
+        });
+        handleClose();
+      });
+  };
+
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        Add Transfer
-      </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Transfer</DialogTitle>
         <DialogContent>
@@ -323,3 +455,5 @@ export default function AddTransfer({
     </div>
   );
 }
+
+export default AddTransfer;

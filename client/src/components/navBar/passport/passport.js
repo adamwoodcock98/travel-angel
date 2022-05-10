@@ -4,10 +4,16 @@ import React, { useState, useEffect } from "react";
 import { Alerts } from "../../assets/snackbar";
 import axios from "axios";
 import "./passport.css";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
-const Passport = ({ session }) => {
+export const Passport = ({ session }) => {
   const userId = session;
   const [open, setOpen] = useState(false);
+  const [openPassport, setOpenPassport] = useState(false);
   const [displayState, setDisplayState] = useState([]);
   const [emptyFields, setEmptyFields] = useState([])
   const [passport, setPassport] = useState({
@@ -38,6 +44,14 @@ const Passport = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleOpenPassport = () => {
+    setOpenPassport(true);
+  };
+
+  const handleClosePassport = () => {
+    setOpenPassport(false);
   };
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -121,9 +135,11 @@ const Passport = ({ session }) => {
 
   useEffect(() => {
     if (userId !== "null") {
-      axios.get(`http://localhost:8000/dashboard/passport/${userId}`).then((res) => {
-        setDisplayState(res.data.passport);
-      });
+      axios
+        .get(`http://localhost:8000/dashboard/passport/${userId}`)
+        .then((res) => {
+          setDisplayState(res.data.passport);
+        });
     }
   }, [passport]);
 
@@ -139,17 +155,22 @@ const Passport = ({ session }) => {
   if (displayState.length) {
     return (
       <div id="Passport">
-        <h1 className="pass-h1">Passport</h1>
-        <AddPassport
-          open={open}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          handleChange={handleChange}
-          passport={passport}
-          onSubmit={onSubmit}
-          emptyFields={emptyFields}
-        />
-        <div id="pass-render">{passportRender}</div>
+        <div onClick={handleOpenPassport}>Passport</div>
+        <Dialog open={openPassport} onClose={handleClosePassport}>
+          <DialogTitle>Passport</DialogTitle>
+          <DialogContent>
+            <div id="pass-render">{passportRender}</div>
+          </DialogContent>
+          <AddPassport
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            handleChange={handleChange}
+            passport={passport}
+            onSubmit={onSubmit}
+            emptyFields={emptyFields}
+          />
+        </Dialog>
         <Alerts
           message={alertMessage}
           open={alertOpen}
@@ -162,20 +183,21 @@ const Passport = ({ session }) => {
   } else {
     return (
       <div>
-      <h1 className="pass-h1">Passport</h1>
-      <AddPassport
-        open={open}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        handleChange={handleChange}
-        passport={passport}
-        onSubmit={onSubmit}
-        emptyFields={emptyFields}
-      />
-     <br /><i className="pass-i">You don't have your passports saved just yet. Add it now!</i>
-    </div>
+        <h1 className="pass-h1">Passport</h1>
+        <AddPassport
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          passport={passport}
+          onSubmit={onSubmit}
+          emptyFields={emptyFields}
+        />
+        <br />
+        <i className="pass-i">
+          You don't have your passports saved just yet. Add it now!
+        </i>
+      </div>
     );
   }
 };
-
-export default Passport;

@@ -73,7 +73,7 @@ describe("Transfer model", () => {
       checkOutDate: mockDate,
     });
 
-    expect(accommodation.checkOutDate).toEqual(mockCheckOutDate);
+    expect(accommodation.checkOutDate).toEqual(mockDate);
   });
 
   it("stores the check in time", () => {

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,23 +7,121 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
 
-export default function AddAccommodation({
-  handleOpen,
-  open,
-  handleClose,
-  handleChange,
-  accommodation,
-  handleSubmit,
-  emptyFields,
-}) {
+const AddAccommodation = (props) => {
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const accommodationData = props.accommodationData;
+  const accommodationId = props.accommodationId;
+  const open = props.open;
+  const handleClose = props.handleClose;
+  const emptyFields = props.emptyFields
+  const [accommodation, setAccommodation] = useState({
+    name: accommodationData.name,
+    contactNumber: accommodationData.contactNumber,
+    checkInDate: accommodationData.checkInDate,
+    checkOutDate: accommodationData.checkOutDate,
+    checkInTime: accommodationData.checkInTime,
+    checkOutTime: accommodationData.checkOutTime,
+    bookingReference: accommodationData.bookingReference,
+    buildingNumber: accommodationData.address.buildingNumber,
+    buildingName: accommodationData.address.buildingName,
+    addressLine1: accommodationData.address.addressLine1,
+    addressLine2: accommodationData.address.addressLine2,
+    city: accommodationData.address.city,
+    postalCode: accommodationData.address.postalCode,
+    stateCounty: accommodationData.address.stateCounty,
+    countryCode: accommodationData.address.countryCode,
+    user: userId,
+    trip: tripId, 
+  });
+  
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setAccommodation({
+      ...accommodation,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let url;
+    if (accommodationId) {
+      url = `http://localhost:8000/dashboard/accommodation/edit/${accommodationId}`
+    } else {
+      url = `http://localhost:8000/dashboard/accommodation`
+    }
+
+    const {
+      name,
+      contactNumber,
+      checkInDate,
+      checkOutDate,
+      checkInTime,
+      checkOutTime,
+      bookingReference,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+    } = accommodation;
+
+    const newAccommodation = {
+      name,
+      contactNumber,
+      checkInDate,
+      checkOutDate,
+      checkInTime,
+      checkOutTime,
+      bookingReference,
+      buildingNumber,
+      buildingName,
+      addressLine1,
+      addressLine2,
+      city,
+      postalCode,
+      stateCounty,
+      countryCode,
+      user,
+      trip: tripId,
+    };
+
+    await axios
+      .post(url, newAccommodation)
+      .catch((err) => console.log(err.message))
+      .then(() => {
+        setAccommodation({
+          name: "",
+          contactNumber: "",
+          checkInDate: "",
+          checkOutDate: "",
+          checkInTime: "",
+          checkOutTime: "",
+          bookingReference: "",
+          buildingNumber: "",
+          buildingName: "",
+          addressLine1: "",
+          addressLine2: "",
+          city: "",
+          postalCode: "",
+          stateCounty: "",
+          countryCode: "",
+          user: userId,
+        });
+        handleClose();
+      });
+  };
+
   return (
     <div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Accommodation</DialogTitle>
         <DialogContent>
@@ -254,3 +353,5 @@ export default function AddAccommodation({
     </div>
   );
 }
+
+export default AddAccommodation;
