@@ -3,10 +3,17 @@ const Trip = require("../models/trip.js");
 
 const VisaController = {
   Index: async (req, res) => {
-    const tripId = req.params.tripId;
-    const userId = req.params.id;
-    const visas = await Visa.find({ user: userId, trip: tripId });
-    res.json(visas);
+    try {
+      const tripId = req.params.tripId;
+      const userId = req.params.id;
+      const visas = await Visa.find({ user: userId, trip: tripId });
+      
+      res.json(visas);
+      res.status(200).send();
+    } catch(e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
   },
 
   Create: async (req, res) => {
