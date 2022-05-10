@@ -25,72 +25,62 @@ const TransferController = {
     }
   },
 
-  Create: (req, res) => {
-    const {
-      pickupTime,
-      dropoffTime,
-      pickupAddress,
-      dropoffAddress,
-      isOutbound,
-      company,
-      contactNumber,
-      bookingReference,
-      user,
-      trip,
-    } = req.body;
+  Create: async (req, res) => {
+    const data = req.body
 
-    const thePickupAddress = new Address({
-      buildingNumber: pickupAddress.buildingNumber,
-      buildingName: pickupAddress.buildingName,
-      addressLine1: pickupAddress.addressLine1,
-      addressLine2: pickupAddress.addressLine2,
-      city: pickupAddress.city,
-      postalCode: pickupAddress.postalCode,
-      stateCounty: pickupAddress.stateCounty,
-      countryCode: pickupAddress.countryCode,
-    });
-
-    const theDropoffAddress = new Address({
-      buildingNumber: pickupAddress.buildingNumber,
-      buildingName: pickupAddress.buildingName,
-      addressLine1: pickupAddress.addressLine1,
-      addressLine2: pickupAddress.addressLine2,
-      city: pickupAddress.city,
-      postalCode: pickupAddress.postalCode,
-      stateCounty: pickupAddress.stateCounty,
-      countryCode: pickupAddress.countryCode,
-    });
-
-    thePickupAddress.save().then((result) => {
-      const pickupAddressObject = result;
-      theDropoffAddress.save().then((result) => {
-        const transfer = new Transfer({
-          pickupTime: pickupTime,
-          dropoffTime: dropoffTime,
-          pickupAddress: pickupAddressObject,
-          dropoffAddress: result,
-          isOutbound: isOutbound,
-          company: company,
-          contactNumber: contactNumber,
-          bookingReference: bookingReference,
-          user: user,
-          trip: trip,
-        });
-        transfer
-          .save()
-          .then(() =>
-            Trip.findById(trip).then((thisTrip) => {
-              thisTrip.transfers.push(transfer);
-              thisTrip.save().then(
-                res.json({
-                  message: "Amazing, you've just added a new transfer!",
-                })
-              );
-            })
-          )
-          .catch((err) => console.log(err.message));
+    try {
+      const thePickupAddress = new Address({
+        buildingNumber: data.pickupAddress.buildingNumber,
+        buildingName: data.pickupAddress.buildingName,
+        addressLine1: data.pickupAddress.addressLine1,
+        addressLine2: data.pickupAddress.addressLine2,
+        city: data.pickupAddress.city,
+        postalCode: data.pickupAddress.postalCode,
+        stateCounty: data.pickupAddress.stateCounty,
+        countryCode: data.pickupAddress.countryCode,
       });
-    });
+
+      const savedPickup = await thePickupAddress.save();
+
+      const theDropoffAddress = new Address({
+        buildingNumber: data.pickupAddress.buildingNumber,
+        buildingName: data.pickupAddress.buildingName,
+        addressLine1: data.pickupAddress.addressLine1,
+        addressLine2: data.pickupAddress.addressLine2,
+        city: data.pickupAddress.city,
+        postalCode: data.pickupAddress.postalCode,
+        stateCounty: data.pickupAddress.stateCounty,
+        countryCode: data.pickupAddress.countryCode,
+      });
+
+      const savedDropoff = await theDropoffAddress.save();
+
+      const transfer = new Transfer({
+        pickupTime: pickupTime,
+        dropoffTime: dropoffTime,
+        pickupAddress: savedPickup._id,
+        dropoffAddress: savedDropoff._id,
+        isOutbound: isOutbound,
+        company: company,
+        contactNumber: contactNumber,
+        bookingReference: bookingReference,
+        user: data.user,
+        trip: data.trip,
+      });
+
+      const savedTransfer = await transfer.save();
+
+      const trip = Trip.findById(data.trip);
+      trip.transfers.push(savedTransfer);
+      
+      await trip.save();
+
+      res.status(200);
+    } catch(e) {
+      console.log(e.message);
+
+      res.status(200).send();
+    }
   },
 
   Update: async (req, res) => {

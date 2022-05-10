@@ -85,7 +85,7 @@ const AddAccommodation = (props) => {
       bookingReference,
       buildingNumber,
       buildingName,
-      addressLine1,
+      addressLine1, 
       addressLine2,
       city,
       postalCode,

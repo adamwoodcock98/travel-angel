@@ -5,6 +5,8 @@ import ParkingCard from "./viewParking/viewParking";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import { useParams } from "react-router-dom";
+import { Alerts } from "../../assets/snackbar";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Parking = ({ session }) => {
   const { tripId } = useParams();
@@ -13,6 +15,7 @@ const Parking = ({ session }) => {
 
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
+  const [loading, setLoading] = useState(false);
   const newParking = {
     startDate: "",
     endDate: "",
@@ -37,6 +40,24 @@ const Parking = ({ session }) => {
     trip: tripId,
   };
 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/parking/",
   });
@@ -51,10 +72,25 @@ const Parking = ({ session }) => {
 
   useEffect(() => {
     if (userId !== "null") {
-      api.get(`/${userId}/${tripId}`).then((res) => {
+      api.get(`/${userId}/${tripId}`)
+      .then((res) => {
         const bookings = res.data.bookings;
         setParking(bookings);
-      });
+      })
+      .catch((error) => {
+        if (error.response.status) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert(
+            "There was a problem connecting to the server.",
+            "error"
+          );
+        }
+      })
+      .finally(() => setLoading(false));;
     }
   }, []);
 
@@ -107,6 +143,7 @@ const Parking = ({ session }) => {
   } else {
     return (
       <>
+      <h1>Looks like you don't have any saved parking voucher, add your first one now!</h1>
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>
@@ -118,6 +155,13 @@ const Parking = ({ session }) => {
         parkingId={null}
         userId={userId}
         tripId={tripId}
+      />
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
       />
       </>
     );
