@@ -3,7 +3,7 @@ import moment from "moment";
 import "./viewVisa.css";
 import Upload from "../../upload/upload";
 
-export default function VisaCard({ visa }) {
+export default function VisaCard({ visa, handleUpload }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const handleSubmit = async (id) => {
@@ -47,7 +47,11 @@ export default function VisaCard({ visa }) {
               </div>
             </div>
             <div className="uploads">
-              <Upload cardId={visa._id} url="dashboard/visas" />
+              <Upload
+                cardId={visa._id}
+                url="dashboard/visas"
+                handleUpload={handleUpload}
+              />
               {visa.uploads.length &&
                 visa.uploads.map((upload, index) => {
                   return (

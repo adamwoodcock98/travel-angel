@@ -6,6 +6,11 @@ import { useParams } from "react-router-dom";
 
 const Visas = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -26,7 +31,7 @@ const Visas = ({ session }) => {
       .then((res) => {
         setVisa(res.data);
       });
-  }, [visaArray]);
+  }, [visaArray, state]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -83,7 +88,7 @@ const Visas = ({ session }) => {
         </div>
         <div className="visas-content">
           <div className="visas-content-outbound">
-            <VisaCard visa={visa} />
+            <VisaCard visa={visa} handleUpload={handleUpload} />
           </div>
         </div>
 
