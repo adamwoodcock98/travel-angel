@@ -16,6 +16,7 @@ export default function AddAccommodation({
   handleChange,
   accommodation,
   handleSubmit,
+  emptyFields,
 }) {
   return (
     <div>
@@ -40,6 +41,7 @@ export default function AddAccommodation({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('name') ? '1px solid red' : '' }}
             onChange={handleChange}
           />
           <TextField
@@ -53,6 +55,7 @@ export default function AddAccommodation({
             type="number"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' }}
             onChange={handleChange}
           />
           <TextField
@@ -67,6 +70,7 @@ export default function AddAccommodation({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkInDateInput') ? '1px solid red' : '' }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -84,6 +88,7 @@ export default function AddAccommodation({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkOutDateInput') ? '1px solid red' : '' }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -101,6 +106,7 @@ export default function AddAccommodation({
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkInTimeInput') ? '1px solid red' : '' }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -118,6 +124,7 @@ export default function AddAccommodation({
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkOutTimeInput') ? '1px solid red' : '' }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -134,6 +141,7 @@ export default function AddAccommodation({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('bookingReference') ? '1px solid red' : '' }}
             onChange={handleChange}
           />
           <TextField

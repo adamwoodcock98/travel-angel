@@ -12,6 +12,7 @@ export const ViewAccommodation = ({ session }) => {
 
   const [accommodation, setAccommodation] = useState([]);
   const [open, setOpen] = useState(false);
+  const [emptyFields, setEmptyFields] = useState([])
   const [accommodationArray, setAccommodationArray] = useState({
     name: "",
     contactNumber: "",
@@ -103,6 +104,11 @@ export const ViewAccommodation = ({ session }) => {
       trip,
     };
 
+    if (name === "" || contactNumber === "" || checkInDate === "" || checkOutDate === "" || checkInTime === "" || checkOutTime === "" || bookingReference === "") {
+      setEmptyFields(['name', 'contactNumber', 'checkInDateInput', 'checkOutDateInput', 'checkInTimeInput', 'checkOutTimeInput', 'bookingReference'])
+      return
+    }
+
     await axios
       .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
       .catch((err) => console.log(err.message))
@@ -145,42 +151,26 @@ export const ViewAccommodation = ({ session }) => {
     return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
    }
 
-  if (accommodation.length) {
-    return (
-      <div className="container">
-        <div className="header">
-          <h1 className="title">Accommodation</h1>
-          <AddAccommodation
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            handleChange={handleChange}
-            accommodation={accommodationArray}
-            handleSubmit={handleSubmit}
-          />
-        </div>
+  return (
+    <div className="container">
+      <div className="header">
+        <h1 className="title">Accommodation</h1>
+        <AddAccommodation
+          className="add-accomodation"
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          accommodation={accommodationArray}
+          handleSubmit={handleSubmit}
+          emptyFields={emptyFields}
+        />
+      </div>
+      {accommodation.length &&
         <div className="body">
           <AccommodationCard accommodation={accommodation} handleDirections={handleDirections} />
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div className="container">
-        <div className="header">
-          <h1 className="title">Accommodation</h1>
-          <AddAccommodation
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            handleChange={handleChange}
-            accommodation={accommodationArray}
-            handleSubmit={handleSubmit}
-          />
-        </div>
-      </div>
-    );
-  }
+      }
+    </div>
+  )
 };
