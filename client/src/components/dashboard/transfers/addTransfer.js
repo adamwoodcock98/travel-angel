@@ -54,7 +54,7 @@ export default function AddTransfer({
               label="Journey type"
               variant="outlined"
               required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' }}
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
               onChange={handleChange}
             >
               <MenuItem value={false}>Inbound</MenuItem>
@@ -71,7 +71,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('company') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('company') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -84,7 +84,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -97,7 +97,7 @@ export default function AddTransfer({
             type="datetime-local"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('pickupTime') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('pickupTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -114,7 +114,7 @@ export default function AddTransfer({
             type="datetime-local"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('dropoffTime') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('dropoffTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -155,7 +155,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('pickupAddress.addressLine1') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('pickupAddress.addressLine1') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handlePickupChange}
           />
           <TextField
@@ -179,7 +179,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('pickupAddress.city') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('pickupAddress.city') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handlePickupChange}
           />
           <TextField
@@ -203,7 +203,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('pickupAddress.postalCode') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('pickupAddress.postalCode') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handlePickupChange}
           />
           <TextField
@@ -252,7 +252,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('dropoffAddress.addressLine1') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('dropoffAddress.addressLine1') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleDropoffChange}
           />
           <TextField
@@ -276,7 +276,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('dropoffAddress.city') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('dropoffAddress.city') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleDropoffChange}
           />
           <TextField
@@ -300,7 +300,7 @@ export default function AddTransfer({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('dropoffAddress.postalCode') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('dropoffAddress.postalCode') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleDropoffChange}
           />
           <TextField

@@ -54,7 +54,7 @@ export default function AddFlight({
             type="time"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -70,7 +70,7 @@ export default function AddFlight({
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureDate') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('departureDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -97,7 +97,7 @@ export default function AddFlight({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureAirport') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('departureAirport') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -121,7 +121,7 @@ export default function AddFlight({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureCity') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('departureCity') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -145,7 +145,7 @@ export default function AddFlight({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('arrivalAirport') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('arrivalAirport') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -169,7 +169,7 @@ export default function AddFlight({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('arrivalCity') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('arrivalCity') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -206,7 +206,7 @@ export default function AddFlight({
               variant="outlined"
               onChange={handleChange}
               required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' }}
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>

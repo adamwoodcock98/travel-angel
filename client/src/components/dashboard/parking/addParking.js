@@ -39,7 +39,7 @@ export default function AddParking(
             type="datetime-local"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -55,7 +55,7 @@ export default function AddParking(
             type="datetime-local"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -173,7 +173,7 @@ export default function AddParking(
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('addressLine1') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('addressLine1') ? '1px solid red' : '' , borderRadius: "5px"}}
             onChange={handleChange}
           />
           <TextField
@@ -199,7 +199,7 @@ export default function AddParking(
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('city') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('city') ? '1px solid red' : '' , borderRadius: "5px"}}
             onChange={handleChange}
           />
           <TextField
@@ -225,7 +225,7 @@ export default function AddParking(
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('postalCode') ? '1px solid red' : '' }}
+            sx={{border: emptyFields.includes('postalCode') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
