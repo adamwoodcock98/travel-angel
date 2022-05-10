@@ -58,7 +58,11 @@ const ParkingCard = (props) => {
         <p>{parkingData.notes}</p>
       </div>
       <div className="uploads">
-        <Upload cardId={parkingData._id} url="dashboard/parking" />
+        <Upload
+          cardId={parkingData._id}
+          url="dashboard/parking"
+          handleUpload={props.handleUpload}
+        />
         {parkingData.uploads.length &&
           parkingData.uploads.map((upload, index) => {
             return (

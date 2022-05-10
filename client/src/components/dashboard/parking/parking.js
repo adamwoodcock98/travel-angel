@@ -6,6 +6,11 @@ import { useParams } from "react-router-dom";
 
 const Parking = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -133,14 +138,18 @@ const Parking = ({ session }) => {
         setParking(bookings);
       });
     }
-  }, [newParking]);
+  }, [newParking, state]);
 
   if (parking.length) {
     const parkingArray = [];
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} />
+        <ParkingCard
+          bookingData={booking}
+          key={booking._id}
+          handleUpload={handleUpload}
+        />
       );
     });
 
