@@ -7,6 +7,7 @@ import "./accommodation.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -107,33 +108,46 @@ export const ViewAccommodation = ({ session }) => {
 
   if (accommodation.length) {
     return (
-      <div className="container">
-        <div className="header">
-          <h1 className="title">Accommodation</h1>
-          <AddAccommodation
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            accommodationData={accommodationArray}
-            accommodationId={null}
-            userId={userId}
-            tripId={tripId}
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
+        </div>
+        <div className="container">
+          <div className="header">
+            <h1 className="title">Accommodation</h1>
+            <AddAccommodation
+              className="add-accomodation"
+              handleOpen={handleOpen}
+              open={open}
+              handleClose={handleClose}
+              accommodationData={accommodationArray}
+              accommodationId={null}
+              userId={userId}
+              tripId={tripId}
+            />
+          </div>
+          <div className="body">
+            <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
+          </div>
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
+          <Alerts
+            message={alertMessage}
+            open={alertOpen}
+            handleClose={handleAlertClose}
+            alertPosition={alertPosition}
+            alertType={alertType}
           />
         </div>
-        <div className="body">
-          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
-        </div>
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-      </div>
+      </>
     );
   } else {
     return (
       <div className="container">
         <div className="header">
           <h1 className="title">Accommodation</h1>
+          <h1>Looks like you don't have any saved flights, add your first one now!</h1>
           <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
@@ -148,6 +162,13 @@ export const ViewAccommodation = ({ session }) => {
             tripId={tripId}
           />
         </div>
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
       </div>
     );
   }
