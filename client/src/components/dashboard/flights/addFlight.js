@@ -136,7 +136,11 @@ const AddFlight = (props) => {
         isOutbound: "",
         user: userId,
       })
-    });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
+    });;
   };
 
   return (

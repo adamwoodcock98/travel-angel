@@ -119,26 +119,31 @@ const Parking = ({ session }) => {
     });
 
     return (
-      <div className="parking-window">
-        <div className="parking-header">
-          <h1>Parking</h1>
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
         </div>
-        <div className="parking-content">{parking.length && parkingArray}</div>
-        <div className="parking-footer">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-          <AddParking
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            parkingData={newParking}
-            parkingId={null}
-            userId={userId}
-            tripId={tripId}
-          />
+        <div className="parking-window">
+          <div className="parking-header">
+            <h1>Parking</h1>
+          </div>
+          <div className="parking-content">{parking.length && parkingArray}</div>
+          <div className="parking-footer">
+            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+              <AddIcon />
+            </Fab>
+            <AddParking
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              parkingData={newParking}
+              parkingId={null}
+              userId={userId}
+              tripId={tripId}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   } else {
     return (
