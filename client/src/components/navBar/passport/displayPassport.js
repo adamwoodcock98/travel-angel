@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import moment from "moment";
 
-export const DisplayPassport = ({ passport, user }) => {
+export const DisplayPassport = ({ passport }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {

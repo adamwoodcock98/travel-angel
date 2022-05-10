@@ -144,7 +144,7 @@ export const Passport = ({ session }) => {
       new Date(pass2.dateOfExpiry) - new Date(pass1.dateOfExpiry)
   );
   displayState.forEach((pass) => {
-    passportRender.push(<DisplayPassport passport={pass} user={userId} />);
+    passportRender.push(<DisplayPassport passport={pass} />);
   });
 
   if (displayState.length) {
