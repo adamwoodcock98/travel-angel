@@ -11,6 +11,7 @@ const Visas = ({ session }) => {
 
   const [open, setOpen] = useState(false);
   const [visa, setVisa] = useState([]);
+  const [emptyFields, setEmptyFields] = useState([]);
   const [visaArray, setVisaArray] = useState({
     visaNumber: "",
     startDate: "",
@@ -59,6 +60,11 @@ const Visas = ({ session }) => {
       trip,
     };
 
+    if(visaNumber === "" || startDate === "" || endDate === "" || issuingCountry === ""){
+      setEmptyFields(['visaNumber', 'startDate', 'endDate', 'issuingCountry'])
+      return
+    }
+
     await axios
       .post("http://localhost:8000/dashboard/visas/", newVisa)
       .catch((err) => console.log(err.message))
@@ -96,6 +102,7 @@ const Visas = ({ session }) => {
             handleChange={handleChange}
             visa={visa}
             handleSubmit={handleSubmit}
+            emptyFields={emptyFields}
           />
         </div>
       </div>
@@ -114,6 +121,7 @@ const Visas = ({ session }) => {
             handleChange={handleChange}
             visa={visa}
             handleSubmit={handleSubmit}
+            emptyFields={emptyFields}
           />
         </div>
       </div>

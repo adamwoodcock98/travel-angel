@@ -15,6 +15,7 @@ export default function AddVisa({
   handleChange,
   visa,
   handleSubmit,
+  emptyFields,
 }) {
   return (
     <div>
@@ -37,6 +38,7 @@ export default function AddVisa({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('visaNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -49,6 +51,7 @@ export default function AddVisa({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -64,6 +67,7 @@ export default function AddVisa({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -79,6 +83,7 @@ export default function AddVisa({
             type="string"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />  
         </DialogContent>
