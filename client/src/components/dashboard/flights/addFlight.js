@@ -43,6 +43,7 @@ const AddFlight = ({
     trip: tripId,
   });
 
+  const [openFields, setOpenFields] = useState(false);
   const [emptyFields, setEmptyFields] = useState([])
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -61,6 +62,14 @@ const AddFlight = ({
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
+
+  const handleExpand = () => {
+    setOpenFields(true)
+  }
+
+  const handleContract = () => {
+    setOpenFields(false)
+  }
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -228,22 +237,6 @@ const AddFlight = ({
             onChange={handleChange}
           />
           <TextField
-            value={flight.departureTime}
-            autoFocus
-            margin="dense"
-            id="departureTime"
-            name="departureTime"
-            label="Time"
-            type="time"
-            variant="outlined"
-            required
-            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-          />
-          <TextField
             value={formatDate(flight.departureDate)}
             autoFocus
             margin="dense"
@@ -283,6 +276,7 @@ const AddFlight = ({
               <MenuItem value={true}>Outbound</MenuItem>
             </Select>
           </FormControl>
+          <div style={{display: openFields ? "" : "none"}}>
           <TextField
             value={flight.departureTime}
             autoFocus
@@ -298,7 +292,7 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-
+          <br />
           <TextField
             value={flight.airline}
             autoFocus
@@ -406,6 +400,7 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
+          </div>
           <TextField
             value={flight.bookingReference}
             autoFocus
@@ -417,30 +412,14 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
-            <Select
-              value={flight.isOutbound}
-              autoFocus
-              margin="dense"
-              id="isOutbound"
-              name="isOutbound"
-              label="Journey type"
-              variant="outlined"
-              onChange={handleChange}
-              required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
-            >
-              <MenuItem value={false}>Inbound</MenuItem>
-              <MenuItem value={true}>Outbound</MenuItem>
-            </Select>
-          </FormControl>
+          <p className={"text-link"} onClick={handleExpand} style={{display: openFields ? "none" : ""}}>+ add details manually</p>
+          <p className={"text-link"} onClick={handleContract} style={{display: openFields ? "" : "none"}} >- remove manual details</p>
         </DialogContent>
         <DialogActions>
           {flightId && (
-            <Button onClick={onSubmit}>Update Flight Details</Button>
+            <Button onClick={onSubmit}>Update</Button>
           )}
-          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
+          {!flightId && <Button onClick={onSubmit}>Save</Button>}
           <Button onClick={handleClear}>Clear</Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>

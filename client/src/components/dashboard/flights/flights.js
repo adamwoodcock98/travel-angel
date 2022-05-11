@@ -19,7 +19,7 @@ const Flights = ({ session }) => {
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
   const [didUpdate, setDidUpdate] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -75,7 +75,6 @@ const Flights = ({ session }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
     api
       .get(`/${userId}/${tripId}`)
       .then((res) => {
@@ -100,7 +99,13 @@ const Flights = ({ session }) => {
       .finally(() => setLoading(false));
   }, [didUpdate, state]);
 
-  if (outboundFlight.length || inboundFlight.length) {
+  if (loading) {
+    return(
+      <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  } else if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
     const inboundFlights = [];
 
