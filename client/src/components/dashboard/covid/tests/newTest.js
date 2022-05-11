@@ -23,6 +23,7 @@ const AddTest = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const entryType = props.entryType;
+  const handleRender = props.handleRender;
 
   const [test, setTest] = useState({
     testType: testData.testType,
@@ -91,6 +92,7 @@ const AddTest = (props) => {
     }
     axios.post(url, newTest).then((res) => {
       handleClose();
+      handleRender();
       setTest({
         testType: "",
         entryType: "",

@@ -15,6 +15,11 @@ const Covid = ({ session }) => {
   const [didLoad, setDidLoad] = useState(false);
   const { tripId } = useParams();
   const userId = session;
+  const [state, setState] = useState(0);
+
+  const handleRender = () => {
+    setState((prev) => prev + 1);
+  };
   const [test, setTest] = useState({
     testType: "",
     entryType: "",
@@ -54,7 +59,7 @@ const Covid = ({ session }) => {
       .catch((e) => {
         console.log(e.message);
       });
-  }, []);
+  }, [state]);
 
   console.log(testData, "this is the test data");
 
@@ -63,7 +68,9 @@ const Covid = ({ session }) => {
   if (didLoad && testData.length) {
     const testsArray = [];
     testData.forEach((test) => {
-      testsArray.push(<TestCard testData={test} userId={userId} />);
+      testsArray.push(
+        <TestCard testData={test} userId={userId} handleRender={handleRender} />
+      );
     });
     console.log("This is the tests array", testsArray.length);
     return (
@@ -99,6 +106,7 @@ const Covid = ({ session }) => {
               userId={userId}
               testID={null}
               tripId={tripId}
+              handleRender={handleRender}
             />
           </div>
         </div>
@@ -138,6 +146,7 @@ const Covid = ({ session }) => {
               userId={userId}
               testID={null}
               tripId={tripId}
+              handleRender={handleRender}
             />
           </div>
         </div>

@@ -26,9 +26,13 @@ const VaccineCard = (props) => {
 
   const dosesArray = [];
   if (vaccinationsData && vaccinationsData.vaccineDoses.length) {
-    vaccinationsData.vaccineDoses.forEach((dose) => {
+    vaccinationsData.vaccineDoses.forEach((dose, index) => {
       dosesArray.push(
-        <DosePane doseData={dose} vaccinationsID={vaccinationsData._id} />
+        <DosePane
+          doseData={dose}
+          vaccinationsID={vaccinationsData._id}
+          key={index}
+        />
       );
     });
   }
