@@ -82,7 +82,10 @@ const Covid = ({ session }) => {
           <div className="covid-content">
             <div className="covid-content-vaccinations">
               <h1>Vaccinations</h1>
-              <VaccineCard vaccinationsData={vaccineData} />
+              <VaccineCard
+                vaccinationsData={vaccineData}
+                handleRender={handleRender}
+              />
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>

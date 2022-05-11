@@ -8,6 +8,7 @@ import DosePane from "./dosePane";
 const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
   const vaccinationsData = props.vaccinationsData;
+  const handleRender = props.handleRender;
   const doseData = {
     dose: "",
     date: "",
@@ -32,6 +33,7 @@ const VaccineCard = (props) => {
           doseData={dose}
           vaccinationsID={vaccinationsData._id}
           key={index}
+          handleRender={handleRender}
         />
       );
     });
@@ -70,6 +72,7 @@ const VaccineCard = (props) => {
             vaccinationsID={vaccinationsData._id}
             doseData={doseData}
             doseId={null}
+            handleRender={handleRender}
           />
         </div>
       </div>

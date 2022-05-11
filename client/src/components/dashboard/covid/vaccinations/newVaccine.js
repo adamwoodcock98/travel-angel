@@ -21,6 +21,7 @@ const AddVaccine = (props) => {
   const vaccinationsID = props.vaccinationsID;
   const doseData = props.doseData;
   const doseId = props.doseId;
+  const handleRender = props.handleRender;
 
   const [vaccine, setVaccine] = useState({
     dose: doseData.dose,
@@ -52,6 +53,7 @@ const AddVaccine = (props) => {
 
     axios.post(url, newDose).then((res) => {
       handleClose();
+      handleRender();
     });
   };
 
