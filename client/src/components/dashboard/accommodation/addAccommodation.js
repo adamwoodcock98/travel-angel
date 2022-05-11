@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
+import "../dashboard.css";
 
 const AddAccommodation = (props) => {
 
@@ -17,6 +18,7 @@ const AddAccommodation = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const accommodationData = props.accommodationData;
+  console.log(accommodationData.name)
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
@@ -40,6 +42,8 @@ const AddAccommodation = (props) => {
     user: userId,
     trip: tripId, 
   });
+
+  console.log(accommodation.name)
   
   console.log(userId)
 
@@ -377,10 +381,11 @@ const AddAccommodation = (props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit} data-testid="saveAccommodationDetails">
+        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="save-details-button" onClick={handleSubmit} data-testid="saveAccommodationDetails">
             Save Accommodation Details
           </Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          
         </DialogActions>
       </Dialog>
       <Alerts

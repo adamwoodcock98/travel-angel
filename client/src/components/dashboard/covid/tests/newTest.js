@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
+import "../../dashboard.css";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
@@ -232,8 +232,8 @@ const [test, setTest] = useState({
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Test Details</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="save-details-button" onClick={onSubmit}>Save Test Details</Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-
+import "../dashboard.css";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,6 +14,13 @@ import { Alerts } from "../../assets/snackbar";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import moment from 'moment';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
+const SearchButton = ({handleClick}) => (
+  <Button id="search-button" onClick={handleClick}>
+    <SearchOutlinedIcon />
+  </Button>
+)
 
 const AddFlight = ({
   flightData,
@@ -187,6 +194,7 @@ const AddFlight = ({
   });
 
   const handleApiSearch = async () => {
+    console.log('hello')
     await flightApi.get("/", options).then((res) => {
       const data = res.data[0];
       console.log(res.data);
@@ -223,26 +231,11 @@ const AddFlight = ({
             margin="dense"
             id="flightNumber"
             name="flightNumber"
-            label="Flight Number"
+            label="Flight numbber"
             type="text"
             variant="outlined"
             onChange={handleChange}
-          />
-          <TextField
-            value={flight.departureTime}
-            autoFocus
-            margin="dense"
-            id="departureTime"
-            name="departureTime"
-            label="Time"
-            type="time"
-            variant="outlined"
-            required
-            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
+            InputProps={{endAdornment: <SearchButton handleClick={handleApiSearch}/>}}
           />
           <TextField
             value={formatDate(flight.departureDate)}
@@ -260,11 +253,8 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-        </DialogContent>
 
-        <DialogActions>
-          <Button onClick={handleApiSearch}>Search</Button>
-        </DialogActions>
+        </DialogContent>
 
         <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 190 }}>
@@ -279,6 +269,7 @@ const AddFlight = ({
               variant="outlined"
               onChange={handleChange}
               required
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>
@@ -294,6 +285,7 @@ const AddFlight = ({
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -438,12 +430,12 @@ const AddFlight = ({
           </FormControl>
         </DialogContent>
         <DialogActions>
+        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+        <Button id="default-cancel-button" onClick={handleClear}>Clear</Button>
           {flightId && (
-            <Button onClick={onSubmit}>Update Flight Details</Button>
+            <Button id="save-details-button" onClick={onSubmit}>Update Flight Details</Button>
           )}
-          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
-          <Button onClick={handleClear}>Clear</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save Flight Details</Button>}
         </DialogActions>
       </Dialog>
       <Alerts
