@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 
 export const Passport = ({ session }) => {
+  console.log("This is the passport rendering");
+
   const userId = session;
   const [open, setOpen] = useState(false);
   const [openPassport, setOpenPassport] = useState(false);
@@ -179,19 +181,19 @@ export const Passport = ({ session }) => {
       <div>
         <div onClick={handleOpenPassport}>Passport</div>
         <Dialog open={openPassport} onClose={handleClosePassport}>
-         <DialogTitle>Passport</DialogTitle>
-         <DialogContent>
+          <DialogTitle>Passport</DialogTitle>
+          <DialogContent>
             <DialogContentText>
               You don't have your passports saved just yet. Add it now!
             </DialogContentText>
-              <AddPassport
-                open={open}
-                handleOpen={handleOpen}
-                handleClose={handleClose}
-                handleChange={handleChange}
-                passport={passport}
-                onSubmit={onSubmit}
-             />
+            <AddPassport
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              handleChange={handleChange}
+              passport={passport}
+              onSubmit={onSubmit}
+            />
           </DialogContent>
         </Dialog>
       </div>

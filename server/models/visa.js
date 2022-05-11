@@ -27,6 +27,12 @@ const visaSchema = new mongoose.Schema({
     ref: "Trip",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Visa = mongoose.model("Visa", visaSchema);
