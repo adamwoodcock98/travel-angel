@@ -12,7 +12,9 @@ const CovidController = {
       let vaccineToPass;
       const vaccinationData = await Vaccinations.findOne({
         user: userId,
-      }).populate("vaccineDoses");
+      })
+        .populate("vaccineDoses")
+        .populate("uploads");
       if (vaccinationData) {
         vaccineToPass = vaccinationData;
       } else {
@@ -184,6 +186,15 @@ const CovidController = {
       console.log(err.message);
       res.status(500).send(err);
     }
+  },
+  Download: async (req, res) => {
+    const fileId = req.params.id;
+
+    const file = await Upload.findById(fileId);
+
+    const filename = file.file;
+
+    res.download(`./public/uploads/${filename}`); // this is the absolute path to the file
   },
 };
 

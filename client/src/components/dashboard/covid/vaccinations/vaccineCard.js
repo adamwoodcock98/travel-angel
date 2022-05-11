@@ -25,7 +25,7 @@ const VaccineCard = (props) => {
   };
 
   const handleSubmit = async (id) => {
-    window.open(`http://localhost:8000/dashboard/flights/download/${id}`);
+    window.open(`http://localhost:8000/dashboard/covid/download/${id}`);
   };
 
   console.log("this is the vaccine card");

@@ -26,6 +26,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const covidRouter = express.Router();
+covidRouter.get("/download/:id", CovidController.Download);
 covidRouter.get("/:id/:tripId", CovidController.Index);
 covidRouter.post("/test", CovidController.NewTest);
 covidRouter.post("/vaccination/:id/new", CovidController.NewVaccination);
