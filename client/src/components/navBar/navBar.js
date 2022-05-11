@@ -22,6 +22,8 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({});
 
+  console.log("The navbar rendering");
+
   const handleOpenMenu = () => {
     setOpen(true);
   };
@@ -35,6 +37,10 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
       setUser(res.data.user);
     });
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div>
@@ -73,7 +79,7 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
               </div>
               {session && (
                 <div>
-                  {getUser()}
+                  {/* {getUser()} */}
                   <Box sx={{ flexGrow: 0 }}>
                     <IconButton
                       className="avatar"

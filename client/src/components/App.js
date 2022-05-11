@@ -10,6 +10,8 @@ const App = () => {
     window.localStorage.getItem("session")
   );
 
+  console.log("The app file when rendered");
+
   const handleLogIn = (user) => {
     window.localStorage.setItem("session", user);
     setSession(user);

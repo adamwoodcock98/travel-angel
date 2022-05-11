@@ -17,6 +17,8 @@ const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
 const app = express();
 const port = process.env.PORT || 8000;
+const multer = require("multer");
+const Upload = require("./models/upload");
 
 dotenv.config({ path: "./config.env" });
 
@@ -53,6 +55,12 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+const getExtension = (filename) => {
+  return filename.split(".").pop();
+};
+
+app.use(express.static("public"));
 
 app.use("/user", usersRouter);
 app.use("/dashboard/flights", flightsRouter);

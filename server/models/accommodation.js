@@ -33,6 +33,12 @@ const accommodationSchema = new mongoose.Schema({
     ref: "Trip",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Accommodation = mongoose.model("Accommodation", accommodationSchema);

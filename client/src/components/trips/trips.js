@@ -10,6 +10,8 @@ const Trips = ({ session }) => {
   const userId = session;
   const { tripId } = useParams;
 
+  console.log("the trips rendering ----");
+
   const [trip, setTrip] = useState({
     name: "",
     startDate: "",

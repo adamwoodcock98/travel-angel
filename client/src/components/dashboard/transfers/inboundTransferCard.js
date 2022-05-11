@@ -1,25 +1,30 @@
-import React from 'react';
-import moment from 'moment';
+import React from "react";
+import moment from "moment";
 import "./transferCard.css";
-import CrudMenu from "./crud/crud"
+import CrudMenu from "./crud/crud";
+import Upload from "../../upload/upload";
 
 export const InboundTransferCard = (props) => {
-    const inboundTransfer = props.inboundTransfer;
-    const userId = props.userId;
-    const tripId = props.tripId;
+  const inboundTransfer = props.inboundTransfer;
+  const userId = props.userId;
+  const tripId = props.tripId;
+  const handleUpload = props.handleUpload;
+  const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
+  const formatTime = (time) => moment(time).format("HH:mm");
 
-    const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
-    const formatTime = (time) => moment(time).format('HH:mm');
-
-    const formatAddress = (address) => {
-      const addressObject = address;
-      delete addressObject._id;
-      delete addressObject.__v;
-      const arrayOfAddressValues = Object.values(addressObject);
-      const onlyDefinedAddressValues = arrayOfAddressValues.filter(
-        (addressValue) => addressValue !== ""
-      );
+  const formatAddress = (address) => {
+    const addressObject = address;
+    delete addressObject._id;
+    delete addressObject.__v;
+    const arrayOfAddressValues = Object.values(addressObject);
+    const onlyDefinedAddressValues = arrayOfAddressValues.filter(
+      (addressValue) => addressValue !== ""
+    );
     return onlyDefinedAddressValues.join(", ");
+  };
+
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/transfers/download/${id}`);
   };
 
   return (
@@ -41,15 +46,22 @@ export const InboundTransferCard = (props) => {
                   <p>{formatTime(inboundTransfer.pickupTime)}</p>
                 </div>
                 <div className="pickup-address">
-                {inboundTransfer.pickupAddress && (
-                  <p>Address: {formatAddress(inboundTransfer.pickupAddress)}</p>
-                )}
-              </div>
+                  {inboundTransfer.pickupAddress && (
+                    <p>
+                      Address: {formatAddress(inboundTransfer.pickupAddress)}
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="dropoff">
                 <div className="dropoff-header">
                   <h3>Dropoff</h3>
-                  <CrudMenu transferData={inboundTransfer} transferId={inboundTransfer._id} userId={userId} tripId={tripId} />
+                  <CrudMenu
+                    transferData={inboundTransfer}
+                    transferId={inboundTransfer._id}
+                    userId={userId}
+                    tripId={tripId}
+                  />
                 </div>
                 <div className="dropoff-body">
                   <p>{formatDate(inboundTransfer.dropoffTime)}</p>
@@ -57,10 +69,12 @@ export const InboundTransferCard = (props) => {
                   <p>{formatTime(inboundTransfer.dropoffTime)}</p>
                 </div>
                 <div className="dropoff-address">
-                {inboundTransfer.dropoffAddress && (
-                  <p>Address: {formatAddress(inboundTransfer.dropoffAddress)}</p>
-                )}
-              </div>
+                  {inboundTransfer.dropoffAddress && (
+                    <p>
+                      Address: {formatAddress(inboundTransfer.dropoffAddress)}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
             <div className="footer">
@@ -70,9 +84,7 @@ export const InboundTransferCard = (props) => {
                 )}
               </div>
               <div className="company">
-                {inboundTransfer.company && (
-                  <p>{inboundTransfer.company}</p>
-                )}
+                {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
               </div>
               <div className="contact-number">
                 {inboundTransfer.contactNumber && (
@@ -80,9 +92,27 @@ export const InboundTransferCard = (props) => {
                 )}
               </div>
             </div>
+            <div className="uploads">
+              <Upload
+                cardId={inboundTransfer._id}
+                url="dashboard/transfers"
+                handleUpload={handleUpload}
+              />
+              {inboundTransfer.uploads.length &&
+                inboundTransfer.uploads.map((upload, index) => {
+                  return (
+                    <button
+                      onClick={() => handleSubmit(upload._id)}
+                      key={index}
+                    >
+                      {upload.name}
+                    </button>
+                  );
+                })}
+            </div>
           </div>
         );
       })}
     </div>
   );
-}
+};

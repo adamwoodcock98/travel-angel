@@ -46,6 +46,12 @@ const flightSchema = mongoose.Schema({
     ref: "Trip",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Flight = mongoose.model("Flight", flightSchema);

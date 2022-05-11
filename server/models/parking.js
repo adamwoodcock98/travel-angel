@@ -30,6 +30,12 @@ const parkingSchema = new mongoose.Schema({
     ref: "Trip",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Parking = mongoose.model("Parking", parkingSchema);

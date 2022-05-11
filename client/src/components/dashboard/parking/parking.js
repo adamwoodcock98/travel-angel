@@ -3,17 +3,24 @@ import axios from "axios";
 import AddParking from "./addParking";
 import ParkingCard from "./viewParking/viewParking";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
 
 const Parking = ({ session }) => {
+  console.log("this is the parking rendering ");
+
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
-  const newParking = {
+  const [newParking, setNewParking] = useState({
     startDate: "",
     endDate: "",
     airport: "",
@@ -35,7 +42,7 @@ const Parking = ({ session }) => {
     },
     user: userId,
     trip: tripId,
-  };
+  });
 
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/parking/",
@@ -56,7 +63,7 @@ const Parking = ({ session }) => {
         setParking(bookings);
       });
     }
-  }, []);
+  }, [newParking, state]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
@@ -70,15 +77,25 @@ const Parking = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
   if (parking.length) {
     const parkingArray = [];
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} />
+        <ParkingCard
+          bookingData={booking}
+          key={booking._id}
+          handleUpload={handleUpload}
+          userId={userId}
+          tripId={tripId}
+          handleDirections={handleDirections}
+        />
       );
     });
 
@@ -89,7 +106,12 @@ const Parking = ({ session }) => {
         </div>
         <div className="parking-content">{parking.length && parkingArray}</div>
         <div className="parking-footer">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
           <AddParking
@@ -107,18 +129,23 @@ const Parking = ({ session }) => {
   } else {
     return (
       <>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
-      <AddParking
-        open={open}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        parkingData={newParking}
-        parkingId={null}
-        userId={userId}
-        tripId={tripId}
-      />
+        <Fab
+          size="large"
+          color="secondary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <AddIcon />
+        </Fab>
+        <AddParking
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          parkingData={newParking}
+          parkingId={null}
+          userId={userId}
+          tripId={tripId}
+        />
       </>
     );
   }
