@@ -8,13 +8,21 @@ const AccommodationController = {
   New: async (req, res) => {
     const tripId = req.params.tripId;
     const userId = req.params.id;
-    const accommodation = await Accommodation.find({
-      user: userId,
-      trip: tripId,
-    })
-      .populate("address")
-      .populate("uploads");
-    res.json({ accommodation: accommodation });
+
+    try {
+      const accommodation = await Accommodation.find({
+        user: userId,
+        trip: tripId,
+      })
+        .populate("address")
+        .populate("uploads");
+        
+      res.json({ accommodation: accommodation });
+      res.status(200).send();
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).send();
+    }
   },
 
   Create: async (req, res) => {

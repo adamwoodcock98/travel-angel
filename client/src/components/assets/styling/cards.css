@@ -1,3 +1,7 @@
+element {
+  --primary-fuschia: "F22771";
+}
+
 .upload {
   display: flex;
 }
@@ -22,4 +26,33 @@
 
 i {
   color: dimgrey;
+}
+
+.empty-window {
+  height: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-prompt {
+  color: rgb(160, 160, 160);
+  text-align: center;
+  
+  flex: 5;
+}
+
+.empty-button {
+  align-self: flex-end;
+}
+
+p.text-link {
+  color: #F22771;
+}
+
+p.text-link:hover {
+  text-decoration: underline;
+  text-decoration-color: #F22771;
+  cursor: pointer;
 }

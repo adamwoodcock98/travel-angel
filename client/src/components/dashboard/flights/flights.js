@@ -13,13 +13,7 @@ import moment from "moment";
 const Flights = ({ session }) => {
   const { tripId } = useParams();
   const [state, setState] = useState(0);
-
-  const handleUpload = async () => {
-    setState((prev) => prev + 1);
-  };
-
   const userId = session;
-
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
@@ -66,6 +60,10 @@ const Flights = ({ session }) => {
     baseURL: "http://localhost:8000/dashboard/flights/",
   });
 
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -73,71 +71,6 @@ const Flights = ({ session }) => {
   const handleClose = () => {
     setOpen(false);
     setDidUpdate(!didUpdate);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    } = flight;
-
-    const newFlight = {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    };
-
-    api.post("/", newFlight).then((res) => {
-      handleClose();
-      setFlight({
-        flightNumber: "",
-        departureTime: "",
-        departureDate: "",
-        airline: "",
-        departureAirport: "",
-        departureTerminal: "",
-        departureCity: "",
-        departureGate: "",
-        arrivalAirport: "",
-        arrivalTerminal: "",
-        arrivalCity: "",
-        arrivalGate: "",
-        bookingReference: "",
-        isOutbound: "",
-        user: userId,
-        trip: tripId,
-      });
-      window.location = "/";
-    });
   };
 
   useEffect(() => {
@@ -221,31 +154,36 @@ const Flights = ({ session }) => {
     );
   } else {
     return (
-      <>
-      <h1>Looks like you don't have any saved flights, add your first one now!</h1>
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-        <AddFlight
-          open={open}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          flightData={flight}
-          flightId={null}
-          userId={userId}
-          tripId={tripId}
-          handleUpload={handleUpload}
-        />
-        {alertMessage && (
-          <Alerts
-            message={alertMessage}
-            open={alertOpen}
-            handleClose={handleAlertClose}
-            alertPosition={alertPosition}
-            alertType={alertType}
+      <div className="empty-window">
+        <div className="empty-prompt" >
+         <h3>Looks like you don't have any saved flights</h3>
+         <h2>Press  +  to get started</h2>
+        </div>
+        <div className="empty-button" >
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
+        </div>
+          <AddFlight
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            flightData={flight}
+            flightId={null}
+            userId={userId}
+            tripId={tripId}
+            handleUpload={handleUpload}
           />
-        )}
-      </>
+          {alertMessage && (
+            <Alerts
+              message={alertMessage}
+              open={alertOpen}
+              handleClose={handleAlertClose}
+              alertPosition={alertPosition}
+              alertType={alertType}
+            />
+          )}
+      </div>
     );
   }
 };

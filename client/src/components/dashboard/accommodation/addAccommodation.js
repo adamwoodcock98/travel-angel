@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
+import "../../assets/styling/cards.css"
 
 const AddAccommodation = (props) => {
 
@@ -20,6 +21,7 @@ const AddAccommodation = (props) => {
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
+  const [openAddress, setOpenAddress] = useState(false);
   const [emptyFields, setEmptyFields] = useState([]);
   const [accommodation, setAccommodation] = useState({
     name: accommodationData.name,
@@ -40,8 +42,6 @@ const AddAccommodation = (props) => {
     user: userId,
     trip: tripId, 
   });
-  
-  console.log(userId)
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -60,6 +60,32 @@ const AddAccommodation = (props) => {
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
+
+  const handleExpand = () => {
+    setOpenAddress(true)
+  }
+
+  const handleContract = () => {
+    setAccommodation({
+      name: accommodation.name,
+      contactNumber: accommodation.contactNumber,
+      checkInDate: accommodation.checkInDate,
+      checkOutDate: accommodation.checkOutDate,
+      checkInTime: accommodation.checkInTime,
+      checkOutTime: accommodation.checkOutTime,
+      bookingReference: accommodation.bookingReference,
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+      user: userId,
+    })
+    setOpenAddress(false)
+  }
   
 
   const handleChange = (e) => {
@@ -169,7 +195,7 @@ const AddAccommodation = (props) => {
             margin="dense"
             id="name"
             name="name"
-            label="Accommodation Name"
+            label="Venue name"
             type="text"
             variant="outlined"
             required
@@ -183,7 +209,7 @@ const AddAccommodation = (props) => {
             margin="dense"
             id="contactNumber"
             name="contactNumber"
-            label="Accommodation Contact Number"
+            label="Contact Number"
             type="number"
             variant="outlined"
             required
@@ -198,7 +224,7 @@ const AddAccommodation = (props) => {
             margin="dense"
             id="checkInDate"
             name="checkInDate"
-            label="Date of Arrival"
+            label="Check-in date"
             type="date"
             variant="outlined"
             required
@@ -216,7 +242,7 @@ const AddAccommodation = (props) => {
             margin="dense"
             id="checkOutDate"
             name="checkOutDate"
-            label="Date of Departure"
+            label="Check-out date"
             type="date"
             variant="outlined"
             required
@@ -234,7 +260,7 @@ const AddAccommodation = (props) => {
             margin="dense"
             id="checkInTime"
             name="checkInTime"
-            label="Time of Arrival"
+            label="Check-in time"
             type="time"
             variant="outlined"
             required
@@ -252,7 +278,7 @@ const AddAccommodation = (props) => {
             margin="dense"
             id="checkOutTime"
             name="checkOutTime"
-            label="Time of Departure"
+            label="Check-out time"
             type="time"
             variant="outlined"
             required
@@ -276,109 +302,113 @@ const AddAccommodation = (props) => {
             sx={{border: emptyFields.includes('bookingReference') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
-          <TextField
-            value={accommodation.buildingNumber}
-            inputProps={{ "data-testid": "buildingNumber" }}
-            autoFocus
-            margin="dense"
-            id="buildingNumber"
-            name="buildingNumber"
-            label="Building Number"
-            type="text"
-            variant="outlined"
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.buildingName}
-            inputProps={{ "data-testid": "buildingName" }}
-            autoFocus
-            margin="dense"
-            id="buildingName"
-            name="buildingName"
-            label="Building Name"
-            type="text"
-            variant="outlined"
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.addressLine1}
-            inputProps={{ "data-testid": "addressLine1" }}
-            autoFocus
-            margin="dense"
-            id="addressLine1"
-            name="addressLine1"
-            label="Address Line 1"
-            type="text"
-            variant="outlined"
-            required
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.addressLine2}
-            inputProps={{ "data-testid": "addressLine2" }}
-            autoFocus
-            margin="dense"
-            id="addressLine2"
-            name="addressLine2"
-            label="Address Line 2"
-            type="text"
-            variant="outlined"
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.city}
-            inputProps={{ "data-testid": "city" }}
-            autoFocus
-            margin="dense"
-            id="city"
-            name="city"
-            label="City"
-            type="text"
-            variant="outlined"
-            required
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.stateCounty}
-            inputProps={{ "data-testid": "stateCounty" }}
-            autoFocus
-            margin="dense"
-            id="stateCounty"
-            name="stateCounty"
-            label="State/Province"
-            type="text"
-            variant="outlined"
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.postalCode}
-            inputProps={{ "data-testid": "postalCode" }}
-            autoFocus
-            margin="dense"
-            id="postalCode"
-            name="postalCode"
-            label="Postal/Zip Code"
-            type="text"
-            variant="outlined"
-            required
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.countryCode}
-            inputProps={{ "data-testid": "countryCode" }}
-            autoFocus
-            margin="dense"
-            id="countryCode"
-            name="countryCode"
-            label="Country"
-            type="text"
-            variant="outlined"
-            onChange={handleChange}
-          />
+          <div style={{display: openAddress ? "" : "none"}} >
+            <TextField
+              value={accommodation.buildingNumber}
+              inputProps={{ "data-testid": "buildingNumber" }}
+              autoFocus
+              margin="dense"
+              id="buildingNumber"
+              name="buildingNumber"
+              label="Building Number"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.buildingName}
+              inputProps={{ "data-testid": "buildingName" }}
+              autoFocus
+              margin="dense"
+              id="buildingName"
+              name="buildingName"
+              label="Building Name"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.addressLine1}
+              inputProps={{ "data-testid": "addressLine1" }}
+              autoFocus
+              margin="dense"
+              id="addressLine1"
+              name="addressLine1"
+              label="Address Line 1"
+              type="text"
+              variant="outlined"
+              required
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.addressLine2}
+              inputProps={{ "data-testid": "addressLine2" }}
+              autoFocus
+              margin="dense"
+              id="addressLine2"
+              name="addressLine2"
+              label="Address Line 2"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.city}
+              inputProps={{ "data-testid": "city" }}
+              autoFocus
+              margin="dense"
+              id="city"
+              name="city"
+              label="City"
+              type="text"
+              variant="outlined"
+              required
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.stateCounty}
+              inputProps={{ "data-testid": "stateCounty" }}
+              autoFocus
+              margin="dense"
+              id="stateCounty"
+              name="stateCounty"
+              label="State/Province"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.postalCode}
+              inputProps={{ "data-testid": "postalCode" }}
+              autoFocus
+              margin="dense"
+              id="postalCode"
+              name="postalCode"
+              label="Postal/Zip Code"
+              type="text"
+              variant="outlined"
+              required
+              onChange={handleChange}
+            />
+            <TextField
+              value={accommodation.countryCode}
+              inputProps={{ "data-testid": "countryCode" }}
+              autoFocus
+              margin="dense"
+              id="countryCode"
+              name="countryCode"
+              label="Country"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+          </div>
+          <p className={"text-link"} onClick={handleExpand} style={{display: openAddress ? "none" : ""}}>+ add address</p>
+          <p className={"text-link"} onClick={handleContract} style={{display: openAddress ? "" : "none"}} >- remove address</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSubmit} data-testid="saveAccommodationDetails">
-            Save Accommodation Details
+            Save
           </Button>
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
