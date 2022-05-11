@@ -57,3 +57,8 @@ p.text-link:hover {
   text-decoration-color: #F22771;
   cursor: pointer;
 }
+
+.loading {
+margin-top: 30%;
+color:#F22771;
+}

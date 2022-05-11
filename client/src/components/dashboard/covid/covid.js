@@ -90,9 +90,10 @@ const Covid = (props) => {
     return(
       <div className="loading" style={{ display: loading ? "" : "none"}} >
         <CircularProgress color="secondary" />
+        <p color="secondary">loading...</p>
       </div>
     )
-  } else if (testData.length) {
+  } else if (vaccineData) {
     const testsArray =[]
     testData.forEach(test => {
       testsArray.push(<TestCard testData={test} userId={userId} refresh={handleClose} />);
@@ -105,18 +106,23 @@ const Covid = (props) => {
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
-              <h1>Vaccinations</h1>
               <VaccineCard vaccinationsData={vaccineData} refresh={handleClose} />
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>
               {testData[0] && testsArray}
-            </div>
-          </div>
-          <div className="covid-footer">
+              {!testData[0] &&
+                <div className="empty-prompt">
+                  <h3>Looks like you don't have any saved tests</h3>
+                  <h2>Press + to get started</h2>
+                </div>
+              }
             <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
               <AddIcon />
             </Fab>
+            </div>
+          </div>
+          <div className="covid-footer">
             <AddTest
               open={open}
               handleOpen={handleOpen}

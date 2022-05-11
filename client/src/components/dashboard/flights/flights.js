@@ -7,9 +7,9 @@ import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
-import "../../assets/styling/cards.css"
+import "../../assets/styling/cards.css";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
@@ -90,43 +90,53 @@ const Flights = ({ session }) => {
             "error"
           );
         } else {
-          handleAlert(
-            "There was a problem connecting to the server.",
-            "error"
-          );
+          handleAlert("There was a problem connecting to the server.", "error");
         }
       })
       .finally(() => setLoading(false));
   }, [didUpdate, state]);
 
   if (loading) {
-    return(
-      <div className="loading" style={{ display: loading ? "" : "none"}} >
+    return (
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
+        <p color="secondary">loading...</p>
       </div>
-    )
+    );
   } else if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
     const inboundFlights = [];
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} handleUpload={handleUpload} />
+        <FlightCard
+          outboundFlight={flight}
+          key={flight._id}
+          userId={userId}
+          refresh={handleClose}
+          handleUpload={handleUpload}
+        />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} handleUpload={handleUpload}/>
+        <FlightCard
+          outboundFlight={flight}
+          key={flight._id}
+          userId={userId}
+          refresh={handleClose}
+          handleUpload={handleUpload}
+        />
       );
     });
 
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none"}} >
-          <CircularProgress color="secondary" />
-        </div>
-        <div className="flights-window" style={{ display: loading ? "none" : "" }}>
+        <div
+          className="flights-window"
+          style={{ display: loading ? "none" : "" }}
+        >
           <div className="flights-header">
             <h1>Your flights</h1>
           </div>
@@ -141,7 +151,12 @@ const Flights = ({ session }) => {
             </div>
           </div>
           <div className="flights-footer">
-            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <Fab
+              size="large"
+              color="secondary"
+              aria-label="add"
+              onClick={handleOpen}
+            >
               <AddIcon />
             </Fab>
             <AddFlight
@@ -161,34 +176,39 @@ const Flights = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-      <div className="empty-prompt" >
-      <h3>Looks like you don't have any saved flights</h3>
-      <h2>Press  +  to get started</h2>
-      </div>
-      <div className="empty-button" >
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-      </div>
-          <AddFlight
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            flightData={flight}
-            flightId={null}
-            userId={userId}
-            tripId={tripId}
-            handleUpload={handleUpload}
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved flights</h3>
+          <h2>Press + to get started</h2>
+        </div>
+        <div className="empty-button">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
+        <AddFlight
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          flightData={flight}
+          flightId={null}
+          userId={userId}
+          tripId={tripId}
+          handleUpload={handleUpload}
+        />
+        {alertMessage && (
+          <Alerts
+            message={alertMessage}
+            open={alertOpen}
+            handleClose={handleAlertClose}
+            alertPosition={alertPosition}
+            alertType={alertType}
           />
-          {alertMessage && (
-            <Alerts
-              message={alertMessage}
-              open={alertOpen}
-              handleClose={handleAlertClose}
-              alertPosition={alertPosition}
-              alertType={alertType}
-            />
-          )}
+        )}
       </div>
     );
   }

@@ -116,6 +116,7 @@ const Transfers = ({ session }) => {
     return(
       <div className="loading" style={{ display: loading ? "" : "none"}} >
         <CircularProgress color="secondary" />
+        <p color="secondary">loading...</p>
       </div>
     )
   } else if (outboundTransfer.length || inboundTransfer.length) {
