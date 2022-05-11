@@ -78,6 +78,7 @@ const AddFlight = ({
       user,
       trip,
     } = flight;
+
     const newFlight = {
       flightNumber,
       departureTime,

@@ -4,7 +4,12 @@ import React, { useState, useEffect } from "react";
 import { Alerts } from "../../assets/snackbar";
 import axios from "axios";
 import "./passport.css";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 export const Passport = ({ session }) => {
   console.log("This is the passport rendering");
@@ -174,19 +179,23 @@ export const Passport = ({ session }) => {
   } else {
     return (
       <div>
-        <h1 className="pass-h1">Passport</h1>
-        <AddPassport
-          open={open}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          handleChange={handleChange}
-          passport={passport}
-          onSubmit={onSubmit}
-        />
-        <br />
-        <i className="pass-i">
-          You don't have your passports saved just yet. Add it now!
-        </i>
+        <div onClick={handleOpenPassport}>Passport</div>
+        <Dialog open={openPassport} onClose={handleClosePassport}>
+          <DialogTitle>Passport</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              You don't have your passports saved just yet. Add it now!
+            </DialogContentText>
+            <AddPassport
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              handleChange={handleChange}
+              passport={passport}
+              onSubmit={onSubmit}
+            />
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }

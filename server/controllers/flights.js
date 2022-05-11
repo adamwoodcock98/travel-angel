@@ -100,7 +100,6 @@ const FlightsController = {
     const data = req.body;
     try {
       const flight = await Flight.findById(req.params.id);
-      console.log(flight);
       flight.flightNumber = data.flightNumber;
       flight.departureTime = data.departureTime;
       flight.departureDate = data.departureDate;
