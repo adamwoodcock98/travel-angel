@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
+import "../../assets/styling/cards.css"
 
 const AddParking = (props) => {
 
@@ -21,6 +22,7 @@ const AddParking = (props) => {
   const handleClose = props.handleClose;
   const parkingData = props.parkingData;
   const parkingId = props.parkingId;
+  const [openAddress, setOpenAddress] = useState(false);
   const [emptyFields, setEmptyFields] = useState([]);
   const [parking, setParking] = useState({
     startDate: parkingData.startDate,
@@ -51,6 +53,34 @@ const AddParking = (props) => {
     vertical: "top",
     horizontal: "center",
   };
+
+  const handleExpand = () => {
+    setOpenAddress(true)
+  }
+
+  const handleContract = () => {
+    setParking({
+      startDate: parking.startDate,
+      endDate: parking.endDate,
+      airport: parking.airport,
+      type: parking.type,
+      regPlate: parking.regPlate,
+      company: parking.company,
+      contactNumber: parking.contactNumber,
+      bookingReference: parking.bookingReference,
+      notes: parking.notes,
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+      user: userId,
+    })
+    setOpenAddress(false)
+  }
 
   const handleAlert = (message, type) => {
     setAlertOpen(true);
@@ -275,6 +305,7 @@ const AddParking = (props) => {
             variant="outlined"
             onChange={handleChange}
           />
+          <div style={{display: openAddress ? "" : "none"}} >
           <TextField
             value={parking.buildingNumber}
             inputProps={{ "data-testid": "buildingNumber" }}
@@ -377,6 +408,9 @@ const AddParking = (props) => {
             variant="outlined"
             onChange={handleChange}
           />
+                    </div>
+          <p className={"text-link"} onClick={handleExpand} style={{display: openAddress ? "none" : ""}}>+ add address</p>
+          <p className={"text-link"} onClick={handleContract} style={{display: openAddress ? "" : "none"}} >- remove address</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
