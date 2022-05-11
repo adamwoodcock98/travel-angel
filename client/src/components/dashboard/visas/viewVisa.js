@@ -4,7 +4,7 @@ import "./viewVisa.css";
 import Upload from "../../upload/upload";
 import CrudMenu from "./crud/crud";
 
-export default function VisaCard({ visa, handleUpload, userId, tripId }) {
+export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const handleSubmit = async (id) => {
