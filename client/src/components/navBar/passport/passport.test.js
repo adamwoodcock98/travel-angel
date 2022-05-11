@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import Passport from "./passport";
+import { Passport } from "./passport";
 
 test("passport", () => {
   render(<Passport />);

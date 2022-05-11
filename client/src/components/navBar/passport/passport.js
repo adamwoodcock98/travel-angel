@@ -7,11 +7,17 @@ import "./passport.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import CircularProgress from '@mui/material/CircularProgress';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
-const Passport = ({ session }) => {
+export const Passport = ({ session }) => {
   const userId = session;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openPassport, setOpenPassport] = useState(false);
   const [displayState, setDisplayState] = useState([]);
   const [didUpdate, setDidUpdate] = useState(false);
   const [passport, setPassport] = useState({
@@ -35,6 +41,14 @@ const Passport = ({ session }) => {
   const handleClose = () => {
     setOpen(false);
     setDidUpdate(!didUpdate);
+  };
+
+  const handleOpenPassport = () => {
+    setOpenPassport(true);
+  };
+
+  const handleClosePassport = () => {
+    setOpenPassport(false);
   };
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -108,6 +122,12 @@ const Passport = ({ session }) => {
             >
             <AddIcon />
           </Fab>
+        <div onClick={handleOpenPassport}>Passport</div>
+        <Dialog open={openPassport} onClose={handleClosePassport}>
+          <DialogTitle>Passport</DialogTitle>
+          <DialogContent>
+            <div id="pass-render">{passportRender}</div>
+          </DialogContent>
           <AddPassport
             open={open}
             handleOpen={handleOpen}
@@ -116,7 +136,7 @@ const Passport = ({ session }) => {
             passportId={null}
             user={userId}
           />
-        <div id="pass-render">{passportRender}</div>
+        </Dialog>
         <Alerts
           message={alertMessage}
           open={alertOpen}
@@ -152,5 +172,3 @@ const Passport = ({ session }) => {
     );
   }
 };
-
-export default Passport;
