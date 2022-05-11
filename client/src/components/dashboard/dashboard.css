@@ -32,3 +32,9 @@ p {
 #default-cancel-button {
   color: #64BAAA;
 }
+#search-button {
+  color: black;
+  margin-right: -18px;
+  padding-left: 0px;
+  padding-right: 0px;
+}

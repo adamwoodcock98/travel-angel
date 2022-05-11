@@ -14,6 +14,15 @@ import { Alerts } from "../../assets/snackbar";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import moment from 'moment';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
+const SearchButton = ({handleClick}) => (
+  <Button id="search-button" onClick={handleClick}>
+    <SearchOutlinedIcon />
+  </Button>
+)
+
+// <Button startIcon={<SearchOutlinedIcon />} id="search-button" onClick={handleApiSearch}></Button>
 
 const AddFlight = ({
   flightData,
@@ -187,6 +196,7 @@ const AddFlight = ({
   });
 
   const handleApiSearch = async () => {
+    console.log('hello')
     await flightApi.get("/", options).then((res) => {
       const data = res.data[0];
       console.log(res.data);
@@ -223,26 +233,11 @@ const AddFlight = ({
             margin="dense"
             id="flightNumber"
             name="flightNumber"
-            label="Flight Number"
+            label="Look Up Flight"
             type="text"
             variant="outlined"
             onChange={handleChange}
-          />
-          <TextField
-            value={flight.departureTime}
-            autoFocus
-            margin="dense"
-            id="departureTime"
-            name="departureTime"
-            label="Time"
-            type="time"
-            variant="outlined"
-            required
-            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
+            InputProps={{endAdornment: <SearchButton handleClick={handleApiSearch}/>}}
           />
           <TextField
             value={formatDate(flight.departureDate)}
@@ -260,11 +255,8 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-        </DialogContent>
 
-        <DialogActions>
-          <Button onClick={handleApiSearch}>Search</Button>
-        </DialogActions>
+        </DialogContent>
 
         <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 190 }}>
@@ -295,6 +287,7 @@ const AddFlight = ({
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
