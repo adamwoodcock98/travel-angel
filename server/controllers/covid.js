@@ -1,6 +1,7 @@
 const CovidTest = require("../models/covidTest.js");
 const VaccineDose = require("../models/vaccineDose.js");
 const Vaccinations = require("../models/vaccinations.js");
+const Upload = require("../models/upload.js");
 
 const CovidController = {
   Index: async (req, res) => {
@@ -160,6 +161,28 @@ const CovidController = {
     } catch (e) {
       console.log(e.message);
       res.status(200).send();
+    }
+  },
+  Upload: async (req, res) => {
+    const vaccineId = req.params.id;
+    const file = req.file.filename;
+    const filename = req.file.originalname;
+
+    try {
+      const upload = new Upload({ name: filename, file: file });
+
+      await upload.save();
+
+      const foundVaccination = await Vaccinations.findById(vaccineId);
+
+      foundVaccination.uploads.push(upload);
+
+      await foundVaccination.save();
+
+      res.json({ msg: "Upload Successful", type: "success", file: file });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send(err);
     }
   },
 };

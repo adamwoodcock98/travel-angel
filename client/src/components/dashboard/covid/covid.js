@@ -17,7 +17,7 @@ const Covid = ({ session }) => {
   const userId = session;
   const [state, setState] = useState(0);
 
-  const handleRender = () => {
+  const handleUpload = () => {
     setState((prev) => prev + 1);
   };
   const [test, setTest] = useState({
@@ -69,7 +69,7 @@ const Covid = ({ session }) => {
     const testsArray = [];
     testData.forEach((test) => {
       testsArray.push(
-        <TestCard testData={test} userId={userId} handleRender={handleRender} />
+        <TestCard testData={test} userId={userId} handleUpload={handleUpload} />
       );
     });
     console.log("This is the tests array", testsArray.length);
@@ -84,7 +84,7 @@ const Covid = ({ session }) => {
               <h1>Vaccinations</h1>
               <VaccineCard
                 vaccinationsData={vaccineData}
-                handleRender={handleRender}
+                handleUpload={handleUpload}
               />
             </div>
             <div className="covid-content-testing">
@@ -109,7 +109,7 @@ const Covid = ({ session }) => {
               userId={userId}
               testID={null}
               tripId={tripId}
-              handleRender={handleRender}
+              handleUpload={handleUpload}
             />
           </div>
         </div>
@@ -149,7 +149,7 @@ const Covid = ({ session }) => {
               userId={userId}
               testID={null}
               tripId={tripId}
-              handleRender={handleRender}
+              handleUpload={handleUpload}
             />
           </div>
         </div>

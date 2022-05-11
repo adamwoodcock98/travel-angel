@@ -18,6 +18,12 @@ const vaccinationsSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Vaccinations = mongoose.model("Vaccinations", vaccinationsSchema);

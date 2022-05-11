@@ -4,11 +4,12 @@ import Button from "@mui/material/Button";
 import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import AddVaccine from "./newVaccine";
 import DosePane from "./dosePane";
+import Upload from "../../../upload/upload";
 
 const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
   const vaccinationsData = props.vaccinationsData;
-  const handleRender = props.handleRender;
+  const handleUpload = props.handleUpload;
   const doseData = {
     dose: "",
     date: "",
@@ -23,6 +24,10 @@ const VaccineCard = (props) => {
     setOpen(false);
   };
 
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/flights/download/${id}`);
+  };
+
   console.log("this is the vaccine card");
 
   const dosesArray = [];
@@ -33,7 +38,7 @@ const VaccineCard = (props) => {
           doseData={dose}
           vaccinationsID={vaccinationsData._id}
           key={index}
-          handleRender={handleRender}
+          handleUpload={handleUpload}
         />
       );
     });
@@ -72,7 +77,7 @@ const VaccineCard = (props) => {
             vaccinationsID={vaccinationsData._id}
             doseData={doseData}
             doseId={null}
-            handleRender={handleRender}
+            handleUpload={handleUpload}
           />
         </div>
       </div>
@@ -81,6 +86,24 @@ const VaccineCard = (props) => {
       </div>
       <div className="vaccine-card-documents-content">
         <h2>Additional documents</h2>
+      </div>
+      <div className="upload">
+        <Upload
+          cardId={vaccinationsData._id}
+          url="dashboard/covid"
+          handleUpload={handleUpload}
+        />
+        <div className="uploads">
+          Download Your Documents
+          {vaccinationsData.uploads.length &&
+            vaccinationsData.uploads.map((upload, index) => {
+              return (
+                <button onClick={() => handleSubmit(upload._id)} key={index}>
+                  {upload.name}
+                </button>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

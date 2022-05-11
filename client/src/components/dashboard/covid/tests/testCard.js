@@ -12,7 +12,7 @@ const TestCard = (props) => {
   const userId = props.userId;
   const testId = testData._id;
   const tripId = props.tripId;
-  const handleRender = props.handleRender;
+  const handleUpload = props.handleUpload;
 
   const handleOpen = () => {
     setOpen(true);
@@ -92,7 +92,7 @@ const TestCard = (props) => {
             testData={testData}
             testID={testData._id}
             tripId={tripId}
-            handleRender={handleRender}
+            handleUpload={handleUpload}
           />
         </div>
       </div>
