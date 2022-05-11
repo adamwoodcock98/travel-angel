@@ -125,7 +125,6 @@ const AddFlight = ({
     axios.post(url, newFlight).then((res) => {
       handleAlert("Flight added successfully.", "success");
       handleClose();
-      handleUpload();
       setFlight({
         flightNumber: "",
         departureTime: "",
@@ -146,7 +145,7 @@ const AddFlight = ({
       })
     })
     .catch((err) => {
-      console.log(err.message);
+      console.log(err);
       handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
       handleClear();
     });
