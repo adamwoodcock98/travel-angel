@@ -11,7 +11,7 @@ import { Alerts } from "../../assets/snackbar"
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [state, setState] = useState(0);
 
   const handleUpload = async () => {
@@ -112,12 +112,15 @@ const Transfers = ({ session }) => {
     }
   }, [didUpdate, state]);
 
-  if (outboundTransfer.length || inboundTransfer.length) {
-    return (
-      <>
+  if (loading) {
+    return(
       <div className="loading" style={{ display: loading ? "" : "none"}} >
         <CircularProgress color="secondary" />
       </div>
+    )
+  } else if (outboundTransfer.length || inboundTransfer.length) {
+    return (
+      <>
       <div className="transfers">
         <div className="transfer-header">
           <h1>Your transfers</h1>

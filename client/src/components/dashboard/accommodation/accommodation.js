@@ -12,21 +12,10 @@ import "../../assets/styling/cards.css"
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
-
   const [state, setState] = useState(0);
-
-  console.log("This is the state, is this causing problems?", state);
-
-  const handleUpload = async () => {
-    setState((prev) => prev + 1);
-  };
-
   const userId = session;
-
   const [accommodation, setAccommodation] = useState([]);
-
   const [open, setOpen] = useState(false);
-
   const [accommodationArray, setAccommodationArray] = useState({
     name: "",
     contactNumber: "",
@@ -53,10 +42,14 @@ export const ViewAccommodation = ({ session }) => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
   const [didUpdate, setDidUpdate] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const alertPosition = {
     vertical: "top",
     horizontal: "center",
+  };
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
   };
 
   const handleAlert = (message, type) => {
@@ -83,7 +76,6 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
     if (userId !== "null") {
       axios
         .get(
@@ -127,12 +119,15 @@ export const ViewAccommodation = ({ session }) => {
     );
   };
 
-  if (accommodation.length) {
+  if (loading) {
+    return(
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  } else if (accommodation.length) {
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none" }}>
-          <CircularProgress color="secondary" />
-        </div>
         <div className="container">
           <div className="header">
             <h1 className="title">Accommodation</h1>
