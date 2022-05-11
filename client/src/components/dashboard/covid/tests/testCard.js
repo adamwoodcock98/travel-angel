@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./testCard.css"
+import "./testCard.css";
 import moment from "moment";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import BiotechOutlinedIcon from "@mui/icons-material/BiotechOutlined";
 import AddTest from "./newTest";
 import CrudMenu from "./crud/crud";
@@ -14,7 +14,7 @@ const TestCard = (props) => {
 
   const handleOpen = () => {
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -22,10 +22,12 @@ const TestCard = (props) => {
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
-  return(
+  return (
     <div className="test-card">
       <div className="test-card-header">
-        <h1>{testData.testType} {testData.entryType}</h1>
+        <h1>
+          {testData.testType} {testData.entryType}
+        </h1>
         <CrudMenu testData={testData} testId={testId} userId={userId} />
       </div>
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
@@ -72,14 +74,26 @@ const TestCard = (props) => {
           </div>
         </div>
         <div className="test-card-secondary-content">
-          <Button color="secondary" startIcon={<BiotechOutlinedIcon />} onClick={handleOpen}>
+          <Button
+            color="secondary"
+            startIcon={<BiotechOutlinedIcon />}
+            onClick={handleOpen}
+          >
             Add results
           </Button>
-          <AddTest open={open} handleOpen={handleOpen} handleClose={handleClose} entryType="Result" testData={testData} testID={testData._id}/>
+          <AddTest
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            entryType="Result"
+            userId={userId}
+            testData={testData}
+            testID={testData._id}
+          />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default TestCard;

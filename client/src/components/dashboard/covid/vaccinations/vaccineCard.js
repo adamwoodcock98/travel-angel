@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./vaccineCard.css";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import AddVaccine from "./newVaccine";
 import DosePane from "./dosePane";
@@ -8,27 +8,32 @@ import DosePane from "./dosePane";
 const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
   const vaccinationsData = props.vaccinationsData;
-  const doses = vaccinationsData.vaccineDoses;
   const doseData = {
     dose: "",
     date: "",
     type: "",
-  }
+  };
 
   const handleOpen = () => {
     setOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const dosesArray = [];
-  vaccinationsData.vaccineDoses.forEach(dose => {
-    dosesArray.push(<DosePane doseData={dose} vaccinationsID={vaccinationsData._id} />)
-  })
+  console.log("this is the vaccine card");
 
-  return(
+  const dosesArray = [];
+  if (vaccinationsData && vaccinationsData.vaccineDoses.length) {
+    vaccinationsData.vaccineDoses.forEach((dose) => {
+      dosesArray.push(
+        <DosePane doseData={dose} vaccinationsID={vaccinationsData._id} />
+      );
+    });
+  }
+
+  return (
     <div className="vaccine-card">
       <div className="vaccine-card-header">
         <h1>Vaccinations</h1>
@@ -45,8 +50,23 @@ const VaccineCard = (props) => {
           {vaccinationsData.vaccineDoses && dosesArray}
         </div>
         <div className="vaccine-card-dose-button">
-          {dosesArray.length < 3 && <Button color="secondary" startIcon={<VaccinesOutlinedIcon />} onClick={handleOpen}>Add dose</Button>}
-          <AddVaccine open={open} handleOpen={handleOpen} handleClose={handleClose} vaccinationsID={vaccinationsData._id} doseData={doseData} doseId={null} />
+          {dosesArray.length < 3 && (
+            <Button
+              color="secondary"
+              startIcon={<VaccinesOutlinedIcon />}
+              onClick={handleOpen}
+            >
+              Add dose
+            </Button>
+          )}
+          <AddVaccine
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            vaccinationsID={vaccinationsData._id}
+            doseData={doseData}
+            doseId={null}
+          />
         </div>
       </div>
       <div className="vaccine-card-proof-content">
@@ -56,7 +76,7 @@ const VaccineCard = (props) => {
         <h2>Additional documents</h2>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default VaccineCard;

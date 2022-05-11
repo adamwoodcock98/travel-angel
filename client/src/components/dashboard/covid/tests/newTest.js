@@ -15,8 +15,8 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
 const AddTest = (props) => {
-  const open = props.open
-  const handleClose = props.handleClose
+  const open = props.open;
+  const handleClose = props.handleClose;
   const testData = props.testData;
   const testID = props.testID;
   const handleOpen = props.handleOpen;
@@ -24,9 +24,7 @@ const AddTest = (props) => {
   const tripId = props.tripId;
   const entryType = props.entryType;
 
- 
-
-const [test, setTest] = useState({
+  const [test, setTest] = useState({
     testType: testData.testType,
     entryType: entryType,
     result: testData.result,
@@ -37,6 +35,7 @@ const [test, setTest] = useState({
     testNumber: testData.testNumber,
     testCountry: testData.testCountry,
     testProvider: testData.testProvider,
+    user: userId,
   });
 
   const handleChange = (e) => {
@@ -50,33 +49,59 @@ const [test, setTest] = useState({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider } = test;
+    const {
+      entryType,
+      testType,
+      isReminder,
+      result,
+      testDate,
+      testFromDate,
+      resultByDate,
+      validToDate,
+      testNumber,
+      testCountry,
+      testProvider,
+      user,
+    } = test;
 
-    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider, testID, user: userId };
-    
+    const newTest = {
+      entryType,
+      testType,
+      isReminder,
+      result,
+      testDate,
+      testFromDate,
+      resultByDate,
+      validToDate,
+      testNumber,
+      testCountry,
+      testProvider,
+      testID,
+      user,
+    };
+
     let url;
     if (testID) {
-      url = "http://localhost:8000/dashboard/covid/test/edit"
+      url = "http://localhost:8000/dashboard/covid/test/edit";
     } else {
-      url = "http://localhost:8000/dashboard/covid/test"
+      url = "http://localhost:8000/dashboard/covid/test";
     }
-    axios
-      .post(url, newTest)
-      .then((res) => {
-        handleClose();
-        setTest({
-          testType: "",
-          entryType: "",
-          result: "",
-          testDate: "",
-          testFromDate: "",
-          resultByDate: "",
-          validToDate: "",
-          testNumber: "",
-          testCountry: "",
-          testProvider: "",
-        });
+    axios.post(url, newTest).then((res) => {
+      handleClose();
+      setTest({
+        testType: "",
+        entryType: "",
+        result: "",
+        testDate: "",
+        testFromDate: "",
+        resultByDate: "",
+        validToDate: "",
+        testNumber: "",
+        testCountry: "",
+        testProvider: "",
+        user: userId,
       });
+    });
   };
 
   return (
