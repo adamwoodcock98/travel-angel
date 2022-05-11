@@ -34,15 +34,12 @@ export const OutboundTransferCard = (props) => {
       {outboundTransfer.map((outboundTransfer, index) => {
         return (
           <div className="card" key={index}>
-
             <div className="crud-menu">
               <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
             </div>
-
             <div className="header">
               <h1>{outboundTransfer.name}</h1>
             </div>
-
             <div className="body">
               <div className="subbody-left">
                 <div className="pickup-header">
@@ -53,13 +50,9 @@ export const OutboundTransferCard = (props) => {
                   <p>{formatTime(outboundTransfer.pickupTime)}</p>
                   <div className="address">
                   {outboundTransfer.pickupAddress && (
-                    <p>
-                      Address: {formatAddress(outboundTransfer.pickupAddress)}
-                    </p>
+                    <p>Address: {formatAddress(outboundTransfer.pickupAddress)}</p>
                   )}
                 </div>
-                </div>
-                
               </div>
               <div className="subbody-right">
                 <div className="dropoff-header">
@@ -75,11 +68,11 @@ export const OutboundTransferCard = (props) => {
                       Address: {formatAddress(outboundTransfer.dropoffAddress)}
                     </p>
                   )}
-                </div>
-                </div>
-                
+                  </div>
               </div>
-            </div>
+            </div> 
+          </div>
+        </div>
             <div className="footer">
               <div className="booking-reference">
                 {outboundTransfer.bookingReference && (
@@ -94,24 +87,24 @@ export const OutboundTransferCard = (props) => {
                   <p>TEL: {outboundTransfer.contactNumber}</p>
                 )}
               </div>
-            </div>
-            <div className="upload">
-              <Upload
-                cardId={outboundTransfer._id}
-                url="dashboard/transfers"
-                handleUpload={handleUpload}
-              />
-              {outboundTransfer.uploads.length &&
-                outboundTransfer.uploads.map((upload, index) => {
-                  return (
-                    <button
-                      onClick={() => handleSubmit(upload._id)}
-                      key={index}
-                    >
-                      {upload.name}
-                    </button>
-                  );
-                })}
+              <div className="upload">
+                <Upload
+                  cardId={outboundTransfer._id}
+                  url="dashboard/transfers"
+                  handleUpload={handleUpload}
+                />
+                {outboundTransfer.uploads.length &&
+                  outboundTransfer.uploads.map((upload, index) => {
+                    return (
+                      <button
+                        onClick={() => handleSubmit(upload._id)}
+                        key={index}
+                      >
+                        {upload.name}
+                      </button>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         );
