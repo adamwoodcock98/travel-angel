@@ -113,8 +113,13 @@ export const Passport = ({ session }) => {
         <div className="loading" style={{ display: loading ? "" : "none"}} >
           <CircularProgress color="secondary" />
         </div>
-        <h1 className="pass-h1">Passport</h1>
-          <Fab
+        <div onClick={handleOpenPassport}>Passport</div>
+        <Dialog open={openPassport} onClose={handleClosePassport}>
+          <DialogTitle>Passport</DialogTitle>
+          <DialogContent>
+            <div id="pass-render">{passportRender}</div>
+          </DialogContent>
+                    <Fab
             id="pass-fab"
             size="medium"
             color="secondary"
@@ -123,12 +128,6 @@ export const Passport = ({ session }) => {
             >
             <AddIcon />
           </Fab>
-        <div onClick={handleOpenPassport}>Passport</div>
-        <Dialog open={openPassport} onClose={handleClosePassport}>
-          <DialogTitle>Passport</DialogTitle>
-          <DialogContent>
-            <div id="pass-render">{passportRender}</div>
-          </DialogContent>
           <AddPassport
             open={open}
             handleOpen={handleOpen}
