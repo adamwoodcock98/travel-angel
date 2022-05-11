@@ -35,14 +35,12 @@ export default function AccommodationCard(props) {
       {accommodation.map((accommodation, index) => {
         return (
             <div className="card" key={index}>
-
               <div className="crud-menu">
                 <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
               </div>
               <div className="header">
                 <h1>{accommodation.name}</h1>
               </div>
-
               <div className="body">
                 <div className="subbody-left">
                   <div className="check-in-header">
@@ -53,7 +51,6 @@ export default function AccommodationCard(props) {
                     <p>Check-in opens at {accommodation.checkInTime}</p>
                   </div>
                 </div>
-
                 <div className="subbody-right">
                   <div className="check-out-header">
                     <h3>Check-Out</h3>
@@ -64,7 +61,6 @@ export default function AccommodationCard(props) {
                   </div>
                 </div>
               </div>
-
               <div className="footer">
                 <div className="booking-reference">
                   {accommodation.bookingReference && (
@@ -81,7 +77,6 @@ export default function AccommodationCard(props) {
                     <p>Address: {formatAddress(accommodation.address)}</p>
                   )}
                 </div>
-              
                 <div className="directions">
                   <Button
                     color="secondary"
@@ -92,26 +87,25 @@ export default function AccommodationCard(props) {
                     Get Directions
                   </Button>
                 </div>
-
-              <div className="upload">
-                <Upload
-                  cardId={accommodation._id}
-                  url="dashboard/accommodation"
-                  handleUpload={handleUpload}
-                />
-                Download Your files
-                {accommodation.uploads.length &&
-                  accommodation.uploads.map((upload, index) => {
-                    return (
-                      <button
-                        onClick={() => handleSubmit(upload._id)}
-                        key={index}
-                      >
-                        {upload.name}
-                      </button>
-                    );
-                  })}
-              </div>
+                <div className="upload">
+                  <Upload
+                    cardId={accommodation._id}
+                    url="dashboard/accommodation"
+                    handleUpload={handleUpload}
+                  />
+                  Download Your files
+                  {accommodation.uploads.length &&
+                    accommodation.uploads.map((upload, index) => {
+                      return (
+                        <button
+                          onClick={() => handleSubmit(upload._id)}
+                          key={index}
+                        >
+                          {upload.name}
+                        </button>
+                      );
+                    })}
+                </div> 
             </div>
           </div>
         );
