@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import DeleteButton from "./deleteButton";
+import { Alerts } from "./snackbar"
 
 export default function DeleteDialogue({
   open,
@@ -18,7 +19,31 @@ export default function DeleteDialogue({
     handleDeletePromptClose();
     axios.post(
       `http://localhost:8000/dashboard/${dataType}/delete/${objectId}`
-    );
+    ).then(res => {
+      handleAlert("Item successfully deleted", "success");
+    })
+    .catch(err => {
+      console.log(err.message)
+      handleAlert("Unable to delete item", "error");
+    });
+  };
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
   };
 
   return (
@@ -43,6 +68,13 @@ export default function DeleteDialogue({
           <DeleteButton handleClick={handleDelete} />
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

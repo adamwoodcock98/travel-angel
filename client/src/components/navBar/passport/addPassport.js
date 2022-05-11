@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import axios from "axios";
+import { Alerts } from "../../assets/snackbar";
 import {
   Button,
   Fab,
@@ -12,27 +15,127 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 
 export default function AddPassport({
   open,
   handleOpen,
   handleClose,
-  handleChange,
-  passport,
-  onSubmit,
+  passportId,
+  passportData,
+  user,
 }) {
+  const [emptyFields, setEmptyFields] = useState([]);
+  const [passport, setPassport] = useState({
+    passportNumber: passportData.passportNumber,
+    firstName: passportData.firstName,
+    lastName: passportData.lastName,
+    nationality: passportData.nationality,
+    country: passportData.country,
+    dob: passportData.dob,
+    gender: passportData.gender,
+    placeOfBirth: passportData.placeOfBirth,
+    dateOfIssue: passportData.dateOfIssue,
+    dateOfExpiry: passportData.dateOfExpiry,
+    user: user,
+  });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setPassport({
+      ...passport,
+      [e.target.name]: value,
+    });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    let url;
+    if (passportId) {
+      url = `http://localhost:8000/dashboard/passport/edit/${passportId}`
+    } else {
+      url = `http://localhost:8000/dashboard/passport/`
+    }
+
+    const {
+      passportNumber,
+      firstName,
+      lastName,
+      nationality,
+      country,
+      dob,
+      gender,
+      placeOfBirth,
+      dateOfIssue,
+      dateOfExpiry,
+      user,
+    } = passport;
+
+    const newPassport = {
+      passportNumber,
+      firstName,
+      lastName,
+      nationality,
+      country,
+      dob,
+      gender,
+      placeOfBirth,
+      dateOfIssue,
+      dateOfExpiry,
+      user,
+    };
+
+    if(passportNumber === "" || firstName === "" || lastName === "" || nationality === "" || country === "" || dob === ""){
+      setEmptyFields(['passportNumber', 'firstName', 'lastName', 'nationality', 'country', 'dob'])
+      return
+    }
+
+    await axios
+      .post(url, newPassport)
+      .then((res) => {
+        handleAlert("Passport added successfully.", "success");
+        setPassport({
+          passportNumber: "",
+          firstName: "",
+          lastName: "",
+          nationality: "",
+          country: "",
+          dob: "",
+          gender: "",
+          placeOfBirth: "",
+          dateOfIssue: "",
+          dateOfExpiry: "",
+          user: user,
+        })
+        handleClose();
+      })
+      .catch((err) => {
+        console.log(err.message);
+        handleAlert("Whoops! We couldn't add your passport, please try again.", "error");
+      });;;
+  };
+
+
   return (
     <div>
-      <Fab
-        id="pass-fab"
-        size="medium"
-        color="secondary"
-        aria-label="add"
-        onClick={handleOpen}
-      >
-        <AddIcon />
-      </Fab>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Passport</DialogTitle>
         <DialogContent>
@@ -49,6 +152,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -61,6 +165,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -73,6 +178,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -85,6 +191,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -97,6 +204,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -110,6 +218,7 @@ export default function AddPassport({
             inputProps={{ "data-testid": "dob-input" }}
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true,
@@ -128,6 +237,7 @@ export default function AddPassport({
               variant="outlined"
               onChange={handleChange}
               required
+              sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             >
               <MenuItem value="F">Female</MenuItem>
               <MenuItem value="M">Male</MenuItem>
@@ -144,6 +254,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -157,6 +268,7 @@ export default function AddPassport({
             inputProps={{ "data-testid": "dof-input" }}
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -173,6 +285,7 @@ export default function AddPassport({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -184,6 +297,13 @@ export default function AddPassport({
           <Button onClick={onSubmit}>Save</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
     </div>
   );
 }

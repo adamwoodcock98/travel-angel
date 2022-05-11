@@ -4,7 +4,7 @@ import "./viewVisa.css";
 import Upload from "../../upload/upload";
 import CrudMenu from "./crud/crud";
 
-export default function VisaCard({ visa, handleUpload, userId, tripId }) {
+export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const handleSubmit = async (id) => {
@@ -12,22 +12,17 @@ export default function VisaCard({ visa, handleUpload, userId, tripId }) {
   };
 
   return (
-    <div className="card-container">
-      {visa.map((visa, index) => {
-        return (
-          <div className="visa-card" key={index}>
-            <div className="header">
-              <h3>Your entry visa to</h3>
-              <CrudMenu
-                visaData={visa}
-                visaId={visa._id}
-                userId={userId}
-                tripId={tripId}
-              />
-              <div className="country">
-                <h1>{visa.issuingCountry}</h1>
+      <div className="card-container">
+        {visa.map((visa, index) => {
+          return (
+            <div className="visa-card" key={index}>
+              <div className="header">
+                <h3>Your entry visa to</h3>
+                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
+                  <div className="country">
+                    <h1>{visa.issuingCountry}</h1>
+                  </div>
               </div>
-            </div>
             <div className="body">
               <div className="start-date">
                 <div className="start-date-header">
