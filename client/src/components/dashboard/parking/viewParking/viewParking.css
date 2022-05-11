@@ -6,6 +6,7 @@
 
   .parking-card-header {
     flex: 1;
+    display: flex;
   }
 
   .parking-card-dates-content {

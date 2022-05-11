@@ -5,6 +5,8 @@ import Upload from "../../../upload/upload";
 import CrudMenu from "./crud/crud";
 import Button from "@mui/material/Button";
 import DirectionsOutlinedIcon from "@mui/icons-material/DirectionsOutlined";
+import "../../../assets/styling/cards.css"
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
@@ -27,6 +29,7 @@ const ParkingCard = (props) => {
           Your booking
           {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
         </h1>
+        <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
       </div>
       <div className="parking-card-dates-content">
         <div className="parking-card-dates-arrival">
@@ -67,32 +70,39 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
-      <div className="uploads">
-        <Upload
-          cardId={parkingData._id}
-          url="dashboard/parking"
-          handleUpload={handleUpload}
-        />
-        {parkingData.uploads.length &&
-          parkingData.uploads.map((upload, index) => {
-            return (
-              <button onClick={() => handleSubmit(upload._id)} key={index}>
-                {upload.name}
-              </button>
-            );
-          })}
-      </div>
-      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
       <div className="directions">
-        <Button
-          color="secondary"
-          startIcon={<DirectionsOutlinedIcon />}
-          target="_blank"
-          href={props.handleDirections(parkingData.address)}
-        >
-          Get Directions
-        </Button>
-      </div>
+          <Button
+            color="secondary"
+            startIcon={<DirectionsOutlinedIcon />}
+            target="_blank"
+            href={props.handleDirections(parkingData.address)}
+          >
+            Get Directions
+          </Button>
+        </div>
+      <div className="upload">
+            <div className="uploads">
+              <div style={{display: "flex", alignItems: "center"}} className="documents" >
+                <h4>Documents</h4>
+                <Upload
+                  cardId={parkingData._id}
+                  url="dashboard/parking"
+                  handleUpload={handleUpload}
+                />
+              </div>
+              <i>Use this section to store any additional documents you may need for your flights</i>
+              {parkingData.uploads.length &&
+                parkingData.uploads.map((upload, index) => {
+                  return (
+                    <div className="document-button">
+                      <Button style={{padding: "0%"}} color="primary" onClick={() => handleSubmit(upload._id)} key={index} endIcon={<FileDownloadOutlinedIcon />}>
+                        {upload.name}
+                      </Button>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
     </div>
   );
 };

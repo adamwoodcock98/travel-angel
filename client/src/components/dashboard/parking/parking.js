@@ -126,7 +126,7 @@ const Parking = ({ session }) => {
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} refresh={handleClose} />
+        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} refresh={handleClose} handleUpload={handleUpload} />
       );
     });
 
