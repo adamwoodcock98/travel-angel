@@ -22,6 +22,11 @@ const covidTestSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  trip: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Trip",
+    required: true,
+  },
 });
 
 const CovidTest = mongoose.model("CovidTest", covidTestSchema);

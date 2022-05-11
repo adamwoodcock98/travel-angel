@@ -36,6 +36,7 @@ const AddTest = (props) => {
     testCountry: testData.testCountry,
     testProvider: testData.testProvider,
     user: userId,
+    trip: tripId,
   });
 
   const handleChange = (e) => {
@@ -62,6 +63,7 @@ const AddTest = (props) => {
       testCountry,
       testProvider,
       user,
+      trip,
     } = test;
 
     const newTest = {
@@ -78,6 +80,7 @@ const AddTest = (props) => {
       testProvider,
       testID,
       user,
+      trip,
     };
 
     let url;
@@ -100,6 +103,7 @@ const AddTest = (props) => {
         testCountry: "",
         testProvider: "",
         user: userId,
+        trip: tripId,
       });
     });
   };

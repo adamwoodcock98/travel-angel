@@ -2,7 +2,7 @@ const express = require("express");
 const CovidController = require("../controllers/covid.js");
 
 const covidRouter = express.Router();
-covidRouter.get("/:id", CovidController.Index);
+covidRouter.get("/:id/:tripId", CovidController.Index);
 covidRouter.post("/test", CovidController.NewTest);
 covidRouter.post("/vaccination/:id/new", CovidController.NewVaccination);
 covidRouter.post(

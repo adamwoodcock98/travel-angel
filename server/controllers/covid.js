@@ -6,6 +6,7 @@ const CovidController = {
   Index: async (req, res) => {
     console.log("In the index route");
     const userId = req.params.id;
+    const tripId = req.params.tripId;
     try {
       let vaccineToPass;
       const vaccinationData = await Vaccinations.findOne({
@@ -22,7 +23,7 @@ const CovidController = {
 
       console.log(vaccineToPass);
 
-      const testData = await CovidTest.find({ user: userId }); //  addddddddd ttrrrriiippppppsssssssssss
+      const testData = await CovidTest.find({ user: userId, trip: tripId }); //  addddddddd ttrrrriiippppppsssssssssss
 
       console.log(testData.length);
 

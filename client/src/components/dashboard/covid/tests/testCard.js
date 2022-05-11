@@ -11,6 +11,7 @@ const TestCard = (props) => {
   const testData = props.testData;
   const userId = props.userId;
   const testId = testData._id;
+  const tripId = props.tripId;
 
   const handleOpen = () => {
     setOpen(true);
@@ -89,6 +90,7 @@ const TestCard = (props) => {
             userId={userId}
             testData={testData}
             testID={testData._id}
+            tripId={tripId}
           />
         </div>
       </div>

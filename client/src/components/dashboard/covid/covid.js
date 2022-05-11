@@ -6,14 +6,14 @@ import "./covid.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import AddTest from "./tests/newTest";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Covid = ({ session }) => {
   const [testData, setTestData] = useState([]);
   const [vaccineData, setVaccineData] = useState();
   const [open, setOpen] = useState(false);
   const [didLoad, setDidLoad] = useState(false);
-  // const { tripId } = useParams();
+  const { tripId } = useParams();
   const userId = session;
   const [test, setTest] = useState({
     testType: "",
@@ -27,11 +27,8 @@ const Covid = ({ session }) => {
     testCountry: "",
     testProvider: "",
     user: userId,
+    trip: tripId,
   });
-
-  // const api = axios.create({
-  //   baseURL: `http://localhost:8000/dashboard/covid/`,
-  // });
 
   const handleOpen = () => {
     setOpen(true);
@@ -45,7 +42,7 @@ const Covid = ({ session }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/dashboard/covid/${userId}`)
+      .get(`http://localhost:8000/dashboard/covid/${userId}/${tripId}`)
       .then((res) => {
         const tests = res.data.tests;
         const vaccines = res.data.vaccinations;
@@ -101,6 +98,7 @@ const Covid = ({ session }) => {
               testData={test}
               userId={userId}
               testID={null}
+              tripId={tripId}
             />
           </div>
         </div>
@@ -139,6 +137,7 @@ const Covid = ({ session }) => {
               testData={test}
               userId={userId}
               testID={null}
+              tripId={tripId}
             />
           </div>
         </div>

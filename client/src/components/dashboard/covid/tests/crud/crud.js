@@ -144,6 +144,7 @@ const CrudMenu = (props) => {
         userId={userId}
         testId={testId}
         entryType={testData.entryType}
+        tripId={tripId}
       />
     </div>
   );
