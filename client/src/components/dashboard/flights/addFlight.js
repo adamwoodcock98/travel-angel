@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios"
 import Button from "@mui/material/Button";
-
+import "../dashboard.css";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,7 +10,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
@@ -357,10 +356,10 @@ const AddFlight = ({
           </FormControl>
         </DialogContent>
         <DialogActions>
-          {flightId && <Button onClick={onSubmit}>Update Flight Details</Button>}
-          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
-          <Button onClick={handleClear}>Clear</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+        <Button id="default-lower-button" onClick={handleClose}>Cancel</Button>
+        <Button id="default-lower-button" onClick={handleClear}>Clear</Button>
+          {flightId && <Button id="update-flight-details-button" onClick={onSubmit}>Update Flight Details</Button>}
+          {!flightId && <Button id="save-flight-details-button" onClick={onSubmit}>Save Flight Details</Button>}
         </DialogActions>
       </Dialog>
     </div>
