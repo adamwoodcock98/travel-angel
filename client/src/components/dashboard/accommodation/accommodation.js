@@ -48,11 +48,6 @@ export const ViewAccommodation = ({ session }) => {
     trip: tripId,
   });
 
-  console.log(
-    "This is the accommodation, is this changing?",
-    accommodationArray
-  );
-
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");

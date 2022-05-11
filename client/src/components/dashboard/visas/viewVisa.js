@@ -3,6 +3,9 @@ import moment from "moment";
 import "./viewVisa.css";
 import Upload from "../../upload/upload";
 import CrudMenu from "./crud/crud";
+import Button from '@mui/material/Button';
+import "../../assets/styling/cards.css";
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
@@ -46,24 +49,29 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                 <p>Visa Number: {visa.visaNumber}</p>
               </div>
             </div>
+            <div className="upload">
             <div className="uploads">
-              <Upload
-                cardId={visa._id}
-                url="dashboard/visas"
-                handleUpload={handleUpload}
-              />
+              <div style={{display: "flex", alignItems: "center"}} className="documents" >
+                <h4>Documents</h4>
+                <Upload
+                  cardId={visa._id}
+                  url="dashboard/visas"
+                  handleUpload={handleUpload}
+                />
+              </div>
+              <i>Use this section to store any additional documents you may need for your flights</i>
               {visa.uploads.length &&
                 visa.uploads.map((upload, index) => {
                   return (
-                    <button
-                      onClick={() => handleSubmit(upload._id)}
-                      key={index}
-                    >
-                      {upload.name}
-                    </button>
+                    <div className="document-button">
+                      <Button style={{padding: "0%"}} color="primary" onClick={() => handleSubmit(upload._id)} key={index} endIcon={<FileDownloadOutlinedIcon />}>
+                        {upload.name}
+                      </Button>
+                    </div>
                   );
                 })}
             </div>
+          </div>
           </div>
         );
       })}
