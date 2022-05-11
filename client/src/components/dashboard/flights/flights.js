@@ -7,7 +7,6 @@ import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
-import moment from "moment";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
@@ -95,66 +94,6 @@ const Flights = ({ session }) => {
       });
   }, [flight, state]);
 
-  const handleClear = () => {
-    setFlight({
-      flightNumber: "",
-      departureTime: "",
-      departureDate: "",
-      airline: "",
-      departureAirport: "",
-      departureTerminal: "",
-      departureCity: "",
-      departureGate: "",
-      arrivalAirport: "",
-      arrivalTerminal: "",
-      arrivalCity: "",
-      arrivalGate: "",
-      bookingReference: "",
-      isOutbound: "",
-      user: userId,
-      trip: tripId,
-    });
-  };
-
-  const formatDate = (date) => moment(date).format("YYYY-MM-DD");
-  const formatTime = (time) => moment(time).format("hh:mm");
-  const flightNumber = flight.flightNumber;
-  const flightDate = formatDate(flight.departureDate);
-  // console.log(flightNumber)
-  // console.log(flightDate)
-
-  const options = {
-    headers: {
-      "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com",
-      "X-RapidAPI-Key": process.env.REACT_APP_FLIGHT_API_KEY,
-    },
-  };
-  const flightApi = axios.create({
-    baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`,
-  });
-
-  const handleApiSearch = async () => {
-    await flightApi.get("/", options).then((res) => {
-      const data = res.data[0];
-
-      setFlight({
-        ...flight,
-        departureTime: formatTime(data.departure.scheduledTimeLocal),
-        airline: data.airline.name,
-        departureAirport: data.departure.airport.shortName,
-        departureTerminal: data.departure.terminal,
-        departureCity: data.departure.airport.municipalityName,
-        departureGate: data.departure.gate,
-        arrivalAirport: data.arrival.airport.name,
-        arrivalTerminal: data.arrival.terminal,
-        arrivalCity: data.arrival.airport.municipalityName,
-        arrivalGate: data.arrival.gate,
-        user: userId,
-        trip: tripId,
-      });
-    });
-  };
-
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
     const inboundFlights = [];
@@ -213,8 +152,6 @@ const Flights = ({ session }) => {
             flightId={null}
             userId={userId}
             tripId={tripId}
-            handleApiSearch={handleApiSearch}
-            handleClear={handleClear}
             handleUpload={handleUpload}
           />
         </div>
@@ -239,8 +176,7 @@ const Flights = ({ session }) => {
           flightId={null}
           userId={userId}
           tripId={tripId}
-          handleApiSearch={handleApiSearch}
-          handleClear={handleClear}
+          handleUpload={handleUpload}
         />
         {alertMessage && (
           <Alerts

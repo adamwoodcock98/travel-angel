@@ -84,6 +84,9 @@ const Visas = ({ session }) => {
   } else {
     return (
       <div className="visas">
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+        </Fab>
         <div className="visa-header">
           <h1>Your visas</h1>
         </div>
