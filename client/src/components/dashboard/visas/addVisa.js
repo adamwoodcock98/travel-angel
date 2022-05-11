@@ -17,10 +17,10 @@ const AddVisa = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const visaId = props.visaId;
-  const emptyFields = props.emptyFields
   const open = props.open;
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
+  const [emptyFields, setEmptyFields] = useState([]);
   const visaData = props.visaData;
   const [visa, setVisa] = useState({
     visaNumber: visaData.visaNumber,
@@ -78,6 +78,11 @@ const AddVisa = (props) => {
       user: userId,
       trip: tripId,
     };
+
+    if(visaNumber === "" || startDate === "" || endDate === "" || issuingCountry === ""){
+      setEmptyFields(['visaNumber', 'startDate', 'endDate', 'issuingCountry'])
+      return
+    }
 
     await axios
       .post(url, newVisa)

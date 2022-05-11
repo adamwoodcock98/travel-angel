@@ -20,7 +20,7 @@ const AddAccommodation = (props) => {
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
-  const emptyFields = props.emptyFields
+  const [emptyFields, setEmptyFields] = useState([]);
   const [accommodation, setAccommodation] = useState({
     name: accommodationData.name,
     contactNumber: accommodationData.contactNumber,
@@ -118,7 +118,10 @@ const AddAccommodation = (props) => {
       trip: tripId,
     };
 
-    console.log(newAccommodation.user)
+    if (name === "" || contactNumber === "" || checkInDate === "" || checkOutDate === "" || checkInTime === "" || checkOutTime === "" || bookingReference === "") {
+      setEmptyFields(['name', 'contactNumber', 'checkInDateInput', 'checkOutDateInput', 'checkInTimeInput', 'checkOutTimeInput', 'bookingReference'])
+      return
+    }
 
     await axios
       .post(url, newAccommodation)

@@ -21,7 +21,7 @@ const AddParking = (props) => {
   const handleClose = props.handleClose;
   const parkingData = props.parkingData;
   const parkingId = props.parkingId;
-  const emptyFields = props.emptyFields;
+  const [emptyFields, setEmptyFields] = useState([]);
   const [parking, setParking] = useState({
     startDate: parkingData.startDate,
     endDate: parkingData.endDate,
@@ -123,6 +123,10 @@ const AddParking = (props) => {
     };
 
 
+    if(startDate === "" || endDate === "" || addressLine1 === "" || city === "" || postalCode === ""){
+      setEmptyFields(['startDate', 'endDate', 'addressLine1', 'city', 'postalCode'])
+      return
+    }
 
     axios.post(url, newBooking).then((res) => {
       handleAlert("Parking added successfully.", "success");

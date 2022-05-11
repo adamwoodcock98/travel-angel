@@ -26,7 +26,7 @@ const AddTransfer = (props) => {
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
   const transferData = props.transferData;
-  const emptyFields = getThemeProps.emptyFields;
+  const [emptyFields, setEmptyFields] = useState([])
   const [transfer, setTransfer] = useState({
     pickupTime: transferData.pickupTime,
     dropoffTime: transferData.dropoffTime,
@@ -141,6 +141,11 @@ const AddTransfer = (props) => {
       user,
       trip,
     };
+
+    if (company === "" || contactNumber === "" || pickupTime === "" || dropoffTime === "" || pickupAddress.addressLine1 === "" || pickupAddress.city === "" || pickupAddress.postalCode === "" || dropoffAddress.addressLine1 === "" || dropoffAddress.city === "" || dropoffAddress.postalCode === "" || isOutbound === ""){
+      setEmptyFields(['company', 'contactNumber', 'pickupTime', 'dropoffTime', 'pickupAddress.addressLine1', 'pickupAddress.city', 'pickupAddress.postalCode', 'dropoffAddress.addressLine1', 'dropoffAddress.city', 'dropoffAddress.postalCode', 'isOutbound'])
+      return
+    }
 
     axios
       .post(url, newTransfer)
