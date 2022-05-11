@@ -232,6 +232,7 @@ export const ViewAccommodation = ({ session }) => {
             accommodationId={null}
             userId={userId}
             tripId={tripId}
+            emptyFields={emptyFields}
           />
         </div>
       </div>

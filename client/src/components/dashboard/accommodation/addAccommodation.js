@@ -16,10 +16,12 @@ const AddAccommodation = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const accommodationData = props.accommodationData;
+  console.log(accommodationData.name)
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
-  const emptyFields = props.emptyFields
+  const emptyFields = props.emptyFields;
+  console.log(emptyFields)
   const [accommodation, setAccommodation] = useState({
     name: accommodationData.name,
     contactNumber: accommodationData.contactNumber,
@@ -39,6 +41,8 @@ const AddAccommodation = (props) => {
     user: userId,
     trip: tripId, 
   });
+
+  console.log(accommodation.name)
   
 
   const handleChange = (e) => {

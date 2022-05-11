@@ -6,23 +6,3 @@
 #default-lower-button {
   color: #64BAAA;
 }
-
-<DialogContent>
-<FormControl sx={{ m: 1, minWidth: 190 }}>
-  <InputLabel id="demo-select-small">Journey Type</InputLabel>
-  <Select
-    value={flight.isOutbound}
-    autoFocus
-    margin="dense"
-    id="isOutbound"
-    name="isOutbound"
-    label="Journey type"
-    variant="outlined"
-    onChange={handleChange}
-    required
-  >
-    <MenuItem value={false}>Inbound</MenuItem>
-    <MenuItem value={true}>Outbound</MenuItem>
-  </Select>
-</FormControl>
-<TextField
