@@ -18,7 +18,7 @@ const Visas = ({ session }) => {
 
   const userId = session;
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [visa, setVisa] = useState([]);
   const [emptyFields, setEmptyFields] = useState([]);
@@ -51,6 +51,7 @@ const Visas = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:8000/dashboard/visas/${userId}/${tripId}`)
       .then((res) => {
@@ -81,12 +82,15 @@ const Visas = ({ session }) => {
     setDidUpdate(!didUpdate);
   };
 
-  if (visa.length) {
+  if (loading) {
+    return(
+      <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  } else if (visa.length) {
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none"}} >
-          <CircularProgress color="secondary" />
-        </div>
         <div className="visas">
           <div className="visa-header">
             <h1>Your visas</h1>

@@ -6,6 +6,8 @@ import "./covid.css"
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import AddTest from "./tests/newTest"
+import { Alerts } from "../../assets/snackbar";
+import CircularProgress from '@mui/material/CircularProgress';
 // import { useParams } from "react-router-dom";
 
 const Covid = (props) => {
@@ -13,6 +15,7 @@ const Covid = (props) => {
   const [vaccineData, setVaccineData] = useState([]);
   const [didUpdate, setDidUpdate] = useState(false);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   // const { tripId } = useParams();
   const userId = props.session;
   const [test, setTest] = useState({
@@ -27,6 +30,23 @@ const Covid = (props) => {
     testCountry: "",
     testProvider: "",
   });
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const api = axios.create({
     baseURL: "http://localhost:8000/dashboard/covid/"
@@ -42,21 +62,41 @@ const Covid = (props) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     api.get("/").then(res => {
       const tests = res.data.tests;
       const vaccines = res.data.vaccinations;
       setTestData(tests);
       setVaccineData(vaccines[0]);
+    })      
+    .catch((error) => {
+      if (error.response.status) {
+        handleAlert(
+          error.response.status + " - " + error.response.statusText,
+          "error"
+        );
+      } else {
+        handleAlert(
+          "There was a problem connecting to the server.",
+          "error"
+        );
+      }
     })
+    .finally(() => setLoading(false));
+
   }, [didUpdate]);
 
-  if (testData.length) {
-
+  if (loading) {
+    return(
+      <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  } else if (testData.length) {
     const testsArray =[]
     testData.forEach(test => {
       testsArray.push(<TestCard testData={test} userId={userId} refresh={handleClose} />);
     })
-
     return(
       <>
         <div className="covid-window">
@@ -84,7 +124,14 @@ const Covid = (props) => {
               testData={test}
               userId={userId}
               testID={null}
-            />            
+            />     
+            <Alerts
+              message={alertMessage}
+              open={alertOpen}
+              handleClose={handleAlertClose}
+              alertPosition={alertPosition}
+              alertType={alertType}
+            />       
           </div>
         </div>
       </>
