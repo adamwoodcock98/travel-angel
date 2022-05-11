@@ -23,7 +23,7 @@ const ParkingCard = (props) => {
 
   return (
     <div className="card-container">
-    <div className="parking-card">
+    <div className="card">
 
       <div className="crud-menu">
         <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
@@ -36,13 +36,13 @@ const ParkingCard = (props) => {
         </h1>
       </div>
 
-      <div className="parking-body">
-        <div className="dates-arrival">
+      <div className="body">
+        <div className="subbody-left">
           <h3>From</h3>
           <h2>{parkingData.startDate && formatDate(parkingData.startDate)}</h2>
           <h2>{parkingData.startDate && formatTime(parkingData.startDate)}</h2>
         </div>
-        <div className="dates-departure">
+        <div className="subbody-right">
           <h3>Until</h3>
           <h2>{parkingData.endDate && formatDate(parkingData.endDate)}</h2>
           <h2>{parkingData.endDate && formatTime(parkingData.endDate)}</h2>
@@ -63,29 +63,32 @@ const ParkingCard = (props) => {
             {parkingData.address.buildingName},{" "}
             {parkingData.address.addressLine1}, {parkingData.address.postalCode}
           </p>
+
           <div className="directions">
-        <Button
-          color="secondary"
-          startIcon={<DirectionsOutlinedIcon />}
-          target="_blank"
-          href={props.handleDirections(parkingData.address)}
-        >
-          Get Directions
-        </Button>
-      </div>
+            <Button
+              color="secondary"
+              startIcon={<DirectionsOutlinedIcon />}
+              target="_blank"
+              href={props.handleDirections(parkingData.address)}
+            >
+              Get Directions
+            </Button>
+          </div>
         </div>
+
         <div className="parking-card-contact-number">
           <h4>Tel: {parkingData.contactNumber}</h4>
         </div>
+        
       </div>
       <div className="parking-card-vehicle-content">
         <h2>For your vehicle: {parkingData.regPlate}</h2>
       </div>
       <div className="parking-card-notes-footer">
         <h3>Notes</h3>
-        <p>{parkingData.notes}</p>
+        <p><i>{parkingData.notes}</i></p>
       </div>
-      <div className="parking-upload">
+      <div className="upload">
         <Upload
           cardId={parkingData._id}
           url="dashboard/parking"

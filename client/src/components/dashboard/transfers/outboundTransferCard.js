@@ -3,6 +3,7 @@ import moment from "moment";
 import "./transferCard.css";
 import CrudMenu from "./crud/crud";
 import Upload from "../../upload/upload";
+import "../../assets/styling/cards.css"
 
 export const OutboundTransferCard = (props) => {
   const outboundTransfer = props.outboundTransfer;
@@ -32,7 +33,7 @@ export const OutboundTransferCard = (props) => {
     <div className="card-container">
       {outboundTransfer.map((outboundTransfer, index) => {
         return (
-          <div className="transfer-card" key={index}>
+          <div className="card" key={index}>
 
             <div className="crud-menu">
               <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
@@ -90,7 +91,7 @@ export const OutboundTransferCard = (props) => {
               </div>
               <div className="contact-number">
                 {outboundTransfer.contactNumber && (
-                  <p>Contact Number: {outboundTransfer.contactNumber}</p>
+                  <p>TEL: {outboundTransfer.contactNumber}</p>
                 )}
               </div>
             </div>

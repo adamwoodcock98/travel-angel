@@ -33,7 +33,7 @@ export const InboundTransferCard = (props) => {
     <div className="card-container">
       {inboundTransfer.map((inboundTransfer, index) => {
         return (
-          <div className="transfer-card" key={index}>
+          <div className="card" key={index}>
 
             <div className="crud-menu">
               <CrudMenu transferData={inboundTransfer} transferId={inboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
@@ -91,7 +91,7 @@ export const InboundTransferCard = (props) => {
               </div>
               <div className="contact-number">
                 {inboundTransfer.contactNumber && (
-                  <p>Contact Number: {inboundTransfer.contactNumber}</p>
+                  <p>TEL: {inboundTransfer.contactNumber}</p>
                 )}
               </div>
             </div>

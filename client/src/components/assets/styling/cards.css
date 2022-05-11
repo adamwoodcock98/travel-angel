@@ -34,14 +34,14 @@ p {
 
 
 /* CARD LAYOUT */
-.card-container {
+.card {
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(#ffe3ec, #eba0ae);
   border-radius: 25px;
   opacity: 0.9;
   text-align: center;
-  margin: 10;
+  margin-bottom: 2%;
 }
 
 .crud-menu {

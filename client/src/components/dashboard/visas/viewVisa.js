@@ -16,7 +16,7 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
       <div className="card-container">
         {visa.map((visa, index) => {
           return (
-            <div className="visa-card" key={index}>
+            <div className="card" key={index}>
              
               <div className="crud-menu">
                   <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />

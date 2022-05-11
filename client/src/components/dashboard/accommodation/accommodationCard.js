@@ -31,11 +31,11 @@ export default function AccommodationCard(props) {
   };
 
   return (
-    <div className="container">
+    <div className="card-container">
       {accommodation.map((accommodation, index) => {
         return (
           // <div className="accommodation">
-            <div className="accommodation-card" key={index}>
+            <div className="card" key={index}>
 
               <div className="crud-menu">
                 <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
@@ -45,8 +45,8 @@ export default function AccommodationCard(props) {
                 <h1>{accommodation.name}</h1>
               </div>
 
-              <div className="accommodation-card-body">
-                <div className="check-in">
+              <div className="body">
+                <div className="subbody-left">
                   <div className="check-in-header">
                     <h3>Check-In</h3>
                   </div>
@@ -55,7 +55,7 @@ export default function AccommodationCard(props) {
                     <p>Check-in opens at {accommodation.checkInTime}</p>
                   </div>
                 </div>
-                <div className="check-out">
+                <div className="subbody-right">
                   <div className="check-out-header">
                     <h3>Check-Out</h3>
                   </div>
@@ -78,7 +78,7 @@ export default function AccommodationCard(props) {
                 </div>
                 <div className="contact-number">
                   {accommodation.contactNumber && (
-                    <p>Contact Number: {accommodation.contactNumber}</p>
+                    <p>TEL: {accommodation.contactNumber}</p>
                   )}
                 </div>
                 <div className="directions">
@@ -93,7 +93,7 @@ export default function AccommodationCard(props) {
                 </div>
               </div>
 
-              <div className="accommodation-upload">
+              <div className="upload">
               <Upload
                   cardId={accommodation._id}
                   url="dashboard/accommodation"
