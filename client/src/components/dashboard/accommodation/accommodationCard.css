@@ -1,89 +1,62 @@
-.accommodation {
+/* .accommodation-card {
   display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(#ffe3ec, #eba0ae);
+  border-radius: 25px;
+  opacity: 0.9;
+  text-align: center;
+  margin: 10;
 }
 
 .crud-menu {
+  display: flex;
   flex: 1;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.accommodation-card {
-  flex: 5;
-  background-color: var(--koala-white);
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-  margin: auto;
-  padding: 14px 10px 14px 10px;
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
+  justify-content: right;
 }
 
 .header {
+  text-align: center;
   display: flex;
+  flex: 1;
   justify-content: center;
+  padding-bottom: 10px;
 }
 
-.body {
+.subheading {
+  justify-content: center;
+  text-align: center;
+}
+
+.accommodation-body {
+  text-align: center;
   display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  justify-items: center;
+  padding: 10px 0px 15px 0px;
+}
+
+.accommodation-card-body {
+  display: flex;
+  justify-content: center;
   flex-direction: row;
-  justify-content: space-evenly;
-  padding-bottom: 5vh;
+  padding-bottom: 15px;
 }
 
 .check-in {
-  display: flex;
-  flex-direction: column;
-}
-
-.check-in-header {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.check-in-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  text-align: right;
+  padding-right: 15px;
+  margin: 0;
 }
 
 .check-out {
-  display: flex;
-  flex-direction: column;
+  text-align: left;
+  padding-left: 15px;
+  margin: 0;
 }
 
-.check-out-header {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.check-out-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: small;
-}
-
-.booking-reference {
-  display: flex;
-  justify-content: center;
-}
-
-.address {
-  display: flex;
-  justify-content: center;
-}
-
-.contact-number {
-  display: flex;
-  justify-content: center;
-}
+.accommodation-upload {
+  padding: 10px 0px 15px 0px;
+} */

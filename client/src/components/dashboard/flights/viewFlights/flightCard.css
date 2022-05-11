@@ -10,6 +10,7 @@
 .flight-card-content {
   display: flex;
   flex-direction: row;
+  
 }
 
 .flight-card-footer {
@@ -32,6 +33,7 @@
 /* Airport pane classes */
 .airport-pane-top {
   text-align: center;
+  
 }
 
 .airport-pane-middle {
@@ -64,7 +66,7 @@
   flex: 1;
 }
 
-h1 {
+/* h1 {
   margin: 0;
 }
 
@@ -90,4 +92,4 @@ h6 {
 
 p {
   margin: 0;
-}
+} */

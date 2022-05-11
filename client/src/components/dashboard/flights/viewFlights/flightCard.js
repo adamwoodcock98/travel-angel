@@ -4,6 +4,7 @@ import { AirportPane } from "./airportPane";
 import { FooterPane } from "./footerPane";
 import CrudMenu from "./crud/crud";
 import Upload from "../../../upload/upload";
+import "../../../assets/styling/cards.css"
 
 export const FlightCard = (props) => {
   const handleUpload = props.handleUpload;
@@ -43,6 +44,7 @@ export const FlightCard = (props) => {
   };
 
   return (
+    <div className="card-container">
     <div className="flight-card">
       <div className="flight-card-content">
         <div className="upload">
@@ -76,6 +78,7 @@ export const FlightCard = (props) => {
       <div className="flight-card-footer">
         <FooterPane data={footerData} airport={departureData.airport} />
       </div>
+    </div>
     </div>
   );
 };

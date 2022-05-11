@@ -147,7 +147,7 @@ const AddFlight = ({
     })
     .catch((err) => {
       console.log(err.message);
-      handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
+      handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
       handleClear();
     });
   };
@@ -195,11 +195,11 @@ const AddFlight = ({
         ...flight,
         departureTime: formatTime(data.departure.scheduledTimeLocal),
         airline: data.airline.name,
-        departureAirport: data.departure.airport.shortName,
+        departureAirport: data.departure.airport.iata,
         departureTerminal: data.departure.terminal,
         departureCity: data.departure.airport.municipalityName,
         departureGate: data.departure.gate,
-        arrivalAirport: data.arrival.airport.name,
+        arrivalAirport: data.arrival.airport.iata,
         arrivalTerminal: data.arrival.terminal,
         arrivalCity: data.arrival.airport.municipalityName,
         arrivalGate: data.arrival.gate,
