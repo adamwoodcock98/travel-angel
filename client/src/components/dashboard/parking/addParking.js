@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
 
 const AddParking = (props) => {
@@ -20,7 +21,7 @@ const AddParking = (props) => {
   const handleClose = props.handleClose;
   const parkingData = props.parkingData;
   const parkingId = props.parkingId;
-  const emptyFields = props.emptyFields;
+  const [emptyFields, setEmptyFields] = useState([]);
   const [parking, setParking] = useState({
     startDate: parkingData.startDate,
     endDate: parkingData.endDate,
@@ -43,7 +44,23 @@ const AddParking = (props) => {
     trip: tripId,
   });
 
-  console.log(parking.startDate)
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -106,8 +123,13 @@ const AddParking = (props) => {
     };
 
 
+    if(startDate === "" || endDate === "" || addressLine1 === "" || city === "" || postalCode === ""){
+      setEmptyFields(['startDate', 'endDate', 'addressLine1', 'city', 'postalCode'])
+      return
+    }
 
     axios.post(url, newBooking).then((res) => {
+      handleAlert("Parking added successfully.", "success");
       handleClose();
       setParking({
         startDate: "",
@@ -129,7 +151,11 @@ const AddParking = (props) => {
         countryCode: "",
         user: userId,
       });
-    });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      handleAlert("Whoops! We couldn't add your parking, please try again.", "error");
+    });;
   };
 
   return (
@@ -357,6 +383,13 @@ const AddParking = (props) => {
           <Button onClick={onSubmit}>Save Parking Details</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

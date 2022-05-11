@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogContent } from "@mui/material";
 import moment from "moment";
+import CrudMenu from "./crud/crud"
 
-export const DisplayPassport = ({ passport }) => {
+export const DisplayPassport = ({ passport, userId, refresh}) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -35,6 +36,7 @@ export const DisplayPassport = ({ passport }) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <div className="pass-card">
+            <CrudMenu passportData={passport} userId={userId} refresh={refresh} />
             <div className="pass-country">{passport.country}</div>
             <div className="pass-pic">
               <div className="pass-passport">
@@ -90,7 +92,7 @@ export const DisplayPassport = ({ passport }) => {
             </div>
           </div>
           <div className="pass-footer">
-            <p class="pass-p">
+            <p className="pass-p">
               {`P < ${passport.lastName} < < ${
                 passport.firstName
               } < < < < < < < < < < < < < < < < < < < < < < < < < < < < < ${

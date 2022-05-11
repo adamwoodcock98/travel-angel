@@ -10,6 +10,7 @@ const ParkingCard = (props) => {
   const parkingData = props.bookingData;
   const userId = props.userId;
   const tripId = props.tripId;
+  const refresh = props.refresh;
   const handleUpload = props.handleUpload;
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
@@ -81,7 +82,7 @@ const ParkingCard = (props) => {
             );
           })}
       </div>
-      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} />
+      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
       <div className="directions">
         <Button
           color="secondary"

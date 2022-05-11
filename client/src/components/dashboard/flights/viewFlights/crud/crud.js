@@ -61,6 +61,7 @@ const CrudMenu = (props) => {
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const refresh = props.refresh;
 
 
   const handleClick = (event) => {
@@ -88,6 +89,7 @@ const CrudMenu = (props) => {
   const handleDeletePromptClose = () => {
     handleCrudClose();
     setDeleteOpen(false);
+    refresh();
   };
 
   return (

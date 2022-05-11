@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
 
 const AddVisa = (props) => {
@@ -16,10 +17,10 @@ const AddVisa = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const visaId = props.visaId;
-  const emptyFields = props.emptyFields
   const open = props.open;
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
+  const [emptyFields, setEmptyFields] = useState([]);
   const visaData = props.visaData;
   const [visa, setVisa] = useState({
     visaNumber: visaData.visaNumber,
@@ -29,6 +30,24 @@ const AddVisa = (props) => {
     user: userId,
     trip: tripId,
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -60,10 +79,15 @@ const AddVisa = (props) => {
       trip: tripId,
     };
 
+    if(visaNumber === "" || startDate === "" || endDate === "" || issuingCountry === ""){
+      setEmptyFields(['visaNumber', 'startDate', 'endDate', 'issuingCountry'])
+      return
+    }
+
     await axios
       .post(url, newVisa)
-      .catch((err) => console.log(err.message))
       .then(() => {
+        handleAlert("Visa added successfully.", "success");
         setVisa({
           visaNumber: "",
           startDate: "",
@@ -73,7 +97,11 @@ const AddVisa = (props) => {
           trip: tripId,
         });
         handleClose();
-      });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        handleAlert("Whoops! We couldn't add your visa, please try again.", "error");
+      });;;
   };
 
   return (
@@ -149,6 +177,13 @@ const AddVisa = (props) => {
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

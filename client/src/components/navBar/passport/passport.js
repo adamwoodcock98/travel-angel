@@ -4,6 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Alerts } from "../../assets/snackbar";
 import axios from "axios";
 import "./passport.css";
+import Fab from "@mui/material/Fab";
+import AddIcon from '@mui/icons-material/Add';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Dialog,
   DialogContent,
@@ -16,9 +19,10 @@ export const Passport = ({ session }) => {
 
   const userId = session;
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [openPassport, setOpenPassport] = useState(false);
   const [displayState, setDisplayState] = useState([]);
-  const [emptyFields, setEmptyFields] = useState([])
+  const [didUpdate, setDidUpdate] = useState(false);
   const [passport, setPassport] = useState({
     passportNumber: "",
     firstName: "",
@@ -33,20 +37,13 @@ export const Passport = ({ session }) => {
     user: userId,
   });
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setPassport({
-      ...passport,
-      [e.target.name]: value,
-    });
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   const handleOpenPassport = () => {
@@ -68,83 +65,38 @@ export const Passport = ({ session }) => {
     horizontal: "center",
   };
 
-  const handleAlertClose = () => {
-    setAlertOpen(false);
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    const {
-      passportNumber,
-      firstName,
-      lastName,
-      nationality,
-      country,
-      dob,
-      gender,
-      placeOfBirth,
-      dateOfIssue,
-      dateOfExpiry,
-      user,
-    } = passport;
-
-    const newPassport = {
-      passportNumber,
-      firstName,
-      lastName,
-      nationality,
-      country,
-      dob,
-      gender,
-      placeOfBirth,
-      dateOfIssue,
-      dateOfExpiry,
-      user,
-    };
-
-    if(passportNumber === "" || firstName === "" || lastName === "" || nationality === "" || country === "" || dob === ""){
-      setEmptyFields(['passportNumber', 'firstName', 'lastName', 'nationality', 'country', 'dob'])
-      return
+  useEffect(() => {
+    setLoading(true);
+    if (userId !== "null") {
+      axios.get(`http://localhost:8000/dashboard/passport/${userId}`).then((res) => {
+        setDisplayState(res.data.passport);
+      })
+      .catch((error) => {
+        if (error.response.status) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert(
+            "There was a problem connecting to the server.",
+            "error"
+          );
+        }
+      })
+      .finally(() => setLoading(false));;
     }
+  }, [didUpdate]);
 
-    await axios
-      .post("http://localhost:8000/dashboard/passport/", newPassport)
-      .then((res) => {
-        setPassport({
-          passportNumber: "",
-          firstName: "",
-          lastName: "",
-          nationality: "",
-          country: "",
-          dob: "",
-          gender: "",
-          placeOfBirth: "",
-          dateOfIssue: "",
-          dateOfExpiry: "",
-          user: userId,
-        });
-        handleClose();
-        setDisplayState([...displayState, res.data.passport]);
-        handleAlert(res.data.msg, res.data.type);
-      });
-  };
-
-  const handleAlert = (msg, type) => {
+  const handleAlert = (message, type) => {
     setAlertOpen(true);
-    setAlertMessage(msg);
+    setAlertMessage(message);
     setAlertType(type);
   };
 
-  useEffect(() => {
-    if (userId !== "null") {
-      axios
-        .get(`http://localhost:8000/dashboard/passport/${userId}`)
-        .then((res) => {
-          setDisplayState(res.data.passport);
-        });
-    }
-  }, [passport]);
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const passportRender = [];
   displayState.sort(
@@ -152,26 +104,38 @@ export const Passport = ({ session }) => {
       new Date(pass2.dateOfExpiry) - new Date(pass1.dateOfExpiry)
   );
   displayState.forEach((pass) => {
-    passportRender.push(<DisplayPassport passport={pass} />);
+    passportRender.push(<DisplayPassport passport={pass} userId={userId} refresh={handleClose} />);
   });
+
 
   if (displayState.length) {
     return (
       <div id="Passport">
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
+        </div>
         <div onClick={handleOpenPassport}>Passport</div>
         <Dialog open={openPassport} onClose={handleClosePassport}>
           <DialogTitle>Passport</DialogTitle>
           <DialogContent>
             <div id="pass-render">{passportRender}</div>
           </DialogContent>
+                    <Fab
+            id="pass-fab"
+            size="medium"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+            >
+            <AddIcon />
+          </Fab>
           <AddPassport
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
-            handleChange={handleChange}
-            passport={passport}
-            onSubmit={onSubmit}
-            emptyFields={emptyFields}
+            passportData={passport}
+            passportId={null}
+            user={userId}
           />
         </Dialog>
         <Alerts
@@ -185,26 +149,25 @@ export const Passport = ({ session }) => {
     );
   } else {
     return (
-      <div>
+      <>
         <div onClick={handleOpenPassport}>Passport</div>
-        <Dialog open={openPassport} onClose={handleClosePassport}>
+          <Dialog open={openPassport} onClose={handleClosePassport}>
           <DialogTitle>Passport</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              You don't have your passports saved just yet. Add it now!
-            </DialogContentText>
-            <AddPassport
-              open={open}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-              handleChange={handleChange}
-              passport={passport}
-              onSubmit={onSubmit}
-              emptyFields={emptyFields}
-            />
-          </DialogContent>
-        </Dialog>
-      </div>
+              <DialogContentText>
+                You don't have your passports saved just yet. Add it now!
+              </DialogContentText>
+                <AddPassport
+                  open={open}
+                  handleOpen={handleOpen}
+                  handleClose={handleClose}
+                  passportData={passport}
+                  passportId={null}
+                  user={userId}
+              />
+            </DialogContent>
+          </Dialog>
+      </>
     );
   }
 };

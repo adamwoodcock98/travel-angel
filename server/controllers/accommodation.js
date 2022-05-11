@@ -17,71 +17,49 @@ const AccommodationController = {
     res.json({ accommodation: accommodation });
   },
 
-  Create: (req, res) => {
-    const {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    } = req.body;
+  Create: async (req, res) => {
+    const data = req.body
 
-    const address = new Address({
-      buildingNumber: buildingNumber,
-      buildingName: buildingName,
-      addressLine1: addressLine1,
-      addressLine2: addressLine2,
-      city: city,
-      postalCode: postalCode,
-      stateCounty: stateCounty,
-      countryCode: countryCode,
-      trip: trip,
-    });
+    try {
+      const address = new Address({
+        buildingNumber: data.buildingNumber,
+        buildingName: data.buildingName,
+        addressLine1: data.addressLine1,
+        addressLine2: data.addressLine2,
+        city: data.city,
+        postalCode: data.postalCode,
+        stateCounty: data.stateCounty,
+        countryCode: data.countryCode,
+        trip: data.trip,
+      });
 
-    address
-      .save()
-      .then((address) => {
-        const accommodation = new Accommodation({
-          name: name,
-          contactNumber: contactNumber,
-          checkInDate: checkInDate,
-          checkOutDate: checkOutDate,
-          checkInTime: checkInTime,
-          checkOutTime: checkOutTime,
-          bookingReference: bookingReference,
-          address: address,
-          user: user,
-          trip: trip,
-        });
-        accommodation
-          .save()
-          .then(() => {
-            Trip.findById(trip).then((newTrip) => {
-              newTrip.accommodation.push(accommodation._id);
-              newTrip
-                .save()
-                .then(res.json({ msg: "Accommodation added successfully" }));
-            });
-          })
-          .catch((err) =>
-            res.status(400).json({ error: "Unable to add this accommodation" })
-          );
-      })
-      .catch((err) =>
-        res.status(400).json({ error: "Unable to add this address" })
-      );
+      const savedAddress = await address.save();
+
+      const accommodation = new Accommodation({
+        name: data.name,
+        contactNumber: data.contactNumber,
+        checkInDate: data.checkInDate,
+        checkOutDate: data.checkOutDate,
+        checkInTime: data.checkInTime,
+        checkOutTime: data.checkOutTime,
+        bookingReference: data.bookingReference,
+        address: savedAddress._id,
+        user: data.user,
+        trip: data.trip,
+      });
+
+      const savedAccommodation = await accommodation.save();
+
+      const currentTrip = await Trip.findById(data.trip);
+      currentTrip.accommodation.push(savedAccommodation._id);
+
+      await currentTrip.save()
+
+      res.status(200).send();
+    } catch(e) {
+      console.log(e);
+      res.status(500).send();
+    }
   },
   Upload: async (req, res) => {
     const accommodationId = req.params.id;
