@@ -9,11 +9,20 @@
 }
 
 .trip-body {
-  display: flex;
   justify-content: center;
 }
 
 .footer {
   display: flex;
   flex-direction: flex-end;
+}
+
+#expired {
+  opacity: 0.5;
+  margin-top: 50px;
+}
+
+h2.countdown {
+  text-align: center;
+  margin-bottom: 40px;
 }

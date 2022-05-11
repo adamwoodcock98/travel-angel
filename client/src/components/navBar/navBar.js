@@ -16,10 +16,13 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
+import "./navBar.css"
 
 export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({});
+
+  console.log("The navbar rendering");
 
   const handleOpenMenu = () => {
     setOpen(true);
@@ -34,6 +37,10 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
       setUser(res.data.user);
     });
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="navbar">
@@ -72,7 +79,7 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
               </div>
               {session && (
                 <div>
-                  {getUser()}
+                  {/* {getUser()} */}
                   <Box sx={{ flexGrow: 0 }}>
                     <IconButton
                       className="avatar"
@@ -98,6 +105,25 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                         horizontal: "right",
                       }}
                     >
+
+                      <MenuItem>
+                        <IconButton>
+                        <a href="/" id="nav-trips">
+                          <Typography textAlign="center">
+                            Trips
+                          </Typography>
+                          </a>
+                        </IconButton>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <IconButton>
+                          <Typography textAlign="center">
+                            <Passport session={session} />
+                          </Typography>
+                        </IconButton>
+                      </MenuItem>
+
                       <MenuItem>
                         <IconButton>
                           <Typography textAlign="center">
@@ -110,14 +136,6 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                         <IconButton>
                           <Typography textAlign="center">
                             <Settings session={session} />
-                          </Typography>
-                        </IconButton>
-                      </MenuItem>
-
-                      <MenuItem>
-                        <IconButton>
-                          <Typography textAlign="center">
-                            <Passport session={session} />
                           </Typography>
                         </IconButton>
                       </MenuItem>

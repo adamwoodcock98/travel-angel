@@ -7,14 +7,20 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Alerts } from "../../assets/snackbar";
+import moment from "moment";
 
 const AddAccommodation = (props) => {
+
+  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const accommodationData = props.accommodationData;
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
+  const [emptyFields, setEmptyFields] = useState([]);
   const [accommodation, setAccommodation] = useState({
     name: accommodationData.name,
     contactNumber: accommodationData.contactNumber,
@@ -34,6 +40,26 @@ const AddAccommodation = (props) => {
     user: userId,
     trip: tripId, 
   });
+  
+  console.log(userId)
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
   
 
   const handleChange = (e) => {
@@ -64,13 +90,12 @@ const AddAccommodation = (props) => {
       bookingReference,
       buildingNumber,
       buildingName,
-      addressLine1,
+      addressLine1, 
       addressLine2,
       city,
       postalCode,
       stateCounty,
       countryCode,
-      user,
     } = accommodation;
 
     const newAccommodation = {
@@ -89,14 +114,19 @@ const AddAccommodation = (props) => {
       postalCode,
       stateCounty,
       countryCode,
-      user,
+      user: userId,
       trip: tripId,
     };
 
+    if (name === "" || contactNumber === "" || checkInDate === "" || checkOutDate === "" || checkInTime === "" || checkOutTime === "" || bookingReference === "") {
+      setEmptyFields(['name', 'contactNumber', 'checkInDateInput', 'checkOutDateInput', 'checkInTimeInput', 'checkOutTimeInput', 'bookingReference'])
+      return
+    }
+
     await axios
       .post(url, newAccommodation)
-      .catch((err) => console.log(err.message))
       .then(() => {
+        handleAlert("Accommodation added successfully.", "success");
         setAccommodation({
           name: "",
           contactNumber: "",
@@ -116,6 +146,10 @@ const AddAccommodation = (props) => {
           user: userId,
         });
         handleClose();
+      })
+      .catch((err) => {
+        console.log(err.message);
+        handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
       });
   };
 
@@ -139,6 +173,7 @@ const AddAccommodation = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('name') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -152,10 +187,11 @@ const AddAccommodation = (props) => {
             type="number"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
-            value={accommodation.checkInDate}
+            value={formatDate(accommodation.checkInDate)}
             data-testid="checkInDate"
             inputProps={{ "data-testid": "checkInDateInput" }}
             autoFocus
@@ -166,13 +202,14 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkInDateInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
             onChange={handleChange}
           />
           <TextField
-            value={accommodation.checkOutDate}
+            value={formatDate(accommodation.checkOutDate)}
             inputProps={{ "data-testid": "checkOutDateInput" }}
             data-testid="checkOutDate"
             autoFocus
@@ -183,6 +220,7 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkOutDateInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -200,6 +238,7 @@ const AddAccommodation = (props) => {
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkInTimeInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -217,6 +256,7 @@ const AddAccommodation = (props) => {
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkOutTimeInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -233,6 +273,7 @@ const AddAccommodation = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('bookingReference') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -342,6 +383,13 @@ const AddAccommodation = (props) => {
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

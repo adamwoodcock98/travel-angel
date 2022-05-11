@@ -57,6 +57,7 @@ const StyledMenu = styled((props) => (
 const CrudMenu = (props) => {
   const accommodationData = props.accommodationData;
   const userId = props.userId;
+  const refresh = props.refresh
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
@@ -87,6 +88,7 @@ const CrudMenu = (props) => {
   const handleDeletePromptClose = () => {
     handleCrudClose();
     setDeleteOpen(false);
+    refresh();
   };
 
   return (

@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
-import CrudMenu from "./crud/crud"
+import CrudMenu from "./crud/crud";
 import "./accommodationCard.css";
+import Upload from "../../upload/upload";
 import Button from "@mui/material/Button";
 import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
 import "../../assets/styling/cards.css"
 
 export default function AccommodationCard(props) {
+  const handleUpload = props.handleUpload;
   const userId = props.userId;
   const accommodation = props.accommodation;
   const handleDirections = props.handleDirections;
+  const refresh = props.refresh;
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
@@ -23,6 +26,10 @@ export default function AccommodationCard(props) {
     return onlyDefinedAddressValues.join(", ");
   };
 
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/accommodation/download/${id}`);
+  };
+
   return (
     <div className="card-container">
       {accommodation.map((accommodation, index) => {
@@ -31,6 +38,11 @@ export default function AccommodationCard(props) {
             <div className="accommodation-card" key={index}>
               <div className="header">
                 <h1>{accommodation.name}</h1>
+                <Upload
+                  cardId={accommodation._id}
+                  url="dashboard/accommodation"
+                  handleUpload={handleUpload}
+                />
               </div>
               <div className="body">
                 <div className="check-in">
@@ -70,13 +82,34 @@ export default function AccommodationCard(props) {
                     <p>Contact Number: {accommodation.contactNumber}</p>
                   )}
                 </div>
-                  <div className="directions">
-                    <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={handleDirections(accommodation.address)}>Get Directions</Button>
-                  </div>
+                <div className="directions">
+                  <Button
+                    color="secondary"
+                    startIcon={<DirectionsOutlinedIcon />}
+                    target="_blank"
+                    href={handleDirections(accommodation.address)}
+                  >
+                    Get Directions
+                  </Button>
+                </div>
+              </div>
+              <div className="uploads">
+                Download Your files
+                {accommodation.uploads.length &&
+                  accommodation.uploads.map((upload, index) => {
+                    return (
+                      <button
+                        onClick={() => handleSubmit(upload._id)}
+                        key={index}
+                      >
+                        {upload.name}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
             <div className="crud-menu">
-              <CrudMenu userId={userId} accommodationData={accommodation} />
+              <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
             </div>
           </div>
         );

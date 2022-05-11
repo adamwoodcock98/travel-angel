@@ -5,18 +5,26 @@ import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
 import moment from "moment";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
+  const [didUpdate, setDidUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -64,9 +72,76 @@ const Flights = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+      trip,
+    } = flight;
+
+    const newFlight = {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+      trip,
+    };
+
+    api.post("/", newFlight).then((res) => {
+      handleClose();
+      setFlight({
+        flightNumber: "",
+        departureTime: "",
+        departureDate: "",
+        airline: "",
+        departureAirport: "",
+        departureTerminal: "",
+        departureCity: "",
+        departureGate: "",
+        arrivalAirport: "",
+        arrivalTerminal: "",
+        arrivalCity: "",
+        arrivalGate: "",
+        bookingReference: "",
+        isOutbound: "",
+        user: userId,
+        trip: tripId,
+      });
+      window.location = "/";
+    });
   };
 
   useEffect(() => {
+    setLoading(true);
     api
       .get(`/${userId}/${tripId}`)
       .then((res) => {
@@ -76,77 +151,20 @@ const Flights = ({ session }) => {
         setInboundFlight(inbound);
       })
       .catch((error) => {
-        if (error.response.status === 500) {
+        if (error.response.status) {
           handleAlert(
             error.response.status + " - " + error.response.statusText,
             "error"
           );
         } else {
           handleAlert(
-            error.response.status + " - " + error.response.statusText,
+            "There was a problem connecting to the server.",
             "error"
           );
         }
-      });
-  }, []);
-
-  const handleClear = () => {
-    setFlight({
-      flightNumber: "",
-      departureTime: "",
-      departureDate: "",
-      airline: "",
-      departureAirport: "",
-      departureTerminal: "",
-      departureCity: "",
-      departureGate: "",
-      arrivalAirport: "",
-      arrivalTerminal: "",
-      arrivalCity: "",
-      arrivalGate: "",
-      bookingReference: "",
-      isOutbound: "",
-      user: userId,
-    })
-  }
-    
-  const formatDate = (date) => moment(date).format("YYYY-MM-DD");
-  const formatTime = (time) => moment(time).format("hh:mm");
-    const flightNumber = flight.flightNumber;
-    const flightDate = formatDate(flight.departureDate);
-    // console.log(flightNumber)
-    // console.log(flightDate)
-
-    const options = {
-      headers: {
-        'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
-        'X-RapidAPI-Key': process.env.REACT_APP_FLIGHT_API_KEY,
-      }
-    }
-    const flightApi = axios.create({
-      baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`
-    });
-
-      const handleApiSearch = async () => {
-        await flightApi.get('/', options).then((res) => {
-          const data  = res.data[0]
-          console.log(data.departure)
-  
-          setFlight({
-            ...flight, 
-            departureTime: formatTime(data.departure.scheduledTimeLocal),
-            airline: data.airline.name,
-            departureAirport: data.departure.airport.shortName,
-            departureTerminal: data.departure.terminal,
-            departureCity: data.departure.airport.municipalityName,
-            departureGate: data.departure.gate,
-            arrivalAirport: data.arrival.airport.name,
-            arrivalTerminal: data.arrival.terminal,
-            arrivalCity: data.arrival.airport.municipalityName,
-            arrivalGate: data.arrival.gate,
-          })
       })
-      }
+      .finally(() => setLoading(false));
+  }, [didUpdate, state]);
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
@@ -154,52 +172,57 @@ const Flights = ({ session }) => {
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} />
+        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
       );
-    })
+    });
 
     return (
-      <div className="flights-window">
-        <div className="flights-header">
-          <h1>Your flights</h1>
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
         </div>
-        <div className="flights-content">
-          <div className="flights-content-outbound">
-            <h1 className="flights-content-subheading">Outbound</h1>
-            {outboundFlight[0] && outboundFlights}
+        <div className="flights-window" style={{ display: loading ? "none" : "" }}>
+          <div className="flights-header">
+            <h1>Your flights</h1>
           </div>
-          <div className="flights-content-inbound">
-            <h1 className="flights-content-subheading">Inbound</h1>
-            {inboundFlight[0] && inboundFlights}
+          <div className="flights-content">
+            <div className="flights-content-outbound">
+              <h1 className="flights-content-subheading">Outbound</h1>
+              {outboundFlight[0] && outboundFlights}
+            </div>
+            <div className="flights-content-inbound">
+              <h1 className="flights-content-subheading">Inbound</h1>
+              {inboundFlight[0] && inboundFlights}
+            </div>
+          </div>
+          <div className="flights-footer">
+            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+              <AddIcon />
+            </Fab>
+            <AddFlight
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              flightData={flight}
+              flightId={null}
+              userId={userId}
+              tripId={tripId}
+              handleUpload={handleUpload}
+            />
           </div>
         </div>
-        <div className="flights-footer">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-          <AddFlight
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            flightData={flight}
-            flightId={null}
-            user={userId}
-            tripId={tripId}
-            handleApiSearch={handleApiSearch}
-            handleClear={handleClear}
-          />
-        </div>
-      </div>
+      </>
     );
   } else {
     return (
       <>
+      <h1>Looks like you don't have any saved flights, add your first one now!</h1>
         <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
           <AddIcon />
         </Fab>
@@ -209,10 +232,9 @@ const Flights = ({ session }) => {
           handleClose={handleClose}
           flightData={flight}
           flightId={null}
-          user={userId}
+          userId={userId}
           tripId={tripId}
-          handleApiSearch={handleApiSearch}
-          handleClear={handleClear}
+          handleUpload={handleUpload}
         />
         {alertMessage && (
           <Alerts
@@ -224,7 +246,8 @@ const Flights = ({ session }) => {
           />
         )}
       </>
-    )}
+    );
+  }
 };
 
 export default Flights;

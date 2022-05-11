@@ -68,7 +68,7 @@
 }
 
 .pass-footer {
-  width: 510px;
+  width: 530px;
   text-transform: uppercase;
   font-family: "Courier-New", Courier, monospace;
   font-weight: 600;
@@ -150,8 +150,4 @@ h5 {
   text-transform: none;
   font-size: 10px;
   line-height: 4px;
-}
-
-i.pass-i {
-  text-align: center;
 }

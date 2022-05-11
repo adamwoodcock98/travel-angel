@@ -5,15 +5,27 @@ import AddAccommodation from "./addAccommodation";
 import { useParams } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import { Alerts } from "../../assets/snackbar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
 
+  const [state, setState] = useState(0);
+
+  console.log("This is the state, is this causing problems?", state);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   const userId = session;
 
   const [accommodation, setAccommodation] = useState([]);
+
   const [open, setOpen] = useState(false);
-  const accommodationArray = {
+
+  const [accommodationArray, setAccommodationArray] = useState({
     name: "",
     contactNumber: "",
     checkInDate: "",
@@ -33,19 +45,32 @@ export const ViewAccommodation = ({ session }) => {
     },
     user: userId,
     trip: tripId,
+  });
+
+  console.log(
+    "This is the accommodation, is this changing?",
+    accommodationArray
+  );
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const [didUpdate, setDidUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
   };
 
-  useEffect(() => {
-    if (userId !== "null") {
-      axios
-        .get(
-          `http://localhost:8000/dashboard/accommodation/${userId}/${tripId}`
-        )
-        .then((res) => {
-          setAccommodation(res.data.accommodation);
-        });
-    }
-  }, []);
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -53,7 +78,35 @@ export const ViewAccommodation = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
+
+  useEffect(() => {
+    setLoading(true);
+    if (userId !== "null") {
+      axios
+        .get(
+          `http://localhost:8000/dashboard/accommodation/${userId}/${tripId}`
+        )
+        .then((res) => {
+          setAccommodation(res.data.accommodation);
+        })
+        .catch((error) => {
+          if (error.response.status) {
+            handleAlert(
+              error.response.status + " - " + error.response.statusText,
+              "error"
+            );
+          } else {
+            handleAlert(
+              "There was a problem connecting to the server.",
+              "error"
+            );
+          }
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [didUpdate, state]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
@@ -67,39 +120,72 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
   if (accommodation.length) {
     return (
-      <div className="container">
-        <div className="header">
-          <h1 className="title">Accommodation</h1>
-          <AddAccommodation
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            accommodationData={accommodationArray}
-            accommodationId={null}
-            userId={userId}
-            tripId={tripId}
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none" }}>
+          <CircularProgress color="secondary" />
+        </div>
+        <div className="container">
+          <div className="header">
+            <h1 className="title">Accommodation</h1>
+            <AddAccommodation
+              className="add-accomodation"
+              handleOpen={handleOpen}
+              open={open}
+              handleClose={handleClose}
+              accommodationData={accommodationArray}
+              accommodationId={null}
+              userId={userId}
+              tripId={tripId}
+            />
+          </div>
+          <div className="body">
+            <AccommodationCard
+              accommodation={accommodation}
+              userId={userId}
+              handleDirections={handleDirections}
+              refresh={handleClose}
+            />
+          </div>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+          <Alerts
+            message={alertMessage}
+            open={alertOpen}
+            handleClose={handleAlertClose}
+            alertPosition={alertPosition}
+            alertType={alertType}
           />
         </div>
-        <div className="body">
-          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
-        </div>
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-      </div>
+      </>
     );
   } else {
     return (
       <div className="container">
         <div className="header">
           <h1 className="title">Accommodation</h1>
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <h1>
+            Looks like you don't have any saved flights, add your first one now!
+          </h1>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
           <AddAccommodation
@@ -113,6 +199,13 @@ export const ViewAccommodation = ({ session }) => {
             tripId={tripId}
           />
         </div>
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
       </div>
     );
   }
