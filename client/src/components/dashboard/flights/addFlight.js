@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import Button from "@mui/material/Button";
 
 import TextField from "@mui/material/TextField";
@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import moment from "moment";
 
 const AddFlight = ({
   flightData,
@@ -22,9 +23,9 @@ const AddFlight = ({
   userId,
   handleClose,
   handleClear,
-  handleApiSearch
+  handleApiSearch,
+  handleUpload,
 }) => {
-
   const [flight, setFlight] = useState({
     flightNumber: flightData.flightNumber,
     departureTime: flightData.departureTime,
@@ -44,7 +45,6 @@ const AddFlight = ({
     trip: tripId,
   });
 
-
   const handleChange = (e) => {
     const value = e.target.value;
     setFlight({
@@ -58,9 +58,9 @@ const AddFlight = ({
 
     let url;
     if (flightId) {
-      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`
+      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`;
     } else {
-      url = `http://localhost:8000/dashboard/flights/`
+      url = `http://localhost:8000/dashboard/flights/`;
     }
 
     const {
@@ -79,8 +79,8 @@ const AddFlight = ({
       bookingReference,
       isOutbound,
       user,
+      trip,
     } = flight;
-
     const newFlight = {
       flightNumber,
       departureTime,
@@ -97,11 +97,12 @@ const AddFlight = ({
       bookingReference,
       isOutbound,
       user,
-      trip: tripId,
+      trip,
     };
 
     axios.post(url, newFlight).then((res) => {
       handleClose();
+      handleUpload();
       setFlight({
         flightNumber: "",
         departureTime: "",
@@ -118,7 +119,8 @@ const AddFlight = ({
         bookingReference: "",
         isOutbound: "",
         user: userId,
-      })
+        trip: tripId,
+      });
     });
   };
 
@@ -156,13 +158,13 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-          </DialogContent>
-          
-          <DialogActions>
-            <Button onClick={handleApiSearch}>Search</Button>
-          </DialogActions>
-          
-          <DialogContent>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleApiSearch}>Search</Button>
+        </DialogActions>
+
+        <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 190 }}>
             <InputLabel id="demo-select-small">Journey Type</InputLabel>
             <Select
@@ -195,7 +197,7 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-          
+
           <TextField
             value={flight.airline}
             autoFocus
@@ -310,10 +312,11 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
-          
         </DialogContent>
         <DialogActions>
-          {flightId && <Button onClick={onSubmit}>Update Flight Details</Button>}
+          {flightId && (
+            <Button onClick={onSubmit}>Update Flight Details</Button>
+          )}
           {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
           <Button onClick={handleClear}>Clear</Button>
           <Button onClick={handleClose}>Cancel</Button>
@@ -321,6 +324,6 @@ const AddFlight = ({
       </Dialog>
     </div>
   );
-}
+};
 
 export default AddFlight;

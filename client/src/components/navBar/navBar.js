@@ -37,6 +37,10 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
     });
   };
 
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <div className="navbar">
       <Box sx={{ flexGrow: 1 }}>

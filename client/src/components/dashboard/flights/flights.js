@@ -112,6 +112,7 @@ const Flights = ({ session }) => {
       bookingReference: "",
       isOutbound: "",
       user: userId,
+      trip: tripId,
     });
   };
 
@@ -135,7 +136,6 @@ const Flights = ({ session }) => {
   const handleApiSearch = async () => {
     await flightApi.get("/", options).then((res) => {
       const data = res.data[0];
-      console.log(data.departure);
 
       setFlight({
         ...flight,
@@ -149,6 +149,8 @@ const Flights = ({ session }) => {
         arrivalTerminal: data.arrival.terminal,
         arrivalCity: data.arrival.airport.municipalityName,
         arrivalGate: data.arrival.gate,
+        user: userId,
+        trip: tripId,
       });
     });
   };
@@ -209,10 +211,11 @@ const Flights = ({ session }) => {
             handleClose={handleClose}
             flightData={flight}
             flightId={null}
-            user={userId}
+            userId={userId}
             tripId={tripId}
             handleApiSearch={handleApiSearch}
             handleClear={handleClear}
+            handleUpload={handleUpload}
           />
         </div>
       </div>
@@ -234,7 +237,7 @@ const Flights = ({ session }) => {
           handleClose={handleClose}
           flightData={flight}
           flightId={null}
-          user={userId}
+          userId={userId}
           tripId={tripId}
           handleApiSearch={handleApiSearch}
           handleClear={handleClear}
