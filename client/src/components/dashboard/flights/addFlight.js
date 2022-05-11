@@ -15,8 +15,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import moment from 'moment';
 
-import moment from "moment";
-
 const AddFlight = ({
   flightData,
   tripId,

@@ -37,21 +37,21 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
   };
 
   return (
-    <div className="navbar">
+    <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx={{ backgroundColor: "#f22771" }}>
+        <AppBar id="navbar" sx={{ backgroundColor: "#f22771" }}>
           <Toolbar>
             <div>
               <a href="/">
                 <Typography
-                  className="logo"
+                  id="logo"
                   aria-label="logo"
                   variant="h6"
                   noWrap
                   component="div"
                   sx={{ display: { xs: "none", md: "flex" } }}
                 >
-                  TRAVEL ANGEL
+                  Travel Angel
                 </Typography>
               </a>
             </div>
