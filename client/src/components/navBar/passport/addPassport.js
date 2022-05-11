@@ -24,6 +24,7 @@ export default function AddPassport({
   passportData,
   user,
 }) {
+  const [emptyFields, setEmptyFields] = useState([]);
   const [passport, setPassport] = useState({
     passportNumber: passportData.passportNumber,
     firstName: passportData.firstName,
@@ -102,6 +103,11 @@ export default function AddPassport({
       user,
     };
 
+    if(passportNumber === "" || firstName === "" || lastName === "" || nationality === "" || country === "" || dob === ""){
+      setEmptyFields(['passportNumber', 'firstName', 'lastName', 'nationality', 'country', 'dob'])
+      return
+    }
+
     await axios
       .post(url, newPassport)
       .then((res) => {
@@ -146,6 +152,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -158,6 +165,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -170,6 +178,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -182,6 +191,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -194,6 +204,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -207,6 +218,7 @@ export default function AddPassport({
             inputProps={{ "data-testid": "dob-input" }}
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true,
@@ -225,6 +237,7 @@ export default function AddPassport({
               variant="outlined"
               onChange={handleChange}
               required
+              sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             >
               <MenuItem value="F">Female</MenuItem>
               <MenuItem value="M">Male</MenuItem>
@@ -241,6 +254,7 @@ export default function AddPassport({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -254,6 +268,7 @@ export default function AddPassport({
             inputProps={{ "data-testid": "dof-input" }}
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -270,6 +285,7 @@ export default function AddPassport({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}

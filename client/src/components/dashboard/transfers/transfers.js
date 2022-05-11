@@ -21,6 +21,7 @@ const Transfers = ({ session }) => {
   const userId = session;
 
   const [open, setOpen] = useState(false);
+  const [emptyFields, setEmptyFields] = useState([])
   const [didUpdate, setDidUpdate] = useState(false);
   const [transfer, setTransfer] = useState({
     pickupTime: "",
@@ -148,6 +149,7 @@ const Transfers = ({ session }) => {
             userId={userId}
             tripId={tripId}
             transferId={null}
+            emptyFields={emptyFields}
           />
         </div>
       </div>
@@ -168,6 +170,7 @@ const Transfers = ({ session }) => {
           userId={userId}
           tripId={tripId}
           transferId={null}
+          emptyFields={emptyFields}
         />
       </div>
     );

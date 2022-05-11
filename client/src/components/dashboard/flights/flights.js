@@ -75,6 +75,71 @@ const Flights = ({ session }) => {
     setDidUpdate(!didUpdate);
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+      trip,
+    } = flight;
+
+    const newFlight = {
+      flightNumber,
+      departureTime,
+      departureDate,
+      airline,
+      departureAirport,
+      departureTerminal,
+      departureCity,
+      departureGate,
+      arrivalAirport,
+      arrivalTerminal,
+      arrivalCity,
+      arrivalGate,
+      bookingReference,
+      isOutbound,
+      user,
+      trip,
+    };
+
+    api.post("/", newFlight).then((res) => {
+      handleClose();
+      setFlight({
+        flightNumber: "",
+        departureTime: "",
+        departureDate: "",
+        airline: "",
+        departureAirport: "",
+        departureTerminal: "",
+        departureCity: "",
+        departureGate: "",
+        arrivalAirport: "",
+        arrivalTerminal: "",
+        arrivalCity: "",
+        arrivalGate: "",
+        bookingReference: "",
+        isOutbound: "",
+        user: userId,
+        trip: tripId,
+      });
+      window.location = "/";
+    });
+  };
+
   useEffect(() => {
     setLoading(true);
     api

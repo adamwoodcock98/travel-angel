@@ -20,6 +20,7 @@ const AddAccommodation = (props) => {
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
+  const [emptyFields, setEmptyFields] = useState([]);
   const [accommodation, setAccommodation] = useState({
     name: accommodationData.name,
     contactNumber: accommodationData.contactNumber,
@@ -117,7 +118,10 @@ const AddAccommodation = (props) => {
       trip: tripId,
     };
 
-    console.log(newAccommodation.user)
+    if (name === "" || contactNumber === "" || checkInDate === "" || checkOutDate === "" || checkInTime === "" || checkOutTime === "" || bookingReference === "") {
+      setEmptyFields(['name', 'contactNumber', 'checkInDateInput', 'checkOutDateInput', 'checkInTimeInput', 'checkOutTimeInput', 'bookingReference'])
+      return
+    }
 
     await axios
       .post(url, newAccommodation)
@@ -169,6 +173,7 @@ const AddAccommodation = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('name') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -182,6 +187,7 @@ const AddAccommodation = (props) => {
             type="number"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -196,6 +202,7 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkInDateInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -213,6 +220,7 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkOutDateInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -230,6 +238,7 @@ const AddAccommodation = (props) => {
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkInTimeInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -247,6 +256,7 @@ const AddAccommodation = (props) => {
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('checkOutTimeInput') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -263,6 +273,7 @@ const AddAccommodation = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('bookingReference') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField

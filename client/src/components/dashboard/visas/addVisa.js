@@ -20,6 +20,7 @@ const AddVisa = (props) => {
   const open = props.open;
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
+  const [emptyFields, setEmptyFields] = useState([]);
   const visaData = props.visaData;
   const [visa, setVisa] = useState({
     visaNumber: visaData.visaNumber,
@@ -78,6 +79,11 @@ const AddVisa = (props) => {
       trip: tripId,
     };
 
+    if(visaNumber === "" || startDate === "" || endDate === "" || issuingCountry === ""){
+      setEmptyFields(['visaNumber', 'startDate', 'endDate', 'issuingCountry'])
+      return
+    }
+
     await axios
       .post(url, newVisa)
       .then(() => {
@@ -117,6 +123,7 @@ const AddVisa = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('visaNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -129,6 +136,7 @@ const AddVisa = (props) => {
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -144,6 +152,7 @@ const AddVisa = (props) => {
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -159,6 +168,7 @@ const AddVisa = (props) => {
             type="string"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />  
         </DialogContent>

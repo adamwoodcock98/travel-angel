@@ -43,6 +43,7 @@ const AddFlight = ({
     trip: tripId,
   });
 
+  const [emptyFields, setEmptyFields] = useState([])
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
@@ -115,6 +116,11 @@ const AddFlight = ({
       user,
       trip,
     };
+
+    if (departureTime === "" || departureDate === "" || departureAirport === "" || departureCity === "" || arrivalAirport === "" || arrivalCity === "" || isOutbound === "") {
+      setEmptyFields(['departureTime', 'departureDate', 'departureAirport', 'departureCity', 'arrivalAirport', 'arrivalCity', 'isOutbound'])
+      return
+    }
 
     axios.post(url, newFlight).then((res) => {
       handleAlert("Flight added successfully.", "success");
@@ -223,6 +229,22 @@ const AddFlight = ({
             onChange={handleChange}
           />
           <TextField
+            value={flight.departureTime}
+            autoFocus
+            margin="dense"
+            id="departureTime"
+            name="departureTime"
+            label="Time"
+            type="time"
+            variant="outlined"
+            required
+            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
+          <TextField
             value={formatDate(flight.departureDate)}
             autoFocus
             margin="dense"
@@ -232,6 +254,7 @@ const AddFlight = ({
             type="date"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('departureDate') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -298,6 +321,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('departureAirport') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -321,6 +345,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('departureCity') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -344,6 +369,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('arrivalAirport') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -367,6 +393,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('arrivalCity') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -391,6 +418,24 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
+          <FormControl sx={{ m: 1, minWidth: 190 }}>
+            <InputLabel id="demo-select-small">Journey Type</InputLabel>
+            <Select
+              value={flight.isOutbound}
+              autoFocus
+              margin="dense"
+              id="isOutbound"
+              name="isOutbound"
+              label="Journey type"
+              variant="outlined"
+              onChange={handleChange}
+              required
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
+            >
+              <MenuItem value={false}>Inbound</MenuItem>
+              <MenuItem value={true}>Outbound</MenuItem>
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           {flightId && (

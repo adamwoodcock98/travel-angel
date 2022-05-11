@@ -21,6 +21,7 @@ const Visas = ({ session }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [visa, setVisa] = useState([]);
+  const [emptyFields, setEmptyFields] = useState([]);
   const [didUpdate, setDidUpdate] = useState(false);
   const [visaArray, setVisaArray] = useState({
     visaNumber: "",
@@ -131,6 +132,7 @@ const Visas = ({ session }) => {
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}
+            visa={visa}
             visaData={visaArray}
             userId={userId}
             tripId={tripId}

@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import { getThemeProps } from "@mui/system";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
 
@@ -25,6 +26,7 @@ const AddTransfer = (props) => {
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
   const transferData = props.transferData;
+  const [emptyFields, setEmptyFields] = useState([])
   const [transfer, setTransfer] = useState({
     pickupTime: transferData.pickupTime,
     dropoffTime: transferData.dropoffTime,
@@ -140,6 +142,11 @@ const AddTransfer = (props) => {
       trip,
     };
 
+    if (company === "" || contactNumber === "" || pickupTime === "" || dropoffTime === "" || pickupAddress.addressLine1 === "" || pickupAddress.city === "" || pickupAddress.postalCode === "" || dropoffAddress.addressLine1 === "" || dropoffAddress.city === "" || dropoffAddress.postalCode === "" || isOutbound === ""){
+      setEmptyFields(['company', 'contactNumber', 'pickupTime', 'dropoffTime', 'pickupAddress.addressLine1', 'pickupAddress.city', 'pickupAddress.postalCode', 'dropoffAddress.addressLine1', 'dropoffAddress.city', 'dropoffAddress.postalCode', 'isOutbound'])
+      return
+    }
+
     axios
       .post(url, newTransfer)
       .then(() => {
@@ -208,6 +215,8 @@ const AddTransfer = (props) => {
               name="isOutbound"
               label="Journey type"
               variant="outlined"
+              required
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
               onChange={handleChange}
             >
               <MenuItem value={false}>Inbound</MenuItem>
@@ -224,6 +233,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('company') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -236,6 +246,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
           <TextField
@@ -248,6 +259,7 @@ const AddTransfer = (props) => {
             type="datetime-local"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('pickupTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -264,6 +276,7 @@ const AddTransfer = (props) => {
             type="datetime-local"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('dropoffTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -304,6 +317,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('pickupAddress.addressLine1') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handlePickupChange}
           />
           <TextField
@@ -327,6 +341,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('pickupAddress.city') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handlePickupChange}
           />
           <TextField
@@ -350,6 +365,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('pickupAddress.postalCode') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handlePickupChange}
           />
           <TextField
@@ -398,6 +414,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('dropoffAddress.addressLine1') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleDropoffChange}
           />
           <TextField
@@ -421,6 +438,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('dropoffAddress.city') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleDropoffChange}
           />
           <TextField
@@ -444,6 +462,7 @@ const AddTransfer = (props) => {
             type="text"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('dropoffAddress.postalCode') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleDropoffChange}
           />
           <TextField
