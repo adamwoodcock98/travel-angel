@@ -1,91 +1,68 @@
-.card-container {
+/* .transfer-card {
   display: flex;
   flex-direction: column;
+  background-image: linear-gradient(#ffe3ec, #eba0ae);
+  border-radius: 25px;
+  opacity: 0.9;
+  text-align: center;
+  margin: 10;
 }
 
-.transfer-card {
-  background-color: var(--koala-white);
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-  margin: auto;
-  width: 50vw;
+.crud-menu {
   display: flex;
-  flex-direction: column;
+  flex: 1;
+  justify-content: right;
 }
 
 .header {
+  text-align: center;
   display: flex;
+  flex: 1;
   justify-content: center;
+  padding-bottom: 10px;
 }
 
-.body {
+.subheading {
+  justify-content: center;
+  text-align: center;
+}
+
+.transfer-body {
+  text-align: center;
   display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  justify-items: center;
+  padding: 10px 0px 15px 0px;
+}
+
+.transfer-card-body {
+  display: flex;
+  justify-content: center;
   flex-direction: row;
-  justify-content: space-evenly;
-  padding-bottom: 6vh;
+  padding-bottom: 15px;
 }
 
 .pickup {
-  display: flex;
-  flex-direction: column;
   text-align: right;
-  padding-right: 30px;
-}
-
-.pickup-header {
-  display: flex;
-  justify-content: flex-end;
-  text-align: right
-}
-
-.pickup-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  text-align: right
+  padding: 10px 20px 0px 15px;
+  margin: 0;
 }
 
 .dropoff {
-  display: flex;
-  flex-direction: column;
-  text-align: left
-}
-
-.dropoff-header {
-  display: flex;
-  justify-content: flex-start;
-  text-align: left
-}
-
-.dropoff-body {
-  display: flex;
-  flex-direction: column;
-  text-align: left
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: small;
-}
-
-.booking-reference {
-  display: flex;
-  justify-content: center;
+  text-align: left;
+  padding: 10px 15px 0px 20px;
+  margin: 0;
 }
 
 .address {
-  display: flex;
-  justify-content: center;
+  padding-top: 10px;
 }
 
-.company {
-  display: flex;
-  justify-content: center;
+.transfer-upload {
+  padding: 10px 0px 15px 0px;
 }
 
-.contact-number {
-  display: flex;
-  justify-content: center;
-}
+ */

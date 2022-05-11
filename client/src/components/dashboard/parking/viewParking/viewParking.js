@@ -22,20 +22,27 @@ const ParkingCard = (props) => {
   };
 
   return (
+    <div className="card-container">
     <div className="parking-card">
-      <div className="parking-card-header">
+
+      <div className="crud-menu">
+        <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
+      </div>
+
+      <div className="header">
         <h1>
           Your booking
           {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
         </h1>
       </div>
-      <div className="parking-card-dates-content">
-        <div className="parking-card-dates-arrival">
+
+      <div className="parking-body">
+        <div className="dates-arrival">
           <h3>From</h3>
           <h2>{parkingData.startDate && formatDate(parkingData.startDate)}</h2>
           <h2>{parkingData.startDate && formatTime(parkingData.startDate)}</h2>
         </div>
-        <div className="parking-card-dates-departure">
+        <div className="dates-departure">
           <h3>Until</h3>
           <h2>{parkingData.endDate && formatDate(parkingData.endDate)}</h2>
           <h2>{parkingData.endDate && formatTime(parkingData.endDate)}</h2>
@@ -50,12 +57,22 @@ const ParkingCard = (props) => {
             {parkingData.type} {parkingData.company}
           </h3>
         </div>
-        <div className="parking-card-contact-address">
+        <div className="address">
           <p>
             {parkingData.address.buildingNumber}{" "}
             {parkingData.address.buildingName},{" "}
             {parkingData.address.addressLine1}, {parkingData.address.postalCode}
           </p>
+          <div className="directions">
+        <Button
+          color="secondary"
+          startIcon={<DirectionsOutlinedIcon />}
+          target="_blank"
+          href={props.handleDirections(parkingData.address)}
+        >
+          Get Directions
+        </Button>
+      </div>
         </div>
         <div className="parking-card-contact-number">
           <h4>Tel: {parkingData.contactNumber}</h4>
@@ -68,7 +85,7 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
-      <div className="uploads">
+      <div className="parking-upload">
         <Upload
           cardId={parkingData._id}
           url="dashboard/parking"
@@ -83,17 +100,8 @@ const ParkingCard = (props) => {
             );
           })}
       </div>
-      <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
-      <div className="directions">
-        <Button
-          color="secondary"
-          startIcon={<DirectionsOutlinedIcon />}
-          target="_blank"
-          href={props.handleDirections(parkingData.address)}
-        >
-          Get Directions
-        </Button>
-      </div>
+      
+    </div>
     </div>
   );
 };

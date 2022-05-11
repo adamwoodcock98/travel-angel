@@ -44,6 +44,7 @@ export const FlightCard = (props) => {
   };
 
   return (
+    <div className="card-container">
     <div className="flight-card">
       <div className="flight-card-content">
         <div className="upload">
@@ -77,6 +78,7 @@ export const FlightCard = (props) => {
       <div className="flight-card-footer">
         <FooterPane data={footerData} airport={departureData.airport} />
       </div>
+    </div>
     </div>
   );
 };

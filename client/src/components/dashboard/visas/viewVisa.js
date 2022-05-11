@@ -17,15 +17,20 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
         {visa.map((visa, index) => {
           return (
             <div className="visa-card" key={index}>
+             
+              <div className="crud-menu">
+                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
+              </div>
+
               <div className="header">
                 <h3>Your entry visa to</h3>
-                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
-                  <div className="country">
-                    <h1>{visa.issuingCountry}</h1>
-                  </div>
               </div>
+              <div className="subheading">
+                <h1>{visa.issuingCountry}</h1>
+              </div>
+
             <div className="body">
-              <div className="start-date">
+              <div className="subbody-left">
                 <div className="start-date-header">
                   <h3>Start Date</h3>
                 </div>
@@ -33,7 +38,8 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                   <p>{formatDate(visa.startDate)}</p>
                 </div>
               </div>
-              <div className="end-datet">
+
+              <div className="subbody-right">
                 <div className="end-date-header">
                   <h3>End Date</h3>
                 </div>
@@ -42,12 +48,13 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                 </div>
               </div>
             </div>
+
             <div className="footer">
               <div className="visaNumber">
                 <p>Visa Number: {visa.visaNumber}</p>
               </div>
-            </div>
-            <div className="uploads">
+
+              <div className="upload">
               <Upload
                 cardId={visa._id}
                 url="dashboard/visas"
@@ -65,6 +72,8 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                   );
                 })}
             </div>
+            </div>
+            
           </div>
         );
       })}

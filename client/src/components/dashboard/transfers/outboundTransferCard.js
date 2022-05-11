@@ -33,44 +33,50 @@ export const OutboundTransferCard = (props) => {
       {outboundTransfer.map((outboundTransfer, index) => {
         return (
           <div className="transfer-card" key={index}>
+
+            <div className="crud-menu">
+              <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
+            </div>
+
             <div className="header">
               <h1>{outboundTransfer.name}</h1>
             </div>
+
             <div className="body">
-              <div className="pickup">
+              <div className="subbody-left">
                 <div className="pickup-header">
                   <h3>Pickup</h3>
                 </div>
                 <div className="pickup-body">
                   <p>{formatDate(outboundTransfer.pickupTime)}</p>
-                  <br></br>
                   <p>{formatTime(outboundTransfer.pickupTime)}</p>
-                </div>
-                <div className="pickup-address">
+                  <div className="address">
                   {outboundTransfer.pickupAddress && (
                     <p>
                       Address: {formatAddress(outboundTransfer.pickupAddress)}
                     </p>
                   )}
                 </div>
+                </div>
+                
               </div>
-              <div className="dropoff">
+              <div className="subbody-right">
                 <div className="dropoff-header">
                   <h3>Dropoff</h3>
                   <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
                 </div>
                 <div className="dropoff-body">
                   <p>{formatDate(outboundTransfer.dropoffTime)}</p>
-                  <br></br>
                   <p>{formatTime(outboundTransfer.dropoffTime)}</p>
-                </div>
-                <div className="dropoff-address">
+                  <div className="address">
                   {outboundTransfer.dropoffAddress && (
                     <p>
                       Address: {formatAddress(outboundTransfer.dropoffAddress)}
                     </p>
                   )}
                 </div>
+                </div>
+                
               </div>
             </div>
             <div className="footer">
@@ -88,7 +94,7 @@ export const OutboundTransferCard = (props) => {
                 )}
               </div>
             </div>
-            <div className="uploads">
+            <div className="upload">
               <Upload
                 cardId={outboundTransfer._id}
                 url="dashboard/transfers"
