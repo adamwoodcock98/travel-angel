@@ -1,12 +1,92 @@
 .sidebar {
   width: fit-content;
-  margin-top: 20%;
+  left: 0;
+  top: 20%;
+  margin-right: 40px;
+  display: fixed;
+  position: sticky;
+  z-index: 2;
+  float: left;
+  border-right: rgb(241, 241, 241) 1px solid;
+}
+
+.MuiTabs-indicator {
+  background-color: #eba0ae !important;
+  padding: 2.2px;
+  background: linear-gradient(180deg, rgba(235,160,174,1) 0%, rgba(242,39,113,0.6) 100%);
+}
+.MuiTabs-indicator:hover {
+  background-color: rgb(111, 41, 196) !important;
+  border-right: rgb(32, 135, 54) !important;
+  color: rgb(224, 51, 51) !important;
+}
+.MuiTabs-indicator:focus {
+  background-color: rgb(111, 41, 196) !important;
+  border-right: rgb(32, 135, 54) !important;
+  color: rgb(224, 51, 51) !important;
+}.MuiTabs-indicator:active {
+  background-color: rgb(111, 41, 196) !important;
+  border-right: rgb(32, 135, 54) !important;
+  color: rgb(224, 51, 51) !important;
+}
+
+.MuiTouchRipple-root {
+  /* background-color: rgb(111, 41, 196) !important; */
+  border-right: rgb(32, 135, 54) !important;
+  color: rgb(224, 51, 51) !important;
+}
+
+.css-8je8zh-MuiTouchRipple-root {
+  border-right: rgb(32, 135, 54) !important;
+  color: rgb(224, 51, 51) !important;
+}
+.css-i4bv87-MuiSvgIcon-root {
+  border-right: rgb(32, 135, 54) !important;
+  /* color: rgb(180, 180, 180); */
+}
+
+/* .css-i4bv87-MuiSvgIcon-root:hover {
+  border-right: rgb(32, 135, 54) !important;
+  color: rgb(180, 180, 180) !important;
+} */
+
+.MuiSvgIcon-root:hover {
+  color: rgb(224, 51, 51) !important;
+  border-right: rgb(224, 51, 51) !important;
+}
+.MuiSvgIcon-root:active {
+  color: rgb(52, 52, 199) !important;
+  border-right: rgb(52, 52, 199) !important;
+}
+.MuiSvgIcon-root:focus {
+  color: rgb(32, 135, 54) !important;
+  border-right: rgb(32, 135, 54) !important;
+}
+
+.Mui-selected {
+  /* padding: 100px !important;
+  color:rgb(94, 201, 117) !important;
+  background-color:rgb(52, 52, 199) !important;
+  font-size: 100px !important; */
+
+}
+
+#select {
+  padding: 100px !important;
+  color:rgb(94, 201, 117) !important;
+  background-color:rgb(52, 52, 199) !important;
+  font-size: 100px !important;
+}
+.MuiButtonBase-root:hover {
+  /* background-color: #eba0ae !important; */
+  background: linear-gradient(180deg, rgb(235,160,174,0.5) 0%, rgba(242,39,113,0.4) 100%) !important;
+  border-right: rgba(242,39,113,0.8) 4.5px solid !important;
 }
 
 .tab-content {
   width: 90%;
-  padding: 0%;
-  margin-top: 7%;
+  padding: 2%;
+  margin-top: 4%;
 }
 
 .tab-box {

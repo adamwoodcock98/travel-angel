@@ -22,8 +22,6 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({});
 
-  console.log("The navbar rendering");
-
   const handleOpenMenu = () => {
     setOpen(true);
   };
