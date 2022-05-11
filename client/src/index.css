@@ -1,16 +1,15 @@
 @font-face {
   font-family: "Roboto-Regular";
   src: local("Roboto-Regular"),
-    url("./components/assets/Roboto-Regular.ttf") format('truetype')
+    url("./components/assets/Roboto-Regular.ttf") format("truetype");
 }
 
 body {
   margin: 0;
-  background-color: #fff5f7;
   font-family: "Roboto-Regular", arial, serif;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
