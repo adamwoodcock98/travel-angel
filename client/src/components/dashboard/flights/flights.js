@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import moment from "moment";
+import "../../assets/styling/cards.css"
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
@@ -155,15 +156,15 @@ const Flights = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-        <div className="empty-prompt" >
-         <h3>Looks like you don't have any saved flights</h3>
-         <h2>Press  +  to get started</h2>
-        </div>
-        <div className="empty-button" >
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-        </div>
+      <div className="empty-prompt" >
+      <h3>Looks like you don't have any saved flights</h3>
+      <h2>Press  +  to get started</h2>
+      </div>
+      <div className="empty-button" >
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
+      </div>
           <AddFlight
             open={open}
             handleOpen={handleOpen}

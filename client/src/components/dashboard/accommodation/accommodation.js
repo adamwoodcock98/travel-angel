@@ -8,6 +8,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
+import "../../assets/styling/cards.css"
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -175,31 +176,26 @@ export const ViewAccommodation = ({ session }) => {
     );
   } else {
     return (
-      <div className="container">
-        <div className="header">
-          <h1 className="title">Accommodation</h1>
-          <AddAccommodation
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            accommodationData={accommodationArray}
-            accommodationId={null}
-            userId={userId}
-            tripId={tripId}
-          />
+      <div className="empty-window">
+        <div className="empty-prompt" >
+        <h3>Looks like you don't have any saved places</h3>
+        <h2>Press  +  to get started</h2>
         </div>
-        <h2>
-          Looks like you don't have any saved accommodation, add your first one now!
-        </h2>
-        <Fab
-          size="large"
-          color="secondary"
-          aria-label="add"
-          onClick={handleOpen}
-        >
-          <AddIcon />
-        </Fab>
+        <div className="empty-button" >
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
+        </div>
+        <AddAccommodation
+          className="add-accomodation"
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+          accommodationData={accommodationArray}
+          accommodationId={null}
+          userId={userId}
+          tripId={tripId}
+        />
         <Alerts
           message={alertMessage}
           open={alertOpen}
