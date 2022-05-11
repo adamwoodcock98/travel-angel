@@ -65,9 +65,9 @@ const PassportController = {
     } catch(e) {
       console.log(e.message);
 
-      res.status(200).send();
+      res.status(500).send();
     }
-  }
+  },
 };
 
 module.exports = PassportController;

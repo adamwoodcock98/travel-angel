@@ -197,12 +197,10 @@ const Flights = ({ session }) => {
               handleClose={handleClose}
               flightData={flight}
               flightId={null}
-              user={userId}
+              userId={userId}
               tripId={tripId}
-              handleApiSearch={handleApiSearch}
-              handleClear={handleClear}
             />
-         </div>
+          </div>
         </div>
       </>
     );
@@ -219,10 +217,8 @@ const Flights = ({ session }) => {
           handleClose={handleClose}
           flightData={flight}
           flightId={null}
-          user={userId}
+          userId={userId}
           tripId={tripId}
-          handleApiSearch={handleApiSearch}
-          handleClear={handleClear}
         />
         {alertMessage && (
           <Alerts

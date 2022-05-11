@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {
   Dialog,
   DialogContent,
+  DialogContentText,
   DialogTitle,
 } from "@mui/material";
 
@@ -148,27 +149,25 @@ export const Passport = ({ session }) => {
     );
   } else {
     return (
-      <div>
-      <h1 className="pass-h1">Passport</h1>
-      <Fab
-        id="pass-fab"
-        size="medium"
-        color="secondary"
-        aria-label="add"
-        onClick={handleOpen}
-      >
-        <AddIcon />
-      </Fab>
-      <AddPassport
-          open={open}
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          passportData={passport}
-          passportId={null}
-          user={userId}
-        />
-     <br /><i className="pass-i">You don't have your passports saved just yet. Add it now!</i>
-    </div>
+      <>
+        <div onClick={handleOpenPassport}>Passport</div>
+          <Dialog open={openPassport} onClose={handleClosePassport}>
+          <DialogTitle>Passport</DialogTitle>
+          <DialogContent>
+              <DialogContentText>
+                You don't have your passports saved just yet. Add it now!
+              </DialogContentText>
+                <AddPassport
+                  open={open}
+                  handleOpen={handleOpen}
+                  handleClose={handleClose}
+                  passportData={passport}
+                  passportId={null}
+                  user={userId}
+              />
+            </DialogContent>
+          </Dialog>
+      </>
     );
   }
 };

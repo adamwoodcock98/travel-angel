@@ -16,6 +16,7 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
+import "./navBar.css"
 
 export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
@@ -98,6 +99,25 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                         horizontal: "right",
                       }}
                     >
+
+                      <MenuItem>
+                        <IconButton>
+                        <a href="/" id="nav-trips">
+                          <Typography textAlign="center">
+                            Trips
+                          </Typography>
+                          </a>
+                        </IconButton>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <IconButton>
+                          <Typography textAlign="center">
+                            <Passport session={session} />
+                          </Typography>
+                        </IconButton>
+                      </MenuItem>
+
                       <MenuItem>
                         <IconButton>
                           <Typography textAlign="center">
@@ -110,14 +130,6 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                         <IconButton>
                           <Typography textAlign="center">
                             <Settings session={session} />
-                          </Typography>
-                        </IconButton>
-                      </MenuItem>
-
-                      <MenuItem>
-                        <IconButton>
-                          <Typography textAlign="center">
-                            <Passport session={session} />
                           </Typography>
                         </IconButton>
                       </MenuItem>
