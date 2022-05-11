@@ -163,7 +163,11 @@ const Parking = ({ session }) => {
   } else {
     return (
       <>
-      <h1>Looks like you don't have any saved parking voucher, add your first one now!</h1>
+      <h1>Parking</h1>
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved flights</h3>
+          <h2>Press + to get started</h2>
+        </div>
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>

@@ -138,7 +138,7 @@ const Flights = ({ session }) => {
           style={{ display: loading ? "none" : "" }}
         >
           <div className="flights-header">
-            <h1>Your flights</h1>
+            <h1>Flights</h1>
           </div>
           <div className="flights-content">
             <div className="flights-content-outbound">
@@ -176,6 +176,7 @@ const Flights = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
+        <h1>Flights</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved flights</h3>
           <h2>Press + to get started</h2>

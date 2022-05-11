@@ -173,6 +173,7 @@ export const ViewAccommodation = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
+        <h1>Accommodation</h1>
         <div className="empty-prompt" >
         <h3>Looks like you don't have any saved places</h3>
         <h2>Press  +  to get started</h2>
