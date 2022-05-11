@@ -3,6 +3,7 @@ import { Button, Dialog, DialogContent } from "@mui/material";
 import { DisplayProfile } from "./displayProfile";
 import { Settings } from "./settings";
 import axios from "axios";
+import "./profile.css"
 
 export const Profile = ({ session }) => {
   const userId = session
@@ -32,10 +33,8 @@ export const Profile = ({ session }) => {
           Account
         </div>
         <Dialog open={open} onClose={handleClose}>
-          <DialogContent>
-            <DisplayProfile user={user} />
-            <Button><Settings session={session} /></Button>
-          </DialogContent>
+          <DisplayProfile user={user} />
+          <Button><Settings session={session} /></Button>
         </Dialog>
       </div>
     );
