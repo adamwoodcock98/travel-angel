@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 
 export const Passport = ({ session }) => {
+  console.log("This is the passport rendering");
+
   const userId = session;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

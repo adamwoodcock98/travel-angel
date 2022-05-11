@@ -12,6 +12,11 @@ import { Alerts } from "../../assets/snackbar"
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
   const [loading, setLoading] = useState(false);
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -104,7 +109,7 @@ const Transfers = ({ session }) => {
         })
         .finally(() => setLoading(false));;
     }
-  }, [didUpdate]);
+  }, [didUpdate, state]);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
@@ -119,15 +124,20 @@ const Transfers = ({ session }) => {
         <div className="transfers-content">
           <div className="transfers-content-outbound">
             <h1 className="transfer-content-subheading">Outbound</h1>
-            <OutboundTransferCard outboundTransfer={outboundTransfer} userId={userId} tripId={tripId} refresh={handleClose} />
+            <OutboundTransferCard outboundTransfer={outboundTransfer} userId={userId} tripId={tripId} refresh={handleClose} handleUpload={handleUpload} />
           </div>
           <div className="transfers-content-inbound">
             <h1 className="transfers-content-subheading">Inbound</h1>
-            <InboundTransferCard inboundTransfer={inboundTransfer} userId={userId} tripId={tripId} refresh={handleClose} />
+            <InboundTransferCard inboundTransfer={inboundTransfer} userId={userId} tripId={tripId} refresh={handleClose} handleUpload={handleUpload} />
           </div>
         </div>
         <div>
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
           <AddTransfer

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import Button from "@mui/material/Button";
 
 import TextField from "@mui/material/TextField";
@@ -22,6 +22,7 @@ const AddFlight = ({
   open,
   userId,
   handleClose,
+  handleUpload,
 }) => {
   const [flight, setFlight] = useState({
     flightNumber: flightData.flightNumber,
@@ -72,9 +73,9 @@ const AddFlight = ({
     e.preventDefault();
     let url;
     if (flightId) {
-      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`
+      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`;
     } else {
-      url = `http://localhost:8000/dashboard/flights/`
+      url = `http://localhost:8000/dashboard/flights/`;
     }
 
     const {
@@ -93,7 +94,7 @@ const AddFlight = ({
       bookingReference,
       isOutbound,
       user,
-      trip
+      trip,
     } = flight;
 
     const newFlight = {
@@ -111,13 +112,14 @@ const AddFlight = ({
       arrivalGate,
       bookingReference,
       isOutbound,
-      user: userId,
-      trip
+      user,
+      trip,
     };
 
     axios.post(url, newFlight).then((res) => {
       handleAlert("Flight added successfully.", "success");
       handleClose();
+      handleUpload();
       setFlight({
         flightNumber: "",
         departureTime: "",
@@ -134,6 +136,7 @@ const AddFlight = ({
         bookingReference: "",
         isOutbound: "",
         user: userId,
+        trip: tripId,
       })
     })
     .catch((err) => {
@@ -158,48 +161,47 @@ const AddFlight = ({
       arrivalCity: "",
       arrivalGate: "",
       bookingReference: "",
-      isOutbound: ""
-    })
-  }
+      isOutbound: "",
+    });
+  };
 
   const formatDate = (date) => moment(date).format("YYYY-MM-DD");
   const formatTime = (time) => moment(time).format("hh:mm");
-    const flightNumber = flight.flightNumber;
-    const flightDate = formatDate(flight.departureDate);
-    const options = {
-      headers: {
-        'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
-        'X-RapidAPI-Key': process.env.REACT_APP_FLIGHT_API_KEY,
-      }
-    }
-    const flightApi = axios.create({
-      baseURL: 
-      `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`
+  const flightNumber = flight.flightNumber;
+  const flightDate = formatDate(flight.departureDate);
 
+  const options = {
+    headers: {
+      "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com",
+      "X-RapidAPI-Key": process.env.REACT_APP_FLIGHT_API_KEY,
+    },
+  };
+  const flightApi = axios.create({
+    baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`,
+  });
+
+  const handleApiSearch = async () => {
+    await flightApi.get("/", options).then((res) => {
+      const data = res.data[0];
+      console.log(res.data);
+
+      setFlight({
+        ...flight,
+        departureTime: formatTime(data.departure.scheduledTimeLocal),
+        airline: data.airline.name,
+        departureAirport: data.departure.airport.shortName,
+        departureTerminal: data.departure.terminal,
+        departureCity: data.departure.airport.municipalityName,
+        departureGate: data.departure.gate,
+        arrivalAirport: data.arrival.airport.name,
+        arrivalTerminal: data.arrival.terminal,
+        arrivalCity: data.arrival.airport.municipalityName,
+        arrivalGate: data.arrival.gate,
+        trip: tripId,
+        user: userId,
+      });
     });
-
-      const handleApiSearch = async () => {
-        await flightApi.get('/', options).then((res) => {
-          const data  = res.data[0]
-          console.log(res.data)
-  
-          setFlight({
-            ...flight, 
-            departureTime: formatTime(data.departure.scheduledTimeLocal),
-            airline: data.airline.name,
-            departureAirport: data.departure.airport.shortName,
-            departureTerminal: data.departure.terminal,
-            departureCity: data.departure.airport.municipalityName,
-            departureGate: data.departure.gate,
-            arrivalAirport: data.arrival.airport.name,
-            arrivalTerminal: data.arrival.terminal,
-            arrivalCity: data.arrival.airport.municipalityName,
-            arrivalGate: data.arrival.gate,
-            trip: tripId,
-            user: userId
-          })
-      })
-    }
+  };
 
   return (
     <div>
@@ -235,13 +237,13 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-          </DialogContent>
-          
-          <DialogActions>
-            <Button onClick={handleApiSearch}>Search</Button>
-          </DialogActions>
-          
-          <DialogContent>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleApiSearch}>Search</Button>
+        </DialogActions>
+
+        <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 190 }}>
             <InputLabel id="demo-select-small">Journey Type</InputLabel>
             <Select
@@ -274,7 +276,7 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-          
+
           <TextField
             value={flight.airline}
             autoFocus
@@ -389,10 +391,11 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
-          
         </DialogContent>
         <DialogActions>
-          {flightId && <Button onClick={onSubmit}>Update Flight Details</Button>}
+          {flightId && (
+            <Button onClick={onSubmit}>Update Flight Details</Button>
+          )}
           {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
           <Button onClick={handleClear}>Clear</Button>
           <Button onClick={handleClose}>Cancel</Button>
@@ -407,6 +410,6 @@ const AddFlight = ({
       />
     </div>
   );
-}
+};
 
 export default AddFlight;

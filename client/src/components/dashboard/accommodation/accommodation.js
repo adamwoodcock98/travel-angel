@@ -12,11 +12,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
 
+  const [state, setState] = useState(0);
+
+  console.log("This is the state, is this causing problems?", state);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   const userId = session;
 
   const [accommodation, setAccommodation] = useState([]);
+
   const [open, setOpen] = useState(false);
-  const accommodationArray = {
+  const [accommodationArray, setAccommodationArray] = useState({
     name: "",
     contactNumber: "",
     checkInDate: "",
@@ -36,7 +45,12 @@ export const ViewAccommodation = ({ session }) => {
     },
     user: userId,
     trip: tripId,
-  };
+  });
+
+  console.log(
+    "This is the accommodation, is this changing?",
+    accommodationArray
+  );
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -92,7 +106,7 @@ export const ViewAccommodation = ({ session }) => {
         })
         .finally(() => setLoading(false));
     }
-  }, [didUpdate]);
+  }, [didUpdate, state]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;

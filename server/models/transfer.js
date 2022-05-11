@@ -34,6 +34,12 @@ const transferSchema = mongoose.Schema({
     ref: "Trip",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Transfer = mongoose.model("Transfer", transferSchema);

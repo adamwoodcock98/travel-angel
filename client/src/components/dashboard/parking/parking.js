@@ -3,13 +3,20 @@ import axios from "axios";
 import AddParking from "./addParking";
 import ParkingCard from "./viewParking/viewParking";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from '@mui/material/CircularProgress';
 
 const Parking = ({ session }) => {
+  console.log("this is the parking rendering ");
+
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -17,7 +24,7 @@ const Parking = ({ session }) => {
   const [parking, setParking] = useState([]);
   const [didUpdate, setDidUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
-  const newParking = {
+  const [newParking, setNewParking] = useState({
     startDate: "",
     endDate: "",
     airport: "",
@@ -39,7 +46,7 @@ const Parking = ({ session }) => {
     },
     user: userId,
     trip: tripId,
-  };
+  });
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -94,7 +101,7 @@ const Parking = ({ session }) => {
       })
       .finally(() => setLoading(false));;
     }
-  }, [didUpdate]);
+  }, [didUpdate, state]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
@@ -108,8 +115,11 @@ const Parking = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
   if (parking.length) {
     const parkingArray = [];

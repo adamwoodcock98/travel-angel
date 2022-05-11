@@ -1,6 +1,7 @@
 const Transfer = require("../models/transfer.js");
 const Address = require("../models/address.js");
 const Trip = require("../models/trip.js");
+const Upload = require("../models/upload.js");
 
 const TransferController = {
   Index: async (req, res) => {
@@ -11,12 +12,16 @@ const TransferController = {
         isOutbound: true,
         user: userId,
         trip: tripId,
-      }).populate("pickupAddress dropoffAddress");
+      })
+        .populate("pickupAddress dropoffAddress")
+        .populate("uploads");
       const inboundTransfer = await Transfer.find({
         isOutbound: false,
         user: userId,
         trip: tripId,
-      }).populate("pickupAddress dropoffAddress");
+      })
+        .populate("pickupAddress dropoffAddress")
+        .populate("uploads");
       res.json({ outbound: outboundTransfer, inbound: inboundTransfer });
       res.status(200).send();
     } catch (e) {
@@ -82,17 +87,48 @@ const TransferController = {
       res.status(200).send();
     }
   },
+  Upload: async (req, res) => {
+    const transferId = req.params.id;
+    const file = req.file.filename;
+    const filename = req.file.originalname;
+
+    try {
+      const upload = new Upload({ name: filename, file: file });
+
+      await upload.save();
+
+      const foundTransfer = await Transfer.findById(transferId);
+
+      foundTransfer.uploads.push(upload);
+
+      await foundTransfer.save();
+
+      res.json({ msg: "Upload Successful", type: "success", file: file });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send(err);
+    }
+  },
+  Download: async (req, res) => {
+    const fileId = req.params.id;
+
+    const file = await Upload.findById(fileId);
+
+    const filename = file.file;
+
+    res.download(`./public/uploads/${filename}`); // this is the absolute path to the file
+  },
 
   Update: async (req, res) => {
     const data = req.body;
-    console.log(data)
+    console.log(data);
     const transferId = req.params.id;
     try {
       const transfer = await Transfer.findById(transferId);
-      console.log(transfer)
+      console.log(transfer);
       transfer.pickupTime = data.pickupTime;
       transfer.dropoffTime = data.dropoffTime;
-      transfer.isOutbound = data.isOutbound; 
+      transfer.isOutbound = data.isOutbound;
       transfer.company = data.company;
       transfer.contactNumber = data.contactNumber;
       transfer.bookingReference = data.bookingReference;
@@ -126,7 +162,7 @@ const TransferController = {
       await dropoffAddress.save();
 
       res.status(200).send();
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
       res.status(500).send();
     }

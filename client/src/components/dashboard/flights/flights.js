@@ -5,13 +5,18 @@ import "./flights.css";
 import AddFlight from "./addFlight";
 import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import moment from "moment";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -94,7 +99,7 @@ const Flights = ({ session }) => {
         }
       })
       .finally(() => setLoading(false));
-  }, [didUpdate]);
+  }, [didUpdate, state]);
 
   if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
@@ -110,7 +115,7 @@ const Flights = ({ session }) => {
       inboundFlights.push(
         <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
       );
-    })
+    });
 
     return (
       <>
@@ -143,6 +148,7 @@ const Flights = ({ session }) => {
               flightId={null}
               userId={userId}
               tripId={tripId}
+              handleUpload={handleUpload}
             />
           </div>
         </div>
@@ -163,6 +169,7 @@ const Flights = ({ session }) => {
           flightId={null}
           userId={userId}
           tripId={tripId}
+          handleUpload={handleUpload}
         />
         {alertMessage && (
           <Alerts
@@ -174,7 +181,8 @@ const Flights = ({ session }) => {
           />
         )}
       </>
-    )}
+    );
+  }
 };
 
 export default Flights;

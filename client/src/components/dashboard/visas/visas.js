@@ -10,6 +10,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Visas = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -64,7 +69,7 @@ const Visas = ({ session }) => {
         }
       })
       .finally(() => setLoading(false));
-  }, [didUpdate]);
+  }, [didUpdate, state]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -88,7 +93,7 @@ const Visas = ({ session }) => {
           <div className="visas-content">
             <div className="visas-content-outbound">
               <h1 className="visa-content-subheading"> BLOOPS </h1>
-              <VisaCard visa={visa} userId={userId} tripId={tripId} refresh={handleClose} />
+              <VisaCard visa={visa} userId={userId} tripId={tripId} refresh={handleClose} handleUpload={handleUpload} />
             </div>
           </div>
 
@@ -129,7 +134,7 @@ const Visas = ({ session }) => {
             visaData={visaArray}
             userId={userId}
             tripId={tripId}
-            visaId={null} 
+            visaId={null}
           />
         </div>
         <Alerts
