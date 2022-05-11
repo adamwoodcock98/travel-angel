@@ -1,3 +1,9 @@
+body {
+  letter-spacing: 0.5px;
+  margin-top: 70px;
+  background-color: #f7f7f7;
+}
+
 .sidebar {
   min-width: fit-content;
   left: 0;
@@ -12,26 +18,9 @@
 }
 
 .MuiTabs-indicator {
-  background-color: rgb(111, 41, 196) !important;
-  border-right: rgb(32, 135, 54) !important;
-  color: rgb(224, 51, 51) !important;
   background-color: #eba0ae !important;
   padding: 2.2px;
   background: linear-gradient(180deg, rgba(235,160,174,1) 0%, rgba(242,39,113,0.6) 100%);
-}
-.MuiTabs-indicator:hover {
-  background-color: rgb(111, 41, 196) !important;
-  border-right: rgb(32, 135, 54) !important;
-  color: rgb(224, 51, 51) !important;
-}
-.MuiTabs-indicator:focus {
-  background-color: rgb(111, 41, 196) !important;
-  border-right: rgb(32, 135, 54) !important;
-  color: rgb(224, 51, 51) !important;
-}.MuiTabs-indicator:active {
-  background-color: rgb(111, 41, 196) !important;
-  border-right: rgb(32, 135, 54) !important;
-  color: rgb(224, 51, 51) !important;
 }
 
 .css-i4bv87-MuiSvgIcon-root {

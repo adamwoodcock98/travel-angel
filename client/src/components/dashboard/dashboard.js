@@ -38,6 +38,9 @@ function TabPanel(props) {
 }
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "Roboto-Regular",
+  },
   palette: {
     primary: {
       main: '#f22771',
