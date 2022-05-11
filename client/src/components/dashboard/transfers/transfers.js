@@ -9,6 +9,11 @@ import AddIcon from "@mui/icons-material/Add";
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -138,7 +143,7 @@ const Transfers = ({ session }) => {
           setInboundTransfer(inbound);
         });
     }
-  }, []);
+  }, [transfer, state]);
 
   if (outboundTransfer.length || inboundTransfer.length) {
     return (
@@ -149,15 +154,30 @@ const Transfers = ({ session }) => {
         <div className="transfers-content">
           <div className="transfers-content-outbound">
             <h1 className="transfer-content-subheading">Outbound</h1>
-            <OutboundTransferCard outboundTransfer={outboundTransfer} userId={userId} tripId={tripId} />
+            <OutboundTransferCard
+              outboundTransfer={outboundTransfer}
+              handleUpload={handleUpload}
+              userId={userId}
+              tripId={tripId}
+            />
           </div>
           <div className="transfers-content-inbound">
             <h1 className="transfers-content-subheading">Inbound</h1>
-            <InboundTransferCard inboundTransfer={inboundTransfer} userId={userId} tripId={tripId} />
+            <InboundTransferCard
+              inboundTransfer={inboundTransfer}
+              handleUpload={handleUpload}
+              userId={userId}
+              tripId={tripId}
+            />
           </div>
         </div>
         <div>
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
           <AddTransfer
@@ -176,8 +196,13 @@ const Transfers = ({ session }) => {
   } else {
     return (
       <div>
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
+        <Fab
+          size="large"
+          color="secondary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <AddIcon />
         </Fab>
         <AddTransfer
           open={open}

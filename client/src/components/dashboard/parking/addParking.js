@@ -7,8 +7,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import moment from "moment";
 
 const AddParking = (props) => {
+
+  const formatDateTime = (date) => moment(date).format("yyyy-MM-DDThh:mm");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const open = props.open;
@@ -38,6 +42,8 @@ const AddParking = (props) => {
     user: userId,
     trip: tripId,
   });
+
+  console.log(parking.startDate)
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -135,7 +141,7 @@ const AddParking = (props) => {
             Fill in the fields to store your parking details
           </DialogContentText>
           <TextField
-            value={parking.startDate}
+            value={formatDateTime(parking.startDate)}
             autoFocus
             margin="dense"
             id="startDate"
@@ -151,7 +157,7 @@ const AddParking = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={parking.endDate}
+            value={formatDateTime(parking.endDate)}
             autoFocus
             margin="dense"
             id="endDate"

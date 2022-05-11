@@ -10,9 +10,18 @@ import AddIcon from "@mui/icons-material/Add";
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
 
+  const [state, setState] = useState(0);
+
+  console.log("This is the state, is this causing problems?", state);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   const userId = session;
 
   const [accommodation, setAccommodation] = useState([]);
+
   const [open, setOpen] = useState(false);
   const [emptyFields, setEmptyFields] = useState([])
   const [accommodationArray, setAccommodationArray] = useState({
@@ -35,7 +44,20 @@ export const ViewAccommodation = ({ session }) => {
     },
     user: userId,
     trip: tripId,
-  })
+  });
+
+  console.log(
+    "This is the accommodation, is this changing?",
+    accommodationArray
+  );
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (userId !== "null") {
@@ -45,17 +67,10 @@ export const ViewAccommodation = ({ session }) => {
         )
         .then((res) => {
           setAccommodation(res.data.accommodation);
-        });
+        })
+        .catch((err) => console.log(err.message));
     }
-  }, []);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  }, [accommodationArray, state]);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -152,10 +167,16 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
-  return (
+
+  if (accommodation.length) {
+
+  return(
     <div className="container">
       <div className="header">
         <h1 className="title">Accommodation</h1>
@@ -172,9 +193,48 @@ export const ViewAccommodation = ({ session }) => {
       </div>
       {accommodation.length &&
         <div className="body">
-          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
-        </div>
-      }
+          <AccommodationCard
+            accommodation={accommodation}
+            handleUpload={handleUpload}
+            userId={userId}
+            handleDirections={handleDirections}
+          />
+        </div>}
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
     </div>
-  )
+    )
+  } else {
+    return (
+      <div className="container">
+        <div className="header">
+          <h1 className="title">Accommodation</h1>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+          <AddAccommodation
+            className="add-accomodation"
+            handleOpen={handleOpen}
+            open={open}
+            handleClose={handleClose}
+            accommodationData={accommodationArray}
+            accommodationId={null}
+            userId={userId}
+            tripId={tripId}
+          />
+        </div>
+      </div>
+    );
+  }
 };

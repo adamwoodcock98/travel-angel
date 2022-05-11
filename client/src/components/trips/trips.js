@@ -3,10 +3,14 @@ import ViewTrips from "./viewTrips/viewTrips";
 import AddTrip from "./addTrip/addTrip";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import moment from "moment";
+import "./trips.css";
 
 const Trips = ({ session }) => {
   const userId = session;
   const { tripId } = useParams;
+
+  console.log("the trips rendering ----");
 
   const [trip, setTrip] = useState({
     name: "",
@@ -69,6 +73,20 @@ const Trips = ({ session }) => {
       });
   };
 
+  const isExpired = (trip) => new Date(trip.startDate) - new Date() < 0;
+
+  const expiredTrips = tripArray
+    .filter((trip) => isExpired(trip))
+    .sort(
+      (trip1, trip2) => new Date(trip2.startDate) - new Date(trip1.startDate)
+    );
+
+  const upcomingTrips = tripArray
+    .filter((trip) => !expiredTrips.includes(trip))
+    .sort(
+      (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
+    );
+
   return (
     <div className="container">
       <div className="header">
@@ -83,9 +101,21 @@ const Trips = ({ session }) => {
           handleSubmit={handleSubmit}
         />
       </div>
-      <div className="trip-body">
-        <ViewTrips trips={tripArray} />
-      </div>
+      {tripArray.length && (
+        <div className="trip-body">
+          {upcomingTrips.length > 0 && (
+            <h2 className="countdown">
+              The next trip is{" "}
+              {moment(upcomingTrips[0].startDate, "YYYYMMDD").fromNow()}!
+            </h2>
+          )}
+          <ViewTrips trips={upcomingTrips} />
+          <div id="expired">
+            <ViewTrips trips={expiredTrips} />
+          </div>
+        </div>
+      )}
+      {!tripArray.length && <h2>Nothing here. Add your trip now!</h2>}
     </div>
   );
 };

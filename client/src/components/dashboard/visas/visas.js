@@ -4,10 +4,15 @@ import VisaCard from "./viewVisa";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 
 const Visas = ({ session }) => {
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
@@ -29,7 +34,7 @@ const Visas = ({ session }) => {
       .then((res) => {
         setVisa(res.data);
       });
-  }, [visaArray]);
+  }, [visaArray, state]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -83,15 +88,24 @@ const Visas = ({ session }) => {
         </div>
         <div className="visas-content">
           <div className="visas-content-outbound">
-            <h1 className="visa-content-subheading"> BLOOPS </h1>
-            <VisaCard visa={visa} userId={userId} tripId={tripId} />
+            <VisaCard
+              visa={visa}
+              handleUpload={handleUpload}
+              userId={userId}
+              tripId={tripId}
+            />
           </div>
         </div>
 
         <div>
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
           <AddVisa
             open={open}
             handleOpen={handleOpen}
@@ -110,6 +124,9 @@ const Visas = ({ session }) => {
   } else {
     return (
       <div className="visas">
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+        </Fab>
         <div className="visa-header">
           <h1>Your visas</h1>
         </div>
@@ -124,7 +141,7 @@ const Visas = ({ session }) => {
             visaData={visaArray}
             userId={userId}
             tripId={tripId}
-            visaId={null} 
+            visaId={null}
           />
         </div>
       </div>

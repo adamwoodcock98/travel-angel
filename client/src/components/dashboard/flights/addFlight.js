@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 import Button from "@mui/material/Button";
 import "../dashboard.css";
 import TextField from "@mui/material/TextField";
@@ -12,6 +12,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import moment from "moment";
 
 const AddFlight = ({
   flightData,
@@ -20,10 +21,8 @@ const AddFlight = ({
   open,
   userId,
   handleClose,
-  handleClear,
-  handleApiSearch
+  handleUpload,
 }) => {
-
   const [flight, setFlight] = useState({
     flightNumber: flightData.flightNumber,
     departureTime: flightData.departureTime,
@@ -55,12 +54,11 @@ const AddFlight = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     let url;
     if (flightId) {
-      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`
+      url = `http://localhost:8000/dashboard/flights/edit/${flightId}`;
     } else {
-      url = `http://localhost:8000/dashboard/flights/`
+      url = `http://localhost:8000/dashboard/flights/`;
     }
 
     const {
@@ -79,6 +77,7 @@ const AddFlight = ({
       bookingReference,
       isOutbound,
       user,
+      trip,
     } = flight;
 
     const newFlight = {
@@ -97,7 +96,7 @@ const AddFlight = ({
       bookingReference,
       isOutbound,
       user,
-      trip: tripId,
+      trip,
     };
 
     if (departureTime === "" || departureDate === "" || departureAirport === "" || departureCity === "" || arrivalAirport === "" || arrivalCity === "" || isOutbound === "") {
@@ -107,6 +106,7 @@ const AddFlight = ({
 
     axios.post(url, newFlight).then((res) => {
       handleClose();
+      handleUpload();
       setFlight({
         flightNumber: "",
         departureTime: "",
@@ -123,7 +123,68 @@ const AddFlight = ({
         bookingReference: "",
         isOutbound: "",
         user: userId,
-      })
+        trip: tripId,
+      });
+      handleClear();
+    });
+  };
+
+  const handleClear = () => {
+    setFlight({
+      flightNumber: "",
+      departureTime: "",
+      departureDate: "",
+      airline: "",
+      departureAirport: "",
+      departureTerminal: "",
+      departureCity: "",
+      departureGate: "",
+      arrivalAirport: "",
+      arrivalTerminal: "",
+      arrivalCity: "",
+      arrivalGate: "",
+      bookingReference: "",
+      isOutbound: "",
+    });
+  };
+
+  const formatDate = (date) => moment(date).format("YYYY-MM-DD");
+  const formatTime = (time) => moment(time).format("hh:mm");
+  const flightNumber = flight.flightNumber;
+  const flightDate = formatDate(flight.departureDate);
+  // console.log(flightNumber)
+  // console.log(flightDate)
+
+  const options = {
+    headers: {
+      "X-RapidAPI-Host": "aerodatabox.p.rapidapi.com",
+      "X-RapidAPI-Key": process.env.REACT_APP_FLIGHT_API_KEY,
+    },
+  };
+  const flightApi = axios.create({
+    baseURL: `https://aerodatabox.p.rapidapi.com/flights/number/${flightNumber}/${flightDate}/`,
+  });
+
+  const handleApiSearch = async () => {
+    await flightApi.get("/", options).then((res) => {
+      const data = res.data[0];
+      console.log(res.data);
+
+      setFlight({
+        ...flight,
+        departureTime: formatTime(data.departure.scheduledTimeLocal),
+        airline: data.airline.name,
+        departureAirport: data.departure.airport.shortName,
+        departureTerminal: data.departure.terminal,
+        departureCity: data.departure.airport.municipalityName,
+        departureGate: data.departure.gate,
+        arrivalAirport: data.arrival.airport.name,
+        arrivalTerminal: data.arrival.terminal,
+        arrivalCity: data.arrival.airport.municipalityName,
+        arrivalGate: data.arrival.gate,
+        trip: tripId,
+        user: userId,
+      });
     });
   };
 
@@ -147,23 +208,7 @@ const AddFlight = ({
             onChange={handleChange}
           />
           <TextField
-            value={flight.departureTime}
-            autoFocus
-            margin="dense"
-            id="departureTime"
-            name="departureTime"
-            label="Time"
-            type="time"
-            variant="outlined"
-            required
-            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-          />
-          <TextField
-            value={flight.departureDate}
+            value={formatDate(flight.departureDate)}
             autoFocus
             margin="dense"
             id="departureDate"
@@ -178,13 +223,13 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-          </DialogContent>
-          
-          <DialogActions>
-            <Button onClick={handleApiSearch}>Search</Button>
-          </DialogActions>
-          
-          <DialogContent>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleApiSearch}>Search</Button>
+        </DialogActions>
+
+        <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 190 }}>
             <InputLabel id="demo-select-small">Journey Type</InputLabel>
             <Select
@@ -197,6 +242,7 @@ const AddFlight = ({
               variant="outlined"
               onChange={handleChange}
               required
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>
@@ -217,7 +263,7 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-          
+
           <TextField
             value={flight.airline}
             autoFocus
@@ -336,34 +382,18 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
-            <Select
-              value={flight.isOutbound}
-              autoFocus
-              margin="dense"
-              id="isOutbound"
-              name="isOutbound"
-              label="Journey type"
-              variant="outlined"
-              onChange={handleChange}
-              required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
-            >
-              <MenuItem value={false}>Inbound</MenuItem>
-              <MenuItem value={true}>Outbound</MenuItem>
-            </Select>
-          </FormControl>
         </DialogContent>
         <DialogActions>
-        <Button id="default-lower-button" onClick={handleClose}>Cancel</Button>
-        <Button id="default-lower-button" onClick={handleClear}>Clear</Button>
-          {flightId && <Button id="update-flight-details-button" onClick={onSubmit}>Update Flight Details</Button>}
-          {!flightId && <Button id="save-flight-details-button" onClick={onSubmit}>Save Flight Details</Button>}
+          {flightId && (
+            <Button onClick={onSubmit}>Update Flight Details</Button>
+          )}
+          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
+          <Button onClick={handleClear}>Clear</Button>
+          <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </div>
   );
-}
+};
 
 export default AddFlight;

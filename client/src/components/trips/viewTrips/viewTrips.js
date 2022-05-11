@@ -32,7 +32,7 @@ const ViewTrips = ({ trips }) => {
                     <p>
                       {daysRemaining(trip.startDate) <= 0
                         ? "Less than a day remaining"
-                        : `Days left until trip: ${
+                        : `Days left until the trip: ${
                             daysRemaining(trip.startDate) + 1
                           }`}
                     </p>

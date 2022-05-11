@@ -12,8 +12,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { getThemeProps } from "@mui/system";
+import moment from "moment";
 
 const AddTransfer = (props) => {
+
+  const formatDateTime = (date) => moment(date).format("yyyy-MM-DDThh:mm");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const transferId = props.transferId;
@@ -220,7 +224,7 @@ const AddTransfer = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={transfer.pickupTime}
+            value={formatDateTime(transfer.pickupTime)}
             autoFocus
             margin="dense"
             id="pickupTime"
@@ -237,7 +241,7 @@ const AddTransfer = (props) => {
           />
           
           <TextField
-            value={transfer.dropoffTime}
+            value={formatDateTime(transfer.dropoffTime)}
             autoFocus
             margin="dense"
             id="dropoffTime"
