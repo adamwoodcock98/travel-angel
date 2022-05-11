@@ -22,8 +22,6 @@ const SearchButton = ({handleClick}) => (
   </Button>
 )
 
-// <Button startIcon={<SearchOutlinedIcon />} id="search-button" onClick={handleApiSearch}></Button>
-
 const AddFlight = ({
   flightData,
   tripId,

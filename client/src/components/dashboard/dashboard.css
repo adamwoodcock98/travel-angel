@@ -37,4 +37,14 @@ p {
   margin-right: -18px;
   padding-left: 0px;
   padding-right: 0px;
+  background: transparent;
+}
+/* #flightNumber:focus {
+  background-color: yellow;
+} */
+/* .MuiFormControl-root:focus {
+  background-color: yellow;
+} */
+.MuiOutlinedInput-notchedOutline.disable-x {
+  background-color: black;
 }
