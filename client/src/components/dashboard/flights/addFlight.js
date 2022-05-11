@@ -166,9 +166,6 @@ const AddFlight = ({
   const formatTime = (time) => moment(time).format("hh:mm");
     const flightNumber = flight.flightNumber;
     const flightDate = formatDate(flight.departureDate);
-    // console.log(flightNumber)
-    // console.log(flightDate)
-
     const options = {
       headers: {
         'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',

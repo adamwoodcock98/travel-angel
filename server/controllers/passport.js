@@ -45,8 +45,6 @@ const PassportController = {
 
       await passport.save();
 
-      console.log(passport)
-
       res.status(200).send();
     } catch(e) {
       console.log(e);

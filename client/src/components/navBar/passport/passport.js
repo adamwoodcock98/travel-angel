@@ -102,7 +102,6 @@ export const Passport = ({ session }) => {
       new Date(pass2.dateOfExpiry) - new Date(pass1.dateOfExpiry)
   );
   displayState.forEach((pass) => {
-    console.log("the pass", pass)
     passportRender.push(<DisplayPassport passport={pass} userId={userId} refresh={handleClose} />);
   });
 
