@@ -15,8 +15,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import moment from 'moment';
 
-import moment from "moment";
-
 const AddFlight = ({
   flightData,
   tripId,
@@ -61,8 +59,6 @@ const AddFlight = ({
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
-
-  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
 
   const handleChange = (e) => {
     const value = e.target.value;
