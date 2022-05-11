@@ -34,15 +34,12 @@ export const InboundTransferCard = (props) => {
       {inboundTransfer.map((inboundTransfer, index) => {
         return (
           <div className="card" key={index}>
-
             <div className="crud-menu">
               <CrudMenu transferData={inboundTransfer} transferId={inboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
             </div>
-
             <div className="header">
               <h1>{inboundTransfer.name}</h1>
             </div>
-
             <div className="body">
               <div className="subbody-left">
                 <div className="pickup-header">
@@ -53,47 +50,39 @@ export const InboundTransferCard = (props) => {
                   <p>{formatTime(inboundTransfer.pickupTime)}</p>
                   <div className="address">
                   {inboundTransfer.pickupAddress && (
-                    <p>
-                      Address: {formatAddress(inboundTransfer.pickupAddress)}
-                    </p>
+                    <p>Address: {formatAddress(inboundTransfer.pickupAddress)}</p>
                   )}
                 </div>
-                </div>
-
               </div>
               <div className="subbody-right">
                 <div className="dropoff-header">
                   <h3>Dropoff</h3>
-                  
                 </div>
                 <div className="dropoff-body">
                   <p>{formatDate(inboundTransfer.dropoffTime)}</p>
                   <p>{formatTime(inboundTransfer.dropoffTime)}</p>
                   <div className="address">
                   {inboundTransfer.dropoffAddress && (
-                    <p>
-                      Address: {formatAddress(inboundTransfer.dropoffAddress)}
-                    </p>
+                    <p>Address: {formatAddress(inboundTransfer.dropoffAddress)}</p>
                   )}
                 </div>
-                </div>
-                
               </div>
+            </div> 
+          </div>
+        </div>
+          <div className="footer">
+            <div className="booking-reference">
+              {inboundTransfer.bookingReference && (
+                <p>Booking Reference: {inboundTransfer.bookingReference}</p>
+              )}
             </div>
-            <div className="footer">
-              <div className="booking-reference">
-                {inboundTransfer.bookingReference && (
-                  <p>Booking Reference: {inboundTransfer.bookingReference}</p>
-                )}
-              </div>
-              <div className="company">
-                {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
-              </div>
-              <div className="contact-number">
-                {inboundTransfer.contactNumber && (
-                  <p>TEL: {inboundTransfer.contactNumber}</p>
-                )}
-              </div>
+            <div className="company">
+              {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
+            </div>
+            <div className="contact-number">
+              {inboundTransfer.contactNumber && (
+                <p>TEL: {inboundTransfer.contactNumber}</p>
+              )}
             </div>
             <div className="upload">
               <Upload
@@ -114,6 +103,7 @@ export const InboundTransferCard = (props) => {
                 })}
             </div>
           </div>
+        </div>
         );
       })}
     </div>
