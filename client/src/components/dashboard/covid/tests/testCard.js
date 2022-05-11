@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import BiotechOutlinedIcon from "@mui/icons-material/BiotechOutlined";
 import AddTest from "./newTest";
 import CrudMenu from "./crud/crud";
+import Upload from "../../../upload/upload";
 
 const TestCard = (props) => {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,8 @@ const TestCard = (props) => {
   const testId = testData._id;
   const tripId = props.tripId;
   const handleUpload = props.handleUpload;
+
+  console.log("LOOK HERE ===========", testData);
 
   const handleOpen = () => {
     setOpen(true);
@@ -23,6 +26,10 @@ const TestCard = (props) => {
   };
 
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
+
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/covid/download/${id}`);
+  };
 
   return (
     <div className="test-card">
@@ -94,6 +101,25 @@ const TestCard = (props) => {
             tripId={tripId}
             handleUpload={handleUpload}
           />
+        </div>
+      </div>
+      <div className="upload">
+        <Upload
+          cardId={testData._id}
+          url="dashboard/covid/test"
+          handleUpload={handleUpload}
+        />
+        <div className="uploads">
+          Download Your Documents
+          {console.log(testData)}
+          {testData.uploads.length &&
+            testData.uploads.map((upload, index) => {
+              return (
+                <button onClick={() => handleSubmit(upload._id)} key={index}>
+                  {upload.name}
+                </button>
+              );
+            })}
         </div>
       </div>
     </div>

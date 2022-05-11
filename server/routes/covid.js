@@ -39,6 +39,11 @@ covidRouter.post(
   CovidController.DeleteVaccination
 );
 covidRouter.post(
+  "/test/upload/:id",
+  upload.single("uploaded_file"),
+  CovidController.TestUpload
+);
+covidRouter.post(
   "/upload/:id",
   upload.single("uploaded_file"),
   CovidController.Upload

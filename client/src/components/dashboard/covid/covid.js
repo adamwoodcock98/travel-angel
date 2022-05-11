@@ -43,8 +43,6 @@ const Covid = ({ session }) => {
     setOpen(false);
   };
 
-  console.log(`http://localhost:8000/dashboard/covid/${userId}`);
-
   useEffect(() => {
     axios
       .get(`http://localhost:8000/dashboard/covid/${userId}/${tripId}`)
@@ -53,17 +51,12 @@ const Covid = ({ session }) => {
         const vaccines = res.data.vaccinations;
         setTestData(tests);
         setVaccineData(vaccines);
-        console.log(vaccines);
         setDidLoad(true);
       })
       .catch((e) => {
         console.log(e.message);
       });
   }, [state]);
-
-  console.log(testData, "this is the test data");
-
-  console.log(vaccineData, "this is the vaccine date");
 
   if (didLoad && testData.length) {
     const testsArray = [];

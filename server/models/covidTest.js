@@ -27,6 +27,12 @@ const covidTestSchema = mongoose.Schema({
     ref: "Trip",
     required: true,
   },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const CovidTest = mongoose.model("CovidTest", covidTestSchema);

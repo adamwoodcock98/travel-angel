@@ -24,11 +24,12 @@ const CovidController = {
         }).save();
       }
 
-      console.log(vaccineToPass);
+      const testData = await CovidTest.find({
+        user: userId,
+        trip: tripId,
+      }).populate("uploads");
 
-      const testData = await CovidTest.find({ user: userId, trip: tripId }); //  addddddddd ttrrrriiippppppsssssssssss
-
-      console.log(testData.length);
+      console.log(testData);
 
       res.json({ vaccinations: vaccineToPass, tests: testData });
       res.status(200).send();
@@ -180,6 +181,30 @@ const CovidController = {
       foundVaccination.uploads.push(upload);
 
       await foundVaccination.save();
+
+      res.json({ msg: "Upload Successful", type: "success", file: file });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send(err);
+    }
+  },
+  TestUpload: async (req, res) => {
+    const testId = req.params.id;
+    const file = req.file.filename;
+    const filename = req.file.originalname;
+
+    try {
+      const upload = new Upload({ name: filename, file: file });
+
+      await upload.save();
+
+      const foundCovidTest = await CovidTest.findById(testId);
+
+      console.log(foundCovidTest);
+
+      foundCovidTest.uploads.push(upload);
+
+      await foundCovidTest.save();
 
       res.json({ msg: "Upload Successful", type: "success", file: file });
     } catch (err) {
