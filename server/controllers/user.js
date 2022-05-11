@@ -67,7 +67,7 @@ const UsersController = {
 
   Settings: (req, res) => {
     const userId = req.params.id;
-    User.findOne({ _id: userId }).then((user) => {
+    User.findById(userId).then((user) => {
       res.json({
         user: user,
       });

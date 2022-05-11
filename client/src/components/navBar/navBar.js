@@ -16,7 +16,7 @@ import {
   Grid,
 } from "@mui/material";
 import axios from "axios";
-import "./navBar.css"
+import "./navBar.css";
 
 export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
@@ -32,15 +32,18 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
     setOpen(false);
   };
 
-  const getUser = () => {
-    axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
-      setUser(res.data.user);
-    });
-  };
+  // const getUser = () => {
+  //   axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
+  //     setUser(res.data.user);
+  //   });
+  // };
 
-  useEffect(() => {
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   getUser();
+  //   return () => getUser;
+  // }, []);
+
+  const isNotNullAndNotUndefined = (session) => session !== "null" && session;
 
   return (
     <div className="navbar">
@@ -64,7 +67,7 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
 
             <Grid container justifyContent="flex-end">
               <div>
-                {session && (
+                {isNotNullAndNotUndefined(session) && (
                   <Typography
                     id="nav-user"
                     aria-label="nav-user"
@@ -72,12 +75,14 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                     color="inherit"
                     sx={{ mt: "4px", mx: 3 }}
                   >
-                    {user.firstName} {user.lastName}
+                    {/* {user.firstName} {user.lastName} */}
                   </Typography>
                 )}
-                {!session && <Authentication handleLogIn={handleLogIn} />}
+                {!isNotNullAndNotUndefined(session) && (
+                  <Authentication handleLogIn={handleLogIn} />
+                )}
               </div>
-              {session && (
+              {isNotNullAndNotUndefined(session) && (
                 <div>
                   {/* {getUser()} */}
                   <Box sx={{ flexGrow: 0 }}>
@@ -105,13 +110,10 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                         horizontal: "right",
                       }}
                     >
-
                       <MenuItem>
                         <IconButton>
-                        <a href="/" id="nav-trips">
-                          <Typography textAlign="center">
-                            Trips
-                          </Typography>
+                          <a href="/" id="nav-trips">
+                            <Typography textAlign="center">Trips</Typography>
                           </a>
                         </IconButton>
                       </MenuItem>
