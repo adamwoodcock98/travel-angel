@@ -84,7 +84,6 @@ export const FlightCard = (props) => {
                   );
                 })}
             </div>
-
           </div>
       </div>
   );

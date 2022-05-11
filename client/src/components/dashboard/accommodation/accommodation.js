@@ -82,6 +82,10 @@ export const ViewAccommodation = ({ session }) => {
     setDidUpdate(!didUpdate);
   };
 
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/flights/download/${id}`);
+  };
+
   useEffect(() => {
     setLoading(true);
     if (userId !== "null") {
@@ -153,6 +157,7 @@ export const ViewAccommodation = ({ session }) => {
               userId={userId}
               handleDirections={handleDirections}
               refresh={handleClose}
+              handleUpload={handleUpload}
             />
           </div>
           <Fab
@@ -178,17 +183,6 @@ export const ViewAccommodation = ({ session }) => {
       <div className="container">
         <div className="header">
           <h1 className="title">Accommodation</h1>
-          <h1>
-            Looks like you don't have any saved flights, add your first one now!
-          </h1>
-          <Fab
-            size="large"
-            color="secondary"
-            aria-label="add"
-            onClick={handleOpen}
-          >
-            <AddIcon />
-          </Fab>
           <AddAccommodation
             className="add-accomodation"
             handleOpen={handleOpen}
@@ -200,6 +194,17 @@ export const ViewAccommodation = ({ session }) => {
             tripId={tripId}
           />
         </div>
+        <h2>
+          Looks like you don't have any saved accommodation, add your first one now!
+        </h2>
+        <Fab
+          size="large"
+          color="secondary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
+          <AddIcon />
+        </Fab>
         <Alerts
           message={alertMessage}
           open={alertOpen}
