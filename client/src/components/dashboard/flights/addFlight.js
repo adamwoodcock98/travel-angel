@@ -439,12 +439,12 @@ const AddFlight = ({
           </FormControl>
         </DialogContent>
         <DialogActions>
+        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+        <Button id="default-cancel-button" onClick={handleClear}>Clear</Button>
           {flightId && (
-            <Button onClick={onSubmit}>Update Flight Details</Button>
+            <Button id="save-details-button" onClick={onSubmit}>Update Flight Details</Button>
           )}
-          {!flightId && <Button onClick={onSubmit}>Save Flight Details</Button>}
-          <Button onClick={handleClear}>Clear</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save Flight Details</Button>}
         </DialogActions>
       </Dialog>
       <Alerts

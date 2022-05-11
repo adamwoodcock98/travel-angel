@@ -25,11 +25,10 @@ p {
   padding-bottom: 0% !important;
 }
 
-#update-flight-details-button, #save-flight-details-button {
-  /* font-size: 100px; */
+#save-details-button {
   background-color: #EBA0AE;
   color: white;
 }
-#default-lower-button {
+#default-cancel-button {
   color: #64BAAA;
 }
