@@ -54,6 +54,7 @@ export const InboundTransferCard = (props) => {
                   )}
                 </div>
               </div>
+            </div>
               <div className="subbody-right">
                 <div className="dropoff-header">
                   <h3>Dropoff</h3>
@@ -69,7 +70,6 @@ export const InboundTransferCard = (props) => {
               </div>
             </div> 
           </div>
-        </div>
           <div className="footer">
             <div className="booking-reference">
               {inboundTransfer.bookingReference && (

@@ -54,6 +54,7 @@ export const OutboundTransferCard = (props) => {
                   )}
                 </div>
               </div>
+            </div> 
               <div className="subbody-right">
                 <div className="dropoff-header">
                   <h3>Dropoff</h3>
@@ -70,7 +71,6 @@ export const OutboundTransferCard = (props) => {
                   )}
                   </div>
               </div>
-            </div> 
           </div>
         </div>
             <div className="footer">
