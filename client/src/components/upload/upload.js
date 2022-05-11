@@ -39,14 +39,11 @@ function Upload({ cardId, url, handleUpload }) {
 
   return (
     <form enctype="multipart/form-data">
-      {/* <input type="file" name="uploaded_file" onChange={changeHandler} />
-      <div>
-        <button onClick={handleSubmission}>Submit</button>
-      </div> */}
+
       <label htmlFor="contained-button-file">
         <div style={{display: selectedFile ? "none" : ""}}>
           <Input
-            accept="image/*"
+            accept="docs/*"
             id="contained-button-file"
             multiple
             type="file"
