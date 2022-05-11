@@ -3,13 +3,13 @@ import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import "./crud.css"
-import AddAccommodation from "../addAccommodation"
+import AddPassport from "../addPassport"
 import DeleteDialogue from '../../../assets/deleteConfirmation';
 
 const StyledMenu = styled((props) => (
@@ -54,10 +54,11 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const CrudMenu = (props) => {
-  const accommodationData = props.accommodationData;
-  const userId = props.userId;
-  const refresh = props.refresh
+const CrudMenu = ({
+  passportData,
+  userId,
+  refresh,
+}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
@@ -73,6 +74,7 @@ const CrudMenu = (props) => {
 
   const handleOpen = () => {
     handleCrudClose();
+    console.log("handle open")
     setOpen(true);
   };
 
@@ -126,20 +128,20 @@ const CrudMenu = (props) => {
           Delete
         </MenuItem>
       </StyledMenu>
-      <DeleteDialogue
+        <DeleteDialogue
           open={deleteOpen}
           handleDeletePromptClose={handleDeletePromptClose}
-          dataType="accommodation"
-          objectId={accommodationData._id}
+          dataType="passport"
+          objectId={passportData._id}
         />
-      <AddAccommodation
-        handleOpen={handleOpen}
-        open={open}
-        handleClose={handleClose}
-        accommodationData={accommodationData}
-        accommodationId={accommodationData._id}
-        userId={userId}
-      />
+        <AddPassport
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          passportData={passportData}
+          passportId={passportData._id}
+          user={userId}
+        />
     </div>
   );
 }

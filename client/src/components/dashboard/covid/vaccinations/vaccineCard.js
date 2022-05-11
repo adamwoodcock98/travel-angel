@@ -9,6 +9,7 @@ const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
   const vaccinationsData = props.vaccinationsData;
   const doses = vaccinationsData.vaccineDoses;
+  const refresh = props.refresh;
   const doseData = {
     dose: "",
     date: "",
@@ -25,7 +26,7 @@ const VaccineCard = (props) => {
 
   const dosesArray = [];
   vaccinationsData.vaccineDoses.forEach(dose => {
-    dosesArray.push(<DosePane doseData={dose} vaccinationsID={vaccinationsData._id} />)
+    dosesArray.push(<DosePane doseData={dose} vaccinationsID={vaccinationsData._id} refresh={refresh} />)
   })
 
   return(

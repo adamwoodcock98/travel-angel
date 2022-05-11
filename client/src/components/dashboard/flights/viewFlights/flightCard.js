@@ -12,6 +12,7 @@ export const FlightCard = (props) => {
 
   const flightData = props.outboundFlight;
   const userId = props.userId;
+  const refresh = props.refresh;
 
   const departureData = {
     airport: flightData.departureAirport,
@@ -69,7 +70,7 @@ export const FlightCard = (props) => {
           <AirportPane data={arrivalData} />
         </div>
         <div className="flight-card-crud">
-          <CrudMenu userId={userId} flightData={flightData} />
+          <CrudMenu userId={userId} flightData={flightData} refresh={refresh} />
         </div>
       </div>
       <div className="flight-card-footer">

@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "@types/google.maps": "^3.48.7"
+    "@types/google.maps": "^3.48.7",
+    "sass": "^1.51.0"
   }
 }
