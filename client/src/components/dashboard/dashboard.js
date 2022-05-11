@@ -43,7 +43,7 @@ const theme = createTheme({
       main: '#f22771',
     },
     secondary: {
-      main: '#f22771',
+      main: 'rgb(255, 0, 93)',
     },
   },
 });
@@ -69,10 +69,10 @@ export default function VerticalTabs({ session }) {
   };
 
   return (
-    <Box
+    <ThemeProvider theme={theme}><Box
       className="tab-box"
       sx={{ flexGrow: 1, bgcolor: "background.paper" }}
-    ><ThemeProvider theme={theme}>
+    >
       <Tabs
         className="sidebar"
         orientation="vertical"
@@ -99,7 +99,7 @@ export default function VerticalTabs({ session }) {
           {...a11yProps(5)}
         />
       </Tabs>
-      </ThemeProvider>
+     
       <TabPanel className="tab-content" value={value} index={0}>
         <Flights session={session} />
       </TabPanel>
@@ -119,5 +119,6 @@ export default function VerticalTabs({ session }) {
         <Covid session={session} />
       </TabPanel>
     </Box>
+    </ThemeProvider>
   );
 }
