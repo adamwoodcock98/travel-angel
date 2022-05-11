@@ -34,13 +34,11 @@ export default function AccommodationCard(props) {
     <div className="card-container">
       {accommodation.map((accommodation, index) => {
         return (
-          // <div className="accommodation">
             <div className="card" key={index}>
 
               <div className="crud-menu">
                 <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
               </div>
-
               <div className="header">
                 <h1>{accommodation.name}</h1>
               </div>
@@ -55,6 +53,7 @@ export default function AccommodationCard(props) {
                     <p>Check-in opens at {accommodation.checkInTime}</p>
                   </div>
                 </div>
+
                 <div className="subbody-right">
                   <div className="check-out-header">
                     <h3>Check-Out</h3>
@@ -65,15 +64,11 @@ export default function AccommodationCard(props) {
                   </div>
                 </div>
               </div>
+
               <div className="footer">
                 <div className="booking-reference">
                   {accommodation.bookingReference && (
                     <p>Booking Reference: {accommodation.bookingReference}</p>
-                  )}
-                </div>
-                <div className="address">
-                  {accommodation.address && (
-                    <p>Address: {formatAddress(accommodation.address)}</p>
                   )}
                 </div>
                 <div className="contact-number">
@@ -81,6 +76,12 @@ export default function AccommodationCard(props) {
                     <p>TEL: {accommodation.contactNumber}</p>
                   )}
                 </div>
+                <div className="address">
+                  {accommodation.address && (
+                    <p>Address: {formatAddress(accommodation.address)}</p>
+                  )}
+                </div>
+              
                 <div className="directions">
                   <Button
                     color="secondary"
@@ -91,10 +92,9 @@ export default function AccommodationCard(props) {
                     Get Directions
                   </Button>
                 </div>
-              </div>
 
               <div className="upload">
-              <Upload
+                <Upload
                   cardId={accommodation._id}
                   url="dashboard/accommodation"
                   handleUpload={handleUpload}
@@ -111,9 +111,8 @@ export default function AccommodationCard(props) {
                       </button>
                     );
                   })}
-              {/* </div> */}
+              </div>
             </div>
-            
           </div>
         );
       })}

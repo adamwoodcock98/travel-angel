@@ -6,26 +6,28 @@
 /* Title page */
 h1 {
   font-family: Arial;
+  margin: 0;
 }
 
 /* Title cards */
 h2 {
-
+  margin: 0;
 }
 
 /* Info headings: time, checkin/out, booking ref*/
 h4 {
-
+  margin: 0;
 }
 
 /* Subheading cards */
 h3 {
-
+  margin: 0;
 }
 
-/* Data: address */
+/* Data: address, dates etc. */
 p {
   /* color:whitesmoke */
+  margin: 0;
 }
 
 .directions {
@@ -55,12 +57,13 @@ p {
   display: flex;
   flex: 1;
   justify-content: center;
+  flex-direction: column;
 }
 
-.subheading {
+/* .subheading {
   justify-content: center;
   text-align: center;
-}
+} */
 
 .body {
   text-align: center;

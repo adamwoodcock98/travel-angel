@@ -23,18 +23,17 @@ const ParkingCard = (props) => {
 
   return (
     <div className="card-container">
-    <div className="card">
+      <div className="card">
+        <div className="crud-menu">
+          <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
+        </div>
 
-      <div className="crud-menu">
-        <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
-      </div>
-
-      <div className="header">
-        <h1>
-          Your booking
-          {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
-        </h1>
-      </div>
+        <div className="header">
+          <h1>
+            Your booking
+            {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
+          </h1>
+        </div>
 
       <div className="body">
         <div className="subbody-left">
@@ -48,6 +47,7 @@ const ParkingCard = (props) => {
           <h2>{parkingData.endDate && formatTime(parkingData.endDate)}</h2>
         </div>
       </div>
+
       <div className="parking-card-contact-content">
         <div className="parking-card-contact-airport">
           <h2>{parkingData.airport}</h2>
@@ -64,17 +64,17 @@ const ParkingCard = (props) => {
             {parkingData.address.addressLine1}, {parkingData.address.postalCode}
           </p>
 
-          <div className="directions">
-            <Button
-              color="secondary"
-              startIcon={<DirectionsOutlinedIcon />}
-              target="_blank"
-              href={props.handleDirections(parkingData.address)}
-            >
-              Get Directions
-            </Button>
-          </div>
+        <div className="directions">
+          <Button
+            color="secondary"
+            startIcon={<DirectionsOutlinedIcon />}
+            target="_blank"
+            href={props.handleDirections(parkingData.address)}
+          >
+          Get Directions
+          </Button>
         </div>
+      </div>
 
         <div className="parking-card-contact-number">
           <h4>Tel: {parkingData.contactNumber}</h4>
@@ -103,9 +103,8 @@ const ParkingCard = (props) => {
             );
           })}
       </div>
-      
     </div>
-    </div>
+  </div>
   );
 };
 

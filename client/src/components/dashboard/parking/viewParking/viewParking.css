@@ -1,4 +1,4 @@
-.parking-card {
+/* .parking-card { */
   /* display: flex;
   flex-direction: column;
   background-image: linear-gradient(#ffe3ec, #eba0ae);
@@ -6,13 +6,13 @@
   opacity: 0.9;
   text-align: center;
   margin: 10; */
-}
+/* } */
 
-.crud-menu {
+/* .crud-menu { */
   /* display: flex;
   flex: 1;
   justify-content: right; */
-}
+/* } */
 
 /* .header {
   text-align: center;
