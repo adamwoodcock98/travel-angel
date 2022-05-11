@@ -7,8 +7,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Alerts } from "../../assets/snackbar";
+import moment from "moment";
 
 const AddVisa = (props) => {
+
+  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const visaId = props.visaId;
@@ -25,6 +30,24 @@ const AddVisa = (props) => {
     user: userId,
     trip: tripId,
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -58,8 +81,8 @@ const AddVisa = (props) => {
 
     await axios
       .post(url, newVisa)
-      .catch((err) => console.log(err.message))
       .then(() => {
+        handleAlert("Visa added successfully.", "success");
         setVisa({
           visaNumber: "",
           startDate: "",
@@ -69,11 +92,16 @@ const AddVisa = (props) => {
           trip: tripId,
         });
         handleClose();
-      });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        handleAlert("Whoops! We couldn't add your visa, please try again.", "error");
+      });;;
   };
 
   return (
     <div>
+      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Visa</DialogTitle>
         <DialogContent>
@@ -94,7 +122,7 @@ const AddVisa = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={visa.startDate}
+            value={formatDate(visa.startDate)}
             autoFocus
             margin="dense"
             id="startDate"
@@ -110,7 +138,7 @@ const AddVisa = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={visa.endDate}
+            value={formatDate(visa.endDate)}
             autoFocus
             margin="dense"
             id="endDate"
@@ -144,6 +172,13 @@ const AddVisa = (props) => {
           <Button onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

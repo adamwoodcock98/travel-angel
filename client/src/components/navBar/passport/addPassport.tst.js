@@ -1,18 +1,14 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { Passport } from "./passport";
+import AddPassport from "./addPassport";
 
 test("passport", () => {
-  render(<Passport />);
+  render(<AddPassport />);
 
   const pass = "Passport";
   const newValue = "New value";
   const date = "2020-05-12";
-
-  expect(screen.getByText(pass)).toBeInTheDocument();
-
-  fireEvent.click(screen.getByRole("button", { name: "add" }));
 
   expect(screen.getByRole("heading", { name: pass })).toBeInTheDocument();
   expect(screen.getByRole("dialog", { name: pass })).toBeInTheDocument();

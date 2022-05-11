@@ -3,18 +3,28 @@ import axios from "axios";
 import AddParking from "./addParking";
 import ParkingCard from "./viewParking/viewParking";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
+import { Alerts } from "../../assets/snackbar";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Parking = ({ session }) => {
+  console.log("this is the parking rendering ");
+
   const { tripId } = useParams();
+  const [state, setState] = useState(0);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
 
   const userId = session;
 
   const [open, setOpen] = useState(false);
   const [parking, setParking] = useState([]);
-  const [emptyFields, setEmptyFields] = useState([]);
-  const newParking = {
+  const [didUpdate, setDidUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [newParking, setNewParking] = useState({
     startDate: "",
     endDate: "",
     airport: "",
@@ -36,6 +46,24 @@ const Parking = ({ session }) => {
     },
     user: userId,
     trip: tripId,
+  });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
   };
 
   const api = axios.create({
@@ -48,94 +76,32 @@ const Parking = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      startDate,
-      endDate,
-      airport,
-      type,
-      regPlate,
-      company,
-      contactNumber,
-      bookingReference,
-      notes,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    } = newParking;
-
-    const newBooking = {
-      startDate,
-      endDate,
-      airport,
-      type,
-      regPlate,
-      company,
-      contactNumber,
-      bookingReference,
-      notes,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    };
-
-    if(startDate === "" || endDate === "" || addressLine1 === "" || city === "" || postalCode === ""){
-      setEmptyFields(['startDate', 'endDate', 'addressLine1', 'city', 'postalCode'])
-      return
-    }
-
-    api.post(`/`, newBooking).then((res) => {
-      handleClose();
-      setParking({
-        startDate: "",
-        endDate: "",
-        airport: "",
-        type: "",
-        regPlate: "",
-        company: "",
-        contactNumber: "",
-        bookingReference: "",
-        notes: "",
-        buildingNumber: "",
-        buildingName: "",
-        addressLine1: "",
-        addressLine2: "",
-        city: "",
-        postalCode: "",
-        stateCounty: "",
-        countryCode: "",
-        user: userId,
-        trip: tripId,
-      });
-    });
+    setDidUpdate(!didUpdate);
   };
 
   useEffect(() => {
     if (userId !== "null") {
-      api.get(`/${userId}/${tripId}`).then((res) => {
+      api.get(`/${userId}/${tripId}`)
+      .then((res) => {
         const bookings = res.data.bookings;
         setParking(bookings);
-      });
+      })
+      .catch((error) => {
+        if (error.response.status) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert(
+            "There was a problem connecting to the server.",
+            "error"
+          );
+        }
+      })
+      .finally(() => setLoading(false));;
     }
-  }, []);
+  }, [didUpdate, state]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
@@ -149,44 +115,52 @@ const Parking = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
   if (parking.length) {
     const parkingArray = [];
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} />
+        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} refresh={handleClose} />
       );
     });
 
     return (
-      <div className="parking-window">
-        <div className="parking-header">
-          <h1>Parking</h1>
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none"}} >
+          <CircularProgress color="secondary" />
         </div>
-        <div className="parking-content">{parking.length && parkingArray}</div>
-        <div className="parking-footer">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-          <AddParking
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            parkingData={newParking}
-            parkingId={null}
-            userId={userId}
-            tripId={tripId}
-            emptyFields={emptyFields}
-          />
+        <div className="parking-window">
+          <div className="parking-header">
+            <h1>Parking</h1>
+          </div>
+          <div className="parking-content">{parking.length && parkingArray}</div>
+          <div className="parking-footer">
+            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+              <AddIcon />
+            </Fab>
+            <AddParking
+              open={open}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+              parkingData={newParking}
+              parkingId={null}
+              userId={userId}
+              tripId={tripId}
+            />
+          </div>
         </div>
-      </div>
+      </>
     );
   } else {
     return (
       <>
+      <h1>Looks like you don't have any saved parking voucher, add your first one now!</h1>
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>
@@ -198,7 +172,13 @@ const Parking = ({ session }) => {
         parkingId={null}
         userId={userId}
         tripId={tripId}
-        emptyFields={emptyFields}
+      />
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
       />
       </>
     );

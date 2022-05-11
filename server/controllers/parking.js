@@ -1,6 +1,7 @@
 const Parking = require("../models/parking.js");
 const Address = require("../models/address.js");
 const Trip = require("../models/trip.js");
+const Upload = require("../models/upload.js");
 
 const ParkingController = {
   Index: async (req, res) => {
@@ -9,7 +10,9 @@ const ParkingController = {
     const parkingBookings = await Parking.find({
       user: userId,
       trip: tripId,
-    }).populate("address");
+    })
+      .populate("address")
+      .populate("uploads");
 
     res.json({ bookings: parkingBookings });
   },
@@ -29,8 +32,6 @@ const ParkingController = {
       });
 
       const saveAddress = await address.save();
-
-      console.log(data.user)
 
       const parking = new Parking({
         startDate: data.startDate,
@@ -61,10 +62,41 @@ const ParkingController = {
       res.status(500).send();
     }
   },
+  Upload: async (req, res) => {
+    const parkingId = req.params.id;
+    const file = req.file.filename;
+    const filename = req.file.originalname;
+
+    try {
+      const upload = new Upload({ name: filename, file: file });
+
+      await upload.save();
+
+      const foundParking = await Parking.findById(parkingId);
+
+      foundParking.uploads.push(upload);
+
+      await foundParking.save();
+
+      res.json({ msg: "Upload Successful", type: "success", file: file });
+    } catch (err) {
+      console.log(err.message);
+      res.status(500).send(err);
+    }
+  },
+  Download: async (req, res) => {
+    const fileId = req.params.id;
+
+    const file = await Upload.findById(fileId);
+
+    const filename = file.file;
+
+    res.download(`./public/uploads/${filename}`); // this is the absolute path to the file
+  },
 
   Update: async (req, res) => {
-    const data = req.body
-    const id = req.params.id
+    const data = req.body;
+    const id = req.params.id;
     try {
       const parking = await Parking.findById(id);
       parking.startDate = data.startDate;
@@ -76,7 +108,7 @@ const ParkingController = {
       parking.contactNumber = data.contactNumber;
       parking.bookingReference = data.bookingReference;
       parking.notes = data.notes;
-    
+
       await parking.save();
 
       const address = await Address.findById(parking.address._id);
@@ -92,7 +124,7 @@ const ParkingController = {
       await address.save();
 
       res.status(202).send();
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
       res.status(500).send();
     }
@@ -105,14 +137,12 @@ const ParkingController = {
       await Parking.deleteOne({ _id: id });
 
       res.status(200).send();
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
 
       res.status(500).send();
     }
   },
-
-
 };
 
 module.exports = ParkingController;

@@ -58,6 +58,8 @@ function a11yProps(index) {
 }
 
 export default function VerticalTabs({ session }) {
+  console.log("This is the rendering of the sidebar");
+
   // the main functional component to be rendered by index aka the sidebar
   const [value, setValue] = React.useState(0); // setting up state for the tab bar, this is purely to render things for the tab bar, not state that we will ever get data from
 

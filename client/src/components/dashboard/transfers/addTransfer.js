@@ -12,8 +12,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import { getThemeProps } from "@mui/system";
+import { Alerts } from "../../assets/snackbar";
+import moment from "moment";
 
 const AddTransfer = (props) => {
+
+  const formatDateTime = (date) => moment(date).format("yyyy-MM-DDThh:mm");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const transferId = props.transferId;
@@ -52,6 +57,24 @@ const AddTransfer = (props) => {
     user: userId,
     trip: tripId,
   })
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handlePickupChange = (e) => {
     const value = e.target.value;
@@ -153,6 +176,8 @@ const AddTransfer = (props) => {
           trip: tripId,
         });
         handleClose();
+      }).catch(() => {
+        handleAlert("Whoops! We couldn't add your transfer, please try again.", "error");
       });
   };
 
@@ -220,7 +245,7 @@ const AddTransfer = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={transfer.pickupTime}
+            value={formatDateTime(transfer.pickupTime)}
             autoFocus
             margin="dense"
             id="pickupTime"
@@ -237,7 +262,7 @@ const AddTransfer = (props) => {
           />
           
           <TextField
-            value={transfer.dropoffTime}
+            value={formatDateTime(transfer.dropoffTime)}
             autoFocus
             margin="dense"
             id="dropoffTime"
@@ -452,6 +477,13 @@ const AddTransfer = (props) => {
           <Button onClick={handleSubmit}>Save Transfer Details</Button>
         </DialogActions>
       </Dialog>
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 }

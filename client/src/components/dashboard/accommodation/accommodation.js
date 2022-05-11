@@ -6,15 +6,26 @@ import { useParams } from "react-router-dom";
 import "./accommodation.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import { Alerts } from "../../assets/snackbar";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
 
+  const [state, setState] = useState(0);
+
+  console.log("This is the state, is this causing problems?", state);
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   const userId = session;
 
   const [accommodation, setAccommodation] = useState([]);
+
   const [open, setOpen] = useState(false);
-  const [emptyFields, setEmptyFields] = useState([])
+
   const [accommodationArray, setAccommodationArray] = useState({
     name: "",
     contactNumber: "",
@@ -35,19 +46,32 @@ export const ViewAccommodation = ({ session }) => {
     },
     user: userId,
     trip: tripId,
-  })
+  });
 
-  useEffect(() => {
-    if (userId !== "null") {
-      axios
-        .get(
-          `http://localhost:8000/dashboard/accommodation/${userId}/${tripId}`
-        )
-        .then((res) => {
-          setAccommodation(res.data.accommodation);
-        });
-    }
-  }, []);
+  console.log(
+    "This is the accommodation, is this changing?",
+    accommodationArray
+  );
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const [didUpdate, setDidUpdate] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -55,90 +79,35 @@ export const ViewAccommodation = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setAccommodationArray({
-      ...accommodationArray,
-      [e.target.name]: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    } = accommodationArray;
-
-    const newAccommodation = {
-      name,
-      contactNumber,
-      checkInDate,
-      checkOutDate,
-      checkInTime,
-      checkOutTime,
-      bookingReference,
-      buildingNumber,
-      buildingName,
-      addressLine1,
-      addressLine2,
-      city,
-      postalCode,
-      stateCounty,
-      countryCode,
-      user,
-      trip,
-    };
-
-    if (name === "" || contactNumber === "" || checkInDate === "" || checkOutDate === "" || checkInTime === "" || checkOutTime === "" || bookingReference === "") {
-      setEmptyFields(['name', 'contactNumber', 'checkInDateInput', 'checkOutDateInput', 'checkInTimeInput', 'checkOutTimeInput', 'bookingReference'])
-      return
+  useEffect(() => {
+    setLoading(true);
+    if (userId !== "null") {
+      axios
+        .get(
+          `http://localhost:8000/dashboard/accommodation/${userId}/${tripId}`
+        )
+        .then((res) => {
+          setAccommodation(res.data.accommodation);
+        })
+        .catch((error) => {
+          if (error.response.status) {
+            handleAlert(
+              error.response.status + " - " + error.response.statusText,
+              "error"
+            );
+          } else {
+            handleAlert(
+              "There was a problem connecting to the server.",
+              "error"
+            );
+          }
+        })
+        .finally(() => setLoading(false));
     }
-
-    await axios
-      .post("http://localhost:8000/dashboard/accommodation", newAccommodation)
-      .catch((err) => console.log(err.message))
-      .then(() => {
-        setAccommodationArray({
-          name: "",
-          contactNumber: "",
-          checkInDate: "",
-          checkOutDate: "",
-          checkInTime: "",
-          checkOutTime: "",
-          bookingReference: "",
-          buildingNumber: "",
-          buildingName: "",
-          addressLine1: "",
-          addressLine2: "",
-          city: "",
-          postalCode: "",
-          stateCounty: "",
-          countryCode: "",
-          user: userId,
-          trip: tripId,
-        });
-        handleClose();
-      });
-  };
+  }, [didUpdate, state]);
 
   const formatAddressMaps = (address) => {
     const addressObject = address;
@@ -152,29 +121,93 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   const handleDirections = (address) => {
-    return "https://www.google.com/maps/search/?api=1&query="+formatAddressMaps(address)
-   }
+    return (
+      "https://www.google.com/maps/search/?api=1&query=" +
+      formatAddressMaps(address)
+    );
+  };
 
-  return (
-    <div className="container">
-      <div className="header">
-        <h1 className="title">Accommodation</h1>
-        <AddAccommodation
-          className="add-accomodation"
-          handleOpen={handleOpen}
-          open={open}
-          handleClose={handleClose}
-          handleChange={handleChange}
-          accommodation={accommodationArray}
-          handleSubmit={handleSubmit}
-          emptyFields={emptyFields}
+  if (accommodation.length) {
+    return (
+      <>
+        <div className="loading" style={{ display: loading ? "" : "none" }}>
+          <CircularProgress color="secondary" />
+        </div>
+        <div className="container">
+          <div className="header">
+            <h1 className="title">Accommodation</h1>
+            <AddAccommodation
+              className="add-accomodation"
+              handleOpen={handleOpen}
+              open={open}
+              handleClose={handleClose}
+              accommodationData={accommodationArray}
+              accommodationId={null}
+              userId={userId}
+              tripId={tripId}
+            />
+          </div>
+          <div className="body">
+            <AccommodationCard
+              accommodation={accommodation}
+              userId={userId}
+              handleDirections={handleDirections}
+              refresh={handleClose}
+            />
+          </div>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+          <Alerts
+            message={alertMessage}
+            open={alertOpen}
+            handleClose={handleAlertClose}
+            alertPosition={alertPosition}
+            alertType={alertType}
+          />
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <div className="container">
+        <div className="header">
+          <h1 className="title">Accommodation</h1>
+          <h1>
+            Looks like you don't have any saved flights, add your first one now!
+          </h1>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+          <AddAccommodation
+            className="add-accomodation"
+            handleOpen={handleOpen}
+            open={open}
+            handleClose={handleClose}
+            accommodationData={accommodationArray}
+            accommodationId={null}
+            userId={userId}
+            tripId={tripId}
+          />
+        </div>
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
         />
       </div>
-      {accommodation.length &&
-        <div className="body">
-          <AccommodationCard accommodation={accommodation} userId={userId} handleDirections={handleDirections} />
-        </div>
-      }
-    </div>
-  )
+    );
+  }
 };

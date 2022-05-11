@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import NavBar from "./navBar/navBar";
 import VerticalTabs from "./dashboard/dashboard";
 import Trips from "./trips/trips";
-import { Welcome } from "./welcome/welcome"
+import { Welcome } from "./welcome/welcome";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
-
   const [session, setSession] = useState(
     window.localStorage.getItem("session")
   );
+
+  console.log("The app file when rendered");
 
   const handleLogIn = (user) => {
     window.localStorage.setItem("session", user);
@@ -19,7 +20,7 @@ const App = () => {
   const handleLogOut = () => {
     window.localStorage.setItem("session", null);
     window.location = "/";
-    setSession({});
+    setSession("");
   };
 
   useEffect(() => {
