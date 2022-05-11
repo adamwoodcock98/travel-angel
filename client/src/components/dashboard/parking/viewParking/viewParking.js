@@ -4,6 +4,7 @@ import moment from "moment";
 import CrudMenu from "./crud/crud"
 import Button from "@mui/material/Button";
 import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
+import '../../../assets/styling/cards.css'
 
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
@@ -13,6 +14,7 @@ const ParkingCard = (props) => {
   const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
 
   return(
+    <div className="card-container">
     <div className="parking-card">
       <div className="parking-card-header">
         <h1>Your booking{parkingData.bookingReference && `: ${parkingData.bookingReference}`}</h1>
@@ -53,6 +55,7 @@ const ParkingCard = (props) => {
       <div className="directions">
         <Button color="secondary" startIcon={<DirectionsOutlinedIcon />} target="_blank" href={props.handleDirections(parkingData.address)}>Get Directions</Button>
       </div>
+    </div>
     </div>
   )
 

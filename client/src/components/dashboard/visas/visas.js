@@ -74,6 +74,9 @@ const Visas = ({ session }) => {
           <h1>Your visas</h1>
         </div>
         <div>
+        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <AddIcon />
+        </Fab>
           <AddVisa
             open={open}
             handleOpen={handleOpen}

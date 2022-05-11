@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import "./viewVisa.css"
 import CrudMenu from "./crud/crud"
+import "../../assets/styling/cards.css"
 
 export default function VisaCard(props) {
   const visa = props.visa;

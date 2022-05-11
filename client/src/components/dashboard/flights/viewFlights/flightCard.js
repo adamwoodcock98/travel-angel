@@ -4,6 +4,7 @@ import { AirportPane } from "./airportPane"
 import { FooterPane } from "./footerPane"
 import CrudMenu from "./crud/crud"
 import AddFlight from "../addFlight"
+import "../../../assets/styling/cards.css"
 
 export const FlightCard = (props) => {
 
@@ -35,7 +36,7 @@ export const FlightCard = (props) => {
   }
 
   return(
-    <div className="flight-card">
+    <div className="card-container">
       <div className="flight-card-content">
         <div className="flight-card-arrival-pane">
           <AirportPane data={departureData} />

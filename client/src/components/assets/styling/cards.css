@@ -1,0 +1,40 @@
+/* Title page */
+h1 {
+  font-family:
+
+}
+
+/* Title cards */
+h2 {
+
+}
+
+/* Info headings: time, checkin/out, booking ref*/
+h4 {
+
+}
+
+/* Subheading cards */
+h3 {
+
+}
+
+/* Data: address */
+p {
+  color:
+}
+
+.directions {
+  display: flex
+}
+
+.card-container {
+  margin: auto;
+  margin-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 5%; */
+  background-color: #ffe3ec;
+  background: #ffe3ec;
+}
+

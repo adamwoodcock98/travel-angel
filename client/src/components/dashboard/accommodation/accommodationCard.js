@@ -4,6 +4,7 @@ import CrudMenu from "./crud/crud"
 import "./accommodationCard.css";
 import Button from "@mui/material/Button";
 import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
+import "../../assets/styling/cards.css"
 
 export default function AccommodationCard(props) {
   const userId = props.userId;
@@ -26,7 +27,7 @@ export default function AccommodationCard(props) {
     <div className="card-container">
       {accommodation.map((accommodation, index) => {
         return (
-          <div className="accomodation">
+          <div className="accommodation">
             <div className="accommodation-card" key={index}>
               <div className="header">
                 <h1>{accommodation.name}</h1>
