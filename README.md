@@ -25,9 +25,8 @@ Travel Angel is a MERN-stack web application used to safely and securely store t
 
 - [Mongoose](https://mongoosejs.com) - Object Data Mapper for MongoDB.
 - [Nodemon](https://nodemon.io/) - reloads the server automatically on file-change (Not CSS though!).
-- [ESLint](https://eslint.org) - project-wide linting.
-- [Jest](https://jestjs.io/) - unit tests.
-- [Cypress](https://www.cypress.io/) - integration tests.
+- [Jest](https://jestjs.io/) - back-end unit testing.
+- [React Testing Library](https://github.com/testing-library/react-testing-library/) - front-end unit testing.
 - [Sketch](https://sketch.com/) - wireframing and mock-ups.
 - [GitHub Actions](https://github.com/features/actions) - continuous integration and automated deployment
 
@@ -37,6 +36,12 @@ Travel Angel is a MERN-stack web application used to safely and securely store t
 - Google Drive - Resources collection, and documentation of Team Charter and stand-ups/retros.
 - Slack - messaging and visibility for GitHUb Pull Requests
 - Zoom - Remote Pairing & Meetings
+
+### Resources
+
+- Slideshow Photos - [1](https://www.pexels.com/photo/birds-flying-in-the-sky-11054377/), [2](https://www.pexels.com/photo/view-of-cityscape-325185/), [3](https://www.pexels.com/photo/snow-covered-field-1076885/), [4](https://www.pexels.com/photo/green-pine-trees-covered-with-fogs-under-white-sky-during-daytime-167699/), [5](https://www.pexels.com/photo/down-angle-photography-of-red-clouds-and-blue-sky-844297/)
+- [Passport Design](https://www.theguardian.com/uk-news/gallery/2015/nov/03/new-uk-passport-design-in-pictures)
+- [Angel Heart Favicon](https://www.flaticon.com/free-icon/angel_3314947?term=heart%20angel&page=1&position=29&page=1&position=29&related_id=3314947&origin=search)
 
 ## Team Approach
 

@@ -7,8 +7,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import moment from "moment";
 
 const AddAccommodation = (props) => {
+
+  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
+
   const userId = props.userId;
   const tripId = props.tripId;
   const accommodationData = props.accommodationData;
@@ -155,7 +159,7 @@ const AddAccommodation = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={accommodation.checkInDate}
+            value={formatDate(accommodation.checkInDate)}
             data-testid="checkInDate"
             inputProps={{ "data-testid": "checkInDateInput" }}
             autoFocus
@@ -172,7 +176,7 @@ const AddAccommodation = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={accommodation.checkOutDate}
+            value={formatDate(accommodation.checkOutDate)}
             inputProps={{ "data-testid": "checkOutDateInput" }}
             data-testid="checkOutDate"
             autoFocus
