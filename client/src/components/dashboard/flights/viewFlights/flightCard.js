@@ -4,7 +4,7 @@ import { AirportPane } from "./airportPane";
 import { FooterPane } from "./footerPane";
 import CrudMenu from "./crud/crud";
 import Upload from "../../../upload/upload";
-import "../../../assets/styling/cards.css"
+import "../../../assets/styling/cards.css";
 
 export const FlightCard = (props) => {
   const handleUpload = props.handleUpload;
@@ -13,6 +13,7 @@ export const FlightCard = (props) => {
 
   const flightData = props.outboundFlight;
   const userId = props.userId;
+  const tripId = props.tripId;
   const refresh = props.refresh;
 
   const departureData = {
@@ -45,40 +46,49 @@ export const FlightCard = (props) => {
 
   return (
     <div className="card-container">
-    <div className="flight-card">
-      <div className="flight-card-content">
-        <div className="upload">
-          <Upload
-            cardId={flightData._id}
-            url="dashboard/flights"
-            handleUpload={handleUpload}
-          />
-          <div className="uploads">
-            Download Your Documents
-            {flightData.uploads.length &&
-              flightData.uploads.map((upload, index) => {
-                return (
-                  <button onClick={() => handleSubmit(upload._id)} key={index}>
-                    {upload.name}
-                  </button>
-                );
-              })}
+      <div className="flight-card">
+        <div className="flight-card-content">
+          <div className="upload">
+            <Upload
+              cardId={flightData._id}
+              url="dashboard/flights"
+              handleUpload={handleUpload}
+            />
+            <div className="uploads">
+              Download Your Documents
+              {flightData.uploads.length &&
+                flightData.uploads.map((upload, index) => {
+                  return (
+                    <button
+                      onClick={() => handleSubmit(upload._id)}
+                      key={index}
+                    >
+                      {upload.name}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
+          <div className="flight-card-arrival-pane">
+            <AirportPane data={departureData} />
+          </div>
+          <div className="flight-card-departure-pane">
+            <AirportPane data={arrivalData} />
+          </div>
+          <div className="flight-card-crud">
+            <CrudMenu
+              userId={userId}
+              flightData={flightData}
+              refresh={refresh}
+              handleUpload={handleUpload}
+              tripId={tripId}
+            />
           </div>
         </div>
-        <div className="flight-card-arrival-pane">
-          <AirportPane data={departureData} />
-        </div>
-        <div className="flight-card-departure-pane">
-          <AirportPane data={arrivalData} />
-        </div>
-        <div className="flight-card-crud">
-          <CrudMenu userId={userId} flightData={flightData} refresh={refresh} />
+        <div className="flight-card-footer">
+          <FooterPane data={footerData} airport={departureData.airport} />
         </div>
       </div>
-      <div className="flight-card-footer">
-        <FooterPane data={footerData} airport={departureData.airport} />
-      </div>
-    </div>
     </div>
   );
 };

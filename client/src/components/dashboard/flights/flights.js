@@ -7,7 +7,7 @@ import { Alerts } from "../../assets/snackbar";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
 
 const Flights = ({ session }) => {
@@ -157,10 +157,7 @@ const Flights = ({ session }) => {
             "error"
           );
         } else {
-          handleAlert(
-            "There was a problem connecting to the server.",
-            "error"
-          );
+          handleAlert("There was a problem connecting to the server.", "error");
         }
       })
       .finally(() => setLoading(false));
@@ -172,22 +169,37 @@ const Flights = ({ session }) => {
 
     outboundFlight.forEach((flight) => {
       outboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
+        <FlightCard
+          outboundFlight={flight}
+          key={flight._id}
+          userId={userId}
+          refresh={handleClose}
+          tripId={tripId}
+        />
       );
     });
 
     inboundFlight.forEach((flight) => {
       inboundFlights.push(
-        <FlightCard outboundFlight={flight} key={flight._id} userId={userId} refresh={handleClose} />
+        <FlightCard
+          outboundFlight={flight}
+          key={flight._id}
+          userId={userId}
+          refresh={handleClose}
+          tripId={tripId}
+        />
       );
     });
 
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <div className="loading" style={{ display: loading ? "" : "none" }}>
           <CircularProgress color="secondary" />
         </div>
-        <div className="flights-window" style={{ display: loading ? "none" : "" }}>
+        <div
+          className="flights-window"
+          style={{ display: loading ? "none" : "" }}
+        >
           <div className="flights-header">
             <h1>Your flights</h1>
           </div>
@@ -202,7 +214,12 @@ const Flights = ({ session }) => {
             </div>
           </div>
           <div className="flights-footer">
-            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <Fab
+              size="large"
+              color="secondary"
+              aria-label="add"
+              onClick={handleOpen}
+            >
               <AddIcon />
             </Fab>
             <AddFlight
@@ -222,8 +239,15 @@ const Flights = ({ session }) => {
   } else {
     return (
       <>
-      <h1>Looks like you don't have any saved flights, add your first one now!</h1>
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <h1>
+          Looks like you don't have any saved flights, add your first one now!
+        </h1>
+        <Fab
+          size="large"
+          color="secondary"
+          aria-label="add"
+          onClick={handleOpen}
+        >
           <AddIcon />
         </Fab>
         <AddFlight

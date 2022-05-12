@@ -1,8 +1,3 @@
-@font-face {
-  font-family: "Noto_Serif";
-  src: local("Noto_Serif"),
-    url("../../assets/Noto_Serif/NotoSerif-Regular.ttf") format("truetype");
-}
 /* Title page */
 h1 {
   font-family: Arial;
@@ -33,7 +28,6 @@ p {
 .directions {
   /* display: flex */
 }
-
 
 /* CARD LAYOUT */
 .card {
@@ -83,12 +77,9 @@ p {
 
 .subbody-right {
   text-align: left;
-  padding-left: 15px
+  padding-left: 15px;
 }
 
 .upload {
-  padding: 10px 0px 15px 0px; 
+  padding: 10px 0px 15px 0px;
 }
-
-
-
