@@ -93,7 +93,7 @@ p {
 #checkInTime.MuiOutlinedInput-input, 
 #checkOutTime.MuiOutlinedInput-input, 
 #dropoffTime.MuiOutlinedInput-input, 
-#pickupTime.MuiOutlinedInput-input {
+#pickupTime.MuiOutlinedInput-input, #endDate.MuiOutlinedInput-input, #startDate.MuiOutlinedInput-input {
   color: #666666;
 }
 
