@@ -83,8 +83,8 @@ export default function VerticalTabs({ session }) {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        // indicatorColor="secondary"
-        textColor="secondary"
+        indicatorColor="primary"
+        textColor="primary"
         id="side-bar"
       >
         <Tab icon={<FlightTakeoff />} aria-label="plane" {...a11yProps(0)} />
