@@ -9,6 +9,7 @@ import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../../assets/styling/cards.css";
 
+
 const Visas = ({ session }) => {
   const { tripId } = useParams();
   const [state, setState] = useState(0);
@@ -91,7 +92,7 @@ const Visas = ({ session }) => {
       <>
         <div className="visas">
           <div className="visa-header">
-            <h1 className="very-big">Visas</h1>
+            <h1 className="title very-big">Visas</h1>
           </div>
           <div className="visas-content">
             <div className="visas-content">
@@ -132,8 +133,9 @@ const Visas = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-          <h1 className="very-big">Visas</h1>
+        <h1 className="very-big">Visas</h1>
         <div className="empty-prompt">
+          
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
