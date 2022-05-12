@@ -123,7 +123,7 @@ const Transfers = ({ session }) => {
     return (
       <>
         <div className="transfers">
-          <div className="transfer-header">
+          <div className="transfer-header very-big">
             <h1>Your transfers</h1>
           </div>
           <div className="transfers-content">
@@ -174,7 +174,7 @@ const Transfers = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-        <h1>Transfers</h1>
+        <h1 className="very-big">Transfers</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved transfers</h3>
           <h2>Press + to get started</h2>

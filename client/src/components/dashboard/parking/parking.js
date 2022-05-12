@@ -140,7 +140,7 @@ const Parking = ({ session }) => {
       <>
         <div className="parking-window">
           <div className="parking-header">
-            <h1>Parking</h1>
+            <h1 className="very-big">Parking</h1>
           </div>
           <div className="parking-content">{parking.length && parkingArray}</div>
           <div className="parking-footer">
@@ -163,7 +163,7 @@ const Parking = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-      <h1>Parking</h1>
+      <h1 className="very-big">Parking</h1>
       <div className="empty-prompt">
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>

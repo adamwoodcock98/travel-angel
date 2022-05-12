@@ -150,3 +150,8 @@ p {
 .upload {
   padding: 10px 0px 15px 0px;
 }
+
+.very-big {
+  font-size: xxx-large;
+  text-align: center;
+}
