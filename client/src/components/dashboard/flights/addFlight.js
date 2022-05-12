@@ -240,24 +240,11 @@ const AddFlight = ({
             margin="dense"
             id="flightNumber"
             name="flightNumber"
-            label="Flight numbber"
+            label="Flight number"
             type="text"
             variant="outlined"
             onChange={handleChange}
             InputProps={{endAdornment: <SearchButton handleClick={handleApiSearch}/>}}
-            sx={{
-              border: '2px solid aqua',
-              borderRadius: 3,
-              transition: '0.2s',
-              textAlign: 'center',
-              '&:hover': {
-                outline: '2px solid green'
-              },
-              '&:focus': {
-                outline: '2px solid green'
-
-              },
-            }}
           />
           <TextField
             value={formatDate(flight.departureDate)}
@@ -269,7 +256,10 @@ const AddFlight = ({
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureDate') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{
+              border: emptyFields.includes('departureDate') ? '1px solid red' : '' ,
+              borderRadius: "5px",
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -291,7 +281,7 @@ const AddFlight = ({
               variant="outlined"
               onChange={handleChange}
               required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px", marginLeft: "-8px" }}
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>

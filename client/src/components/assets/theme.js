@@ -6,10 +6,10 @@ const theme = createTheme({
       main: "#F22771",
     },
     secondary: {
-      main: "64BAAA",
+      main: "#64BAAA",
     },
     warning: {
-      main: "FF7171",
+      main: "#FF7171",
     },
   },
 });
