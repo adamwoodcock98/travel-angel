@@ -71,7 +71,7 @@ p {
 }
 #default-cancel-button {
   color: #64baaa;
-}
+
 #search-button {
   color: black;
   margin-right: -18px;
@@ -86,3 +86,38 @@ p {
 .MuiButton-root#search-button {
   width: 10px;
 }
+
+#departureDate.MuiOutlinedInput-input, 
+#checkOutDate.MuiOutlinedInput-input, 
+#checkInDate.MuiOutlinedInput-input, 
+#checkInTime.MuiOutlinedInput-input, 
+#checkOutTime.MuiOutlinedInput-input, 
+#dropoffTime.MuiOutlinedInput-input, 
+#pickupTime.MuiOutlinedInput-input, #endDate.MuiOutlinedInput-input, #startDate.MuiOutlinedInput-input {
+  color: #666666;
+}
+
+#search-button {
+  margin-right: -13px;
+}
+
+/* label: {
+  position: 'absolute',
+  left: 12,
+  top: -5
+} */
+
+/* sx={{
+  borderRadius: 2,
+  transition: '0.2s',
+  textAlign: 'center',
+  '&:hover': {
+    outline: '2px solid green',
+    borderRadius: 2,
+    border: '2px solid aqua',
+  },
+  '&:focus': {
+    outline: '2px solid green',
+    borderRadius: 2,
+  },
+}} */

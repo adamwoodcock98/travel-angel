@@ -18,7 +18,7 @@ import moment from "moment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const SearchButton = ({handleClick}) => (
-  <Button onClick={handleClick}>
+  <Button id="search-button" onClick={handleClick}>
     <SearchOutlinedIcon />
   </Button>
 );
