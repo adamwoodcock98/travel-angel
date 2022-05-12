@@ -25,17 +25,23 @@ const ParkingCard = (props) => {
   return (
     <div className="card-container">
       <div className="card">
-        
         <div className="header">
           <div className="title">
             <h1>
               Your booking
-              {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
+              {parkingData.bookingReference &&
+                `: ${parkingData.bookingReference}`}
             </h1>
-            </div>
+          </div>
           <div className="crud-menu">
-          <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
-        </div>
+            <CrudMenu
+              userId={userId}
+              parkingData={parkingData}
+              tripId={tripId}
+              refresh={refresh}
+              handleUpload={handleUpload}
+            />
+          </div>
         </div>
         <div className="body">
           <div className="subbody-left">
@@ -43,8 +49,12 @@ const ParkingCard = (props) => {
               <p>From</p>
             </div>
             <div className="start-date-body">
-              <h3>{parkingData.startDate && formatDate(parkingData.startDate)}</h3>
-              <h3>{parkingData.startDate && formatTime(parkingData.startDate)}</h3>
+              <h3>
+                {parkingData.startDate && formatDate(parkingData.startDate)}
+              </h3>
+              <h3>
+                {parkingData.startDate && formatTime(parkingData.startDate)}
+              </h3>
             </div>
           </div>
           <div className="subbody-right">
