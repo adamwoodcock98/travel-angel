@@ -50,6 +50,7 @@ const AddFlight = ({
     trip: tripId,
   });
 
+  const [openFields, setOpenFields] = useState(false);
   const [emptyFields, setEmptyFields] = useState([])
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -68,6 +69,14 @@ const AddFlight = ({
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
+
+  const handleExpand = () => {
+    setOpenFields(true)
+  }
+
+  const handleContract = () => {
+    setOpenFields(false)
+  }
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -132,7 +141,6 @@ const AddFlight = ({
     axios.post(url, newFlight).then((res) => {
       handleAlert("Flight added successfully.", "success");
       handleClose();
-      handleUpload();
       setFlight({
         flightNumber: "",
         departureTime: "",
@@ -275,6 +283,7 @@ const AddFlight = ({
               <MenuItem value={true}>Outbound</MenuItem>
             </Select>
           </FormControl>
+          <div style={{display: openFields ? "" : "none"}}>
           <TextField
             value={flight.departureTime}
             autoFocus
@@ -291,7 +300,7 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-
+          <br />
           <TextField
             value={flight.airline}
             autoFocus
@@ -399,6 +408,7 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
+          </div>
           <TextField
             value={flight.bookingReference}
             autoFocus
@@ -410,32 +420,16 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
-            <Select
-              value={flight.isOutbound}
-              autoFocus
-              margin="dense"
-              id="isOutbound"
-              name="isOutbound"
-              label="Journey type"
-              variant="outlined"
-              onChange={handleChange}
-              required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
-            >
-              <MenuItem value={false}>Inbound</MenuItem>
-              <MenuItem value={true}>Outbound</MenuItem>
-            </Select>
-          </FormControl>
+          <p className={"text-link"} onClick={handleExpand} style={{display: openFields ? "none" : ""}}>+ add details manually</p>
+          <p className={"text-link"} onClick={handleContract} style={{display: openFields ? "" : "none"}} >- remove manual details</p>
         </DialogContent>
         <DialogActions>
-        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-        <Button id="default-cancel-button" onClick={handleClear}>Clear</Button>
           {flightId && (
-            <Button id="save-details-button" onClick={onSubmit}>Update Flight Details</Button>
+            <Button id="save-details-button" onClick={onSubmit}>Update</Button>
           )}
-          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save Flight Details</Button>}
+          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save</Button>}
+          <Button "default-cancel-button" onClick={handleClear}>Clear</Button>
+          <Button "default-cancel-button" onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
       <Alerts
