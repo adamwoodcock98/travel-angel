@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import "../../dashboard.css";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import moment from "moment";
 
 const AddTest = (props) => {
   const open = props.open;
@@ -24,6 +25,8 @@ const AddTest = (props) => {
   const tripId = props.tripId;
   const entryType = props.entryType;
   const handleUpload = props.handleUpload;
+
+  const formatDate = (date) => moment(date).format("yyyy-MM-DD");
 
   const [test, setTest] = useState({
     testType: testData.testType,
@@ -170,7 +173,7 @@ const AddTest = (props) => {
               </Select>
             </FormControl>
             <TextField
-              value={test.testDate}
+              value={formatDate(test.testDate)}
               autoFocus
               margin="dense"
               id="testDate"
@@ -184,7 +187,7 @@ const AddTest = (props) => {
               onChange={handleChange}
             />
             <TextField
-              value={test.validToDate}
+              value={formatDate(test.validToDate)}
               autoFocus
               margin="dense"
               id="validToDate"
@@ -233,7 +236,7 @@ const AddTest = (props) => {
           </div>
           <div style={{ display: test.entryType === "Reminder" ? "" : "none" }}>
             <TextField
-              value={test.testFromDate}
+              value={formatDate(test.testFromDate)}
               autoFocus
               margin="dense"
               id="testFromDate"
@@ -247,7 +250,7 @@ const AddTest = (props) => {
               onChange={handleChange}
             />
             <TextField
-              value={test.resultByDate}
+              value={formatDate(test.resultByDate)}
               autoFocus
               margin="dense"
               id="resultByDate"
