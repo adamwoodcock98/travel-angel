@@ -162,15 +162,22 @@ const Parking = ({ session }) => {
     );
   } else {
     return (
-      <>
+      <div className="empty-window">
       <h1>Parking</h1>
-        <div className="empty-prompt">
-          <h3>Looks like you don't have any saved flights</h3>
+      <div className="empty-prompt">
+          <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
+        <div className="empty-button">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       <AddParking
         open={open}
         handleOpen={handleOpen}
@@ -187,7 +194,7 @@ const Parking = ({ session }) => {
         alertPosition={alertPosition}
         alertType={alertType}
       />
-      </>
+      </div>
     );
   }
 };
