@@ -25,16 +25,16 @@ const ViewTrips = ({ trips }) => {
                 <div className="trip-card-header">
                   <h3 className="trip-h3">{trip.name}</h3>
                 </div>
-                <div className="body"><h4 className="trip-h4">{formatDate(trip.startDate)}</h4></div>
+                <div className="trip-body"><h4 className="trip-h4">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</h4></div>
                 <div className="footer">
                   {formatLongDate(new Date(Date.now())) <
                     formatLongDate(trip.startDate) && (
                     <p>
                       {daysRemaining(trip.startDate) <= 0
-                        ? "Less than a day remaining"
-                        : `Days left until the trip: ${
+                        ? ""
+                        : `${
                             daysRemaining(trip.startDate) + 1
-                          }`}
+                          } days to go`}
                     </p>
                   )}
                 </div>

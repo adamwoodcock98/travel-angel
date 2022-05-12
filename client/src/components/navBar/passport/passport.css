@@ -37,12 +37,14 @@
   float: left;
   margin-top: -35px;
 }
+
 .pass-num {
   text-align: right;
   float: right;
   margin-right: 60px;
   margin-top: -35px;
 }
+
 .pass-signature {
   font-family: "Signature", Arial, serif;
   text-transform: capitalize;

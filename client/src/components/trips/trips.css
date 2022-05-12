@@ -1,7 +1,8 @@
-.container {
+.trip-container {
   display: flex;
   flex-direction: column;
   margin-top: 120px;
+  margin-bottom: 60px;
 }
 
 .trip-card {
@@ -42,10 +43,14 @@ h2.countdown {
   margin-bottom: 40px;
 }
 
+.trip-body {
+  text-align: left;
+}
+
 .trip-h3 {
   font-size: 40px;
 }
 
 .trip-h4 {
-
+  text-align: left;
 }

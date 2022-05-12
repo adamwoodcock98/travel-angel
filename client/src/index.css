@@ -23,8 +23,8 @@ code {
   );
   color: white !important;
   transition: 0.3s;
-  /* position: sticky !important;
-  top: 0 !important; */
+  position: sticky !important;
+  top: 0 !important;
 }
 
 .MuiFab-circular:hover {
