@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import "../../dashboard.css";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import { Alerts } from "../../../assets/snackbar";
 
 const AddTest = (props) => {
   const open = props.open;
@@ -39,6 +40,26 @@ const AddTest = (props) => {
     user: userId,
     trip: tripId,
   });
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [openPickup, setOpenPickup] = useState(false);
+  const [openDropoff, setOpenDropoff] = useState(false);
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -91,6 +112,8 @@ const AddTest = (props) => {
       url = "http://localhost:8000/dashboard/covid/test";
     }
     axios.post(url, newTest).then((res) => {
+      handleAlert("Test information added successfully", "success")
+      handleClose()
       handleClose();
       handleUpload();
       setTest({
@@ -107,7 +130,13 @@ const AddTest = (props) => {
         user: userId,
         trip: tripId,
       });
-    });
+    })
+    .catch(() => {
+      handleAlert(
+        "Whoops! We couldn't add your test information, please try again.",
+        "error"
+      );
+    });;
   };
 
   return (
@@ -118,7 +147,7 @@ const AddTest = (props) => {
           <DialogContentText>
             Fill in the fields to store the details of your Covid test
           </DialogContentText>
-          <FormControl sx={{ minWidth: 190 }}>
+          <FormControl sx={{ minWidth: 195, mt: 1 }}>
             <InputLabel id="demo-select">Add new</InputLabel>
             <Select
               value={test.entryType}
@@ -134,7 +163,7 @@ const AddTest = (props) => {
               <MenuItem value={"Reminder"}>Reminder</MenuItem>
             </Select>
           </FormControl>
-          <FormControl sx={{ minWidth: 190 }}>
+          <FormControl sx={{ minWidth: 195, m: 1 }}>
             <InputLabel id="demo-select-small">Test type</InputLabel>
             <Select
               value={test.testType}
@@ -152,7 +181,7 @@ const AddTest = (props) => {
             </Select>
           </FormControl>
           <div style={{ display: test.entryType === "Result" ? "" : "none" }}>
-            <FormControl sx={{ minWidth: 190 }}>
+            <FormControl sx={{ minWidth: 195, mt: 1 }}>
               <InputLabel id="demo-select-small">Result</InputLabel>
               <Select
                 value={test.result}
@@ -170,6 +199,18 @@ const AddTest = (props) => {
               </Select>
             </FormControl>
             <TextField
+              value={test.testNumber}
+              autoFocus
+              margin="dense"
+              id="testNumber"
+              name="testNumber"
+              label="Test number"
+              type="text"
+              sx={{m: 1}}
+              variant="outlined"
+              onChange={handleChange}
+            />
+            <TextField
               value={test.testDate}
               autoFocus
               margin="dense"
@@ -177,6 +218,7 @@ const AddTest = (props) => {
               name="testDate"
               label="Test date"
               type="date"
+              sx={{minWidth: 195}}
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
@@ -190,22 +232,12 @@ const AddTest = (props) => {
               id="validToDate"
               name="validToDate"
               label="Valid until"
+              sx={{m: 1, minWidth: 195}}
               type="date"
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleChange}
-            />
-            <TextField
-              value={test.testNumber}
-              autoFocus
-              margin="dense"
-              id="testNumber"
-              name="testNumber"
-              label="Test number"
-              type="text"
-              variant="outlined"
               onChange={handleChange}
             />
             <TextField
@@ -226,6 +258,7 @@ const AddTest = (props) => {
               id="testProvider"
               name="testProvider"
               label="Test provider"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleChange}
@@ -240,6 +273,7 @@ const AddTest = (props) => {
               name="testFromDate"
               label="Test from"
               type="date"
+              sx={{minWidth: 195}}
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
@@ -254,17 +288,26 @@ const AddTest = (props) => {
               name="resultByDate"
               label="Results by"
               type="date"
+              sx={{m: 1, minWidth: 195}}
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
               }}
               onChange={handleChange}
             />
+                  <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
           </div>
         </DialogContent>
         <DialogActions>
           <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          <Button id="save-details-button" onClick={onSubmit}>Save Test Details</Button>
+          {!testID && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>Save</Button>}
+          {testID && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>Update</Button>}
         </DialogActions>
       </Dialog>
     </div>
