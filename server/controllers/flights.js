@@ -44,6 +44,8 @@ const FlightsController = {
         arrivalTerminal: data.arrivalTerminal,
         arrivalCity: data.arrivalCity,
         arrivalGate: data.arrivalGate,
+        arrivalDate: data.arrivalDate,
+        arrivalTime: data.arrivalTime,
         bookingReference: data.bookingReference,
         isOutbound: data.isOutbound,
         user: data.user,
@@ -112,6 +114,8 @@ const FlightsController = {
       flight.arrivalTerminal = data.arrivalTerminal;
       flight.arrivalCity = data.arrivalCity;
       flight.arrivalGate = data.arrivalGate;
+      flight.arrivalDate = data.arrivalDate;
+      flight.arrivalTime = data.arrivalTime;
       flight.bookingReference = data.bookingReference;
       flight.isOutbound = data.isOutbound;
       await flight.save();

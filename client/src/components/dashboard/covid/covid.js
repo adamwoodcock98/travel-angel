@@ -112,7 +112,7 @@ const Covid = ({ session }) => {
       <>
         <div className="covid-window">
           <div className="covid-header">
-            <h1>COVID Documentation</h1>
+            <h1 className="very-big">COVID-19</h1>
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
@@ -161,7 +161,7 @@ const Covid = ({ session }) => {
       <>
         <div className="covid-window">
           <div className="covid-header">
-            <h1>Your COVID Documentation</h1>
+            <h1 className="very-big">COVID-19</h1>
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
