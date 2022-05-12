@@ -9,6 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
+import "../dashboard.css";
 
 const AddVisa = (props) => {
 
@@ -173,8 +174,8 @@ const AddVisa = (props) => {
           />  
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit}>Save Visa Details</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="save-details-button" onClick={handleSubmit}>Save Visa Details</Button>
         </DialogActions>
       </Dialog>
       <Alerts

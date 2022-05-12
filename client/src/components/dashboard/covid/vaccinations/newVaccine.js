@@ -11,7 +11,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import ListSubheader from "@mui/material/ListSubheader";
-
+import "../../dashboard.css";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
@@ -138,8 +138,12 @@ const AddVaccine = (props) => {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Vaccine Details</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button id="save-details-button" onClick={onSubmit}>
+            Save Vaccine Details
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
