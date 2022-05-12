@@ -33,8 +33,6 @@ const ParkingController = {
 
       const saveAddress = await address.save();
 
-      console.log(data.user);
-
       const parking = new Parking({
         startDate: data.startDate,
         endDate: data.endDate,

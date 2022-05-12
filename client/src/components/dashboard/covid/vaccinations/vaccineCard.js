@@ -10,6 +10,8 @@ const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
   const vaccinationsData = props.vaccinationsData;
   const handleUpload = props.handleUpload;
+  const doses = vaccinationsData.vaccineDoses;
+  const refresh = props.refresh;
   const doseData = {
     dose: "",
     date: "",
@@ -39,6 +41,7 @@ const VaccineCard = (props) => {
           vaccinationsID={vaccinationsData._id}
           key={index}
           handleUpload={handleUpload}
+          refresh={refresh}
         />
       );
     });

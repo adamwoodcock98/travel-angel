@@ -15,7 +15,7 @@ const TestCard = (props) => {
   const tripId = props.tripId;
   const handleUpload = props.handleUpload;
 
-  console.log("LOOK HERE ===========", testData);
+  const refresh = props.refresh;
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,7 +37,13 @@ const TestCard = (props) => {
         <h1>
           {testData.testType} {testData.entryType}
         </h1>
-        <CrudMenu testData={testData} testId={testId} userId={userId} />
+        <CrudMenu
+          testData={testData}
+          testId={testId}
+          userId={userId}
+          refresh={refresh}
+          tripId={tripId}
+        />
       </div>
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
         <div className="test-card-primary-content">

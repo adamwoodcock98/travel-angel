@@ -10,7 +10,8 @@ import { useParams } from "react-router-dom";
 
 const Covid = ({ session }) => {
   const [testData, setTestData] = useState([]);
-  const [vaccineData, setVaccineData] = useState();
+  const [vaccineData, setVaccineData] = useState([]);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [open, setOpen] = useState(false);
   const [didLoad, setDidLoad] = useState(false);
   const { tripId } = useParams();
@@ -41,6 +42,7 @@ const Covid = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   useEffect(() => {
@@ -62,10 +64,14 @@ const Covid = ({ session }) => {
     const testsArray = [];
     testData.forEach((test) => {
       testsArray.push(
-        <TestCard testData={test} userId={userId} handleUpload={handleUpload} />
+        <TestCard
+          testData={test}
+          userId={userId}
+          handleUpload={handleUpload}
+          tripId={tripId}
+        />
       );
     });
-    console.log("This is the tests array", testsArray.length);
     return (
       <>
         <div className="covid-window">
@@ -114,12 +120,15 @@ const Covid = ({ session }) => {
       <>
         <div className="covid-window">
           <div className="covid-header">
-            <h1>Your Coronavirus Documentation</h1>
+            <h1>Your COVID Documentation</h1>
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
               <h1>Vaccinations</h1>
-              <VaccineCard vaccinationsData={vaccineData} />
+              <VaccineCard
+                vaccinationsData={vaccineData}
+                refresh={handleClose}
+              />
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>

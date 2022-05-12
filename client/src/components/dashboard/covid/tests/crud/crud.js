@@ -61,6 +61,7 @@ const CrudMenu = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const handleUpload = props.handleUpload;
+  const refresh = props.refresh;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
@@ -90,6 +91,7 @@ const CrudMenu = (props) => {
   const handleDeletePromptClose = () => {
     handleCrudClose();
     setDeleteOpen(false);
+    refresh();
   };
 
   return (

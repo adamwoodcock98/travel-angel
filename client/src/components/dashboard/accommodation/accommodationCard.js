@@ -4,13 +4,15 @@ import CrudMenu from "./crud/crud";
 import "./accommodationCard.css";
 import Upload from "../../upload/upload";
 import Button from "@mui/material/Button";
-import DirectionsOutlinedIcon from "@mui/icons-material/DirectionsOutlined";
+import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
+import "../../assets/styling/cards.css"
 
 export default function AccommodationCard(props) {
   const handleUpload = props.handleUpload;
   const userId = props.userId;
   const accommodation = props.accommodation;
   const handleDirections = props.handleDirections;
+  const refresh = props.refresh;
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const formatAddress = (address) => {
@@ -32,34 +34,29 @@ export default function AccommodationCard(props) {
     <div className="card-container">
       {accommodation.map((accommodation, index) => {
         return (
-          <div className="accomodation">
-            <div className="accommodation-card" key={index}>
+            <div className="card" key={index}>
+              <div className="crud-menu">
+                <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
+              </div>
               <div className="header">
                 <h1>{accommodation.name}</h1>
-                <Upload
-                  cardId={accommodation._id}
-                  url="dashboard/accommodation"
-                  handleUpload={handleUpload}
-                />
               </div>
               <div className="body">
-                <div className="check-in">
+                <div className="subbody-left">
                   <div className="check-in-header">
                     <h3>Check-In</h3>
                   </div>
                   <div className="check-in-body">
                     <p>{formatDate(accommodation.checkInDate)}</p>
-                    <br></br>
                     <p>Check-in opens at {accommodation.checkInTime}</p>
                   </div>
                 </div>
-                <div className="check-out">
+                <div className="subbody-right">
                   <div className="check-out-header">
                     <h3>Check-Out</h3>
                   </div>
                   <div className="check-out-body">
                     <p>{formatDate(accommodation.checkOutDate)}</p>
-                    <br></br>
                     <p>Check-out by {accommodation.checkOutTime}</p>
                   </div>
                 </div>
@@ -70,14 +67,14 @@ export default function AccommodationCard(props) {
                     <p>Booking Reference: {accommodation.bookingReference}</p>
                   )}
                 </div>
+                <div className="contact-number">
+                  {accommodation.contactNumber && (
+                    <p>TEL: {accommodation.contactNumber}</p>
+                  )}
+                </div>
                 <div className="address">
                   {accommodation.address && (
                     <p>Address: {formatAddress(accommodation.address)}</p>
-                  )}
-                </div>
-                <div className="contact-number">
-                  {accommodation.contactNumber && (
-                    <p>Contact Number: {accommodation.contactNumber}</p>
                   )}
                 </div>
                 <div className="directions">
@@ -90,24 +87,25 @@ export default function AccommodationCard(props) {
                     Get Directions
                   </Button>
                 </div>
-              </div>
-              <div className="uploads">
-                Download Your files
-                {accommodation.uploads.length &&
-                  accommodation.uploads.map((upload, index) => {
-                    return (
-                      <button
-                        onClick={() => handleSubmit(upload._id)}
-                        key={index}
-                      >
-                        {upload.name}
-                      </button>
-                    );
-                  })}
-              </div>
-            </div>
-            <div className="crud-menu">
-              <CrudMenu userId={userId} accommodationData={accommodation} />
+                <div className="upload">
+                  <Upload
+                    cardId={accommodation._id}
+                    url="dashboard/accommodation"
+                    handleUpload={handleUpload}
+                  />
+                  Download Your files
+                  {accommodation.uploads.length &&
+                    accommodation.uploads.map((upload, index) => {
+                      return (
+                        <button
+                          onClick={() => handleSubmit(upload._id)}
+                          key={index}
+                        >
+                          {upload.name}
+                        </button>
+                      );
+                    })}
+                </div> 
             </div>
           </div>
         );

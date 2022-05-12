@@ -10,6 +10,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 const DosePane = (props) => {
   const dose = props.doseData;
   const vaccinationsID = props.vaccinationsID;
+  const refresh = props.refresh;
   const [open, setOpen] = useState(false);
 
   const handleEditOpen = () => {

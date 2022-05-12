@@ -22,10 +22,10 @@
 }
 
 .body {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding-bottom: 5vh;
+  padding-bottom: 5vh; */
 }
 
 .footer {
