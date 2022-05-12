@@ -27,9 +27,14 @@
   padding-left: 70px;
   padding-right: 100px;
   line-height: 43px;
+  transition: 0.3s;
   font-family: "PatrickHandSC-Regular", arial, serif;
   background: url('../assets/wings.png') 0 -3px / 50px 50px no-repeat;
-}   
+}
+
+#logo:hover {
+  color: #ffe3ec;
+}
 
 a {
   text-decoration: none;
@@ -59,8 +64,6 @@ a {
 #nav-avatar {
   margin-top: -4px;
 }
-
-
 
 .MuiMenuItem-root {
  transition: 0.3s;
