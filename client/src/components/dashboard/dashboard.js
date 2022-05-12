@@ -72,7 +72,8 @@ export default function VerticalTabs({ session }) {
   };
 
   return (
-    <ThemeProvider theme={theme}><Box
+    <ThemeProvider theme={theme}>
+      <Box
       className="tab-box"
       sx={{ flexGrow: 1, bgcolor: "background.paper" }}
     >

@@ -1,6 +1,15 @@
 #sign-up {
   float: left;
 }
+
 #log-in {
   float: right;
+}
+
+#auth-btn {
+  margin-top: -6px;
+}
+
+#auth-btn:hover {
+  background-color: #f22771;
 }
