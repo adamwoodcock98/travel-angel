@@ -48,9 +48,6 @@ const theme = createTheme({
     },
     secondary: {
       main: 'rgb(255, 0, 93)',
-    },
-    danger: {
-      main: "#FF4949",
     }
   },
 });

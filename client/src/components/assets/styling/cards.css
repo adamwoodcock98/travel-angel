@@ -4,7 +4,7 @@ element {
 }
 
 .upload {
-  padding: 10px 0px 15px 0px;
+  /* padding: 10px 0px 15px 0px; */
   display: flex;
 }
 
@@ -16,6 +16,12 @@ element {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.document-content {
+  border-top: solid 1px;
+  border-color: lightgrey;
+  margin-top: 2%;
 }
 
 .document-button {
@@ -62,7 +68,7 @@ p.text-link:hover {
 }
 
 .loading {
-margin-top: 30%;
+margin-top: 15%;
 color:#F22771;
 }
 
@@ -205,12 +211,14 @@ p {
   text-align: left;
   margin-bottom: 2%;
   padding: 2%;
-  border-color: lightgrey;
-  border-radius: 10px;
-  box-shadow: 0px 0px 5px lightgrey;
+
 }
 
 .very-big {
   font-size: xxx-large;
   text-align: center;
+}
+
+.fuschia {
+  color: #F22771;
 }

@@ -5,6 +5,7 @@ import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import AddVaccine from "./newVaccine";
 import DosePane from "./dosePane";
 import Upload from "../../../upload/upload";
+import "../../../assets/styling/cards.css"
 
 const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
@@ -30,8 +31,6 @@ const VaccineCard = (props) => {
     window.open(`http://localhost:8000/dashboard/covid/download/${id}`);
   };
 
-  console.log("this is the vaccine card");
-
   const dosesArray = [];
   if (vaccinationsData && vaccinationsData.vaccineDoses.length) {
     vaccinationsData.vaccineDoses.forEach((dose, index) => {
@@ -50,15 +49,15 @@ const VaccineCard = (props) => {
   return (
     <div className="vaccine-card">
       <div className="vaccine-card-header">
-        <h1>Vaccination</h1>
+        <h1>Vaccine card</h1>
       </div>
       <div className="vaccine-card-status-content">
-        <h2>Vaccination status</h2>
-        <h4>{vaccinationsData.vaccinationStatus}</h4>
+        <p className="light-label">Status</p>
+        <h3>{vaccinationsData.vaccinationStatus}</h3>
       </div>
       <div className="vaccine-card-dose-content">
         <div className="vaccine-card-dose-title">
-          <h2>Vaccine dose</h2>
+          <p className="light-label" ></p>
         </div>
         <div className="vaccine-card-dose-pane">
           {vaccinationsData.vaccineDoses && dosesArray}
@@ -84,11 +83,8 @@ const VaccineCard = (props) => {
           />
         </div>
       </div>
-      <div className="vaccine-card-proof-content">
-        <h2>Vaccine proof</h2>
-      </div>
-      <div className="vaccine-card-documents-content">
-        <h2>Additional documents</h2>
+      <div className="vaccine-card-documents-content document-content">
+        <h4 className="light-label">Supporting documents</h4>
       </div>
       <div className="upload">
         <Upload

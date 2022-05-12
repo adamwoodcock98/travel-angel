@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
 import "../../assets/styling/cards.css";
+import Button from "@mui/material/Button";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
@@ -20,6 +21,7 @@ const Flights = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [didUpdate, setDidUpdate] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingFailed, setLoadingFailed] = useState(false);
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -75,6 +77,8 @@ const Flights = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoadingFailed(false);
+    setLoading(true);
     api
       .get(`/${userId}/${tripId}`)
       .then((res) => {
@@ -91,12 +95,25 @@ const Flights = ({ session }) => {
           );
         } else {
           handleAlert("There was a problem connecting to the server.", "error");
+          setLoadingFailed(true);
         }
       })
       .finally(() => setLoading(false));
   }, [didUpdate, state]);
 
-  if (loading) {
+  if (loadingFailed) {
+    return(
+      <div className="empty-window">
+        <h1>Flights</h1>
+        <div className="empty-prompt">
+          <h3>This connection doesn't seem quite right</h3>
+          <h2>:(</h2>
+          <br />
+          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+        </div>
+      </div>
+    )
+  } else if (loading) {
     return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />

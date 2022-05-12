@@ -116,8 +116,6 @@ const Covid = ({ session }) => {
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
-              
-              <h1>Vaccinations</h1>
               <div className="covid-card">
               <VaccineCard
                 vaccinationsData={vaccineData}
@@ -126,7 +124,6 @@ const Covid = ({ session }) => {
             </div>
             </div>
             <div className="covid-content-testing">
-              <h1>Tests</h1>
               <div className="covid-card">
                 {testsArray}
               </div>
@@ -157,7 +154,6 @@ const Covid = ({ session }) => {
       </>
     );
   } else if (didLoad) {
-    console.log("if/else");
     return (
       <>
         <div className="covid-window">
@@ -167,7 +163,7 @@ const Covid = ({ session }) => {
           <div className="covid-content">
             <div className="covid-content-vaccinations">
               <div className="card">
-              <h1>Vaccinations</h1>
+                <h1>      </h1>
               <VaccineCard
                 vaccinationsData={vaccineData}
                 refresh={handleClose}
@@ -176,7 +172,6 @@ const Covid = ({ session }) => {
               </div>
             </div>
             <div className="covid-content-testing">
-              <h1>Tests</h1>
               {!testData[0] && (
                 <div className="empty-prompt">
                   <h3>Looks like you don't have any saved tests</h3>
