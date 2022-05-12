@@ -26,7 +26,7 @@ body {
   background: linear-gradient(
     180deg,
     rgba(235, 160, 174, 1) 0%,
-    rgba(242, 39, 113, 0.6) 100%
+    rgba(242, 39, 113, 0.3) 100%
   );
 }
 
@@ -79,21 +79,10 @@ p {
   padding-right: 0px;
   background: transparent;
 }
-/* #flightNumber:focus {
-  background-color: yellow;
-} */
-/* .MuiFormControl-root:focus {
-  background-color: yellow;
-} */
+
 .MuiOutlinedInput-notchedOutline.disable-x {
   background-color: black;
 }
 .MuiButton-root#search-button {
   width: 10px;
 }
-
-/* label: {
-  position: 'absolute',
-  left: 12,
-  top: -5
-} */

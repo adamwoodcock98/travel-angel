@@ -26,7 +26,7 @@ const ViewTrips = ({ trips }) => {
                   <h3 className="trip-h3">{trip.name}</h3>
                 </div>
                 <div className="trip-body"><h4 className="trip-h4">{formatDate(trip.startDate)} - {formatDate(trip.endDate)}</h4></div>
-                <div className="footer">
+                <div className="footer trip-foot">
                   {formatLongDate(new Date(Date.now())) <
                     formatLongDate(trip.startDate) && (
                     <p>

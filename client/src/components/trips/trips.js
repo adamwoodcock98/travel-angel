@@ -88,8 +88,8 @@ const Trips = ({ session }) => {
 
   return (
     <div className="trip-container">
-      <div className="header">
-        <h1>Your Trips</h1>
+      <div className="trip-header">
+        <h1 className="trip-h1">Trips</h1>
         <AddTrip
           className="add-accomodation"
           handleOpen={handleOpen}
@@ -104,8 +104,8 @@ const Trips = ({ session }) => {
         <div className="trip-body">
           {upcomingTrips.length > 0 && (
             <h2 className="countdown">
-              The next trip is{" "}
-              {moment(upcomingTrips[0].startDate, "YYYYMMDD").fromNow()}!
+              Your next trip is{" "}
+              {moment(upcomingTrips[0].startDate, "YYYYMMDD").fromNow()}
             </h2>
           )}
           <ViewTrips trips={upcomingTrips} />

@@ -5,7 +5,7 @@ export const DisplayProfile = ({ user }) => {
   return (
     <div>
         <DialogContentText>
-        <img alt="Profile" src={user.profilePicture} />
+        <img alt="Profile" id="profile-picture" src={user.profilePicture} />
         </DialogContentText>
         <DialogContentText id="profile-txt">
         <h3>{user.firstName} {user.lastName}</h3>
