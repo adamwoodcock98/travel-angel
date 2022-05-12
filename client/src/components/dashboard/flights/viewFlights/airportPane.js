@@ -15,7 +15,7 @@ export const AirportPane = (props) => {
           <h1>{data.airport}</h1>
         </div>
         <div className="airport-pane-city">
-          <h2>{data.city}</h2>
+          <h2>{data.city} | {formatDate(data.date)}</h2>
         </div>
       </div>
       <div className="airport-pane-middle">
