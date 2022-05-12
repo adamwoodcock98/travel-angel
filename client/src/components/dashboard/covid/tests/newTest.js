@@ -18,7 +18,7 @@ const AddTest = (props) => {
   const open = props.open;
   const handleClose = props.handleClose;
   const testData = props.testData;
-  const testID = props.testID;
+  const testID = props.testId;
   const handleOpen = props.handleOpen;
   const userId = props.userId;
   const tripId = props.tripId;
@@ -263,8 +263,12 @@ const AddTest = (props) => {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          <Button id="save-details-button" onClick={onSubmit}>Save Test Details</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button id="save-details-button" onClick={onSubmit}>
+            Save Test Details
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
