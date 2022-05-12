@@ -107,14 +107,14 @@ const Visas = ({ session }) => {
 
           <div>
             <div id="fab-card-position">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab>
+              <Fab
+                size="large"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+              >
+                <AddIcon />
+              </Fab>
             </div>
             <AddVisa
               open={open}
@@ -124,6 +124,7 @@ const Visas = ({ session }) => {
               userId={userId}
               tripId={tripId}
               visaId={null}
+              handleUpload={handleUpload}
             />
           </div>
         </div>
@@ -132,7 +133,7 @@ const Visas = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-          <h1 className="very-big">Visas</h1>
+        <h1 className="very-big">Visas</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
@@ -156,6 +157,7 @@ const Visas = ({ session }) => {
           userId={userId}
           tripId={tripId}
           visaId={null}
+          handleUpload={handleUpload}
         />
         <Alerts
           message={alertMessage}
