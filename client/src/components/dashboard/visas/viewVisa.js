@@ -58,7 +58,7 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                 <div className="upload">
                   <div className="uploads">
                     <div style={{display: "flex", alignItems: "center"}} className="documents" >
-                      <h4>Documents</h4>
+                      <h4>Supporting Documents</h4>
                       <Upload
                         cardId={visa._id}
                         url="dashboard/visas"

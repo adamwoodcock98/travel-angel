@@ -92,7 +92,7 @@ const Visas = ({ session }) => {
       <>
         <div className="visas">
           <div className="visa-header">
-            <h1 className="title very-big">Visas</h1>
+            <h1 className="very-big">Visas</h1>
           </div>
           <div className="visas-content">
             <div className="visas-content">

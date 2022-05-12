@@ -6,6 +6,7 @@ element {
 .upload {
   padding: 10px 0px 15px 0px;
   display: flex;
+  text-align: left;
 }
 
 .upload-buttons {
@@ -192,3 +193,4 @@ h3 {
   font-size: xxx-large;
   text-align: center;
 }
+
