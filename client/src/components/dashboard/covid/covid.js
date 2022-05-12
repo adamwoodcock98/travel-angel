@@ -181,9 +181,7 @@ const Covid = ({ session }) => {
                   <h2>Press + to get started</h2>
                 </div>
               )}
-            </div>
-          </div>
-          <div className="covid-footer">
+            <div className="empty-prompt">
             <Fab
               size="large"
               color="secondary"
@@ -192,6 +190,11 @@ const Covid = ({ session }) => {
             >
               <AddIcon />
             </Fab>
+            </div>
+            </div>
+          </div>
+          <div className="covid-footer">
+
           </div>
           <div className="covid-footer">
             <AddTest

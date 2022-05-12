@@ -43,6 +43,7 @@ i {
   text-align: center;
   flex: 5;
   vertical-align: center;
+  padding-top: 15%;
 }
 
 .empty-button {
