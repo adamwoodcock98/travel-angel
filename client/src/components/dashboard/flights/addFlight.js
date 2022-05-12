@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import "../dashboard.css";
+
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -16,8 +17,8 @@ import InputLabel from "@mui/material/InputLabel";
 import moment from "moment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
-const SearchButton = ({ handleClick }) => (
-  <Button id="search-button" onClick={handleClick}>
+const SearchButton = ({handleClick}) => (
+  <Button onClick={handleClick}>
     <SearchOutlinedIcon />
   </Button>
 );
