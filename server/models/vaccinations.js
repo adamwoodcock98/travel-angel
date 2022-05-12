@@ -7,15 +7,23 @@ const vaccinationsSchema = mongoose.Schema({
   },
   vaccineProof: [Buffer],
   additionalDocuments: [Buffer],
-  vaccineDoses: [{
+  vaccineDoses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "VaccineDose",
+    },
+  ],
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "VaccineDose"
-  }],
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true,
-  // }
+    ref: "User",
+    required: true,
+  },
+  uploads: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Upload",
+    },
+  ],
 });
 
 const Vaccinations = mongoose.model("Vaccinations", vaccinationsSchema);

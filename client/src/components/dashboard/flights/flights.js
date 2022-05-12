@@ -114,6 +114,7 @@ const Flights = ({ session }) => {
           key={flight._id}
           userId={userId}
           refresh={handleClose}
+          tripId={tripId}
           handleUpload={handleUpload}
         />
       );
@@ -126,6 +127,7 @@ const Flights = ({ session }) => {
           key={flight._id}
           userId={userId}
           refresh={handleClose}
+          tripId={tripId}
           handleUpload={handleUpload}
         />
       );
