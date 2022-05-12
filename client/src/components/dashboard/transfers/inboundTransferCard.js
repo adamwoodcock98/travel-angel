@@ -36,7 +36,10 @@ export const InboundTransferCard = (props) => {
       {inboundTransfer.map((inboundTransfer, index) => {
         return (
           <div className="card" key={index}>
-            <div className="crud-menu">
+            
+            <div className="header">
+              <h1 className="title">{inboundTransfer.name}</h1>
+              <div className="crud-menu">
               <CrudMenu
                 transferData={inboundTransfer}
                 transferId={inboundTransfer._id}
@@ -45,90 +48,93 @@ export const InboundTransferCard = (props) => {
                 refresh={refresh}
                />            
               </div>
-            <div className="header">
-              <h1>{inboundTransfer.name}</h1>
             </div>
             <div className="body">
               <div className="subbody-left">
                 <div className="pickup-header">
-                  <h3>Pickup</h3>
+                  <h2>Pickup</h2>
                 </div>
                 <div className="pickup-body">
                   <p>{formatDate(inboundTransfer.pickupTime)}</p>
                   <p>{formatTime(inboundTransfer.pickupTime)}</p>
                   <div className="address">
-                  {inboundTransfer.pickupAddress && (
-                    <p>Address: {formatAddress(inboundTransfer.pickupAddress)}</p>
-                  )}
+                    {inboundTransfer.pickupAddress && (
+                      <p>
+                        Address: {formatAddress(inboundTransfer.pickupAddress)}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div className="subbody-right">
+                  <div className="dropoff-header">
+                    <h3>Dropoff</h3>
+                  </div>
+                  <div className="dropoff-body">
+                    <p>{formatDate(inboundTransfer.dropoffTime)}</p>
+                    <p>{formatTime(inboundTransfer.dropoffTime)}</p>
+                    <div className="address">
+                      {inboundTransfer.dropoffAddress && (
+                        <p>
+                          Address:{" "}
+                          {formatAddress(inboundTransfer.dropoffAddress)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="subbody-right">
-                <div className="dropoff-header">
-                  <h3>Dropoff</h3>
-                </div>
-                <div className="dropoff-body">
-                  <p>{formatDate(inboundTransfer.dropoffTime)}</p>
-                  <p>{formatTime(inboundTransfer.dropoffTime)}</p>
-                  <div className="address">
-                  {inboundTransfer.dropoffAddress && (
-                    <p>Address: {formatAddress(inboundTransfer.dropoffAddress)}</p>
-                  )}
+            </div>
+            <div className="footer">
+              <div className="booking-reference">
+                {inboundTransfer.bookingReference && (
+                  <p>Booking Reference: {inboundTransfer.bookingReference}</p>
+                )}
+              </div>
+              <div className="company">
+                {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
+              </div>
+              <div className="contact-number">
+                {inboundTransfer.contactNumber && (
+                  <p>TEL: {inboundTransfer.contactNumber}</p>
+                )}
+              </div>
+              <div className="upload">
+                <div className="uploads">
+                  <div
+                    style={{ display: "flex", alignItems: "center" }}
+                    className="documents"
+                  >
+                    <h4>Documents</h4>
+                    <Upload
+                      cardId={inboundTransfer._id}
+                      url="dashboard/transfers"
+                      handleUpload={handleUpload}
+                    />
+                  </div>
+                  <i>
+                    Use this section to store any additional documents you may
+                    need for your flights
+                  </i>
+                  {inboundTransfer.uploads.length &&
+                    inboundTransfer.uploads.map((upload, index) => {
+                      return (
+                        <div className="document-button">
+                          <Button
+                            style={{ padding: "0%" }}
+                            color="primary"
+                            onClick={() => handleSubmit(upload._id)}
+                            key={index}
+                            endIcon={<FileDownloadOutlinedIcon />}
+                          >
+                            {upload.name}
+                          </Button>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
-            </div> 
+            </div>
           </div>
-        </div>
-          <div className="footer">
-            <div className="booking-reference">
-              {inboundTransfer.bookingReference && (
-                <p>Booking Reference: {inboundTransfer.bookingReference}</p>
-              )}
-            </div>
-            <div className="company">
-              {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
-            </div>
-            <div className="contact-number">
-              {inboundTransfer.contactNumber && (
-                <p>TEL: {inboundTransfer.contactNumber}</p>
-              )}
-            </div>
-            <div className="upload">
-              <div className="uploads">
-                <div
-                  style={{ display: "flex", alignItems: "center" }}
-                  className="documents"
-                >
-                  <h4>Documents</h4>
-                  <Upload
-                    cardId={inboundTransfer._id}
-                    url="dashboard/transfers"
-                    handleUpload={handleUpload}
-                  />
-                </div>
-                <i>
-                  Use this section to store any additional documents you may
-                  need for your flights
-                </i>
-                {inboundTransfer.uploads.length &&
-                  inboundTransfer.uploads.map((upload, index) => {
-                    return (
-                      <div className="document-button">
-                        <Button
-                          style={{ padding: "0%" }}
-                          color="primary"
-                          onClick={() => handleSubmit(upload._id)}
-                          key={index}
-                          endIcon={<FileDownloadOutlinedIcon />}
-                        >
-                          {upload.name}
-                        </Button>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-          </div>
-        </div>
         );
       })}
     </div>
