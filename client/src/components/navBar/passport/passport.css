@@ -35,22 +35,28 @@
 
 .pass-type {
   float: left;
+  margin-top: -35px;
 }
+
 .pass-num {
   text-align: right;
+  float: right;
   margin-right: 60px;
+  margin-top: -35px;
 }
+
 .pass-signature {
   font-family: "Signature", Arial, serif;
   text-transform: capitalize;
   float: right;
-  font-size: 17px;
+  font-size: 24px;
   margin: -25px 50px 0 0;
 }
 
 .pass-country {
   color: rgb(33, 27, 113);
-  padding: 17px 5px 0 10px;
+  margin-top: -25px;
+  padding: 0px 5px 0 10px;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 600;
   font-size: 14px;
@@ -58,8 +64,10 @@
 }
 
 .pass-contents {
+  margin-top: 8px;
   padding-top: 20px;
   padding-left: 40px;
+  line-height: 0px;
 }
 
 .pass-gender {
@@ -149,5 +157,5 @@ h5 {
   font-family: Arial, Helvetica, sans-serif;
   text-transform: none;
   font-size: 10px;
-  line-height: 4px;
+  line-height: 0px;
 }

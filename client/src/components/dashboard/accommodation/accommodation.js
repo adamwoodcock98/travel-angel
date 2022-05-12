@@ -141,6 +141,7 @@ export const ViewAccommodation = ({ session }) => {
               handleUpload={handleUpload}
             />
           </div>
+          <div id="fab-card-position">
           <Fab
             size="large"
             color="secondary"
@@ -148,7 +149,7 @@ export const ViewAccommodation = ({ session }) => {
             onClick={handleOpen}
           >
             <AddIcon />
-          </Fab>
+          </Fab></div>
           <AddAccommodation
               className="add-accomodation"
               handleOpen={handleOpen}
@@ -179,7 +180,7 @@ export const ViewAccommodation = ({ session }) => {
         <h3>Looks like you don't have any saved places</h3>
         <h2>Press  +  to get started</h2>
         </div>
-        <div className="empty-button" >
+        <div className="empty-button" id="fab-card-position">
           <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
