@@ -1,15 +1,7 @@
 @font-face {
-  font-family: "Vibur-Regular";
-  /* src: local("Roboto-Regular"),
-    url("../assets/GrandHotel-Regular.ttf") format("truetype"); */
-  /* src: local("Roboto-Regular"),
-  url("../assets/Rochester-Regular.ttf") format("truetype"); */
-  src: local("Roboto-Regular"),
+  font-family: "PatrickHandSC-Regular";
+  src: local("PatrickHandSC-Regular"),
   url("../assets/PatrickHandSC-Regular.ttf") format("truetype");
-  /* src: local("Roboto-Regular"),
-  url("../assets/LeckerliOne-Regular.ttf") format("truetype"); */
-  /* src: local("Vibur-Regular"),
-  url("../assets/Vibur-Regular.ttf") format("truetype"); */
 }
 
 #navbar {
@@ -35,7 +27,7 @@
   padding-left: 70px;
   padding-right: 100px;
   line-height: 43px;
-  font-family: "Vibur-Regular", arial, serif;
+  font-family: "PatrickHandSC-Regular", arial, serif;
   background: url('../assets/wings.png') 0 -3px / 50px 50px no-repeat;
   /* background: url('../assets/wingl.png') 0 4px / 29px 30px no-repeat, url('../assets/wingr.png') 27px 4px / 29px 30px no-repeat; */
 }   
@@ -61,8 +53,8 @@ a {
   padding-top: 4px;
   padding-right: 18px;
   text-transform: capitalize;
-  font-size: 19px;
-  font-family: "Vibur-Regular", arial, serif;
+  font-size: 21px;
+  font-family: "PatrickHandSC-Regular", arial, serif;
 }
 
 #nav-avatar {

@@ -31,7 +31,7 @@ const ViewTrips = ({ trips }) => {
                     formatLongDate(trip.startDate) && (
                     <p>
                       {daysRemaining(trip.startDate) <= 0
-                        ? ""
+                        ? "Less than a day left!"
                         : `${
                             daysRemaining(trip.startDate) + 1
                           } days to go`}

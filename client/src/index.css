@@ -17,7 +17,8 @@ code {
 #fab-position {
   position: fixed;
   bottom: 0;
-  margin: 0 0 100px 350px;
+  margin: 0 0 100px 25vw;
+  max-width: 400px;
   z-index: 2;
 }
 
