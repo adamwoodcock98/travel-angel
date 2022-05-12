@@ -3,11 +3,17 @@ import moment from "moment";
 import "./viewVisa.css";
 import Upload from "../../upload/upload";
 import CrudMenu from "./crud/crud";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import "../../assets/styling/cards.css";
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
-export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }) {
+export default function VisaCard({
+  visa,
+  handleUpload,
+  userId,
+  tripId,
+  refresh,
+}) {
   const formatDate = (date) => moment(date).format("dddd, MMMM Do YYYY");
 
   const handleSubmit = async (id) => {
@@ -15,40 +21,48 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
   };
 
   return (
-      <div className="card-container">
-        {visa.map((visa, index) => {
-          return (
-            <div className="card" key={index}>
-              <div className="header">
-                  <h4>Your entry visa to:</h4>
-                <div className="crud-menu">
-                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
+    <div className="card-container">
+      {visa.map((visa, index) => {
+        return (
+          <div className="card" key={index}>
+            <div className="header">
+              <div className="title">
+                <h3>Your entry visa to</h3>
+              </div>
+              <div className="crud-menu">
+                <CrudMenu
+                  visaData={visa}
+                  visaId={visa._id}
+                  userId={userId}
+                  tripId={tripId}
+                  refresh={refresh}
+                  handleUpload={handleUpload}
+                />
+              </div>
+            </div>
+
+            <div className="subheading">
+              <h1>{visa.issuingCountry}</h1>
+            </div>
+
+            <div className="body">
+              <div className="subbody-left">
+                <div className="start-date-header">
+                  <h3>Start Date</h3>
+                </div>
+                <div className="start-date-body">
+                  <p>{formatDate(visa.startDate)}</p>
                 </div>
               </div>
-
-                <div className="subheading">
-                  <h1>{visa.issuingCountry}</h1>
+              <div className="subbody-right">
+                <div className="end-date-header">
+                  <h3>End Date</h3>
                 </div>
-             
-              <div className="body">
-                <div className="subbody-left">
-                  <div className="start-date-header">
-                    <p>Start Date</p>
-                  </div>
-                  <div className="start-date-body">
-                    <h3>{formatDate(visa.startDate)}</h3>
-                  </div>
-                </div>
-                <div className="subbody-right">
-                  <div className="end-date-header">
-                    <p>End Date</p>
-                  </div>
-                  <div className="end-date-body">
-                    <h3>{formatDate(visa.endDate)}</h3>
-                  </div>
+                <div className="end-date-body">
+                  <p>{formatDate(visa.endDate)}</p>
                 </div>
               </div>
-
+            </div>
               <div className="footer">
                 <div className="visaNumber">
                   <p>Visa Number:</p> 
@@ -81,8 +95,10 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                   </div>
                 </div>
               </div>
-            )})}
-      </div>
-  )
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
-                          

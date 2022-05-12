@@ -41,8 +41,15 @@ export const OutboundTransferCard = (props) => {
               
                 
               <div className="crud-menu">
-              <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
-            </div>
+                <CrudMenu
+                  transferData={outboundTransfer}
+                  transferId={outboundTransfer._id}
+                  userId={userId}
+                  tripId={tripId}
+                  refresh={refresh}
+                  handleUpload={handleUpload}
+                />
+              </div>
             </div>
             <div className="transfer-body">
               

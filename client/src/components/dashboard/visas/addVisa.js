@@ -12,7 +12,6 @@ import moment from "moment";
 import "../dashboard.css";
 
 const AddVisa = (props) => {
-
   const formatDate = (date) => moment(date).format("yyyy-MM-DD");
 
   const userId = props.userId;
@@ -21,6 +20,7 @@ const AddVisa = (props) => {
   const open = props.open;
   const handleOpen = props.handleOpen;
   const handleClose = props.handleClose;
+  const handleUpload = props.handleUpload;
   const [emptyFields, setEmptyFields] = useState([]);
   const visaData = props.visaData;
   const [visa, setVisa] = useState({
@@ -63,13 +63,12 @@ const AddVisa = (props) => {
 
     let url;
     if (visaId) {
-      url = `http://localhost:8000/dashboard/visas/edit/${visaId}`
+      url = `http://localhost:8000/dashboard/visas/edit/${visaId}`;
     } else {
-      url = `http://localhost:8000/dashboard/visas/`
+      url = `http://localhost:8000/dashboard/visas/`;
     }
 
-    const { visaNumber, startDate, endDate, issuingCountry } =
-      visa;
+    const { visaNumber, startDate, endDate, issuingCountry } = visa;
 
     const newVisa = {
       visaNumber,
@@ -80,9 +79,14 @@ const AddVisa = (props) => {
       trip: tripId,
     };
 
-    if(visaNumber === "" || startDate === "" || endDate === "" || issuingCountry === ""){
-      setEmptyFields(['visaNumber', 'startDate', 'endDate', 'issuingCountry'])
-      return
+    if (
+      visaNumber === "" ||
+      startDate === "" ||
+      endDate === "" ||
+      issuingCountry === ""
+    ) {
+      setEmptyFields(["visaNumber", "startDate", "endDate", "issuingCountry"]);
+      return;
     }
 
     await axios
@@ -98,16 +102,19 @@ const AddVisa = (props) => {
           trip: tripId,
         });
         handleClose();
+        handleUpload();
       })
       .catch((err) => {
         console.log(err.message);
-        handleAlert("Whoops! We couldn't add your visa, please try again.", "error");
-      });;;
+        handleAlert(
+          "Whoops! We couldn't add your visa, please try again.",
+          "error"
+        );
+      });
   };
 
   return (
     <div>
-      
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle color="primary">Add a visa</DialogTitle>
         <DialogContent>
@@ -124,22 +131,31 @@ const AddVisa = (props) => {
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('visaNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{
+              border: emptyFields.includes("visaNumber") ? "1px solid red" : "",
+              borderRadius: "5px",
+            }}
             onChange={handleChange}
           />
-            <TextField
-              value={visa.issuingCountry}
-              autoFocus
-              margin="dense"
-              id="issuingCountry"
-              name="issuingCountry"
-              label="Issuing Country"
-              type="string"
-              variant="outlined"
-              required
-              sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
-              onChange={handleChange}
-            />  
+          <TextField
+            value={visa.issuingCountry}
+            autoFocus
+            margin="dense"
+            id="issuingCountry"
+            name="issuingCountry"
+            label="Issuing Country"
+            type="string"
+            variant="outlined"
+            required
+            sx={{
+              border: emptyFields.includes("issuingCountry")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+              m: 1,
+            }}
+            onChange={handleChange}
+          />
           <TextField
             value={formatDate(visa.startDate)}
             autoFocus
@@ -150,7 +166,11 @@ const AddVisa = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195 }}
+            sx={{
+              border: emptyFields.includes("startDate") ? "1px solid red" : "",
+              borderRadius: "5px",
+              minWidth: 195,
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -166,7 +186,12 @@ const AddVisa = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195, m: 1 }}
+            sx={{
+              border: emptyFields.includes("endDate") ? "1px solid red" : "",
+              borderRadius: "5px",
+              minWidth: 195,
+              m: 1,
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -174,9 +199,27 @@ const AddVisa = (props) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          {!visaId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>Save</Button>}
-          {visaId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>Update</Button>}
+          <Button id="default-cancel-button" onClick={handleClose}>
+            Cancel
+          </Button>
+          {!visaId && (
+            <Button
+              id="save-details-button"
+              variant="outlined"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+          )}
+          {visaId && (
+            <Button
+              id="save-details-button"
+              variant="outlined"
+              onClick={handleSubmit}
+            >
+              Update
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
       <Alerts
@@ -188,6 +231,6 @@ const AddVisa = (props) => {
       />
     </div>
   );
-}
+};
 
 export default AddVisa;

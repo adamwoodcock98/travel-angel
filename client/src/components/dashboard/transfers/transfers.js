@@ -151,15 +151,16 @@ const Transfers = ({ session }) => {
             </div>
           </div>
           <div>
-          <div id="fab-card-position">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab></div>
+            <div id="fab-card-position">
+              <Fab
+                size="large"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
             <AddTransfer
               open={open}
               handleOpen={handleOpen}
@@ -169,6 +170,7 @@ const Transfers = ({ session }) => {
               tripId={tripId}
               transferId={null}
               emptyFields={emptyFields}
+              handleUpload={handleUpload}
             />
             <Alerts
               message={alertMessage}
@@ -208,6 +210,7 @@ const Transfers = ({ session }) => {
           tripId={tripId}
           transferId={null}
           emptyFields={emptyFields}
+          handleUpload={handleUpload}
         />
         <Alerts
           message={alertMessage}
