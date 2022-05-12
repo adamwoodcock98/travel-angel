@@ -14,7 +14,12 @@ const slides = [
     description: "In a safe & secure environment",
     image: "/slides/slide-1.jpg",
   },
-
+  {
+    title: "Find",
+    subtitle: "Your Flight",
+    description: "Without having to input the details manually",
+    image: "/slides/slide-6.jpg",
+  },
   {
     title: "Upload &",
     subtitle: "Download",

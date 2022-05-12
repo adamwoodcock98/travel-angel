@@ -149,6 +149,7 @@ const Transfers = ({ session }) => {
             </div>
           </div>
           <div>
+          <div id="fab-card-position">
             <Fab
               size="large"
               color="secondary"
@@ -156,7 +157,7 @@ const Transfers = ({ session }) => {
               onClick={handleOpen}
             >
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddTransfer
               open={open}
               handleOpen={handleOpen}
@@ -186,7 +187,7 @@ const Transfers = ({ session }) => {
           <h3>Looks like you don't have any saved transfers</h3>
           <h2>Press + to get started</h2>
         </div>
-        <div className="empty-button">
+        <div id="fab-card-position">
           <Fab
             size="large"
             color="secondary"

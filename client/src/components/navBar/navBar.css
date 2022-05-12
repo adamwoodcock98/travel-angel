@@ -1,10 +1,11 @@
+@font-face {
+  font-family: "PatrickHandSC-Regular";
+  src: local("PatrickHandSC-Regular"),
+  url("../assets/PatrickHandSC-Regular.ttf") format("truetype");
+}
+
 #navbar {
-  background-color: #eba0ae;
-  background: linear-gradient(
-    0deg,
-    rgba(235, 160, 174, 1) 0%,
-    rgba(242, 39, 113, 0.7) 100%
-  );
+  background-color: rgb(255, 119, 169);
   display: fixed;
   height: 55px;
   margin: -5px 0 0 0;
@@ -17,10 +18,18 @@
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
+  word-spacing: -2px;
+  font-size: 23px;
   margin-left: 10px;
+  margin-top: -2px;
   display: inline-block;
-}
+  padding-left: 70px;
+  padding-right: 100px;
+  line-height: 43px;
+  font-family: "PatrickHandSC-Regular", arial, serif;
+  background: url('../assets/wings.png') 0 -3px / 50px 50px no-repeat;
+}   
 
 a {
   text-decoration: none;
@@ -38,13 +47,25 @@ a {
 
 #nav-user-name {
   float: left;
-  color: rgba(255, 255, 255, 0.6);
-  padding-top: 6px;
-  padding-right: 15px;
+  color: #fff;
+  opacity: 0.9;
+  padding-top: 4px;
+  padding-right: 18px;
   text-transform: capitalize;
-  font-size: 19px;
+  font-size: 21px;
+  font-family: "PatrickHandSC-Regular", arial, serif;
 }
 
 #nav-avatar {
   margin-top: -4px;
+}
+
+
+
+.MuiMenuItem-root {
+ transition: 0.3s;
+}
+
+.MuiMenuItem-root:hover {
+  border-right: 6px solid rgb(255, 119, 169, 0.8) !important;
 }

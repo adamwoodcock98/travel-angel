@@ -100,7 +100,7 @@ export const DisplayPassport = ({ passport, userId, refresh}) => {
               } ${formatFooterDate(passport.dob)} ${
                 passport.gender
               } ${formatFooterDate(passport.dateOfExpiry)}`}{" "}
-              <span>{` < < < < < < < < < < < < < < < < < < < < < < < < < <`}</span>
+              <span>{` < < < < < < < < < < < < < < < < < < < < < < < < < `}</span>
             </p>
           </div>
         </DialogContent>

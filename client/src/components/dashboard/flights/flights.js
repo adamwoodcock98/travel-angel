@@ -152,7 +152,7 @@ const Flights = ({ session }) => {
               {inboundFlight[0] && inboundFlights}
             </div>
           </div>
-          <div className="flights-footer">
+          <div className="flights-footer"><div id="fab-card-position">
             <Fab
               size="large"
               color="secondary"
@@ -160,7 +160,7 @@ const Flights = ({ session }) => {
               onClick={handleOpen}
             >
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddFlight
               open={open}
               handleOpen={handleOpen}
@@ -183,7 +183,7 @@ const Flights = ({ session }) => {
           <h3>Looks like you don't have any saved flights</h3>
           <h2>Press + to get started</h2>
         </div>
-        <div className="empty-button">
+        <div className="empty-button" id="fab-card-position">
           <Fab
             size="large"
             color="secondary"

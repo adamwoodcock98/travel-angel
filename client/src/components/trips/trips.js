@@ -27,7 +27,6 @@ const Trips = ({ session }) => {
         setTripArray(res.data.trips);
       });
     } else {
-      console.log("not logged in");
     }
   }, [trip]);
 
@@ -88,7 +87,7 @@ const Trips = ({ session }) => {
     );
 
   return (
-    <div className="container">
+    <div className="trip-container">
       <div className="header">
         <h1>Your Trips</h1>
         <AddTrip

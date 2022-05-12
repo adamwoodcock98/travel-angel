@@ -19,9 +19,10 @@ const AddTrip = ({
 }) => {
   return (
     <div>
+      <div id="fab-position">
       <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
-      </Fab>
+      </Fab></div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Trip</DialogTitle>
         <DialogContent>

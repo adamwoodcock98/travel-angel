@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 // import theme from "../assets/theme";
-import { Tabs, Tab, Typography, Box, ThemeProvider, createTheme } from "@mui/material";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
 import {
   FlightTakeoff,
   Hotel,
@@ -17,6 +17,7 @@ import Flights from "./flights/flights";
 import Parking from "./parking/parking";
 import Covid from "./covid/covid";
 import Visa from "./visas/visas";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,7 +76,7 @@ export default function VerticalTabs({ session }) {
   };
 
   return (
-    <ThemeProvider theme={theme}><Box
+      <Box
       className="tab-box"
       sx={{ flexGrow: 1, bgcolor: "background.paper" }}
     >
@@ -125,6 +126,5 @@ export default function VerticalTabs({ session }) {
         <Covid session={session} />
       </TabPanel>
     </Box>
-    </ThemeProvider>
   );
 }

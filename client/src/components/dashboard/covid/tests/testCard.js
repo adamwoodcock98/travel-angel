@@ -15,7 +15,6 @@ const TestCard = (props) => {
   const testId = testData._id;
   const tripId = props.tripId;
   const handleUpload = props.handleUpload;
-
   const refresh = props.refresh;
 
   const handleOpen = () => {
@@ -34,21 +33,20 @@ const TestCard = (props) => {
 
   return (
     <div className="test-card">
-      
       <div className="test-card-header">
         <h1>
           {testData.testType} {testData.entryType}
         </h1>
         <div className="crud-menu">
-        <CrudMenu
-          testData={testData}
-          testId={testId}
-          userId={userId}
-          refresh={refresh}
-          tripId={tripId}
-        />
+          <CrudMenu
+            testData={testData}
+            testId={testId}
+            userId={userId}
+            refresh={refresh}
+            tripId={tripId}
+            handleUpload={handleUpload}
+          />
         </div>
-        
       </div>
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
         <div className="test-card-primary-content">
@@ -122,7 +120,6 @@ const TestCard = (props) => {
         />
         <div className="uploads">
           Download Your Documents
-          {console.log(testData)}
           {testData.uploads.length &&
             testData.uploads.map((upload, index) => {
               return (
