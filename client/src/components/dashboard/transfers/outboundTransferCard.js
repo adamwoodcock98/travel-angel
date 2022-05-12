@@ -3,7 +3,9 @@ import moment from "moment";
 import "./transferCard.css";
 import CrudMenu from "./crud/crud";
 import Upload from "../../upload/upload";
-import "../../assets/styling/cards.css"
+import Button from '@mui/material/Button';
+import "../../assets/styling/cards.css";
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 export const OutboundTransferCard = (props) => {
   const outboundTransfer = props.outboundTransfer;
