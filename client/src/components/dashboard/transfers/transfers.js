@@ -175,20 +175,22 @@ const Transfers = ({ session }) => {
     );
   } else {
     return (
-      <div>
+      <div className="empty-window">
         <h1>Transfers</h1>
         <div className="empty-prompt">
-          <h3>Looks like you don't have any saved flights</h3>
+          <h3>Looks like you don't have any saved transfers</h3>
           <h2>Press + to get started</h2>
         </div>
-        <Fab
-          size="large"
-          color="secondary"
-          aria-label="add"
-          onClick={handleOpen}
-        >
-          <AddIcon />
-        </Fab>
+        <div className="empty-button">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
         <AddTransfer
           open={open}
           handleOpen={handleOpen}

@@ -4,10 +4,10 @@ import VisaCard from "./viewVisa";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Fab from "@mui/material/Fab";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
-import CircularProgress from '@mui/material/CircularProgress';
-import "../../assets/styling/cards.css"
+import CircularProgress from "@mui/material/CircularProgress";
+import "../../assets/styling/cards.css";
 
 const Visas = ({ session }) => {
   const { tripId } = useParams();
@@ -65,10 +65,7 @@ const Visas = ({ session }) => {
             "error"
           );
         } else {
-          handleAlert(
-            "There was a problem connecting to the server.",
-            "error"
-          );
+          handleAlert("There was a problem connecting to the server.", "error");
         }
       })
       .finally(() => setLoading(false));
@@ -84,11 +81,11 @@ const Visas = ({ session }) => {
   };
 
   if (loading) {
-    return(
-      <div className="loading" style={{ display: loading ? "" : "none"}} >
+    return (
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
       </div>
-    )
+    );
   } else if (visa.length) {
     return (
       <>
@@ -98,15 +95,26 @@ const Visas = ({ session }) => {
           </div>
           <div className="visas-content">
             <div className="visas-content">
-              <VisaCard visa={visa} userId={userId} tripId={tripId} refresh={handleClose} handleUpload={handleUpload} />
+              <VisaCard
+                visa={visa}
+                userId={userId}
+                tripId={tripId}
+                refresh={handleClose}
+                handleUpload={handleUpload}
+              />
             </div>
           </div>
 
           <div>
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-            <AddVisa 
+            <Fab
+              size="large"
+              color="secondary"
+              aria-label="add"
+              onClick={handleOpen}
+            >
+              <AddIcon />
+            </Fab>
+            <AddVisa
               open={open}
               handleOpen={handleOpen}
               handleClose={handleClose}
@@ -118,34 +126,40 @@ const Visas = ({ session }) => {
           </div>
         </div>
       </>
-    )
+    );
   } else {
     return (
       <div className="visas">
         <div className="visa-header">
+         <div className="empty-window">
           <div className="title">
             <h1>Visas</h1>
           </div>
         </div>
         <div className="empty-prompt">
-          <h3>Looks like you don't have any saved visas</h3>
+          <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
-        <div>
-         <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+        <div className="empty-button">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
-          <AddVisa
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-            visa={visa}
-            visaData={visaArray}
-            userId={userId}
-            tripId={tripId}
-            visaId={null}
-          />
         </div>
+        <AddVisa
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          visa={visa}
+          visaData={visaArray}
+          userId={userId}
+          tripId={tripId}
+          visaId={null}
+          />
         <Alerts
           message={alertMessage}
           open={alertOpen}
@@ -154,7 +168,7 @@ const Visas = ({ session }) => {
           alertType={alertType}
         />
       </div>
-    )
+    );
   }
 };
 
