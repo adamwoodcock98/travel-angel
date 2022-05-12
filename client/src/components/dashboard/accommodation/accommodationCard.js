@@ -69,24 +69,38 @@ export default function AccommodationCard(props) {
                   </div>
                 </div>
               </div>
+              {/* FOOTER */}
               <div className="footer">
-                <div className="booking-reference">
-                  <p className="light-label">Booking Reference:</p>
+                <div className="footer-labels">
+                  <div className="footer-left">
+                    <p className="light-label">Booking Reference:</p>
+                  </div>
+                  <div className="footer-middle">
+                    <p className="light-label">Address:</p>
+                  </div>
+                  <div className="footer-right">
+                    <p className="light-label">TEL:</p> 
+                  </div>
+                </div>
+
+                <div className="footer-text">
+                  <div className="footer-left">
                   {accommodation.bookingReference && (
                     <h4>{accommodation.bookingReference}</h4>
                   )}
-                </div>
-                <div className="contact-number">
-                  {accommodation.contactNumber && (
-                    <p>TEL: {accommodation.contactNumber}</p>
-                  )}
-                </div>
-                <div className="address">
-                  <p className="light-label">Address: </p>
+                  </div>
+                  <div className="footer-middle">
                   {accommodation.address && (
                     <h4>{formatAddress(accommodation.address)}</h4>
                   )}
+                  </div>
+                  <div className="footer-right">
+                  {accommodation.contactNumber && (
+                    <p>{accommodation.contactNumber}</p>
+                  )}
+                  </div>
                 </div>
+
                 <div className="directions">
                   <Button
                     color="primary"
