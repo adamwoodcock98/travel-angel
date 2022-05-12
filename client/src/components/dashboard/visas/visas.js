@@ -123,7 +123,9 @@ const Visas = ({ session }) => {
     return (
       <div className="visas">
         <div className="visa-header">
-          <h1>Visas</h1>
+          <div className="title">
+            <h1>Visas</h1>
+          </div>
         </div>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved visas</h3>

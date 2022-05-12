@@ -14,10 +14,10 @@
   
   } 
     .covid-content-vaccinations {
-      flex: 2;
-      border-right: solid;
+      flex: 1.2;
+      /* border-right: solid;
       border-color: lightgrey;
-      border-width: 1px;
+      border-width: 1px; */
     }
     
     .covid-content-testing {

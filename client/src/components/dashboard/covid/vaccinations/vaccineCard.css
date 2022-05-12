@@ -3,13 +3,13 @@
   flex-direction: column;
   margin-bottom: 5%;
   text-align: left;  */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   background-color:#ffe3ec;
   border-radius: 25px;
   opacity: 0.9;
   text-align: left;
-  margin-bottom: 2%;  
+  margin-bottom: 2%;   */
 }
   .vaccine-card-header {
     padding-top: 10px;
