@@ -35,6 +35,6 @@ TransferRouter.post(
   TransferController.Upload
 );
 TransferRouter.post("/edit/:id", TransferController.Update);
-TransferRouter.post("/delete/:id", TransferController.Index);
+TransferRouter.post("/delete/:id", TransferController.Delete);
 
 module.exports = TransferRouter;

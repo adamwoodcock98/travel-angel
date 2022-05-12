@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
 function Upload({ cardId, url, handleUpload }) {
   const [selectedFile, setSelectedFile] = useState();
 
-  console.log("2nd", handleUpload);
+  const Input = styled('input')({
+    display: 'none',
+  });
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -29,12 +36,30 @@ function Upload({ cardId, url, handleUpload }) {
     }
   };
 
+
   return (
     <form enctype="multipart/form-data">
-      <input type="file" name="uploaded_file" onChange={changeHandler} />
-      <div>
-        <button onClick={handleSubmission}>Submit</button>
-      </div>
+
+      <label htmlFor="contained-button-file">
+        <div style={{display: selectedFile ? "none" : ""}}>
+          <Input
+            accept="docs/*"
+            id="contained-button-file"
+            multiple
+            type="file"
+            name="uploaded_file"
+            onChange={changeHandler}
+          />
+          <IconButton variant="outlined" color="primary" component="span" >
+            <UploadFileIcon />
+          </IconButton>
+        </div>
+        <div style={{display: selectedFile ? "" : "none"}} >
+          <IconButton variant="contained" color="primary" onClick={handleSubmission} >
+            <SaveOutlinedIcon />
+          </IconButton>
+        </div>
+      </label>
     </form>
   );
 }
