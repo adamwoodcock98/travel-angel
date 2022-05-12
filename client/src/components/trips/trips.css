@@ -1,6 +1,20 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-top: 120px;
+}
+
+.trip-card {
+  border-radius: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 24px;
+  transition: 0.3s;
+}
+
+.trip-card:hover {
+  background-color: #ffe3ec;
+  background: linear-gradient(180deg, rgba(235,160,174,0.2) 0%, rgba(242,39,113,0.2) 100%);
 }
 
 .header {
@@ -15,6 +29,7 @@
 .footer {
   display: flex;
   flex-direction: flex-end;
+  text-align: left;
 }
 
 #expired {
@@ -25,4 +40,12 @@
 h2.countdown {
   text-align: center;
   margin-bottom: 40px;
+}
+
+.trip-h3 {
+  font-size: 40px;
+}
+
+.trip-h4 {
+
 }

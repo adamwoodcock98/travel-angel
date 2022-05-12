@@ -3,7 +3,9 @@ import moment from "moment";
 import "./transferCard.css";
 import CrudMenu from "./crud/crud";
 import Upload from "../../upload/upload";
-import "../../assets/styling/cards.css"
+import Button from "@mui/material/Button";
+import "../../assets/styling/cards.css";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 export const InboundTransferCard = (props) => {
   const inboundTransfer = props.inboundTransfer;
@@ -35,8 +37,14 @@ export const InboundTransferCard = (props) => {
         return (
           <div className="card" key={index}>
             <div className="crud-menu">
-              <CrudMenu transferData={inboundTransfer} transferId={inboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
-            </div>
+              <CrudMenu
+                transferData={inboundTransfer}
+                transferId={inboundTransfer._id}
+                userId={userId}
+                tripId={tripId}
+                refresh={refresh}
+               />            
+              </div>
             <div className="header">
               <h1>{inboundTransfer.name}</h1>
             </div>
@@ -85,22 +93,39 @@ export const InboundTransferCard = (props) => {
               )}
             </div>
             <div className="upload">
-              <Upload
-                cardId={inboundTransfer._id}
-                url="dashboard/transfers"
-                handleUpload={handleUpload}
-              />
-              {inboundTransfer.uploads.length &&
-                inboundTransfer.uploads.map((upload, index) => {
-                  return (
-                    <button
-                      onClick={() => handleSubmit(upload._id)}
-                      key={index}
-                    >
-                      {upload.name}
-                    </button>
-                  );
-                })}
+              <div className="uploads">
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="documents"
+                >
+                  <h4>Documents</h4>
+                  <Upload
+                    cardId={inboundTransfer._id}
+                    url="dashboard/transfers"
+                    handleUpload={handleUpload}
+                  />
+                </div>
+                <i>
+                  Use this section to store any additional documents you may
+                  need for your flights
+                </i>
+                {inboundTransfer.uploads.length &&
+                  inboundTransfer.uploads.map((upload, index) => {
+                    return (
+                      <div className="document-button">
+                        <Button
+                          style={{ padding: "0%" }}
+                          color="primary"
+                          onClick={() => handleSubmit(upload._id)}
+                          key={index}
+                          endIcon={<FileDownloadOutlinedIcon />}
+                        >
+                          {upload.name}
+                        </Button>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>
