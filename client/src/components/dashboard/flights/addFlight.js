@@ -220,6 +220,7 @@ const AddFlight = ({
         trip: tripId,
         user: userId,
       });
+      setOpenFields(true);
     })
     .catch((e) => {
       console.log(e.message);
