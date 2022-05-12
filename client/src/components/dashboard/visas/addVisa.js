@@ -109,10 +109,10 @@ const AddVisa = (props) => {
     <div>
       
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Visa</DialogTitle>
+        <DialogTitle color="primary">Add a visa</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill in the fields to store your visa details
+            Use this form to store your visa details.
           </DialogContentText>
           <TextField
             value={visa.visaNumber}
@@ -127,6 +127,19 @@ const AddVisa = (props) => {
             sx={{border: emptyFields.includes('visaNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
             onChange={handleChange}
           />
+            <TextField
+              value={visa.issuingCountry}
+              autoFocus
+              margin="dense"
+              id="issuingCountry"
+              name="issuingCountry"
+              label="Issuing Country"
+              type="string"
+              variant="outlined"
+              required
+              sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
+              onChange={handleChange}
+            />  
           <TextField
             value={formatDate(visa.startDate)}
             autoFocus
@@ -137,7 +150,7 @@ const AddVisa = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('startDate') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -153,29 +166,17 @@ const AddVisa = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('endDate') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195, m: 1 }}
             InputLabelProps={{
               shrink: true,
             }}
             onChange={handleChange}
           />
-          <TextField
-            value={visa.issuingCountry}
-            autoFocus
-            margin="dense"
-            id="issuingCountry"
-            name="issuingCountry"
-            label="Issuing Country"
-            type="string"
-            variant="outlined"
-            required
-            sx={{border: emptyFields.includes('issuingCountry') ? '1px solid red' : '' , borderRadius: "5px" }}
-            onChange={handleChange}
-          />  
         </DialogContent>
         <DialogActions>
           <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          <Button id="save-details-button" onClick={handleSubmit}>Save Visa Details</Button>
+          {!visaId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>Save</Button>}
+          {visaId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>Update</Button>}
         </DialogActions>
       </Dialog>
       <Alerts

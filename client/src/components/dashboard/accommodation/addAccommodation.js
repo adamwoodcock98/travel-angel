@@ -184,7 +184,7 @@ const AddAccommodation = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle color="primary" >Accommodation</DialogTitle>
+        <DialogTitle color="primary" >Add an accommodation</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Use this form to store the details of your accommodation.
@@ -413,10 +413,12 @@ const AddAccommodation = (props) => {
         </DialogContent>
         <DialogActions>
         <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          <Button id="save-details-button" onClick={handleSubmit} variant="outlined" sx={{color: "primary"}} data-testid="saveAccommodationDetails">
+          {!accommodationId && <Button id="save-details-button" onClick={handleSubmit} variant="outlined" sx={{color: "primary"}} data-testid="saveAccommodationDetails">
             Save
-          </Button>
-          
+          </Button>}
+          {accommodationId && <Button id="save-details-button" onClick={handleSubmit} variant="outlined" sx={{color: "primary"}} data-testid="saveAccommodationDetails">
+            Update
+          </Button>}
         </DialogActions>
       </Dialog>
       <Alerts

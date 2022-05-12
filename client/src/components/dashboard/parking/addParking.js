@@ -207,7 +207,7 @@ const AddParking = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle color="primary">Parking</DialogTitle>
+        <DialogTitle color="primary">Add parking</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Use this form to store your parking information
@@ -473,9 +473,12 @@ const AddParking = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+          {!parkingId && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
             Save
-          </Button>
+          </Button>}
+          {parkingId && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+            Update
+          </Button>}
         </DialogActions>
       </Dialog>
       <Alerts

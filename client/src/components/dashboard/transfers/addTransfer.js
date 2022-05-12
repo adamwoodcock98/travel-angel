@@ -294,7 +294,7 @@ const AddTransfer = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle color="primary">Transfer</DialogTitle>
+        <DialogTitle color="primary">Add a transfer</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Use this form to store your transfer details.
@@ -679,9 +679,12 @@ const AddTransfer = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
+          {transferId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
+            Update
+          </Button>}
+          {!transferId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
             Save
-          </Button>
+          </Button>}
         </DialogActions>
       </Dialog>
       <Alerts
