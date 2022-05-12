@@ -11,6 +11,7 @@ const TestCard = (props) => {
   const testData = props.testData;
   const userId = props.userId;
   const testId = testData._id;
+  const refresh = props.refresh;
 
   const handleOpen = () => {
     setOpen(true);
@@ -26,7 +27,7 @@ const TestCard = (props) => {
     <div className="test-card">
       <div className="test-card-header">
         <h1>{testData.testType} {testData.entryType}</h1>
-        <CrudMenu testData={testData} testId={testId} userId={userId} />
+        <CrudMenu testData={testData} testId={testId} userId={userId} refresh={refresh} />
       </div>
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
         <div className="test-card-primary-content">
