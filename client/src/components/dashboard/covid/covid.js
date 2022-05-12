@@ -170,6 +170,7 @@ const Covid = ({ session }) => {
               <VaccineCard
                 vaccinationsData={vaccineData}
                 refresh={handleClose}
+                handleUpload={handleUpload}
               />
               </div>
             </div>
@@ -181,21 +182,19 @@ const Covid = ({ session }) => {
                   <h2>Press + to get started</h2>
                 </div>
               )}
-            <div className="empty-prompt">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab>
-            </div>
+              <div className="empty-prompt">
+                <Fab
+                  size="large"
+                  color="secondary"
+                  aria-label="add"
+                  onClick={handleOpen}
+                >
+                  <AddIcon />
+                </Fab>
+              </div>
             </div>
           </div>
-          <div className="covid-footer">
-
-          </div>
+          <div className="covid-footer"></div>
           <div className="covid-footer">
             <AddTest
               open={open}

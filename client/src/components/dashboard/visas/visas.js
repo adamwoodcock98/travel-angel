@@ -129,13 +129,8 @@ const Visas = ({ session }) => {
     );
   } else {
     return (
-      <div className="visas">
-        <div className="visa-header">
-         <div className="empty-window">
-          <div className="title">
-            <h1>Visas</h1>
-          </div>
-        </div>
+      <div className="empty-window">
+        <h1>Visas</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
@@ -159,7 +154,7 @@ const Visas = ({ session }) => {
           userId={userId}
           tripId={tripId}
           visaId={null}
-          />
+        />
         <Alerts
           message={alertMessage}
           open={alertOpen}

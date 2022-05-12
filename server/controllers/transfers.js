@@ -31,7 +31,8 @@ const TransferController = {
   },
 
   Create: async (req, res) => {
-    const data = req.body
+    console.log("it is going to the right route here", req.body.pickupTime);
+    const data = req.body;
 
     try {
       const thePickupAddress = new Address({
@@ -61,14 +62,14 @@ const TransferController = {
       const savedDropoff = await theDropoffAddress.save();
 
       const transfer = new Transfer({
-        pickupTime: pickupTime,
-        dropoffTime: dropoffTime,
+        pickupTime: data.pickupTime,
+        dropoffTime: data.dropoffTime,
         pickupAddress: savedPickup._id,
         dropoffAddress: savedDropoff._id,
-        isOutbound: isOutbound,
-        company: company,
-        contactNumber: contactNumber,
-        bookingReference: bookingReference,
+        isOutbound: data.isOutbound,
+        company: data.company,
+        contactNumber: data.contactNumber,
+        bookingReference: data.bookingReference,
         user: data.user,
         trip: data.trip,
       });
@@ -77,11 +78,11 @@ const TransferController = {
 
       const trip = Trip.findById(data.trip);
       trip.transfers.push(savedTransfer);
-      
+
       await trip.save();
 
       res.status(200);
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
 
       res.status(200).send();
@@ -172,10 +173,10 @@ const TransferController = {
     const id = req.params.id;
 
     try {
-      await Transfer.deleteOne({ _id: id })
+      await Transfer.deleteOne({ _id: id });
 
       res.status(200).send();
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
 
       res.status(200).send();
