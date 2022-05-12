@@ -60,6 +60,8 @@ const AddTransfer = (props) => {
 
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [openPickup, setOpenPickup] = useState(false);
+  const [openDropoff, setOpenDropoff] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const alertPosition = {
     vertical: "top",
@@ -98,6 +100,84 @@ const AddTransfer = (props) => {
     }));
   };
 
+  const handleDropoffExpand = () => {
+    setOpenDropoff(true)
+  }
+
+  const handleDropoffContract = () => {
+    setOpenDropoff(false)
+    setTransfer({   
+      pickupTime: transfer.pickupTime,
+     dropoffTime: transfer.dropoffTime,
+     pickupAddress: {
+     buildingNumber: transfer.pickupAddress.buildingNumber,
+     buildingName: transfer.pickupAddress.buildingName,
+     addressLine1: transfer.pickupAddress.addressLine1,
+     addressLine2: transfer.pickupAddress.addressLine2,
+     city: transfer.pickupAddress.city,
+     postalCode: transfer.pickupAddress.postalCode,
+     stateCounty: transfer.pickupAddress.stateCounty,
+     countryCode: transfer.pickupAddress.countryCode,
+   },
+   dropoffAddress: {
+     buildingNumber: "",
+     buildingName: "",
+     addressLine1: "",
+     addressLine2: "",
+     city: "",
+     postalCode: "",
+     stateCounty: "",
+     countryCode: "",
+   },
+   isOutbound: transfer.isOutbound,
+   company: transfer.company,
+   contactNumber: transfer.contactNumber,
+   bookingReference: transfer.bookingReference,
+   user: userId,
+   trip: tripId,
+ })
+      
+  }
+
+  const handlePickupExpand = () => {
+    setOpenPickup(true)
+  }
+
+  const handlePickupContract = () => {
+    setOpenPickup(false)
+    setTransfer({   
+      pickupTime: transfer.pickupTime,
+     dropoffTime: transfer.dropoffTime,
+     pickupAddress: {
+      buildingNumber: "",
+      buildingName: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      postalCode: "",
+      stateCounty: "",
+      countryCode: "",
+   },
+   dropoffAddress: {
+     buildingNumber: transfer.dropoffAddress.buildingNumber,
+     buildingName: transfer.dropoffAddress.buildingName,
+     addressLine1: transfer.dropoffAddress.addressLine1,
+     addressLine2: transfer.dropoffAddress.addressLine2,
+     city: transfer.dropoffAddress.city,
+     postalCode: transfer.dropoffAddress.postalCode,
+     stateCounty: transfer.dropoffAddress.stateCounty,
+     countryCode: transfer.dropoffAddress.countryCode,
+   },
+   isOutbound: transfer.isOutbound,
+   company: transfer.company,
+   contactNumber: transfer.contactNumber,
+   bookingReference: transfer.bookingReference,
+   user: userId,
+   trip: tripId,
+ })
+      
+  }
+  
   const handleChange = (e) => {
     const value = e.target.value;
     setTransfer({
@@ -282,6 +362,7 @@ const AddTransfer = (props) => {
             }}
             onChange={handleChange}
           />
+          <div style={{display: openPickup ? "" : "none"}}> 
           <DialogContentText>
             Pickup Address
           </DialogContentText>
@@ -379,9 +460,14 @@ const AddTransfer = (props) => {
             variant="outlined"
             onChange={handlePickupChange}
           />
+          </div>
+          <p className={"text-link"} onClick={handlePickupExpand} style={{display: openPickup ? "none" : ""}}>+ add pickup address</p>
+          <p className={"text-link"} onClick={handlePickupContract} style={{display: openPickup ? "" : "none"}} >- remove pickup address</p>
+
+          <div style={{display: openDropoff ? "" : "none"}}>      
           <DialogContentText>
             Dropoff Address
-          </DialogContentText>          
+          </DialogContentText>    
           <TextField
             value={transfer.dropoffAddress.buildingNumber}
             autoFocus
@@ -476,6 +562,9 @@ const AddTransfer = (props) => {
             variant="outlined"
             onChange={handleDropoffChange}
           />
+          </div>
+          <p className={"text-link"} onClick={handleDropoffExpand} style={{display: openDropoff ? "none" : ""}}>+ add dropoff address</p>
+          <p className={"text-link"} onClick={handleDropoffContract} style={{display: openDropoff ? "" : "none"}} >- remove dropoff address</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
