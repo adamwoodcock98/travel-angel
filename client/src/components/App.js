@@ -10,17 +10,15 @@ const App = () => {
     window.localStorage.getItem("session")
   );
 
-  console.log("The app file when rendered");
-
   const handleLogIn = (user) => {
     window.localStorage.setItem("session", user);
     setSession(user);
   };
 
-  const handleLogOut = () => {
-    window.localStorage.setItem("session", null);
+  const handleLogOut = async () => {
+    await window.localStorage.setItem("session", null);
     window.location = "/";
-    setSession("");
+    setSession(null);
   };
 
   useEffect(() => {

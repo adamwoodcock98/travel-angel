@@ -7,6 +7,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from '@mui/icons-material/Add';
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from '@mui/material/CircularProgress';
+import "../../assets/styling/cards.css"
 
 const Visas = ({ session }) => {
   const { tripId } = useParams();
@@ -18,7 +19,7 @@ const Visas = ({ session }) => {
 
   const userId = session;
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [visa, setVisa] = useState([]);
   const [emptyFields, setEmptyFields] = useState([]);
@@ -51,6 +52,7 @@ const Visas = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:8000/dashboard/visas/${userId}/${tripId}`)
       .then((res) => {
@@ -81,19 +83,21 @@ const Visas = ({ session }) => {
     setDidUpdate(!didUpdate);
   };
 
-  if (visa.length) {
+  if (loading) {
+    return(
+      <div className="loading" style={{ display: loading ? "" : "none"}} >
+        <CircularProgress color="secondary" />
+      </div>
+    )
+  } else if (visa.length) {
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none"}} >
-          <CircularProgress color="secondary" />
-        </div>
         <div className="visas">
           <div className="visa-header">
-            <h1>Your visas</h1>
+            <h1>Visas</h1>
           </div>
           <div className="visas-content">
-            <div className="visas-content-outbound">
-              <h1 className="visa-content-subheading"> BLOOPS </h1>
+            <div className="visas-content">
               <VisaCard visa={visa} userId={userId} tripId={tripId} refresh={handleClose} handleUpload={handleUpload} />
             </div>
           </div>
@@ -118,11 +122,12 @@ const Visas = ({ session }) => {
   } else {
     return (
       <div className="visas">
-        <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-            <AddIcon />
-        </Fab>
         <div className="visa-header">
-          <h1>Your visas</h1>
+          <h1>Visas</h1>
+        </div>
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved visas</h3>
+          <h2>Press + to get started</h2>
         </div>
         <div>
          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>

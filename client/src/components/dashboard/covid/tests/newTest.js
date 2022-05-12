@@ -15,18 +15,17 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 
 const AddTest = (props) => {
-  const open = props.open
-  const handleClose = props.handleClose
+  const open = props.open;
+  const handleClose = props.handleClose;
   const testData = props.testData;
   const testID = props.testID;
   const handleOpen = props.handleOpen;
   const userId = props.userId;
   const tripId = props.tripId;
   const entryType = props.entryType;
+  const handleUpload = props.handleUpload;
 
- 
-
-const [test, setTest] = useState({
+  const [test, setTest] = useState({
     testType: testData.testType,
     entryType: entryType,
     result: testData.result,
@@ -37,6 +36,8 @@ const [test, setTest] = useState({
     testNumber: testData.testNumber,
     testCountry: testData.testCountry,
     testProvider: testData.testProvider,
+    user: userId,
+    trip: tripId,
   });
 
   const handleChange = (e) => {
@@ -50,33 +51,63 @@ const [test, setTest] = useState({
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider } = test;
+    const {
+      entryType,
+      testType,
+      isReminder,
+      result,
+      testDate,
+      testFromDate,
+      resultByDate,
+      validToDate,
+      testNumber,
+      testCountry,
+      testProvider,
+      user,
+      trip,
+    } = test;
 
-    const newTest = { entryType, testType, isReminder, result, testDate, testFromDate, resultByDate, validToDate, testNumber, testCountry, testProvider, testID, user: userId };
-    
+    const newTest = {
+      entryType,
+      testType,
+      isReminder,
+      result,
+      testDate,
+      testFromDate,
+      resultByDate,
+      validToDate,
+      testNumber,
+      testCountry,
+      testProvider,
+      testID,
+      user,
+      trip,
+    };
+
     let url;
     if (testID) {
-      url = "http://localhost:8000/dashboard/covid/test/edit"
+      url = "http://localhost:8000/dashboard/covid/test/edit";
     } else {
-      url = "http://localhost:8000/dashboard/covid/test"
+      url = "http://localhost:8000/dashboard/covid/test";
     }
-    axios
-      .post(url, newTest)
-      .then((res) => {
-        handleClose();
-        setTest({
-          testType: "",
-          entryType: "",
-          result: "",
-          testDate: "",
-          testFromDate: "",
-          resultByDate: "",
-          validToDate: "",
-          testNumber: "",
-          testCountry: "",
-          testProvider: "",
-        });
+    axios.post(url, newTest).then((res) => {
+      handleClose();
+      handleUpload();
+      setTest({
+        testType: "",
+        entryType: "",
+        result: "",
+        testDate: "",
+        testFromDate: "",
+        resultByDate: "",
+        validToDate: "",
+        testNumber: "",
+        testCountry: "",
+        testProvider: "",
+        user: userId,
+        trip: tripId,
       });
+    });
   };
 
   return (

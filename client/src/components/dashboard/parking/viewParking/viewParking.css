@@ -1,11 +1,30 @@
-.parking-card {
-  display: flex;
+/* .parking-card { */
+  /* display: flex;
   flex-direction: column;
-  margin-bottom: 5%;
+  background-image: linear-gradient(#ffe3ec, #eba0ae);
+  border-radius: 25px;
+  opacity: 0.9;
+  text-align: center;
+  margin: 10; */
+/* } */
+
+/* .crud-menu { */
+  /* display: flex;
+  flex: 1;
+  justify-content: right; */
+/* } */
+
+/* .header {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
   .parking-card-header {
     flex: 1;
+    display: flex;
   }
 
   .parking-card-dates-content {
@@ -35,21 +54,36 @@
     .parking-card-contact-name {
       flex: 1;
     }
+.parking-body {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  justify-items: center;
+  padding: 10px 0px 15px 0px;
+}
 
-    .parking-card-contact-address {
-      flex: 1;
-    }
+.parking-body {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-bottom: 15px;
+}
 
-    .parking-card-contact-number {
-      flex: 1;
-    }
+.dates-arrival {
+  text-align: right;
+  padding-right: 15px;
+  margin: 0;
+}
 
-    .parking-card-vehicle-content {
-      flex: 2;
-    }
+.dates-departure {
+  text-align: left;
+  padding-left: 15px;
+  margin: 0;
+}
 
-  .parking-card-notes-footer {
-    flex: 1;
-    border-top: solid;
-    border-color: lightgrey;
-  }
+.parking-upload {
+  padding: 10px 0px 15px 0px;
+} */

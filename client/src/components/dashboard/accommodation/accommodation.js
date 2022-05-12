@@ -3,27 +3,17 @@ import React, { useState, useEffect } from "react";
 import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
 import { useParams } from "react-router-dom";
-import "./accommodation.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
+import "../../assets/styling/cards.css"
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
-
   const [state, setState] = useState(0);
-
-  console.log("This is the state, is this causing problems?", state);
-
-  const handleUpload = async () => {
-    setState((prev) => prev + 1);
-  };
-
   const userId = session;
-
   const [accommodation, setAccommodation] = useState([]);
-
   const [open, setOpen] = useState(false);
   const [accommodationArray, setAccommodationArray] = useState({
     name: "",
@@ -47,19 +37,18 @@ export const ViewAccommodation = ({ session }) => {
     trip: tripId,
   });
 
-  console.log(
-    "This is the accommodation, is this changing?",
-    accommodationArray
-  );
-
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
   const [didUpdate, setDidUpdate] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const alertPosition = {
     vertical: "top",
     horizontal: "center",
+  };
+
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
   };
 
   const handleAlert = (message, type) => {
@@ -81,8 +70,11 @@ export const ViewAccommodation = ({ session }) => {
     setDidUpdate(!didUpdate);
   };
 
+  const handleSubmit = async (id) => {
+    window.open(`http://localhost:8000/dashboard/flights/download/${id}`);
+  };
+
   useEffect(() => {
-    setLoading(true);
     if (userId !== "null") {
       axios
         .get(
@@ -126,15 +118,19 @@ export const ViewAccommodation = ({ session }) => {
     );
   };
 
-  if (accommodation.length) {
+  if (loading) {
+    return(
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
+        <CircularProgress color="secondary" />
+        <p color="secondary">loading...</p>
+      </div>
+    )
+  } else if (accommodation.length) {
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none" }}>
-          <CircularProgress color="secondary" />
-        </div>
         <div className="container">
-          <div className="header">
-            <h1 className="title">Accommodation</h1>
+          <div className="accommodation-header">
+            <h1 className="title"> Your accommodation</h1>
             <AddAccommodation
               className="add-accomodation"
               handleOpen={handleOpen}
@@ -146,12 +142,13 @@ export const ViewAccommodation = ({ session }) => {
               tripId={tripId}
             />
           </div>
-          <div className="body">
+          <div className="accommodation-body">
             <AccommodationCard
               accommodation={accommodation}
               userId={userId}
               handleDirections={handleDirections}
               refresh={handleClose}
+              handleUpload={handleUpload}
             />
           </div>
           <Fab
@@ -174,31 +171,27 @@ export const ViewAccommodation = ({ session }) => {
     );
   } else {
     return (
-      <div className="container">
-        <div className="header">
-          <h1 className="title">Accommodation</h1>
-          <h1>
-            Looks like you don't have any saved flights, add your first one now!
-          </h1>
-          <Fab
-            size="large"
-            color="secondary"
-            aria-label="add"
-            onClick={handleOpen}
-          >
+      <div className="empty-window">
+        <h1>Accommodation</h1>
+        <div className="empty-prompt" >
+        <h3>Looks like you don't have any saved places</h3>
+        <h2>Press  +  to get started</h2>
+        </div>
+        <div className="empty-button" >
+          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
-          <AddAccommodation
-            className="add-accomodation"
-            handleOpen={handleOpen}
-            open={open}
-            handleClose={handleClose}
-            accommodationData={accommodationArray}
-            accommodationId={null}
-            userId={userId}
-            tripId={tripId}
-          />
         </div>
+        <AddAccommodation
+          className="add-accomodation"
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+          accommodationData={accommodationArray}
+          accommodationId={null}
+          userId={userId}
+          tripId={tripId}
+        />
         <Alerts
           message={alertMessage}
           open={alertOpen}

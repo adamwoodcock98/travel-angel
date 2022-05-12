@@ -165,6 +165,23 @@ export const Passport = ({ session }) => {
                   passportId={null}
                   user={userId}
               />
+              <Fab
+                id="pass-fab"
+                size="medium"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+                >
+                <AddIcon />
+              </Fab>
+              <AddPassport
+                open={open}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+                passportData={passport}
+                passportId={null}
+                user={userId}
+              />
             </DialogContent>
           </Dialog>
       </>

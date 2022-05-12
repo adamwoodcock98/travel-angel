@@ -51,6 +51,7 @@ const AddFlight = ({
     trip: tripId,
   });
 
+  const [openFields, setOpenFields] = useState(false);
   const [emptyFields, setEmptyFields] = useState([])
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -69,6 +70,14 @@ const AddFlight = ({
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
+
+  const handleExpand = () => {
+    setOpenFields(true)
+  }
+
+  const handleContract = () => {
+    setOpenFields(false)
+  }
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -133,7 +142,6 @@ const AddFlight = ({
     axios.post(url, newFlight).then((res) => {
       handleAlert("Flight added successfully.", "success");
       handleClose();
-      handleUpload();
       setFlight({
         flightNumber: "",
         departureTime: "",
@@ -155,7 +163,7 @@ const AddFlight = ({
     })
     .catch((err) => {
       console.log(err.message);
-      handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
+      handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
       handleClear();
     });
   };
@@ -204,11 +212,11 @@ const AddFlight = ({
         ...flight,
         departureTime: formatTime(data.departure.scheduledTimeLocal),
         airline: data.airline.name,
-        departureAirport: data.departure.airport.shortName,
+        departureAirport: data.departure.airport.iata,
         departureTerminal: data.departure.terminal,
         departureCity: data.departure.airport.municipalityName,
         departureGate: data.departure.gate,
-        arrivalAirport: data.arrival.airport.name,
+        arrivalAirport: data.arrival.airport.iata,
         arrivalTerminal: data.arrival.terminal,
         arrivalCity: data.arrival.airport.municipalityName,
         arrivalGate: data.arrival.gate,
@@ -289,6 +297,7 @@ const AddFlight = ({
               <MenuItem value={true}>Outbound</MenuItem>
             </Select>
           </FormControl>
+          <div style={{display: openFields ? "" : "none"}}>
           <TextField
             value={flight.departureTime}
             autoFocus
@@ -412,6 +421,7 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
+          </div>
           <TextField
             value={flight.bookingReference}
             autoFocus
@@ -423,32 +433,16 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
-            <InputLabel id="demo-select-small">Journey Type</InputLabel>
-            <Select
-              value={flight.isOutbound}
-              autoFocus
-              margin="dense"
-              id="isOutbound"
-              name="isOutbound"
-              label="Journey type"
-              variant="outlined"
-              onChange={handleChange}
-              required
-              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
-            >
-              <MenuItem value={false}>Inbound</MenuItem>
-              <MenuItem value={true}>Outbound</MenuItem>
-            </Select>
-          </FormControl>
+          <p className={"text-link"} onClick={handleExpand} style={{display: openFields ? "none" : ""}}>+ add details manually</p>
+          <p className={"text-link"} onClick={handleContract} style={{display: openFields ? "" : "none"}} >- remove manual details</p>
         </DialogContent>
         <DialogActions>
-        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-        <Button id="default-cancel-button" onClick={handleClear}>Clear</Button>
           {flightId && (
-            <Button id="save-details-button" onClick={onSubmit}>Update Flight Details</Button>
+            <Button id="save-details-button" onClick={onSubmit}>Update</Button>
           )}
-          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save Flight Details</Button>}
+          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save</Button>}
+          <Button id="default-cancel-button" onClick={handleClear}>Clear</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
       <Alerts
