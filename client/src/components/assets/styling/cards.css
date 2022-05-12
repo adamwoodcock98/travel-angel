@@ -92,7 +92,7 @@ h3 {
 p {
   /* color:whitesmoke */
   margin: 0;
-  font-size: 12px;
+  /* font-size: 12px; */
   /* color: rgb(160, 160, 160); */
 }
 
@@ -101,7 +101,7 @@ p {
 }
 
 .title{
-  color: #F22771;
+  color: rgbb(74, 74, 74);
 }
 
 .directions {

@@ -184,11 +184,10 @@ const AddAccommodation = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Accommodation</DialogTitle>
+        <DialogTitle color="primary" >Accommodation</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Add Accommodation. Fill in the fields to store your Accommodation
-            details
+            Use this form to store the details of your accommodation.
           </DialogContentText>
           <TextField
             value={accommodation.name}
@@ -215,7 +214,7 @@ const AddAccommodation = (props) => {
             type="number"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
             onChange={handleChange}
           />
           <TextField
@@ -230,12 +229,30 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('checkInDateInput') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('checkInDateInput') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195 }}
             InputLabelProps={{
               shrink: true,
             }}
             onChange={handleChange}
           />
+            <TextField
+              value={accommodation.checkInTime}
+              inputProps={{ "data-testid": "checkInTimeInput" }}
+              data-testid="checkInTime"
+              autoFocus
+              margin="dense"
+              id="checkInTime"
+              name="checkInTime"
+              label="Check-in time"
+              type="time"
+              variant="outlined"
+              required
+              sx={{border: emptyFields.includes('checkInTimeInput') ? '1px solid red' : '' , borderRadius: "5px", m: 1, minWidth: 195 }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleChange}
+            />
           <TextField
             value={formatDate(accommodation.checkOutDate)}
             inputProps={{ "data-testid": "checkOutDateInput" }}
@@ -248,25 +265,7 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('checkOutDateInput') ? '1px solid red' : '' , borderRadius: "5px" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            onChange={handleChange}
-          />
-          <TextField
-            value={accommodation.checkInTime}
-            inputProps={{ "data-testid": "checkInTimeInput" }}
-            data-testid="checkInTime"
-            autoFocus
-            margin="dense"
-            id="checkInTime"
-            name="checkInTime"
-            label="Check-in time"
-            type="time"
-            variant="outlined"
-            required
-            sx={{border: emptyFields.includes('checkInTimeInput') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('checkOutDateInput') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -284,7 +283,7 @@ const AddAccommodation = (props) => {
             type="time"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('checkOutTimeInput') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('checkOutTimeInput') ? '1px solid red' : '' , borderRadius: "5px", m: 1, minWidth: 195 }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -328,6 +327,7 @@ const AddAccommodation = (props) => {
               type="text"
               variant="outlined"
               onChange={handleChange}
+              sx={{m: 1}}
             />
             <TextField
               value={accommodation.addressLine1}
@@ -352,6 +352,7 @@ const AddAccommodation = (props) => {
               label="Address Line 2"
               type="text"
               variant="outlined"
+              sx={{m: 1}}
               onChange={handleChange}
             />
             <TextField
@@ -375,6 +376,7 @@ const AddAccommodation = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleChange}
@@ -400,6 +402,7 @@ const AddAccommodation = (props) => {
               id="countryCode"
               name="countryCode"
               label="Country"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleChange}
@@ -410,8 +413,8 @@ const AddAccommodation = (props) => {
         </DialogContent>
         <DialogActions>
         <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          <Button id="save-details-button" onClick={handleSubmit} data-testid="saveAccommodationDetails">
-            Save Accommodation Details
+          <Button id="save-details-button" onClick={handleSubmit} variant="outlined" sx={{color: "primary"}} data-testid="saveAccommodationDetails">
+            Save
           </Button>
           
         </DialogActions>

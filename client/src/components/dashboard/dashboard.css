@@ -66,12 +66,12 @@ p {
   margin-right: 0%;
 }
 
-#save-details-button {
+/* #save-details-button {
   background-color: #eba0ae;
   color: white;
-}
+} */
 #default-cancel-button {
-  color: #64baaa;
+  color: gray;
 }
 #search-button {
   color: black;
