@@ -202,11 +202,10 @@ const AddFlight = ({
   });
 
   const handleApiSearch = async () => {
-    console.log('hello')
     await flightApi.get("/", options).then((res) => {
       const data = res.data[0];
-      console.log(res.data);
 
+      handleAlert(`We found your flight to ${data.arrival.airport.municipalityName}`, "success")
       setFlight({
         ...flight,
         departureTime: formatTime(data.departure.scheduledTimeLocal),
@@ -222,6 +221,10 @@ const AddFlight = ({
         trip: tripId,
         user: userId,
       });
+    })
+    .catch((e) => {
+      console.log(e.message);
+      handleAlert("Hmmm, we couldn't find that flight. Please try again.", "error")
     });
   };
 
