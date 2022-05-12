@@ -203,11 +203,9 @@ const AddFlight = ({
   });
 
   const handleApiSearch = async () => {
-    console.log('hello')
     await flightApi.get("/", options).then((res) => {
       const data = res.data[0];
-      console.log(res.data);
-
+      handleAlert(`Great! We found your flight to ${data.arrival.airport.municipalityName}`, "success")
       setFlight({
         ...flight,
         departureTime: formatTime(data.departure.scheduledTimeLocal),
@@ -223,6 +221,11 @@ const AddFlight = ({
         trip: tripId,
         user: userId,
       });
+      setOpenFields(true);
+    })
+    .catch((e) => {
+      console.log(e.message);
+      handleAlert("Hmmm, we couldn't find that flight. Try again or add details manually", "error")
     });
   };
 
@@ -240,10 +243,11 @@ const AddFlight = ({
             margin="dense"
             id="flightNumber"
             name="flightNumber"
-            label="Flight numbber"
+            label="Flight number"
             type="text"
             variant="outlined"
             onChange={handleChange}
+            sx={{maxWidth: 195}}
             InputProps={{endAdornment: <SearchButton handleClick={handleApiSearch}/>}}
             sx={{
               border: '2px solid aqua',
@@ -269,17 +273,25 @@ const AddFlight = ({
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureDate') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('departureDate') ? '1px solid red' : '' , borderRadius: "5px", m: 1, minWidth: 195 }}
             InputLabelProps={{
               shrink: true,
             }}
             onChange={handleChange}
           />
-
-        </DialogContent>
-
-        <DialogContent>
-          <FormControl sx={{ m: 1, minWidth: 190 }}>
+            <div style={{display: openFields ? "" : "none"}}>
+            <TextField
+              value={flight.bookingReference}
+              autoFocus
+              margin="dense"
+              id="bookingReference"
+              name="bookingReference"
+              label="Booking Reference"
+              type="text"
+              variant="outlined"
+              onChange={handleChange}
+            />
+          <FormControl sx={{ m: 1, minWidth: 195 }}>
             <InputLabel id="demo-select-small">Journey Type</InputLabel>
             <Select
               value={flight.isOutbound}
@@ -297,7 +309,6 @@ const AddFlight = ({
               <MenuItem value={true}>Outbound</MenuItem>
             </Select>
           </FormControl>
-          <div style={{display: openFields ? "" : "none"}}>
           <TextField
             value={flight.departureTime}
             autoFocus
@@ -335,7 +346,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureAirport') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('departureAirport') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
             onChange={handleChange}
           />
           <TextField
@@ -359,7 +370,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('departureCity') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('departureCity') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
             onChange={handleChange}
           />
           <TextField
@@ -383,7 +394,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('arrivalAirport') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('arrivalAirport') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
             onChange={handleChange}
           />
           <TextField
@@ -407,7 +418,7 @@ const AddFlight = ({
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('arrivalCity') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{border: emptyFields.includes('arrivalCity') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
             onChange={handleChange}
           />
           <TextField
@@ -422,17 +433,6 @@ const AddFlight = ({
             onChange={handleChange}
           />
           </div>
-          <TextField
-            value={flight.bookingReference}
-            autoFocus
-            margin="dense"
-            id="bookingReference"
-            name="bookingReference"
-            label="Booking Reference"
-            type="text"
-            variant="outlined"
-            onChange={handleChange}
-          />
           <p className={"text-link"} onClick={handleExpand} style={{display: openFields ? "none" : ""}}>+ add details manually</p>
           <p className={"text-link"} onClick={handleContract} style={{display: openFields ? "" : "none"}} >- remove manual details</p>
         </DialogContent>
