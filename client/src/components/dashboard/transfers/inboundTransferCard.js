@@ -36,22 +36,23 @@ export const InboundTransferCard = (props) => {
       {inboundTransfer.map((inboundTransfer, index) => {
         return (
           <div className="card" key={index}>
-            <div className="crud-menu">
+            
+            <div className="header">
+              <h1 className="title">{inboundTransfer.name}</h1>
+              <div className="crud-menu">
               <CrudMenu
                 transferData={inboundTransfer}
                 transferId={inboundTransfer._id}
                 userId={userId}
                 tripId={tripId}
                 refresh={refresh}
-              />
-            </div>
-            <div className="header">
-              <h1>{inboundTransfer.name}</h1>
+               />            
+              </div>
             </div>
             <div className="body">
               <div className="subbody-left">
                 <div className="pickup-header">
-                  <h3>Pickup</h3>
+                  <h2>Pickup</h2>
                 </div>
                 <div className="pickup-body">
                   <p>{formatDate(inboundTransfer.pickupTime)}</p>

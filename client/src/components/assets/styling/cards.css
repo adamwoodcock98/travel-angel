@@ -4,6 +4,7 @@ element {
 }
 
 .upload {
+  padding: 10px 0px 15px 0px;
   display: flex;
 }
 
@@ -84,27 +85,43 @@ h4 {
 /* Subheading cards */
 h3 {
   margin: 0;
+  
 }
 
 /* Data: address, dates etc. */
 p {
   /* color:whitesmoke */
   margin: 0;
+  font-size: 12px;
+  /* color: rgb(160, 160, 160); */
+}
+
+.light-label {
+  color: rgb(160, 160, 160);
+}
+
+.title{
+  color: #F22771;
 }
 
 .directions {
   /* display: flex */
 }
 
-/* CARD LAYOUT */
+/* CARD LAYOUT - Accommo, Transfers, Parking, Visas*/
 .card {
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(#ffe3ec, #eba0ae);
-  border-radius: 25px;
-  opacity: 0.9;
   text-align: center;
   margin-bottom: 2%;
+  margin-left: 10%;
+
+  padding: 2%;
+  /* border-style: solid; */
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey;
+  
 }
 
 .crud-menu {
@@ -118,7 +135,16 @@ p {
   display: flex;
   flex: 1;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  margin-top: 1%;
+}
+
+.title {
+  /* text-align: center;
+  display: flex;
+  flex-direction: center;
+  justify-content: center; */
+  /* margin-left: 2%; */
 }
 
 /* .subheading {
@@ -135,20 +161,53 @@ p {
   margin: 0;
   justify-items: center;
   padding: 10px 0px 15px 0px;
+  /* border-bottom: 1px black; */
+  border-bottom: 1px solid lightgray;
 }
 
 .subbody-left {
   text-align: right;
-  padding-right: 15px;
+  padding-right: 25px;
+  border-left: #F22771 1px;
 }
 
 .subbody-right {
   text-align: left;
-  padding-left: 15px;
+  padding-left: 25px;
 }
 
-.upload {
-  padding: 10px 0px 15px 0px;
+.footer {
+  /* border-top: 1px solid lightgray; */
+  text-align: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 1%;
+}
+
+.directions {
+  text-align: center;
+  flex: 1;
+}
+
+/* CARD LAYOUT - Covid */
+.covid-card {
+  /* display: flex;
+  flex-direction: column;
+  background-color:#ffe3ec;
+  border-radius: 25px;
+  opacity: 0.9;
+  text-align:left;
+  margin-bottom: 2%; */
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 2%;
+  padding: 2%;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey;
 }
 
 .very-big {

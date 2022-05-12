@@ -9,6 +9,7 @@ import AddTest from "./tests/newTest";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
+import "../../assets/styling/cards.css"
 
 const Covid = ({ session }) => {
   const [testData, setTestData] = useState([]);
@@ -115,15 +116,20 @@ const Covid = ({ session }) => {
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
+              
               <h1>Vaccinations</h1>
+              <div className="covid-card">
               <VaccineCard
                 vaccinationsData={vaccineData}
                 handleUpload={handleUpload}
               />
             </div>
+            </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>
-              {testsArray}
+              <div className="covid-card">
+                {testsArray}
+              </div>
             </div>
           </div>
           <div className="covid-footer">
@@ -159,12 +165,14 @@ const Covid = ({ session }) => {
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
+              <div className="card">
               <h1>Vaccinations</h1>
               <VaccineCard
                 vaccinationsData={vaccineData}
                 refresh={handleClose}
                 handleUpload={handleUpload}
               />
+              </div>
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>
