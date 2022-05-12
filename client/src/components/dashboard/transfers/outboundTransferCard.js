@@ -43,49 +43,52 @@ export const OutboundTransferCard = (props) => {
               <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
             </div>
             </div>
-            <div className="body">
-              <div className="subbody-left">
+            <div className="transfers-body">
+              <div className="pickup-content">
                 <div className="pickup-header">
-                  <h3>Pickup</h3>
+                  <h3 className="light-label">Pickup</h3>
                 </div>
                 <div className="pickup-body">
                   <p>{formatDate(outboundTransfer.pickupTime)}</p>
                   <p>{formatTime(outboundTransfer.pickupTime)}</p>
                   <div className="address">
+                    <p>Address: </p>
                     {outboundTransfer.pickupAddress && (
-                      <p>
-                        Address: {formatAddress(outboundTransfer.pickupAddress)}
-                      </p>
+                      <h3>{formatAddress(outboundTransfer.pickupAddress)}</h3>
                     )}
                   </div>
                 </div>
-                <div className="subbody-right">
+              </div>
+                <div className="dropoff-content">
                   <div className="dropoff-header">
-                    <h3>Dropoff</h3>
+                    <h3 className="light-label">Dropoff</h3>
                   </div>
                   <div className="dropoff-body">
                     <p>{formatDate(outboundTransfer.dropoffTime)}</p>
                     <p>{formatTime(outboundTransfer.dropoffTime)}</p>
                     <div className="address">
+                      <p>Address: </p>
                       {outboundTransfer.dropoffAddress && (
-                        <p>
+                        <h3>
                           Address:{" "}
                           {formatAddress(outboundTransfer.dropoffAddress)}
-                        </p>
+                        </h3>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            
             <div className="footer">
               <div className="booking-reference">
+                <p>Booking Reference: </p>
                 {outboundTransfer.bookingReference && (
-                  <p>Booking Reference: {outboundTransfer.bookingReference}</p>
+                  <h3>{outboundTransfer.bookingReference}</h3>
                 )}
               </div>
               <div className="company">
-                {outboundTransfer.company && <p>{outboundTransfer.company}</p>}
+                <p>Company: </p>
+                {outboundTransfer.company && <h3>{outboundTransfer.company}</h3>}
               </div>
               <div className="contact-number">
                 {outboundTransfer.contactNumber && (

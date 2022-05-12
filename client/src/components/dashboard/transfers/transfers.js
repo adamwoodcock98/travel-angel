@@ -123,8 +123,8 @@ const Transfers = ({ session }) => {
     return (
       <>
         <div className="transfers">
-          <div className="transfer-header">
-            <h1 className="very-big">Transfers</h1>
+          <div className="transfer-header very-big">
+            <h1 className="title very-big">Transfers</h1>
           </div>
           <div className="transfers-content">
             <div className="transfers-content-outbound">

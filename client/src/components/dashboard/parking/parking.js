@@ -149,7 +149,7 @@ const Parking = ({ session }) => {
       <>
         <div className="parking-window">
           <div className="parking-header">
-            <h1 className="very-big">Parking</h1>
+            <h1 className="title very-big">Parking</h1>
           </div>
           <div className="parking-content">
             {parking.length && parkingArray}

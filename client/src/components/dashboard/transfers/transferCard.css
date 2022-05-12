@@ -66,3 +66,35 @@
 }
 
  */
+
+ .transfers-content {
+   display: flex;
+   flex-direction: row;
+   justify-content: left;
+ }
+
+ /* .transfer-body {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+ } */
+ .pickup-header {
+   display: flex;
+   flex-direction: column;
+ }
+ 
+ .pickup-content {
+  text-align: right;
+  padding-left: 25px;
+  display: flex;
+  justify-content: left;
+  flex-direction: row;
+ }
+
+ .dropoff-content {
+  text-align: right;
+  padding-left: 25px;
+  display: flex;
+  justify-content: right;
+ }

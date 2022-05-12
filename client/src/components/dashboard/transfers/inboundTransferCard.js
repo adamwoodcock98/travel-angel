@@ -49,25 +49,24 @@ export const InboundTransferCard = (props) => {
                />            
               </div>
             </div>
-            <div className="body">
-              <div className="subbody-left">
+            <div className="transfer-body">
+              <div className="pickup-content">
                 <div className="pickup-header">
-                  <h2>Pickup</h2>
+                  <p className="light-label">Pickup</p>
                 </div>
                 <div className="pickup-body">
                   <p>{formatDate(inboundTransfer.pickupTime)}</p>
                   <p>{formatTime(inboundTransfer.pickupTime)}</p>
                   <div className="address">
+                    <p>Address: </p>
                     {inboundTransfer.pickupAddress && (
-                      <p>
-                        Address: {formatAddress(inboundTransfer.pickupAddress)}
-                      </p>
+                      <h3>{formatAddress(inboundTransfer.pickupAddress)}</h3>
                     )}
                   </div>
                 </div>
-                <div className="subbody-right">
+                <div className="dropoff-content">
                   <div className="dropoff-header">
-                    <h3>Dropoff</h3>
+                  <p className="light-label">Dropoff</p>
                   </div>
                   <div className="dropoff-body">
                     <p>{formatDate(inboundTransfer.dropoffTime)}</p>
@@ -86,12 +85,14 @@ export const InboundTransferCard = (props) => {
             </div>
             <div className="footer">
               <div className="booking-reference">
+                <p>Booking Reference: </p>
                 {inboundTransfer.bookingReference && (
-                  <p>Booking Reference: {inboundTransfer.bookingReference}</p>
+                  <h3>{inboundTransfer.bookingReference}</h3>
                 )}
               </div>
               <div className="company">
-                {inboundTransfer.company && <p>{inboundTransfer.company}</p>}
+                <p>Company: </p>
+                {inboundTransfer.company && <h3>{inboundTransfer.company}</h3>}
               </div>
               <div className="contact-number">
                 {inboundTransfer.contactNumber && (
