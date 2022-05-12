@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-
+import "../dashboard.css";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -14,6 +14,13 @@ import { Alerts } from "../../assets/snackbar";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import moment from 'moment';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+
+const SearchButton = ({handleClick}) => (
+  <Button id="search-button" onClick={handleClick}>
+    <SearchOutlinedIcon />
+  </Button>
+)
 
 const AddFlight = ({
   flightData,
@@ -154,8 +161,8 @@ const AddFlight = ({
       })
     })
     .catch((err) => {
-      console.log(err);
-      handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
+      console.log(err.message);
+      handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
       handleClear();
     });
   };
@@ -195,6 +202,7 @@ const AddFlight = ({
   });
 
   const handleApiSearch = async () => {
+    console.log('hello')
     await flightApi.get("/", options).then((res) => {
       const data = res.data[0];
       console.log(res.data);
@@ -203,11 +211,11 @@ const AddFlight = ({
         ...flight,
         departureTime: formatTime(data.departure.scheduledTimeLocal),
         airline: data.airline.name,
-        departureAirport: data.departure.airport.shortName,
+        departureAirport: data.departure.airport.iata,
         departureTerminal: data.departure.terminal,
         departureCity: data.departure.airport.municipalityName,
         departureGate: data.departure.gate,
-        arrivalAirport: data.arrival.airport.name,
+        arrivalAirport: data.arrival.airport.iata,
         arrivalTerminal: data.arrival.terminal,
         arrivalCity: data.arrival.airport.municipalityName,
         arrivalGate: data.arrival.gate,
@@ -231,10 +239,11 @@ const AddFlight = ({
             margin="dense"
             id="flightNumber"
             name="flightNumber"
-            label="Flight Number"
+            label="Flight numbber"
             type="text"
             variant="outlined"
             onChange={handleChange}
+            InputProps={{endAdornment: <SearchButton handleClick={handleApiSearch}/>}}
           />
           <TextField
             value={formatDate(flight.departureDate)}
@@ -252,11 +261,8 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-        </DialogContent>
 
-        <DialogActions>
-          <Button onClick={handleApiSearch}>Search</Button>
-        </DialogActions>
+        </DialogContent>
 
         <DialogContent>
           <FormControl sx={{ m: 1, minWidth: 190 }}>
@@ -271,6 +277,7 @@ const AddFlight = ({
               variant="outlined"
               onChange={handleChange}
               required
+              sx={{border: emptyFields.includes('isOutbound') ? '1px solid red' : '' , borderRadius: "5px" }}
             >
               <MenuItem value={false}>Inbound</MenuItem>
               <MenuItem value={true}>Outbound</MenuItem>
@@ -287,6 +294,7 @@ const AddFlight = ({
             type="time"
             variant="outlined"
             required
+            sx={{border: emptyFields.includes('departureTime') ? '1px solid red' : '' , borderRadius: "5px" }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -417,11 +425,11 @@ const AddFlight = ({
         </DialogContent>
         <DialogActions>
           {flightId && (
-            <Button onClick={onSubmit}>Update</Button>
+            <Button id="save-details-button" onClick={onSubmit}>Update</Button>
           )}
-          {!flightId && <Button onClick={onSubmit}>Save</Button>}
-          <Button onClick={handleClear}>Clear</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save</Button>}
+          <Button "default-cancel-button" onClick={handleClear}>Clear</Button>
+          <Button "default-cancel-button" onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
       <Alerts

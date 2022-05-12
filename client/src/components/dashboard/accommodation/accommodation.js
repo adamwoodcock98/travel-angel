@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import AccommodationCard from "./accommodationCard";
 import AddAccommodation from "./addAccommodation";
 import { useParams } from "react-router-dom";
-import "./accommodation.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
@@ -130,8 +129,8 @@ export const ViewAccommodation = ({ session }) => {
     return (
       <>
         <div className="container">
-          <div className="header">
-            <h1 className="title">Accommodation</h1>
+          <div className="accommodation-header">
+            <h1 className="title"> Your accommodation</h1>
             <AddAccommodation
               className="add-accomodation"
               handleOpen={handleOpen}
@@ -143,7 +142,7 @@ export const ViewAccommodation = ({ session }) => {
               tripId={tripId}
             />
           </div>
-          <div className="body">
+          <div className="accommodation-body">
             <AccommodationCard
               accommodation={accommodation}
               userId={userId}

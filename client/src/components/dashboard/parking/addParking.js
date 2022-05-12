@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
 import "../../assets/styling/cards.css"
+import "../dashboard.css";
 
 const AddParking = (props) => {
 
@@ -413,8 +414,8 @@ const AddParking = (props) => {
           <p className={"text-link"} onClick={handleContract} style={{display: openAddress ? "" : "none"}} >- remove address</p>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Save Parking Details</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="save-details-button" onClick={onSubmit}>Save Parking Details</Button>
         </DialogActions>
       </Dialog>
       <Alerts

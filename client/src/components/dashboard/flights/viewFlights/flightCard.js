@@ -46,7 +46,6 @@ export const FlightCard = (props) => {
   };
 
   return (
-
       <div className="flight-card">
         <div className="flight-card-content">
           <div className="flight-card-arrival-pane">

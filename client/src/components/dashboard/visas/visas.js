@@ -97,8 +97,7 @@ const Visas = ({ session }) => {
             <h1>Visas</h1>
           </div>
           <div className="visas-content">
-            <div className="visas-content-outbound">
-              <h1 className="visa-content-subheading"> BLOOPS </h1>
+            <div className="visas-content">
               <VisaCard visa={visa} userId={userId} tripId={tripId} refresh={handleClose} handleUpload={handleUpload} />
             </div>
           </div>

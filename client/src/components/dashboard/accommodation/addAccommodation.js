@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
 import "../../assets/styling/cards.css"
+import "../dashboard.css";
 
 const AddAccommodation = (props) => {
 
@@ -18,6 +19,7 @@ const AddAccommodation = (props) => {
   const userId = props.userId;
   const tripId = props.tripId;
   const accommodationData = props.accommodationData;
+  console.log(accommodationData.name)
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
@@ -407,10 +409,11 @@ const AddAccommodation = (props) => {
           <p className={"text-link"} onClick={handleContract} style={{display: openAddress ? "" : "none"}} >- remove address</p>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleSubmit} data-testid="saveAccommodationDetails">
-            Save
+        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="save-details-button" onClick={handleSubmit} data-testid="saveAccommodationDetails">
+            Save Accommodation Details
           </Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          
         </DialogActions>
       </Dialog>
       <Alerts

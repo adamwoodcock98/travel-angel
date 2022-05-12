@@ -62,6 +62,7 @@ const CrudMenu = (props) => {
   const openCrud = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [emptyFields, setEmptyFields] = useState([])
 
 
   const handleClick = (event) => {
@@ -139,6 +140,7 @@ const CrudMenu = (props) => {
         accommodationData={accommodationData}
         accommodationId={accommodationData._id}
         userId={userId}
+        emptyFields={emptyFields}
       />
     </div>
   );

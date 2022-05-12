@@ -62,3 +62,95 @@ p.text-link:hover {
 margin-top: 30%;
 color:#F22771;
 }
+
+@font-face {
+  font-family: "Noto_Serif";
+  src: local("Noto_Serif"),
+    url("../../assets/Noto_Serif/NotoSerif-Regular.ttf") format("truetype");
+}
+/* Title page */
+h1 {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Title cards */
+h2 {
+  margin: 0;
+}
+
+/* Info headings: time, checkin/out, booking ref*/
+h4 {
+  margin: 0;
+}
+
+/* Subheading cards */
+h3 {
+  margin: 0;
+}
+
+/* Data: address, dates etc. */
+p {
+  /* color:whitesmoke */
+  margin: 0;
+}
+
+.directions {
+  /* display: flex */
+}
+
+
+/* CARD LAYOUT */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(#ffe3ec, #eba0ae);
+  border-radius: 25px;
+  opacity: 0.9;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.crud-menu {
+  display: flex;
+  flex: 1;
+  justify-content: right;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* .subheading {
+  justify-content: center;
+  text-align: center;
+} */
+
+.body {
+  text-align: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0;
+  justify-items: center;
+  padding: 10px 0px 15px 0px;
+}
+
+.subbody-left {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.subbody-right {
+  text-align: left;
+  padding-left: 15px
+}
+
+.upload {
+  padding: 10px 0px 15px 0px; 
+}

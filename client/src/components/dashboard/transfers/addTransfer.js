@@ -14,6 +14,7 @@ import InputLabel from "@mui/material/InputLabel";
 import { getThemeProps } from "@mui/system";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
+import "../dashboard.css";
 
 const AddTransfer = (props) => {
 
@@ -567,8 +568,8 @@ const AddTransfer = (props) => {
           <p className={"text-link"} onClick={handleDropoffContract} style={{display: openDropoff ? "" : "none"}} >- remove dropoff address</p>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Save Transfer Details</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="save-details-button" onClick={handleSubmit}>Save Transfer Details</Button>
         </DialogActions>
       </Dialog>
       <Alerts
