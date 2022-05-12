@@ -52,7 +52,7 @@ export const FooterPane = (props) => {
         <Button
           color="primary"
           variant="outlined"
-          startIcon={<DirectionsOutlinedIcon />}
+          startIcon={<DirectionsOutlinedIcon color="primary" />}
           href={handleDirections(airport)}
           target="_blank"
         >
