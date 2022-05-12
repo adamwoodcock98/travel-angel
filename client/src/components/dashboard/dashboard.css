@@ -72,13 +72,6 @@ p {
 #default-cancel-button {
   color: #64BAAA;
 }
-#search-button {
-  color: black;
-  margin-right: -18px;
-  padding-left: 0px;
-  padding-right: 0px;
-  background: transparent;
-}
 /* #flightNumber:focus {
   background-color: yellow;
 } */
@@ -94,6 +87,9 @@ p {
   width: 10px;
 }
 
+#departureDate.MuiOutlinedInput-input {
+  color: #666666;
+}
 
 /* label: {
   position: 'absolute',
@@ -115,3 +111,4 @@ p {
     borderRadius: 2,
   },
 }} */
+
