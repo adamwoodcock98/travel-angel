@@ -18,8 +18,8 @@ import moment from "moment";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
 const SearchButton = ({handleClick}) => (
-  <Button id="search-button" onClick={handleClick}>
-    <SearchOutlinedIcon />
+  <Button onClick={handleClick}>
+    <SearchOutlinedIcon color="primary" />
   </Button>
 );
 
@@ -550,22 +550,22 @@ const AddFlight = ({
           </p>
         </DialogContent>
         <DialogActions>
-          {flightId && (
-            <Button id="save-details-button" onClick={onSubmit}>
-              Update
-            </Button>
-          )}
-          {!flightId && (
-            <Button id="save-details-button" onClick={onSubmit}>
-              Save
-            </Button>
-          )}
           <Button id="default-cancel-button" onClick={handleClear}>
-            Clear
+            Clear flight
           </Button>
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
+          {flightId && (
+            <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+              Update
+            </Button>
+          )}
+          {!flightId && (
+            <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+              Save
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
       <Alerts

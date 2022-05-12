@@ -15,7 +15,6 @@ const TestCard = (props) => {
   const testId = testData._id;
   const tripId = props.tripId;
   const handleUpload = props.handleUpload;
-
   const refresh = props.refresh;
 
   const handleOpen = () => {
@@ -121,7 +120,6 @@ const TestCard = (props) => {
         />
         <div className="uploads">
           Download Your Documents
-          {console.log(testData)}
           {testData.uploads.length &&
             testData.uploads.map((upload, index) => {
               return (

@@ -17,6 +17,7 @@ import Flights from "./flights/flights";
 import Parking from "./parking/parking";
 import Covid from "./covid/covid";
 import Visa from "./visas/visas";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,6 +37,23 @@ function TabPanel(props) {
     </div>
   );
 }
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Roboto-Regular",
+  },
+  palette: {
+    primary: {
+      main: '#F22771',
+    },
+    secondary: {
+      main: 'rgb(255, 0, 93)',
+    },
+    danger: {
+      main: "#FF4949",
+    }
+  },
+});
 
 TabPanel.propTypes = {
   children: PropTypes.node,
