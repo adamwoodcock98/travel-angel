@@ -207,10 +207,10 @@ const AddParking = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Parking</DialogTitle>
+        <DialogTitle color="primary">Parking</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill in the fields to store your parking details
+            Use this form to store your parking information
           </DialogContentText>
           <TextField
             value={parking.startDate}
@@ -225,6 +225,7 @@ const AddParking = (props) => {
             sx={{
               border: emptyFields.includes("startDate") ? "1px solid red" : "",
               borderRadius: "5px",
+              maxWidth: 195,
             }}
             InputLabelProps={{
               shrink: true,
@@ -244,6 +245,8 @@ const AddParking = (props) => {
             sx={{
               border: emptyFields.includes("endDate") ? "1px solid red" : "",
               borderRadius: "5px",
+              maxWidth: 195,
+              m: 1,
             }}
             InputLabelProps={{
               shrink: true,
@@ -269,6 +272,7 @@ const AddParking = (props) => {
             name="type"
             label="Car Park Type"
             type="text"
+            sx={{m: 1}}
             variant="outlined"
             onChange={handleChange}
           />
@@ -290,6 +294,7 @@ const AddParking = (props) => {
             id="company"
             name="company"
             label="Company"
+            sx={{m: 1}}
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -312,6 +317,7 @@ const AddParking = (props) => {
             id="bookingReference"
             name="bookingReference"
             label="Booking Reference"
+            sx={{m: 1}}
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -347,6 +353,7 @@ const AddParking = (props) => {
               margin="dense"
               id="buildingName"
               name="buildingName"
+              sx={{m: 1}}
               label="Building Name"
               type="text"
               variant="outlined"
@@ -378,6 +385,7 @@ const AddParking = (props) => {
               margin="dense"
               id="addressLine2"
               name="addressLine2"
+              sx={{m: 1}}
               label="Address Line 2"
               type="text"
               variant="outlined"
@@ -408,6 +416,7 @@ const AddParking = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleChange}
@@ -438,6 +447,7 @@ const AddParking = (props) => {
               margin="dense"
               id="countryCode"
               name="countryCode"
+              sx={{m: 1}}
               label="Country"
               type="text"
               variant="outlined"
@@ -463,8 +473,8 @@ const AddParking = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          <Button id="save-details-button" onClick={onSubmit}>
-            Save Parking Details
+          <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+            Save
           </Button>
         </DialogActions>
       </Dialog>

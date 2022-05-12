@@ -6,7 +6,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
 import { Alerts } from "../../assets/snackbar";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Parking = ({ session }) => {
   const { tripId } = useParams();
@@ -80,25 +80,26 @@ const Parking = ({ session }) => {
   useEffect(() => {
     setLoading(true);
     if (userId !== "null") {
-      api.get(`/${userId}/${tripId}`)
-      .then((res) => {
-        const bookings = res.data.bookings;
-        setParking(bookings);
-      })
-      .catch((error) => {
-        if (error.response.status) {
-          handleAlert(
-            error.response.status + " - " + error.response.statusText,
-            "error"
-          );
-        } else {
-          handleAlert(
-            "There was a problem connecting to the server.",
-            "error"
-          );
-        }
-      })
-      .finally(() => setLoading(false));;
+      api
+        .get(`/${userId}/${tripId}`)
+        .then((res) => {
+          const bookings = res.data.bookings;
+          setParking(bookings);
+        })
+        .catch((error) => {
+          if (error.response.status) {
+            handleAlert(
+              error.response.status + " - " + error.response.statusText,
+              "error"
+            );
+          } else {
+            handleAlert(
+              "There was a problem connecting to the server.",
+              "error"
+            );
+          }
+        })
+        .finally(() => setLoading(false));
     }
   }, [didUpdate, state]);
 
@@ -121,18 +122,26 @@ const Parking = ({ session }) => {
   };
 
   if (loading) {
-    return(
-      <div className="loading" style={{ display: loading ? "" : "none"}} >
+    return (
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
         <p color="secondary">loading...</p>
       </div>
-    )
+    );
   } else if (parking.length) {
     const parkingArray = [];
 
     parking.forEach((booking) => {
       parkingArray.push(
-        <ParkingCard bookingData={booking} key={booking._id} userId={userId} tripId={tripId} handleDirections={handleDirections} refresh={handleClose} handleUpload={handleUpload} />
+        <ParkingCard
+          bookingData={booking}
+          key={booking._id}
+          userId={userId}
+          tripId={tripId}
+          handleDirections={handleDirections}
+          refresh={handleClose}
+          handleUpload={handleUpload}
+        />
       );
     });
 
@@ -142,9 +151,16 @@ const Parking = ({ session }) => {
           <div className="parking-header">
             <h1 className="very-big">Parking</h1>
           </div>
-          <div className="parking-content">{parking.length && parkingArray}</div>
+          <div className="parking-content">
+            {parking.length && parkingArray}
+          </div>
           <div className="parking-footer">
-            <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+            <Fab
+              size="large"
+              color="secondary"
+              aria-label="add"
+              onClick={handleOpen}
+            >
               <AddIcon />
             </Fab>
             <AddParking
@@ -156,6 +172,13 @@ const Parking = ({ session }) => {
               userId={userId}
               tripId={tripId}
             />
+            <Alerts
+              message={alertMessage}
+              open={alertOpen}
+              handleClose={handleAlertClose}
+              alertPosition={alertPosition}
+              alertType={alertType}
+            />
           </div>
         </div>
       </>
@@ -163,8 +186,8 @@ const Parking = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-      <h1 className="very-big">Parking</h1>
-      <div className="empty-prompt">
+        <h1 className="very-big">Parking</h1>
+        <div className="empty-prompt">
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
@@ -178,22 +201,22 @@ const Parking = ({ session }) => {
             <AddIcon />
           </Fab>
         </div>
-      <AddParking
-        open={open}
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        parkingData={newParking}
-        parkingId={null}
-        userId={userId}
-        tripId={tripId}
-      />
-      <Alerts
-        message={alertMessage}
-        open={alertOpen}
-        handleClose={handleAlertClose}
-        alertPosition={alertPosition}
-        alertType={alertType}
-      />
+        <AddParking
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          parkingData={newParking}
+          parkingId={null}
+          userId={userId}
+          tripId={tripId}
+        />
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
       </div>
     );
   }
