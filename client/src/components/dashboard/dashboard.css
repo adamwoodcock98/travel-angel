@@ -26,7 +26,7 @@ body {
   background: linear-gradient(
     180deg,
     rgba(235, 160, 174, 1) 0%,
-    rgba(242, 39, 113, 0.6) 100%
+    rgba(242, 39, 113, 0.3) 100%
   );
 }
 
@@ -71,13 +71,15 @@ p {
 }
 #default-cancel-button {
   color: #64baaa;
+
+#search-button {
+  color: black;
+  margin-right: -18px;
+  padding-left: 0px;
+  padding-right: 0px;
+  background: transparent;
 }
-/* #flightNumber:focus {
-  background-color: yellow;
-} */
-/* .MuiFormControl-root:focus {
-  background-color: yellow;
-} */
+
 .MuiOutlinedInput-notchedOutline.disable-x {
   background-color: black;
 }
@@ -119,4 +121,3 @@ p {
     borderRadius: 2,
   },
 }} */
-
