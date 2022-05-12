@@ -428,8 +428,8 @@ const AddFlight = ({
             <Button id="save-details-button" onClick={onSubmit}>Update</Button>
           )}
           {!flightId && <Button id="save-details-button" onClick={onSubmit}>Save</Button>}
-          <Button "default-cancel-button" onClick={handleClear}>Clear</Button>
-          <Button "default-cancel-button" onClick={handleClose}>Cancel</Button>
+          <Button id="default-cancel-button" onClick={handleClear}>Clear</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </Dialog>
       <Alerts

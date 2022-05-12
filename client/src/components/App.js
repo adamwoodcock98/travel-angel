@@ -15,10 +15,10 @@ const App = () => {
     setSession(user);
   };
 
-  const handleLogOut = () => {
-    window.localStorage.setItem("session", null);
+  const handleLogOut = async () => {
+    await window.localStorage.setItem("session", null);
     window.location = "/";
-    setSession("");
+    setSession(null);
   };
 
   useEffect(() => {
