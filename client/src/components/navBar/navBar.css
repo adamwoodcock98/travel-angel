@@ -1,3 +1,31 @@
+#navbar {
+  background-color: #eba0ae;
+  background: linear-gradient(
+    0deg,
+    rgba(235, 160, 174, 1) 0%,
+    rgba(242, 39, 113, 0.7) 100%
+  );
+  display: fixed;
+  height: 55px;
+  margin: -5px 0 0 0;
+  overflow: visible;
+  min-width: 500px;
+  border-radius: 10px;
+}
+
+#logo {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+}
+
 #nav-auth {
   display: inline-block;
   width: 500px;
@@ -6,4 +34,17 @@
 #nav-trips {
   color: inherit;
   text-decoration: none;
+}
+
+#nav-user-name {
+  float: left;
+  color: rgba(255, 255, 255, 0.6);
+  padding-top: 6px;
+  padding-right: 15px;
+  text-transform: capitalize;
+  font-size: 19px;
+}
+
+#nav-avatar {
+  margin-top: -4px;
 }

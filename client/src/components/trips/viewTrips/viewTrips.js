@@ -23,9 +23,9 @@ const ViewTrips = ({ trips }) => {
             <div className="trip-card" key={index}>
               <a href={url}>
                 <div className="trip-card-header">
-                  <h1>{trip.name}</h1>
+                  <h3 className="trip-h3">{trip.name}</h3>
                 </div>
-                <div className="body">{formatDate(trip.startDate)}</div>
+                <div className="body"><h4 className="trip-h4">{formatDate(trip.startDate)}</h4></div>
                 <div className="footer">
                   {formatLongDate(new Date(Date.now())) <
                     formatLongDate(trip.startDate) && (
