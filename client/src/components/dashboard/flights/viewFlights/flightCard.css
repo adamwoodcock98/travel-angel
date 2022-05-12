@@ -43,6 +43,7 @@
 
 .flight-card-crud {
   flex: 1;
+  text-align: right;
 }
 
 /* Airport pane classes */

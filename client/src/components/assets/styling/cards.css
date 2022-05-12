@@ -67,8 +67,8 @@ color:#F22771;
 
 /* Title page */
 h1 {
-  font-family: Arial;
   margin: 0;
+  color: rgb(74, 74, 74);
 }
 
 /* Title cards */
