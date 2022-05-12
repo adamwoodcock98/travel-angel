@@ -25,42 +25,35 @@ const ParkingCard = (props) => {
   return (
     <div className="card-container">
       <div className="card">
-        <div className="crud-menu">
-          <CrudMenu
-            userId={userId}
-            parkingData={parkingData}
-            tripId={tripId}
-            refresh={refresh}
-          />
-        </div>
+        
         <div className="header">
-          <h1>
-            Your booking
-            {parkingData.bookingReference &&
-              `: ${parkingData.bookingReference}`}
-          </h1>
+          <div className="title">
+            <h1>
+              Your booking
+              {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
+            </h1>
+            </div>
+          <div className="crud-menu">
+          <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
+        </div>
         </div>
         <div className="body">
           <div className="subbody-left">
             <div className="start-date-header">
-              <h3>From</h3>
+              <p>From</p>
             </div>
             <div className="start-date-body">
-              <h2>
-                {parkingData.startDate && formatDate(parkingData.startDate)}
-              </h2>
-              <h2>
-                {parkingData.startDate && formatTime(parkingData.startDate)}
-              </h2>
+              <h3>{parkingData.startDate && formatDate(parkingData.startDate)}</h3>
+              <h3>{parkingData.startDate && formatTime(parkingData.startDate)}</h3>
             </div>
           </div>
           <div className="subbody-right">
             <div className="end-date-header">
-              <h3>Until</h3>
+              <p>Until</p>
             </div>
             <div className="end-date-body">
-              <h2>{parkingData.endDate && formatDate(parkingData.endDate)}</h2>
-              <h2>{parkingData.endDate && formatTime(parkingData.endDate)}</h2>
+              <h3>{parkingData.endDate && formatDate(parkingData.endDate)}</h3>
+              <h3>{parkingData.endDate && formatTime(parkingData.endDate)}</h3>
             </div>
           </div>
         </div>

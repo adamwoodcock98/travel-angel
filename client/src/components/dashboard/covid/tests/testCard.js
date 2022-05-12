@@ -6,6 +6,7 @@ import BiotechOutlinedIcon from "@mui/icons-material/BiotechOutlined";
 import AddTest from "./newTest";
 import CrudMenu from "./crud/crud";
 import Upload from "../../../upload/upload";
+import "../../../assets/styling/cards.css";
 
 const TestCard = (props) => {
   const [open, setOpen] = useState(false);
@@ -33,10 +34,12 @@ const TestCard = (props) => {
 
   return (
     <div className="test-card">
+      
       <div className="test-card-header">
         <h1>
           {testData.testType} {testData.entryType}
         </h1>
+        <div className="crud-menu">
         <CrudMenu
           testData={testData}
           testId={testId}
@@ -44,6 +47,8 @@ const TestCard = (props) => {
           refresh={refresh}
           tripId={tripId}
         />
+        </div>
+        
       </div>
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
         <div className="test-card-primary-content">

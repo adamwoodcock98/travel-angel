@@ -44,7 +44,7 @@ body {
 }
 
 .tab-content {
-  width: 90%;
+  width: 100%;
   padding: 2%;
   margin-top: 4%;
 }
@@ -97,3 +97,5 @@ p {
   left: 12,
   top: -5
 } */
+
+

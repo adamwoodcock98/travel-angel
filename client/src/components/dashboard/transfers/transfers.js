@@ -124,7 +124,9 @@ const Transfers = ({ session }) => {
       <>
         <div className="transfers">
           <div className="transfer-header">
-            <h1>Your transfers</h1>
+            <div className="title">
+              <h1>Transfers</h1>
+            </div>
           </div>
           <div className="transfers-content">
             <div className="transfers-content-outbound">

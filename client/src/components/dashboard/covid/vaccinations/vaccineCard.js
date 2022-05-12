@@ -50,7 +50,7 @@ const VaccineCard = (props) => {
   return (
     <div className="vaccine-card">
       <div className="vaccine-card-header">
-        <h1>Vaccinations</h1>
+        <h1>Vaccination</h1>
       </div>
       <div className="vaccine-card-status-content">
         <h2>Vaccination status</h2>

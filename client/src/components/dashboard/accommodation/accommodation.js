@@ -128,9 +128,9 @@ export const ViewAccommodation = ({ session }) => {
   } else if (accommodation.length) {
     return (
       <>
-        <div className="container">
+        {/* <div className="container"> */}
           <div className="accommodation-header">
-            <h1 className="title"> Your accommodation</h1>
+            <h1>Accommodation</h1>
             <AddAccommodation
               className="add-accomodation"
               handleOpen={handleOpen}
@@ -166,7 +166,7 @@ export const ViewAccommodation = ({ session }) => {
             alertPosition={alertPosition}
             alertType={alertType}
           />
-        </div>
+        {/* </div> */}
       </>
     );
   } else {
