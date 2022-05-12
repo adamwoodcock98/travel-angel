@@ -177,7 +177,7 @@ const AddAccommodation = (props) => {
       })
       .catch((err) => {
         console.log(err.message);
-        handleAlert("Whoops! We couldn't add your flight, please try again.", "error");
+        handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
       });
   };
 
