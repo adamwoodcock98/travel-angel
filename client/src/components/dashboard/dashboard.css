@@ -87,7 +87,13 @@ p {
   width: 10px;
 }
 
-#departureDate.MuiOutlinedInput-input {
+#departureDate.MuiOutlinedInput-input, 
+#checkOutDate.MuiOutlinedInput-input, 
+#checkInDate.MuiOutlinedInput-input, 
+#checkInTime.MuiOutlinedInput-input, 
+#checkOutTime.MuiOutlinedInput-input, 
+#dropoffTime.MuiOutlinedInput-input, 
+#pickupTime.MuiOutlinedInput-input {
   color: #666666;
 }
 
