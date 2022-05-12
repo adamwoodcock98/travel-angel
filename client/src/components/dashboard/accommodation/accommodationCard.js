@@ -129,7 +129,6 @@ export default function AccommodationCard(props) {
                 </div>
               </div>
             </div>
-          </div>
         );
       })}
     </div>

@@ -60,6 +60,7 @@ const CrudMenu = (props) => {
   const testId = testData._id;
   const userId = props.userId;
   const tripId = props.tripId;
+  const handleUpload = props.handleUpload;
   const refresh = props.refresh;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openCrud = Boolean(anchorEl);
@@ -146,6 +147,8 @@ const CrudMenu = (props) => {
         userId={userId}
         testId={testId}
         entryType={testData.entryType}
+        tripId={tripId}
+        handleUpload={handleUpload}
       />
     </div>
   );

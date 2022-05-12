@@ -10,7 +10,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import ListSubheader from '@mui/material/ListSubheader';
+import ListSubheader from "@mui/material/ListSubheader";
 import "../../dashboard.css";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
@@ -21,6 +21,7 @@ const AddVaccine = (props) => {
   const vaccinationsID = props.vaccinationsID;
   const doseData = props.doseData;
   const doseId = props.doseId;
+  const handleUpload = props.handleUpload;
 
   const [vaccine, setVaccine] = useState({
     dose: doseData.dose,
@@ -41,20 +42,19 @@ const AddVaccine = (props) => {
 
     let url;
     if (doseData._id) {
-      url = `http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/edit/${doseId}`
+      url = `http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/edit/${doseId}`;
     } else {
-      url = `http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/new`
+      url = `http://localhost:8000/dashboard/covid/vaccination/${vaccinationsID}/new`;
     }
 
     const { dose, date, type } = vaccine;
 
     const newDose = { dose, date, type };
 
-    axios
-      .post(url, newDose)
-      .then((res) => {
-        handleClose();
-      });
+    axios.post(url, newDose).then((res) => {
+      handleClose();
+      handleUpload();
+    });
   };
 
   return (
@@ -67,7 +67,14 @@ const AddVaccine = (props) => {
           </DialogContentText>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel htmlFor="grouped-select">Grouping</InputLabel>
-            <Select defaultValue="" name="dose" id="dose" label="Dose" autoFocus onChange={handleChange}>
+            <Select
+              defaultValue=""
+              name="dose"
+              id="dose"
+              label="Dose"
+              autoFocus
+              onChange={handleChange}
+            >
               <ListSubheader>mRNA Vaccine</ListSubheader>
               <MenuItem value={"1st Dose"}>1st Dose</MenuItem>
               <MenuItem value={"2nd Dose"}>2nd Dose</MenuItem>
@@ -103,20 +110,40 @@ const AddVaccine = (props) => {
               onChange={handleChange}
               required
             >
-              <MenuItem value={"Novavax (Nuvaxovid)"}>Novavax (Nuvaxovid)</MenuItem>
-              <MenuItem value={"Moderna (Spikevax)"}>Moderna (Spikevax)</MenuItem>
-              <MenuItem value={"Pfizer/BioNTech (Comirnaty)"}>Pfizer/BioNTech (Comirnaty)</MenuItem>
-              <MenuItem value={"Oxford/AstraZeneca (Vaxzevria)"}>Oxford/AstraZeneca (Vaxzevria)</MenuItem>
-              <MenuItem value={"Covishield (AstraZeneca formulation)"}>Covishield (AstraZeneca formulation)</MenuItem>
-              <MenuItem value={"Sinopharm (Covilo)"}>Sinopharm (Covilo)</MenuItem>
-              <MenuItem value={"Sinovac (CoronaVac)"}>Sinovac (CoronaVac)</MenuItem>
-              <MenuItem value={"Johnson & Johnson (Janssen)"}>Johnson & Johnson (Janssen)</MenuItem>
+              <MenuItem value={"Novavax (Nuvaxovid)"}>
+                Novavax (Nuvaxovid)
+              </MenuItem>
+              <MenuItem value={"Moderna (Spikevax)"}>
+                Moderna (Spikevax)
+              </MenuItem>
+              <MenuItem value={"Pfizer/BioNTech (Comirnaty)"}>
+                Pfizer/BioNTech (Comirnaty)
+              </MenuItem>
+              <MenuItem value={"Oxford/AstraZeneca (Vaxzevria)"}>
+                Oxford/AstraZeneca (Vaxzevria)
+              </MenuItem>
+              <MenuItem value={"Covishield (AstraZeneca formulation)"}>
+                Covishield (AstraZeneca formulation)
+              </MenuItem>
+              <MenuItem value={"Sinopharm (Covilo)"}>
+                Sinopharm (Covilo)
+              </MenuItem>
+              <MenuItem value={"Sinovac (CoronaVac)"}>
+                Sinovac (CoronaVac)
+              </MenuItem>
+              <MenuItem value={"Johnson & Johnson (Janssen)"}>
+                Johnson & Johnson (Janssen)
+              </MenuItem>
             </Select>
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          <Button id="save-details-button" onClick={onSubmit}>Save Vaccine Details</Button>
+          <Button id="default-cancel-button" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button id="save-details-button" onClick={onSubmit}>
+            Save Vaccine Details
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

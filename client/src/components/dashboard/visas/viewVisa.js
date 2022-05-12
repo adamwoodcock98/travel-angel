@@ -48,6 +48,7 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                   </div>
                 </div>
               </div>
+
               <div className="footer">
                 <div className="visaNumber">
                   <p>Visa Number: {visa.visaNumber}</p>
@@ -63,6 +64,7 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                         handleUpload={handleUpload}
                       />
                     </div>
+                    <div>
                       <i>Use this section to store any additional documents you may need for your flights</i>
                       {visa.uploads.length &&
                         visa.uploads.map((upload, index) => {
@@ -72,9 +74,14 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
                                 {upload.name}
                               </Button>
                             </div>
-                          </div>
-                          );
-                        })}
+                          )})}
+                      </div>
                     </div>
-                    );
-                  }
+                  </div>
+                </div>
+              </div>
+            )})}
+      </div>
+  )
+}
+                          
