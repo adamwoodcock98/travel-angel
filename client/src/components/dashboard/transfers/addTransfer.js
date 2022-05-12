@@ -184,7 +184,6 @@ const AddTransfer = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let url;
     if (transferId) {
       url = `http://localhost:8000/dashboard/transfers/edit/${transferId}`;
@@ -250,6 +249,8 @@ const AddTransfer = (props) => {
     axios
       .post(url, newTransfer)
       .then(() => {
+        handleAlert("Transfer added successfully", "success")
+        handleClose()
         setTransfer({
           pickupTime: "",
           dropoffTime: "",
@@ -293,10 +294,10 @@ const AddTransfer = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Transfer</DialogTitle>
+        <DialogTitle color="primary">Add a transfer</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Fill in the fields to store your transfer details
+            Use this form to store your transfer details.
           </DialogContentText>
           <TextField
             value={transfer.bookingReference}
@@ -309,7 +310,7 @@ const AddTransfer = (props) => {
             variant="outlined"
             onChange={handleChange}
           />
-          <FormControl sx={{ m: 1, ml: 0, minWidth: 200 }}>
+          <FormControl sx={{ m: 1, minWidth: 195 }}>
             <InputLabel>Journey Type</InputLabel>
             <Select
               value={transfer.isOutbound}
@@ -363,6 +364,7 @@ const AddTransfer = (props) => {
                 ? "1px solid red"
                 : "",
               borderRadius: "5px",
+              m: 1,
             }}
             onChange={handleChange}
           />
@@ -379,6 +381,7 @@ const AddTransfer = (props) => {
             sx={{
               border: emptyFields.includes("pickupTime") ? "1px solid red" : "",
               borderRadius: "5px",
+              maxWidth: 195,
             }}
             InputLabelProps={{
               shrink: true,
@@ -401,6 +404,8 @@ const AddTransfer = (props) => {
                 ? "1px solid red"
                 : "",
               borderRadius: "5px",
+              maxWidth: 195,
+              m: 1,
             }}
             InputLabelProps={{
               shrink: true,
@@ -408,7 +413,7 @@ const AddTransfer = (props) => {
             onChange={handleChange}
           />
           <div style={{ display: openPickup ? "" : "none" }}>
-            <DialogContentText>Pickup Address</DialogContentText>
+            <DialogContentText color="secondary">Pickup Address</DialogContentText>
             <TextField
               value={transfer.pickupAddress.buildingNumber}
               autoFocus
@@ -429,6 +434,7 @@ const AddTransfer = (props) => {
               label="Building Name"
               type="text"
               variant="outlined"
+              sx={{m: 1}}
               onChange={handlePickupChange}
             />
             <TextField
@@ -455,6 +461,7 @@ const AddTransfer = (props) => {
               margin="dense"
               id="addressLine2"
               name="addressLine2"
+              sx={{m: 1}}
               label="Address Line 2"
               type="text"
               variant="outlined"
@@ -485,6 +492,7 @@ const AddTransfer = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handlePickupChange}
@@ -514,6 +522,7 @@ const AddTransfer = (props) => {
               id="countryCode"
               name="countryCode"
               label="Country"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handlePickupChange}
@@ -526,6 +535,7 @@ const AddTransfer = (props) => {
           >
             + add pickup address
           </p>
+          
           <p
             className={"text-link"}
             onClick={handlePickupContract}
@@ -533,9 +543,9 @@ const AddTransfer = (props) => {
           >
             - remove pickup address
           </p>
-
+            <DialogContent />
           <div style={{ display: openDropoff ? "" : "none" }}>
-            <DialogContentText>Dropoff Address</DialogContentText>
+            <DialogContentText color="primary">Dropoff Address</DialogContentText>
             <TextField
               value={transfer.dropoffAddress.buildingNumber}
               autoFocus
@@ -554,6 +564,7 @@ const AddTransfer = (props) => {
               id="buildingName"
               name="buildingName"
               label="Building Name"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleDropoffChange}
@@ -583,6 +594,7 @@ const AddTransfer = (props) => {
               id="addressLine2"
               name="addressLine2"
               label="Address Line 2"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleDropoffChange}
@@ -612,6 +624,7 @@ const AddTransfer = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
+              sx={{m: 1}}
               type="text"
               variant="outlined"
               onChange={handleDropoffChange}
@@ -642,6 +655,7 @@ const AddTransfer = (props) => {
               name="countryCode"
               label="Country"
               type="text"
+              sx={{m: 1}}
               variant="outlined"
               onChange={handleDropoffChange}
             />
@@ -665,9 +679,12 @@ const AddTransfer = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          <Button id="save-details-button" onClick={handleSubmit}>
-            Save Transfer Details
-          </Button>
+          {transferId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
+            Update
+          </Button>}
+          {!transferId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
+            Save
+          </Button>}
         </DialogActions>
       </Dialog>
       <Alerts

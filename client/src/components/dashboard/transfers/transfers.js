@@ -123,8 +123,8 @@ const Transfers = ({ session }) => {
     return (
       <>
         <div className="transfers">
-          <div className="transfer-header very-big">
-            <h1>Transfers</h1>
+          <div className="transfer-header">
+            <h1 className="very-big">Transfers</h1>
           </div>
           <div className="transfers-content">
             <div className="transfers-content-outbound">
@@ -168,6 +168,13 @@ const Transfers = ({ session }) => {
               transferId={null}
               emptyFields={emptyFields}
             />
+            <Alerts
+              message={alertMessage}
+              open={alertOpen}
+              handleClose={handleAlertClose}
+              alertPosition={alertPosition}
+              alertType={alertType}
+            />
           </div>
         </div>
       </>
@@ -199,6 +206,13 @@ const Transfers = ({ session }) => {
           tripId={tripId}
           transferId={null}
           emptyFields={emptyFields}
+        />
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
         />
       </div>
     );

@@ -1,37 +1,35 @@
 .trip-container {
   display: flex;
   flex-direction: column;
-  /* margin-top: 120px; */
   margin-bottom: 60px;
 }
 
 .trip-card {
-  border-radius: 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 24px;
   transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  margin-bottom: 5%;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey;
 }
 
 .trip-card:hover {
   background-color: #ffe3ec;
-  background: linear-gradient(180deg, rgba(235,160,174,0.2) 0%, rgba(242,39,113,0.2) 100%);
+  background: #ffe3ec;
 }
 
-.header {
+.trip-header {
   display: flex;
   flex-direction: row;
   margin-top: 100px;
-}
-
-.trip-body {
+  text-align: center;
   justify-content: center;
 }
 
-.footer {
-  display: flex;
-  flex-direction: flex-end;
-  text-align: left;
+.trip-body {
+  justify-content: left;
 }
 
 #expired {
@@ -39,9 +37,16 @@
   margin-top: 50px;
 }
 
+.trip-h1 {
+  font-size: 50px;
+  text-decoration: 8px under #f74083;;
+  color: #f74083;
+}
+
 h2.countdown {
   text-align: center;
   margin-bottom: 40px;
+  color: #c2c2c2;
 }
 
 .trip-body {
@@ -49,9 +54,18 @@ h2.countdown {
 }
 
 .trip-h3 {
-  font-size: 40px;
+  font-size: 35px;
+  color: #4f4f4f;
 }
 
 .trip-h4 {
   text-align: left;
+  color: #c4c4c4;
+}
+
+.trip-foot {
+  text-align: left;
+  color: #f22771;
+  border-top: solid 0px #dedede;
+  /* color: #eba0ae; */
 }
