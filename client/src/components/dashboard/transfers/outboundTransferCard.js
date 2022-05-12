@@ -36,12 +36,18 @@ export const OutboundTransferCard = (props) => {
       {outboundTransfer.map((outboundTransfer, index) => {
         return (
           <div className="card" key={index}>
-            
             <div className="header">
               <h1 className="title">{outboundTransfer.name}</h1>
               <div className="crud-menu">
-              <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
-            </div>
+                <CrudMenu
+                  transferData={outboundTransfer}
+                  transferId={outboundTransfer._id}
+                  userId={userId}
+                  tripId={tripId}
+                  refresh={refresh}
+                  handleUpload={handleUpload}
+                />
+              </div>
             </div>
             <div className="body">
               <div className="subbody-left">
