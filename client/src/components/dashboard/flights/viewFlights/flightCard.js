@@ -34,6 +34,8 @@ export const FlightCard = (props) => {
     terminal: flightData.arrivalTerminal,
     gate: flightData.arrivalGate,
     isDeparture: false,
+    date: flightData.arrivalDate,
+    time: flightData.arrivalTime,
   };
 
   const footerData = {
@@ -65,7 +67,7 @@ export const FlightCard = (props) => {
           />
         </div>
       </div>
-      <div className="flight-card-footer">
+      <div>
         <FooterPane data={footerData} airport={departureData.airport} />
       </div>
       <div className="upload">

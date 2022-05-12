@@ -91,7 +91,7 @@ const Visas = ({ session }) => {
       <>
         <div className="visas">
           <div className="visa-header">
-            <h1>Visas</h1>
+            <h1 className="very-big">Visas</h1>
           </div>
           <div className="visas-content">
             <div className="visas-content">
@@ -130,7 +130,7 @@ const Visas = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-        <h1>Visas</h1>
+          <h1 className="very-big">Visas</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
