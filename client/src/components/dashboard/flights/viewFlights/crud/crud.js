@@ -80,6 +80,7 @@ const CrudMenu = (props) => {
   };
 
   const handleClose = () => {
+    refresh();
     setOpen(false);
   };
 

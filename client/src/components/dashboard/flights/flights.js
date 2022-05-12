@@ -9,22 +9,17 @@ import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import moment from "moment";
+import "../../assets/styling/cards.css";
 
 const Flights = ({ session }) => {
   const { tripId } = useParams();
   const [state, setState] = useState(0);
-
-  const handleUpload = async () => {
-    setState((prev) => prev + 1);
-  };
-
   const userId = session;
-
   const [inboundFlight, setInboundFlight] = useState([]);
   const [outboundFlight, setOutboundFlight] = useState([]);
   const [open, setOpen] = useState(false);
   const [didUpdate, setDidUpdate] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [flight, setFlight] = useState({
     flightNumber: "",
     departureTime: "",
@@ -66,6 +61,10 @@ const Flights = ({ session }) => {
     baseURL: "http://localhost:8000/dashboard/flights/",
   });
 
+  const handleUpload = async () => {
+    setState((prev) => prev + 1);
+  };
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -75,73 +74,7 @@ const Flights = ({ session }) => {
     setDidUpdate(!didUpdate);
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    const {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    } = flight;
-
-    const newFlight = {
-      flightNumber,
-      departureTime,
-      departureDate,
-      airline,
-      departureAirport,
-      departureTerminal,
-      departureCity,
-      departureGate,
-      arrivalAirport,
-      arrivalTerminal,
-      arrivalCity,
-      arrivalGate,
-      bookingReference,
-      isOutbound,
-      user,
-      trip,
-    };
-
-    api.post("/", newFlight).then((res) => {
-      handleClose();
-      setFlight({
-        flightNumber: "",
-        departureTime: "",
-        departureDate: "",
-        airline: "",
-        departureAirport: "",
-        departureTerminal: "",
-        departureCity: "",
-        departureGate: "",
-        arrivalAirport: "",
-        arrivalTerminal: "",
-        arrivalCity: "",
-        arrivalGate: "",
-        bookingReference: "",
-        isOutbound: "",
-        user: userId,
-        trip: tripId,
-      });
-      window.location = "/";
-    });
-  };
-
   useEffect(() => {
-    setLoading(true);
     api
       .get(`/${userId}/${tripId}`)
       .then((res) => {
@@ -163,7 +96,14 @@ const Flights = ({ session }) => {
       .finally(() => setLoading(false));
   }, [didUpdate, state]);
 
-  if (outboundFlight.length || inboundFlight.length) {
+  if (loading) {
+    return (
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
+        <CircularProgress color="secondary" />
+        <p color="secondary">loading...</p>
+      </div>
+    );
+  } else if (outboundFlight.length || inboundFlight.length) {
     const outboundFlights = [];
     const inboundFlights = [];
 
@@ -175,6 +115,7 @@ const Flights = ({ session }) => {
           userId={userId}
           refresh={handleClose}
           tripId={tripId}
+          handleUpload={handleUpload}
         />
       );
     });
@@ -187,21 +128,19 @@ const Flights = ({ session }) => {
           userId={userId}
           refresh={handleClose}
           tripId={tripId}
+          handleUpload={handleUpload}
         />
       );
     });
 
     return (
       <>
-        <div className="loading" style={{ display: loading ? "" : "none" }}>
-          <CircularProgress color="secondary" />
-        </div>
         <div
           className="flights-window"
           style={{ display: loading ? "none" : "" }}
         >
           <div className="flights-header">
-            <h1>Your flights</h1>
+            <h1>Flights</h1>
           </div>
           <div className="flights-content">
             <div className="flights-content-outbound">
@@ -238,18 +177,22 @@ const Flights = ({ session }) => {
     );
   } else {
     return (
-      <>
-        <h1>
-          Looks like you don't have any saved flights, add your first one now!
-        </h1>
-        <Fab
-          size="large"
-          color="secondary"
-          aria-label="add"
-          onClick={handleOpen}
-        >
-          <AddIcon />
-        </Fab>
+      <div className="empty-window">
+        <h1>Flights</h1>
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved flights</h3>
+          <h2>Press + to get started</h2>
+        </div>
+        <div className="empty-button">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
         <AddFlight
           open={open}
           handleOpen={handleOpen}
@@ -269,7 +212,7 @@ const Flights = ({ session }) => {
             alertType={alertType}
           />
         )}
-      </>
+      </div>
     );
   }
 };

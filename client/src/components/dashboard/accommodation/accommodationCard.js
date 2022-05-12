@@ -4,8 +4,9 @@ import CrudMenu from "./crud/crud";
 import "./accommodationCard.css";
 import Upload from "../../upload/upload";
 import Button from "@mui/material/Button";
-import DirectionsOutlinedIcon from '@mui/icons-material/DirectionsOutlined';
-import "../../assets/styling/cards.css"
+import DirectionsOutlinedIcon from "@mui/icons-material/DirectionsOutlined";
+import "../../assets/styling/cards.css";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 export default function AccommodationCard(props) {
   const handleUpload = props.handleUpload;
@@ -35,9 +36,13 @@ export default function AccommodationCard(props) {
       {accommodation.map((accommodation, index) => {
         return (
             <div className="card" key={index}>
-              <div className="crud-menu">
-                <CrudMenu userId={userId} accommodationData={accommodation} refresh={refresh} />
-              </div>
+               <div className="crud-menu">
+                <CrudMenu
+                  userId={userId}
+                  accommodationData={accommodation}
+                  refresh={refresh}
+                />
+               </div>
               <div className="header">
                 <h1>{accommodation.name}</h1>
               </div>
@@ -87,25 +92,42 @@ export default function AccommodationCard(props) {
                     Get Directions
                   </Button>
                 </div>
-                <div className="upload">
-                  <Upload
-                    cardId={accommodation._id}
-                    url="dashboard/accommodation"
-                    handleUpload={handleUpload}
-                  />
-                  Download Your files
+              </div>
+              <div className="upload">
+                <div className="uploads">
+                  <div
+                    style={{ display: "flex", alignItems: "center" }}
+                    className="documents"
+                  >
+                    <h4>Documents</h4>
+                    <Upload
+                      cardId={accommodation._id}
+                      url="dashboard/accommodation"
+                      handleUpload={handleUpload}
+                    />
+                  </div>
+                  <i>
+                    Use this section to store any additional documents you may
+                    need for your flights
+                  </i>
                   {accommodation.uploads.length &&
                     accommodation.uploads.map((upload, index) => {
                       return (
-                        <button
-                          onClick={() => handleSubmit(upload._id)}
-                          key={index}
-                        >
-                          {upload.name}
-                        </button>
+                        <div className="document-button">
+                          <Button
+                            style={{ padding: "0%" }}
+                            color="primary"
+                            onClick={() => handleSubmit(upload._id)}
+                            key={index}
+                            endIcon={<FileDownloadOutlinedIcon />}
+                          >
+                            {upload.name}
+                          </Button>
+                        </div>
                       );
                     })}
-                </div> 
+                </div>
+              </div>
             </div>
           </div>
         );

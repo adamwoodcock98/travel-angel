@@ -6,6 +6,8 @@ import "./covid.css";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import AddTest from "./tests/newTest";
+import { Alerts } from "../../assets/snackbar";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
 
 const Covid = ({ session }) => {
@@ -14,6 +16,7 @@ const Covid = ({ session }) => {
   const [didUpdate, setDidUpdate] = useState(false);
   const [open, setOpen] = useState(false);
   const [didLoad, setDidLoad] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { tripId } = useParams();
   const userId = session;
   const [state, setState] = useState(0);
@@ -35,6 +38,23 @@ const Covid = ({ session }) => {
     user: userId,
     trip: tripId,
   });
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -55,12 +75,27 @@ const Covid = ({ session }) => {
         setVaccineData(vaccines);
         setDidLoad(true);
       })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }, [state]);
+      .catch((error) => {
+        if (error.response.status) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert("There was a problem connecting to the server.", "error");
+        }
+      })
+      .finally(() => setLoading(false));
+  }, [state, didUpdate]);
 
-  if (didLoad && testData.length) {
+  if (loading) {
+    return (
+      <div className="loading" style={{ display: loading ? "" : "none" }}>
+        <CircularProgress color="secondary" />
+        <p color="secondary">loading...</p>
+      </div>
+    );
+  } else if (didLoad && testData.length) {
     const testsArray = [];
     testData.forEach((test) => {
       testsArray.push(
@@ -132,6 +167,12 @@ const Covid = ({ session }) => {
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>
+              {!testData[0] && (
+                <div className="empty-prompt">
+                  <h3>Looks like you don't have any saved tests</h3>
+                  <h2>Press + to get started</h2>
+                </div>
+              )}
             </div>
           </div>
           <div className="covid-footer">
@@ -143,6 +184,8 @@ const Covid = ({ session }) => {
             >
               <AddIcon />
             </Fab>
+          </div>
+          <div className="covid-footer">
             <AddTest
               open={open}
               handleOpen={handleOpen}
@@ -153,12 +196,17 @@ const Covid = ({ session }) => {
               tripId={tripId}
               handleUpload={handleUpload}
             />
+            <Alerts
+              message={alertMessage}
+              open={alertOpen}
+              handleClose={handleAlertClose}
+              alertPosition={alertPosition}
+              alertType={alertType}
+            />
           </div>
         </div>
       </>
     );
-  } else {
-    return <h1>loading</h1>;
   }
 };
 

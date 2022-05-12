@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { LogOut } from "../authentication/logOut/logOut";
 import { Profile } from "./profile/profile";
 import { Settings } from "./profile/settings";
 import { Authentication } from "../authentication/authentication";
 import { Passport } from "./passport/passport";
+import { NavUser } from "./navUser/navUser.js";
+import "./navBar.css";
 import {
   AppBar,
   Box,
@@ -11,18 +13,12 @@ import {
   IconButton,
   Typography,
   Menu,
-  Avatar,
   MenuItem,
   Grid,
 } from "@mui/material";
-import axios from "axios";
-import "./navBar.css";
 
 export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState({});
-
-  console.log("The navbar rendering");
 
   const handleOpenMenu = () => {
     setOpen(true);
@@ -32,66 +28,41 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
     setOpen(false);
   };
 
-  // const getUser = () => {
-  //   axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
-  //     setUser(res.data.user);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   getUser();
-  //   return () => getUser;
-  // }, []);
-
-  const isNotNullAndNotUndefined = (session) => session !== "null" && session;
-
   return (
-    <div className="navbar">
+    <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx={{ backgroundColor: "#f22771" }}>
+        <AppBar id="navbar" sx={{ backgroundColor: "#f22771" }}>
           <Toolbar>
             <div>
               <a href="/">
                 <Typography
-                  className="logo"
+                  id="logo"
                   aria-label="logo"
                   variant="h6"
                   noWrap
                   component="div"
                   sx={{ display: { xs: "none", md: "flex" } }}
                 >
-                  TRAVEL ANGEL
+                  Travel Angel
                 </Typography>
               </a>
             </div>
 
             <Grid container justifyContent="flex-end">
               <div>
-                {isNotNullAndNotUndefined(session) && (
-                  <Typography
-                    id="nav-user"
-                    aria-label="nav-user"
-                    style={{ flex: 1 }}
-                    color="inherit"
-                    sx={{ mt: "4px", mx: 3 }}
-                  >
-                    {/* {user.firstName} {user.lastName} */}
-                  </Typography>
-                )}
-                {!isNotNullAndNotUndefined(session) && (
-                  <Authentication handleLogIn={handleLogIn} />
-                )}
+                {!session && <Authentication handleLogIn={handleLogIn} />}
               </div>
-              {isNotNullAndNotUndefined(session) && (
+              {session && (
                 <div>
-                  {/* {getUser()} */}
                   <Box sx={{ flexGrow: 0 }}>
                     <IconButton
                       className="avatar"
                       sx={{ p: 0 }}
                       onClick={handleOpenMenu}
                     >
-                      <Avatar src={user.profilePicture} />
+                      <Typography textAlign="center">
+                        <NavUser session={session} />
+                      </Typography>
                     </IconButton>
 
                     <Menu
