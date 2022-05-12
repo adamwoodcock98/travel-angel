@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 // import theme from "../assets/theme";
-import { Tabs, Tab, Typography, Box, ThemeProvider, createTheme } from "@mui/material";
+import { Tabs, Tab, Typography, Box } from "@mui/material";
 import {
   FlightTakeoff,
   Hotel,
@@ -37,20 +37,6 @@ function TabPanel(props) {
   );
 }
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Roboto-Regular",
-  },
-  palette: {
-    primary: {
-      main: '#f22771',
-    },
-    secondary: {
-      main: 'rgb(255, 0, 93)',
-    },
-  },
-});
-
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.number.isRequired,
@@ -72,7 +58,6 @@ export default function VerticalTabs({ session }) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Box
       className="tab-box"
       sx={{ flexGrow: 1, bgcolor: "background.paper" }}
@@ -123,6 +108,5 @@ export default function VerticalTabs({ session }) {
         <Covid session={session} />
       </TabPanel>
     </Box>
-    </ThemeProvider>
   );
 }

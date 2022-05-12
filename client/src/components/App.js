@@ -37,6 +37,15 @@ const App = () => {
       secondary: {
         main: 'rgb(255, 0, 93)',
       },
+      error: {
+        main: '#f22771',
+      },
+      warning: {
+        main: '#eba0ae',
+      },
+      success: {
+        main: '#64baaa',
+      },
     },
   });
 
