@@ -145,7 +145,7 @@ const AddTest = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Test</DialogTitle>
+        <DialogTitle color="primary">Test</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Fill in the fields to store the details of your Covid test

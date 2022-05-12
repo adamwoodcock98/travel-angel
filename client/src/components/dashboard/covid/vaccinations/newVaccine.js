@@ -60,7 +60,7 @@ const AddVaccine = (props) => {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Vaccine dose</DialogTitle>
+        <DialogTitle color="primary">Vaccine dose</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Fill in the fields to store the details of your vaccine dose
@@ -141,9 +141,12 @@ const AddVaccine = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          <Button id="save-details-button" onClick={onSubmit}>
-            Save Vaccine Details
-          </Button>
+          {!doseId && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+            Save
+          </Button>}
+          {doseId && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
+            Update
+          </Button>}
         </DialogActions>
       </Dialog>
     </div>
