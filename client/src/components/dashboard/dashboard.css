@@ -97,6 +97,10 @@ p {
   color: #666666;
 }
 
+#search-button {
+  margin-right: -13px;
+}
+
 /* label: {
   position: 'absolute',
   left: 12,
