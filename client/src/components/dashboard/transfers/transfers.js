@@ -139,12 +139,12 @@ const Transfers = ({ session }) => {
     return (
       <>
         <div className="transfers">
-          <div className="transfer-header">
+          <div className="transfer-header very-big">
             <h1 className="very-big">Transfers</h1>
           </div>
           <div className="transfers-content">
             <div className="transfers-content-outbound">
-              <h1 className="transfer-content-subheading">Outbound</h1>
+              <h1 className="transfers-content-subheading">Outbound</h1>
               <OutboundTransferCard
                 outboundTransfer={outboundTransfer}
                 userId={userId}
@@ -153,6 +153,7 @@ const Transfers = ({ session }) => {
                 handleUpload={handleUpload}
               />
             </div>
+            <div className="transfers-content">
             <div className="transfers-content-inbound">
               <h1 className="transfers-content-subheading">Inbound</h1>
               <InboundTransferCard
@@ -162,6 +163,7 @@ const Transfers = ({ session }) => {
                 refresh={handleClose}
                 handleUpload={handleUpload}
               />
+              </div>
             </div>
           </div>
           <div>

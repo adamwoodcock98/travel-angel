@@ -19,12 +19,8 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
         {visa.map((visa, index) => {
           return (
             <div className="card" key={index}>
-              
-              
               <div className="header">
-                <div className="title">
-                  <h3 >Your entry visa to</h3>
-                </div>
+                  <h4>Your entry visa to:</h4>
                 <div className="crud-menu">
                   <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
                 </div>
@@ -37,31 +33,32 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
               <div className="body">
                 <div className="subbody-left">
                   <div className="start-date-header">
-                    <h3>Start Date</h3>
+                    <p>Start Date</p>
                   </div>
                   <div className="start-date-body">
-                    <p>{formatDate(visa.startDate)}</p>
+                    <h3>{formatDate(visa.startDate)}</h3>
                   </div>
                 </div>
                 <div className="subbody-right">
                   <div className="end-date-header">
-                    <h3>End Date</h3>
+                    <p>End Date</p>
                   </div>
                   <div className="end-date-body">
-                    <p>{formatDate(visa.endDate)}</p>
+                    <h3>{formatDate(visa.endDate)}</h3>
                   </div>
                 </div>
               </div>
 
               <div className="footer">
                 <div className="visaNumber">
-                  <p>Visa Number: {visa.visaNumber}</p>
+                  <p>Visa Number:</p> 
+                  <h3 className="visa-num">{visa.visaNumber}</h3>
                 </div>
 
                 <div className="upload">
                   <div className="uploads">
                     <div style={{display: "flex", alignItems: "center"}} className="documents" >
-                      <h4>Documents</h4>
+                      <h4>Supporting Documents</h4>
                       <Upload
                         cardId={visa._id}
                         url="dashboard/visas"

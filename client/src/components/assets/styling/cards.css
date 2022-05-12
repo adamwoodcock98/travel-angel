@@ -6,6 +6,7 @@ element {
 .upload {
   /* padding: 10px 0px 15px 0px; */
   display: flex;
+  text-align: left;
 }
 
 .upload-buttons {
@@ -95,23 +96,17 @@ h3 {
 }
 
 /* Data: address, dates etc. */
-p {
-  /* color:whitesmoke */
+/* p {
   margin: 0;
-  /* font-size: 12px; */
-  /* color: rgb(160, 160, 160); */
-}
+  font-size: 12px;
+} */
 
 .light-label {
-  color: rgb(160, 160, 160);
+  color: rgb(160, 160, 160) !important;
 }
 
 .title{
-  color: rgbb(74, 74, 74);
-}
-
-.directions {
-  /* display: flex */
+  color: #F22771 !important;
 }
 
 /* CARD LAYOUT - Accommo, Transfers, Parking, Visas*/
@@ -121,13 +116,10 @@ p {
   text-align: center;
   margin-bottom: 2%;
   margin-left: 10%;
-
   padding: 2%;
-  /* border-style: solid; */
   border-color: lightgrey;
   border-radius: 10px;
   box-shadow: 0px 0px 5px lightgrey;
-  
 }
 
 .crud-menu {
@@ -142,21 +134,9 @@ p {
   flex: 1;
   justify-content: center;
   flex-direction: row;
-  margin-top: 1%;
+  /* margin-top: 1%; */
 }
 
-.title {
-  /* text-align: center;
-  display: flex;
-  flex-direction: center;
-  justify-content: center; */
-  /* margin-left: 2%; */
-}
-
-/* .subheading {
-  justify-content: center;
-  text-align: center;
-} */
 
 .body {
   text-align: center;
@@ -167,23 +147,21 @@ p {
   margin: 0;
   justify-items: center;
   padding: 10px 0px 15px 0px;
-  /* border-bottom: 1px black; */
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px black;
 }
 
 .subbody-left {
-  text-align: right;
+  text-align: center;
   padding-right: 25px;
-  border-left: #F22771 1px;
 }
 
 .subbody-right {
-  text-align: left;
+  text-align: center;
   padding-left: 25px;
 }
 
 .footer {
-  /* border-top: 1px solid lightgray; */
+  border-top: 1px solid lightgray;
   text-align: center;
   display: flex;
   flex: 1;
@@ -193,6 +171,7 @@ p {
 }
 
 .directions {
+  margin-top: 1%;
   text-align: center;
   flex: 1;
 }

@@ -56,40 +56,55 @@ export default function AccommodationCard(props) {
                   </div>
                   <div className="check-in-body">
                     <h3>{formatDate(accommodation.checkInDate)}</h3>
-                    <p>Check-in opens at {accommodation.checkInTime}</p>
+                    <p>Check-in opens at</p><p className="check-out-time">{accommodation.checkInTime}</p>
                   </div>
                 </div>
                 <div className="subbody-right">
                   <div className="check-out-header">
-                
-                      <p>Check-Out</p>
-              
+                    <p>Check-Out</p>
                   </div>
                   <div className="check-out-body">
                     <h3>{formatDate(accommodation.checkOutDate)}</h3>
-                    <p>Check-out by {accommodation.checkOutTime}</p>
+                    <p>Check-out by</p><p className="check-out-time">{accommodation.checkOutTime}</p>
                   </div>
                 </div>
               </div>
+              {/* FOOTER */}
               <div className="footer">
-                <div className="booking-reference">
+                <div className="footer-labels">
+                  <div className="footer-left">
+                    <p className="light-label">Booking Reference:</p>
+                  </div>
+                  <div className="footer-middle">
+                    <p className="light-label">Address:</p>
+                  </div>
+                  <div className="footer-right">
+                    <p className="light-label">TEL:</p> 
+                  </div>
+                </div>
+
+                <div className="footer-text">
+                  <div className="footer-left">
                   {accommodation.bookingReference && (
-                    <p>Booking Reference: {accommodation.bookingReference}</p>
+                    <h4>{accommodation.bookingReference}</h4>
                   )}
-                </div>
-                <div className="contact-number">
-                  {accommodation.contactNumber && (
-                    <p>TEL: {accommodation.contactNumber}</p>
-                  )}
-                </div>
-                <div className="address">
+                  </div>
+                  <div className="footer-middle">
                   {accommodation.address && (
-                    <p>Address: {formatAddress(accommodation.address)}</p>
+                    <h4>{formatAddress(accommodation.address)}</h4>
                   )}
+                  </div>
+                  <div className="footer-right">
+                  {accommodation.contactNumber && (
+                    <p>{accommodation.contactNumber}</p>
+                  )}
+                  </div>
                 </div>
+
                 <div className="directions">
                   <Button
-                    color="secondary"
+                    color="primary"
+                    variant="outlined"
                     startIcon={<DirectionsOutlinedIcon />}
                     target="_blank"
                     href={handleDirections(accommodation.address)}

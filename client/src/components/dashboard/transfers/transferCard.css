@@ -1,68 +1,134 @@
-/* .transfer-card {
+/* CARD LAYOUT */
+.outbound-transfer-card {
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(#ffe3ec, #eba0ae);
-  border-radius: 25px;
-  opacity: 0.9;
-  text-align: center;
-  margin: 10;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey; 
+  margin-right: 2%;
+  flex: 1 2;
+  border-right: solid;
+  border-color: lightgrey;
 }
 
-.crud-menu {
+.inbound-transfer-card {
   display: flex;
-  flex: 1;
-  justify-content: right;
+  flex-direction: column;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey; 
+  padding-right: 1%;
+  margin-left: 2%;
 }
 
-.header {
-  text-align: center;
+.transfers-content {
   display: flex;
-  flex: 1;
+  flex-direction: row;
   justify-content: center;
-  padding-bottom: 10px;
-}
-
-.subheading {
-  justify-content: center;
-  text-align: center;
 }
 
 .transfer-body {
-  text-align: center;
+display: flex;
+flex-direction: row;
+flex: 1;
+margin-bottom: 2%;
+}
+
+.transfers-content-subheading {
+font-size: xx-large;
+text-align: center;
+color: #F22771 !important;
+}
+
+.transfers-header {
+font-size: xx-large;
+text-align: center;
+color: #F22771 !important;
+}
+
+.pickup-content {
+text-align: left;
+padding-left: 25px;
+display: flex;
+justify-content: left;
+flex-direction: row;
+margin-bottom: 2%;
+}
+
+.dropoff-content {
+text-align: left;
+padding-left: 30px;
+display: flex;
+justify-content: right;
+flex-direction: row;
+}
+
+.pink{
+  color: #f22771
+}
+
+.pickup-address{
+  margin-top: 8%;
+}
+
+.dropoff-address{
+  margin-top: 8%;
+}
+
+.font-labels {
+  font-size: 80%;
+}
+
+/* FOOTER */
+
+.transfer-footer{
+  padding-left:25px;
   display: flex;
-  flex: 1;
-  justify-content: center;
   flex-direction: column;
-  margin: 0;
-  justify-items: center;
-  padding: 10px 0px 15px 0px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-top: solid 1px;
+  border-color: lightgrey;
+  margin-top: 1%;
 }
 
-.transfer-card-body {
+.footer-labels{
   display: flex;
-  justify-content: center;
   flex-direction: row;
-  padding-bottom: 15px;
+  font-size: 80%;
 }
 
-.pickup {
-  text-align: right;
-  padding: 10px 20px 0px 15px;
-  margin: 0;
-}
-
-.dropoff {
+.footer-left {
   text-align: left;
-  padding: 10px 15px 0px 20px;
-  margin: 0;
+  flex: 1;
 }
 
-.address {
-  padding-top: 10px;
+.footer-middle {
+  text-align: left;
+  flex: 1;
 }
 
-.transfer-upload {
-  padding: 10px 0px 15px 0px;
+.footer-right {
+  text-align: left;
+  flex: 1;
+  padding-right: 10px;
 }
 
- */
+.labels {
+  display: flex;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-text {
+  display: flex;
+}
+
+.footer-uploads{
+  padding-left: 25px;
+}
+
+
