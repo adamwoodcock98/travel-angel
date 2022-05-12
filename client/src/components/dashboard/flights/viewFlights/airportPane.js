@@ -6,7 +6,7 @@ export const AirportPane = (props) => {
 
   const data = props.data;
 
-  const formatDate = (time) => moment(time).format("ddd, D MMM YYYY");
+  const formatDate = (time) => moment(time).format("ddd, D MMM 'YY");
 
   return(
     <>
@@ -15,17 +15,34 @@ export const AirportPane = (props) => {
           <h1>{data.airport}</h1>
         </div>
         <div className="airport-pane-city">
-          <h2>{data.city} | {formatDate(data.date)}</h2>
+          <h4>{data.city} | {formatDate(data.date)}</h4>
         </div>
       </div>
       <div className="airport-pane-middle">
-        <h4>Terminal: {data.terminal} | Gate {data.gate}</h4>
+        <div className="label light-label">
+          {data.isDeparture && <p>Departs</p>}
+          {!data.isDeparture && <p>Arrives</p>}
+        </div>
+        <div className="label light-label">
+          <p>Terminal</p>
+        </div>
+        <div className="label light-label">
+          <p>Gate</p>
+        </div>
       </div>
-      <div className="airport-pane-bottom">
-        {data.isDeparture && <h4>Scheduled departure</h4>}
-        {!data.isDeparture && <h4>Scheduled arrival</h4>}
-        <h3>{formatDate(data.date)} @ {data.time}</h3>
+      <div className="airport-pane-middle">
+        <div className="label">
+          <h3 style={{color: "#F22771"}}>{data.time}</h3>
+        </div>
+        <div className="label">
+          <h3>{data.terminal}</h3>
+        </div>
+        <div className="label">
+          <h3>{data.gate && data.gate}</h3>
+          <h3>{!data.gate && "-"}</h3>
+        </div>
       </div>
+
     </>
   )
 
