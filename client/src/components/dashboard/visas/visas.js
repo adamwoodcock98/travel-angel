@@ -154,7 +154,7 @@ const Visas = ({ session }) => {
           userId={userId}
           tripId={tripId}
           visaId={null}
-          />
+        />
         <Alerts
           message={alertMessage}
           open={alertOpen}

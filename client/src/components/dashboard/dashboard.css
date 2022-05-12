@@ -67,11 +67,11 @@ p {
 }
 
 #save-details-button {
-  background-color: #EBA0AE;
+  background-color: #eba0ae;
   color: white;
 }
 #default-cancel-button {
-  color: #64BAAA;
+  color: #64baaa;
 }
 #search-button {
   color: black;
@@ -88,13 +88,10 @@ p {
 } */
 .MuiOutlinedInput-notchedOutline.disable-x {
   background-color: black;
-
-  
 }
 .MuiButton-root#search-button {
   width: 10px;
 }
-
 
 /* label: {
   position: 'absolute',
