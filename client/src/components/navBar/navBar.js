@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { LogOut } from "../authentication/logOut/logOut";
 import { Profile } from "./profile/profile";
 import { Settings } from "./profile/settings";
 import { Authentication } from "../authentication/authentication";
 import { Passport } from "./passport/passport";
+import { NavUser } from "./navUser/navUser.js";
+import "./navBar.css";
 import {
   AppBar,
   Box,
@@ -11,16 +13,12 @@ import {
   IconButton,
   Typography,
   Menu,
-  Avatar,
   MenuItem,
   Grid,
 } from "@mui/material";
-import axios from "axios";
-import "./navBar.css"
 
 export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState({});
 
   const handleOpenMenu = () => {
     setOpen(true);
@@ -29,16 +27,6 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
   const handleCloseMenu = () => {
     setOpen(false);
   };
-
-  const getUser = () => {
-    axios.get(`http://localhost:8000/user/${session}/profile`).then((res) => {
-      setUser(res.data.user);
-    });
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   return (
     <div>
@@ -62,29 +50,19 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
 
             <Grid container justifyContent="flex-end">
               <div>
-                {session && (
-                  <Typography
-                    id="nav-user"
-                    aria-label="nav-user"
-                    style={{ flex: 1 }}
-                    color="inherit"
-                    sx={{ mt: "4px", mx: 3 }}
-                  >
-                    {user.firstName} {user.lastName}
-                  </Typography>
-                )}
                 {!session && <Authentication handleLogIn={handleLogIn} />}
               </div>
               {session && (
                 <div>
-                  {/* {getUser()} */}
                   <Box sx={{ flexGrow: 0 }}>
                     <IconButton
                       className="avatar"
                       sx={{ p: 0 }}
                       onClick={handleOpenMenu}
                     >
-                      <Avatar src={user.profilePicture} />
+                      <Typography textAlign="center">
+                        <NavUser session={session} />
+                      </Typography>
                     </IconButton>
 
                     <Menu
@@ -103,13 +81,10 @@ export default function NavBar({ handleLogOut, handleLogIn, session }) {
                         horizontal: "right",
                       }}
                     >
-
                       <MenuItem>
                         <IconButton>
-                        <a href="/" id="nav-trips">
-                          <Typography textAlign="center">
-                            Trips
-                          </Typography>
+                          <a href="/" id="nav-trips">
+                            <Typography textAlign="center">Trips</Typography>
                           </a>
                         </IconButton>
                       </MenuItem>

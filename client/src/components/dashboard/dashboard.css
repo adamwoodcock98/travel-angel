@@ -1,7 +1,11 @@
 body {
   letter-spacing: 0.5px;
-  margin-top: 70px;
-  background-color: #f7f7f7;
+  margin-top: 100px;
+  background-color: #fefefe;
+}
+
+.css-l31w18 {
+  background-color: #fefefe !important;
 }
 
 .sidebar {
@@ -20,15 +24,23 @@ body {
 .MuiTabs-indicator {
   background-color: #eba0ae !important;
   padding: 2.2px;
-  background: linear-gradient(180deg, rgba(235,160,174,1) 0%, rgba(242,39,113,0.6) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(235, 160, 174, 1) 0%,
+    rgba(242, 39, 113, 0.6) 100%
+  );
 }
 
 .css-i4bv87-MuiSvgIcon-root {
   opacity: 0.65;
 }
 
-.MuiButtonBase-root:hover {
-  background: linear-gradient(180deg, rgb(235,160,174,0.5) 0%, rgba(242,39,113,0.4) 100%) !important;
+.MuiTab-root:hover {
+  background: linear-gradient(
+    180deg,
+    rgb(235, 160, 174, 0.5) 0%,
+    rgba(242, 39, 113, 0.4) 100%
+  ) !important;
 }
 
 .tab-content {
