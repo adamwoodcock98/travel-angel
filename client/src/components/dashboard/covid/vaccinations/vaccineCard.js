@@ -47,7 +47,7 @@ const VaccineCard = (props) => {
   }
 
   return (
-    <div className="vaccine-card">
+    <div className="vaccine-card covid-card">
       <div className="vaccine-card-header">
         <h1>Vaccine card</h1>
       </div>

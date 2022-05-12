@@ -133,6 +133,7 @@ const Covid = ({ session }) => {
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
+              <h1 style={{textAlign: "center"}} className="fuschia">Vaccinations</h1>
               <div className="covid-card">
               <VaccineCard
                 vaccinationsData={vaccineData}
@@ -141,7 +142,8 @@ const Covid = ({ session }) => {
             </div>
             </div>
             <div className="covid-content-testing">
-              <div className="covid-card">
+            <h1 style={{textAlign: "center"}} className="fuschia">Tests</h1>
+              <div className="covid-card"  style={{borderLeft: "1px solid", borderColor: "lightgrey"}}>
                 {testsArray}
               </div>
             </div>
