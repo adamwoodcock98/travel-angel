@@ -10,6 +10,11 @@
   opacity: 0.9;
   text-align: left;
   margin-bottom: 2%; */
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey;
+  margin-bottom: 5%;
+  margin-left: 2.5%;
 }
 
   .test-card-header {
@@ -18,7 +23,6 @@
     margin: 2%;
     flex-direction: row;
     justify-content: left;
-    padding-top: 8px;
   } 
 
   .test-card-primary-content {

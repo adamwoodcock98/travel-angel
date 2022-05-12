@@ -5,6 +5,7 @@
 
   .covid-header {
     flex: 1;
+    margin-bottom: 2%;
   }
 
   .covid-content {
@@ -21,7 +22,7 @@
     }
     
     .covid-content-testing {
-      margin-left: 2%;
+      /* margin-left: 2%; */
       flex: 1;
     }
 

@@ -10,23 +10,26 @@
   opacity: 0.9;
   text-align: left;
   margin-bottom: 2%;   */
+  text-align: left;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey;
+  margin-right: 2.5%;
 }
   .vaccine-card-header {
-    padding-top: 10px;
     flex: 1;
-    margin-left: 2%;
+    padding-bottom: 2%;
   }
 
   .vaccine-card-status-content {
     flex: 1;
-    margin-left: 2%;
+    padding-bottom: 2%;
   }
 
   .vaccine-card-dose-content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin-left: 2%;
   }
 
     .vaccine-card-dose-title {
@@ -46,10 +49,8 @@
     border-top: solid;
     border-color: lightgrey;
     border-width: 1px;
-    margin-left: 2%;
   }
 
   .vaccine-card-documents-content {
     flex: 1;
-    margin-left: 2%;
   } 

@@ -38,7 +38,7 @@ const App = () => {
         main: 'rgb(255, 0, 93)',
       },
       error: {
-        main: '#f22771',
+        main: '#FF3434',
       },
       warning: {
         main: '#eba0ae',

@@ -6,6 +6,7 @@ import AddVaccine from "./newVaccine";
 import IconButton from "@mui/material/IconButton";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import "../../../assets/styling/cards.css"
 
 const DosePane = (props) => {
   const dose = props.doseData;
@@ -32,16 +33,16 @@ const DosePane = (props) => {
   return (
     <div className="doses">
       <div className="vaccine-card-dose">
-        <h4>Dose</h4>
-        <p>{dose.dose}</p>
+        <p className="fuschia" >Dose</p>
+        <h4>{dose.dose}</h4>
       </div>
       <div className="vaccine-card-dose-date">
-        <h4>Date</h4>
-        <p>{formatDate(dose.date)}</p>
+        <p className="fuschia" >Date</p>
+        <h4>{formatDate(dose.date)}</h4>
       </div>
       <div className="vaccine-card-dose-type">
-        <h4>Type</h4>
-        <p>{dose.type}</p>
+        <p className="fuschia" >Type</p>
+        <h4>{dose.type}</h4>
       </div>
       <div className="vaccine-card-buttons">
         <IconButton aria-label="delete" onClick={handleEditOpen}>

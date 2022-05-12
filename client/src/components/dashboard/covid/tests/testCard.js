@@ -35,7 +35,7 @@ const TestCard = (props) => {
     <div className="test-card">
       <div className="test-card-header">
         <h1>
-          {testData.testType} {testData.entryType}
+          {testData.testType} Test {testData.entryType}
         </h1>
         <div className="crud-menu">
           <CrudMenu
@@ -51,44 +51,44 @@ const TestCard = (props) => {
       <div style={{ display: testData.entryType === "Result" ? "" : "none" }}>
         <div className="test-card-primary-content">
           <div className="test-card-primary-left">
-            <h3>Result</h3>
-            <p>{testData.result}</p>
+            <p className="fuschia">Result</p>
+            <h4>{testData.result}</h4>
           </div>
           <div className="test-card-primary-right">
-            <h3>Test date</h3>
-            <p>{formatDate(testData.testDate)}</p>
+            <p className="light-label">Test date</p>
+            <h4>{formatDate(testData.testDate)}</h4>
           </div>
         </div>
         <div className="test-card-secondary-content">
           <div className="test-card-secondary-left">
-            <h3>Test number</h3>
-            <p>{testData.testNumber}</p>
+            <p className="light-label">Test number</p>
+            <h4>{testData.testNumber}</h4>
           </div>
           <div className="test-card-secondary-right">
-            <h3>Test country</h3>
-            <p>{testData.testCountry}</p>
+            <p className="light-label">Test country</p>
+            <h4>{testData.testCountry}</h4>
           </div>
         </div>
         <div className="test-card-tertiary-content">
           <div className="test-card-tertiary-left">
-            <h3>Test provider</h3>
-            <p>{testData.testProvider}</p>
+            <p className="light-label">Test provider</p>
+            <h4>{testData.testProvider}</h4>
           </div>
           <div className="test-card-tertiary-right">
-            <h3>Valid until</h3>
-            <p>{formatDate(testData.validToDate)}</p>
+            <p className="fuschia">Valid until</p>
+            <h4>{formatDate(testData.validToDate)}</h4>
           </div>
         </div>
       </div>
       <div style={{ display: testData.entryType === "Reminder" ? "" : "none" }}>
         <div className="test-card-primary-content">
           <div className="test-card-primary-left">
-            <h3>Test from</h3>
-            <p>{formatDate(testData.testFromDate)}</p>
+            <p className="light-label">Test from</p>
+            <h4>{formatDate(testData.testFromDate)}</h4>
           </div>
           <div className="test-card-primary-right">
-            <h3>Result by</h3>
-            <p>{formatDate(testData.resultByDate)}</p>
+            <p className="fuschia">Result by</p>
+            <h4>{formatDate(testData.resultByDate)}</h4>
           </div>
         </div>
         <div className="test-card-secondary-content">
