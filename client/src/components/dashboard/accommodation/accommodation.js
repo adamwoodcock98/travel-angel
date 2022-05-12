@@ -8,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import "../../assets/styling/cards.css"
+import Button from "@mui/material/Button";
 
 export const ViewAccommodation = ({ session }) => {
   const { tripId } = useParams();
@@ -41,6 +42,7 @@ export const ViewAccommodation = ({ session }) => {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
   const [didUpdate, setDidUpdate] = useState(false);
+  const [loadingFailed, setLoadingFailed] = useState(false);
   const [loading, setLoading] = useState(true);
   const alertPosition = {
     vertical: "top",
@@ -75,6 +77,8 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoadingFailed(false);
+    setLoading(true);
     if (userId !== "null") {
       axios
         .get(
@@ -94,6 +98,7 @@ export const ViewAccommodation = ({ session }) => {
               "There was a problem connecting to the server.",
               "error"
             );
+            setLoadingFailed(true);
           }
         })
         .finally(() => setLoading(false));
@@ -118,7 +123,19 @@ export const ViewAccommodation = ({ session }) => {
     );
   };
 
-  if (loading) {
+  if (loadingFailed) {
+    return(
+      <div className="empty-window">
+        <h1>Accommodation</h1>
+        <div className="empty-prompt">
+          <h3>This connection doesn't seem quite right</h3>
+          <h2>:(</h2>
+          <br />
+          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+        </div>
+      </div>
+    )
+  } else if (loading) {
     return(
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />

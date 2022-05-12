@@ -8,10 +8,12 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Alerts } from "../../assets/snackbar";
+import Button from "@mui/material/Button";
 
 const Transfers = ({ session }) => {
   const { tripId } = useParams();
   const [loading, setLoading] = useState(true);
+  const [loadingFailed, setLoadingFailed] = useState(false);
   const [state, setState] = useState(0);
 
   const handleUpload = async () => {
@@ -86,6 +88,7 @@ const Transfers = ({ session }) => {
 
   useEffect(() => {
     setLoading(true);
+    setLoadingFailed(false);
     if (userId !== "null") {
       axios
         .get(`http://localhost:8000/dashboard/transfers/${userId}/${tripId}`)
@@ -106,13 +109,26 @@ const Transfers = ({ session }) => {
               "There was a problem connecting to the server.",
               "error"
             );
+            setLoadingFailed(true);
           }
         })
         .finally(() => setLoading(false));
     }
   }, [didUpdate, state]);
 
-  if (loading) {
+  if (loadingFailed) {
+    return(
+      <div className="empty-window">
+        <h1>Transfers</h1>
+        <div className="empty-prompt">
+          <h3>This connection doesn't seem quite right</h3>
+          <h2>:(</h2>
+          <br />
+          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+        </div>
+      </div>
+    )
+  } else if (loading) {
     return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
