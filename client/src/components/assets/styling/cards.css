@@ -63,12 +63,6 @@ margin-top: 30%;
 color:#F22771;
 }
 
-@font-face {
-  font-family: "Noto_Serif";
-  src: local("Noto_Serif"),
-    url("../../assets/Noto_Serif/NotoSerif-Regular.ttf") format("truetype");
-}
-
 /* Title page */
 h1 {
   font-family: Arial;
