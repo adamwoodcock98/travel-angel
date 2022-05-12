@@ -24,7 +24,6 @@ export const ViewAccommodation = ({ session }) => {
   const [accommodation, setAccommodation] = useState([]);
 
   const [open, setOpen] = useState(false);
-
   const [accommodationArray, setAccommodationArray] = useState({
     name: "",
     contactNumber: "",
