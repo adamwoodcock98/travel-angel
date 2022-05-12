@@ -130,7 +130,7 @@ export const ViewAccommodation = ({ session }) => {
       <>
         {/* <div className="container"> */}
           <div className="accommodation-header">
-            <h1 className="title very-big">Accommodation</h1>
+            <h1 className="very-big"> Accommodation</h1>
           </div>
           <div className="accommodation-body">
             <AccommodationCard
