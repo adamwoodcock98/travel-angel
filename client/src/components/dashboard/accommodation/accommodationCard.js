@@ -36,15 +36,18 @@ export default function AccommodationCard(props) {
       {accommodation.map((accommodation, index) => {
         return (
             <div className="card" key={index}>
-               <div className="crud-menu">
+               
+              <div className="header">
+                <div className="title">
+                  <h1>{accommodation.name}</h1>
+                </div>
+                <div className="crud-menu">
                 <CrudMenu
                   userId={userId}
                   accommodationData={accommodation}
                   refresh={refresh}
                 />
                </div>
-              <div className="header">
-                <h1>{accommodation.name}</h1>
               </div>
               <div className="body">
                 <div className="subbody-left">

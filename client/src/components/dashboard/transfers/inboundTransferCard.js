@@ -36,7 +36,10 @@ export const InboundTransferCard = (props) => {
       {inboundTransfer.map((inboundTransfer, index) => {
         return (
           <div className="card" key={index}>
-            <div className="crud-menu">
+            
+            <div className="header">
+              <h1 className="title">{inboundTransfer.name}</h1>
+              <div className="crud-menu">
               <CrudMenu
                 transferData={inboundTransfer}
                 transferId={inboundTransfer._id}
@@ -45,8 +48,6 @@ export const InboundTransferCard = (props) => {
                 refresh={refresh}
                />            
               </div>
-            <div className="header">
-              <h1>{inboundTransfer.name}</h1>
             </div>
             <div className="body">
               <div className="subbody-left">

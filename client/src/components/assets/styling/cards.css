@@ -104,12 +104,12 @@ p {
   opacity: 0.9;
   text-align: center;
   margin-bottom: 2%;
-  margin-left: 7%;
+  margin-left: 10%;
 }
 
 .crud-menu {
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   justify-content: right;
 }
 
@@ -118,7 +118,17 @@ p {
   display: flex;
   flex: 1;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  margin-top: 1%;
+}
+
+.title {
+ 
+  text-align: center;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  flex: 50;
 }
 
 /* .subheading {

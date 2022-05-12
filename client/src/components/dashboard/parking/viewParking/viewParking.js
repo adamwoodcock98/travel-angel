@@ -25,14 +25,17 @@ const ParkingCard = (props) => {
   return (
     <div className="card-container">
       <div className="card">
-        <div className="crud-menu">
+        
+        <div className="header">
+          <div className="title">
+            <h1>
+              Your booking
+              {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
+            </h1>
+            </div>
+          <div className="crud-menu">
           <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
         </div>
-        <div className="header">
-          <h1>
-            Your booking
-            {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
-          </h1>
         </div>
         <div className="body">
           <div className="subbody-left">
