@@ -51,7 +51,7 @@ export const InboundTransferCard = (props) => {
             <div className="body">
               <div className="subbody-left">
                 <div className="pickup-header">
-                  <h3>Pickup</h3>
+                  <h2>Pickup</h2>
                 </div>
                 <div className="pickup-body">
                   <p>{formatDate(inboundTransfer.pickupTime)}</p>
@@ -65,7 +65,7 @@ export const InboundTransferCard = (props) => {
             </div>
               <div className="subbody-right">
                 <div className="dropoff-header">
-                  <h3>Dropoff</h3>
+                  <h2>Dropoff</h2>
                 </div>
                 <div className="dropoff-body">
                   <p>{formatDate(inboundTransfer.dropoffTime)}</p>

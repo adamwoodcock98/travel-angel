@@ -91,16 +91,6 @@ const ParkingCard = (props) => {
         <h3>Notes</h3>
         <p>{parkingData.notes}</p>
       </div>
-      <div className="directions">
-          <Button
-            color="secondary"
-            startIcon={<DirectionsOutlinedIcon />}
-            target="_blank"
-            href={props.handleDirections(parkingData.address)}
-          >
-            Get Directions
-          </Button>
-        </div>
       <div className="upload">
             <div className="uploads">
               <div style={{display: "flex", alignItems: "center"}} className="documents" >
