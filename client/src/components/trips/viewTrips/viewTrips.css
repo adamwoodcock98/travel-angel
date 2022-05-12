@@ -10,7 +10,7 @@
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   margin: auto;
   padding: 14px 10px 14px 10px;
-  width: 50vw;
+  width: 70vw;
   display: flex;
   flex-direction: column;
 }
@@ -19,18 +19,4 @@
   display: flex;
   justify-content: flex-start;
   text-align: start;
-}
-
-.body {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding-bottom: 5vh; */
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  font-size: small;
 }

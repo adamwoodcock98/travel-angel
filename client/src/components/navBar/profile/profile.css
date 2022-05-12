@@ -1,6 +1,9 @@
-
 #profile-txt {
   padding: 10px 20px;
   text-align: center;
   padding-bottom: 20px;
+}
+
+#profile-picture {
+  width: 500px;
 }
