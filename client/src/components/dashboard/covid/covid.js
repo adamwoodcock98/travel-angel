@@ -9,7 +9,8 @@ import AddTest from "./tests/newTest";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
-import "../../assets/styling/cards.css"
+import "../../assets/styling/cards.css";
+import Button from "@mui/material/Button";
 
 const Covid = ({ session }) => {
   const [testData, setTestData] = useState([]);
@@ -18,6 +19,7 @@ const Covid = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [didLoad, setDidLoad] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingFailed, setLoadingFailed] = useState(false);
   const { tripId } = useParams();
   const userId = session;
   const [state, setState] = useState(0);
@@ -67,6 +69,8 @@ const Covid = ({ session }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
+    setLoadingFailed(false);
     axios
       .get(`http://localhost:8000/dashboard/covid/${userId}/${tripId}`)
       .then((res) => {
@@ -84,12 +88,25 @@ const Covid = ({ session }) => {
           );
         } else {
           handleAlert("There was a problem connecting to the server.", "error");
+          setLoadingFailed(true);
         }
       })
       .finally(() => setLoading(false));
   }, [state, didUpdate]);
 
-  if (loading) {
+  if (loadingFailed) {
+    return(
+      <div className="empty-window">
+        <h1>COVID-19</h1>
+        <div className="empty-prompt">
+        <h3>This connection doesn't seem quite right</h3>
+          <h2>:(</h2>
+          <br />
+          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+        </div>
+      </div>
+    )
+  } else  if (loading) {
     return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
