@@ -3,15 +3,15 @@ import moment from "moment";
 import "./transferCard.css";
 import CrudMenu from "./crud/crud";
 import Upload from "../../upload/upload";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import "../../assets/styling/cards.css";
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 export const OutboundTransferCard = (props) => {
   const outboundTransfer = props.outboundTransfer;
   const userId = props.userId;
   const tripId = props.tripId;
-  const refresh = props.refresh
+  const refresh = props.refresh;
   const handleUpload = props.handleUpload;
   const formatDate = (time) => moment(time).format("dddd, MMMM Do YYYY");
   const formatTime = (time) => moment(time).format("HH:mm");
@@ -37,7 +37,13 @@ export const OutboundTransferCard = (props) => {
         return (
           <div className="card" key={index}>
             <div className="crud-menu">
-              <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
+              <CrudMenu
+                transferData={outboundTransfer}
+                transferId={outboundTransfer._id}
+                userId={userId}
+                tripId={tripId}
+                refresh={refresh}
+              />
             </div>
             <div className="header">
               <h1>{outboundTransfer.name}</h1>
@@ -51,30 +57,32 @@ export const OutboundTransferCard = (props) => {
                   <p>{formatDate(outboundTransfer.pickupTime)}</p>
                   <p>{formatTime(outboundTransfer.pickupTime)}</p>
                   <div className="address">
-                  {outboundTransfer.pickupAddress && (
-                    <p>Address: {formatAddress(outboundTransfer.pickupAddress)}</p>
-                  )}
-                </div>
-              </div>
-              <div className="subbody-right">
-                <div className="dropoff-header">
-                  <h3>Dropoff</h3>
-                  <CrudMenu transferData={outboundTransfer} transferId={outboundTransfer._id} userId={userId} tripId={tripId} refresh={refresh} />
-                </div>
-                <div className="dropoff-body">
-                  <p>{formatDate(outboundTransfer.dropoffTime)}</p>
-                  <p>{formatTime(outboundTransfer.dropoffTime)}</p>
-                  <div className="address">
-                  {outboundTransfer.dropoffAddress && (
-                    <p>
-                      Address: {formatAddress(outboundTransfer.dropoffAddress)}
-                    </p>
-                  )}
+                    {outboundTransfer.pickupAddress && (
+                      <p>
+                        Address: {formatAddress(outboundTransfer.pickupAddress)}
+                      </p>
+                    )}
                   </div>
+                </div>
+                <div className="subbody-right">
+                  <div className="dropoff-header">
+                    <h3>Dropoff</h3>
+                  </div>
+                  <div className="dropoff-body">
+                    <p>{formatDate(outboundTransfer.dropoffTime)}</p>
+                    <p>{formatTime(outboundTransfer.dropoffTime)}</p>
+                    <div className="address">
+                      {outboundTransfer.dropoffAddress && (
+                        <p>
+                          Address:{" "}
+                          {formatAddress(outboundTransfer.dropoffAddress)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div> 
-          </div>
-        </div>
+            </div>
             <div className="footer">
               <div className="booking-reference">
                 {outboundTransfer.bookingReference && (
