@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import "../dashboard.css";
+
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -17,7 +18,7 @@ import moment from 'moment';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const SearchButton = ({handleClick}) => (
-  <Button id="search-button" onClick={handleClick}>
+  <Button onClick={handleClick}>
     <SearchOutlinedIcon />
   </Button>
 )
@@ -236,6 +237,19 @@ const AddFlight = ({
             variant="outlined"
             onChange={handleChange}
             InputProps={{endAdornment: <SearchButton handleClick={handleApiSearch}/>}}
+            sx={{
+              border: '2px solid aqua',
+              borderRadius: 3,
+              transition: '0.2s',
+              textAlign: 'center',
+              '&:hover': {
+                outline: '2px solid green'
+              },
+              '&:focus': {
+                outline: '2px solid green'
+
+              },
+            }}
           />
           <TextField
             value={formatDate(flight.departureDate)}
@@ -291,7 +305,6 @@ const AddFlight = ({
             }}
             onChange={handleChange}
           />
-
           <TextField
             value={flight.airline}
             autoFocus

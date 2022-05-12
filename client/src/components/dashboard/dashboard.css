@@ -47,4 +47,15 @@ p {
 } */
 .MuiOutlinedInput-notchedOutline.disable-x {
   background-color: black;
+  
 }
+.MuiButton-root#search-button {
+  width: 10px;
+}
+
+
+/* label: {
+  position: 'absolute',
+  left: 12,
+  top: -5
+} */
