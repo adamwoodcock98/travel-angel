@@ -29,6 +29,8 @@ const flightSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  arrivalDate: Date,
+  arrivalTime: String,
   arrivalTerminal: String,
   arrivalGate: String,
   bookingReference: String,

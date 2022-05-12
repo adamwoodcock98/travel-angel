@@ -140,13 +140,13 @@ const Parking = ({ session }) => {
       <>
         <div className="parking-window">
           <div className="parking-header">
-            <h1>Parking</h1>
+            <h1 className="very-big">Parking</h1>
           </div>
           <div className="parking-content">{parking.length && parkingArray}</div>
-          <div className="parking-footer">
+          <div className="parking-footer"><div id="fab-card-position">
             <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddParking
               open={open}
               handleOpen={handleOpen}
@@ -162,15 +162,22 @@ const Parking = ({ session }) => {
     );
   } else {
     return (
-      <>
-      <h1>Parking</h1>
-        <div className="empty-prompt">
-          <h3>Looks like you don't have any saved flights</h3>
+      <div className="empty-window">
+      <h1 className="very-big">Parking</h1>
+      <div className="empty-prompt">
+          <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
-      <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
-        <AddIcon />
-      </Fab>
+        <div className="empty-button" id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       <AddParking
         open={open}
         handleOpen={handleOpen}
@@ -187,7 +194,7 @@ const Parking = ({ session }) => {
         alertPosition={alertPosition}
         alertType={alertType}
       />
-      </>
+      </div>
     );
   }
 };

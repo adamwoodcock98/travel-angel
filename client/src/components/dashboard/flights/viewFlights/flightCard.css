@@ -3,8 +3,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0%;
+  padding: 2%;
   margin-bottom: 5%;
+  /* border-style: solid; */
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey;
+  background-color: white;
 }
 
 .flight-card-content {
@@ -13,9 +18,19 @@
   
 }
 
+.footer {
+  border-top: solid 1px;
+  border-color: lightgrey;
+  padding-top: 1%;
+  margin-top: 1%;
+}
+
 .flight-card-footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 .flight-card-arrival-pane {
@@ -28,6 +43,7 @@
 
 .flight-card-crud {
   flex: 1;
+  text-align: right;
 }
 
 /* Airport pane classes */
@@ -37,33 +53,64 @@
 }
 
 .airport-pane-middle {
-  text-align: center;
+  text-align: left;
+  display: flex;
+
 }
+  .label {
+    flex: 1;
+  }
 
 .airport-pane-bottom {
-  text-align: center;
+  text-align: left;
 }
 
 .airport-pane-code {
+  padding-top: 2%;
+  padding-bottom: 4%;
 }
 
 .airport-pane-city {
+  text-align: left;
 }
 
 /* Footer pane classes */
 .footer-pane-left {
-  text-align: center;
+  text-align: left;
   flex: 1;
 }
 
 .footer-pane-middle {
-  text-align: center;
+  text-align: left;
   flex: 1;
 }
 
 .footer-pane-right {
-  text-align: center;
+  text-align: left;
   flex: 1;
+}
+
+.labels {
+  display: flex;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.light-label {
+  color: rgb(160, 160, 160);
+}
+
+.footer-text {
+  display: flex;
+}
+
+.footer-directions {
+  text-align: center;
+  padding-top: 3%;
+  padding-bottom: 1%;
 }
 
 /* h1 {

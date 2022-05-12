@@ -9,6 +9,7 @@ import AddTest from "./tests/newTest";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router-dom";
+import "../../assets/styling/cards.css"
 
 const Covid = ({ session }) => {
   const [testData, setTestData] = useState([]);
@@ -111,22 +112,28 @@ const Covid = ({ session }) => {
       <>
         <div className="covid-window">
           <div className="covid-header">
-            <h1>Your Coronavirus Documentation</h1>
+            <h1 className="very-big">COVID-19</h1>
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
+              
               <h1>Vaccinations</h1>
+              <div className="covid-card">
               <VaccineCard
                 vaccinationsData={vaccineData}
                 handleUpload={handleUpload}
               />
             </div>
+            </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>
-              {testsArray}
+              <div className="covid-card">
+                {testsArray}
+              </div>
             </div>
           </div>
           <div className="covid-footer">
+          <div id="fab-card-position">
             <Fab
               size="large"
               color="secondary"
@@ -134,7 +141,7 @@ const Covid = ({ session }) => {
               onClick={handleOpen}
             >
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddTest
               open={open}
               handleOpen={handleOpen}
@@ -155,15 +162,18 @@ const Covid = ({ session }) => {
       <>
         <div className="covid-window">
           <div className="covid-header">
-            <h1>Your COVID Documentation</h1>
+            <h1 className="very-big">COVID-19</h1>
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
+              <div className="card">
               <h1>Vaccinations</h1>
               <VaccineCard
                 vaccinationsData={vaccineData}
                 refresh={handleClose}
+                handleUpload={handleUpload}
               />
+              </div>
             </div>
             <div className="covid-content-testing">
               <h1>Tests</h1>
@@ -173,18 +183,19 @@ const Covid = ({ session }) => {
                   <h2>Press + to get started</h2>
                 </div>
               )}
+              <div className="empty-prompt">
+                <Fab
+                  size="large"
+                  color="secondary"
+                  aria-label="add"
+                  onClick={handleOpen}
+                >
+                  <AddIcon />
+                </Fab>
+              </div>
             </div>
           </div>
-          <div className="covid-footer">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab>
-          </div>
+          <div className="covid-footer"></div>
           <div className="covid-footer">
             <AddTest
               open={open}

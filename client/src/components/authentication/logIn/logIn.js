@@ -17,7 +17,7 @@ export default function LogIn({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
+      <Button id="auth-btn" variant="filled" onClick={handleOpen}>
         Log In
       </Button>
       <Dialog open={open} onClose={handleClose}>

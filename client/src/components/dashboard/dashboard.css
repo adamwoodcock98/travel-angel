@@ -1,7 +1,6 @@
 body {
   letter-spacing: 0.5px;
-  margin-top: 100px;
-  background-color: #fefefe;
+  background-color: #fefefe !important;
 }
 
 .css-l31w18 {
@@ -44,7 +43,7 @@ body {
 }
 
 .tab-content {
-  width: 90%;
+  width: 100%;
   padding: 2%;
   margin-top: 4%;
 }
@@ -63,14 +62,15 @@ p {
 .css-19kzrtu {
   padding-top: 0% !important;
   padding-bottom: 0% !important;
+  margin-right: 0%;
 }
 
 #save-details-button {
-  background-color: #EBA0AE;
+  background-color: #eba0ae;
   color: white;
 }
 #default-cancel-button {
-  color: #64BAAA;
+  color: #64baaa;
 }
 /* #flightNumber:focus {
   background-color: yellow;
@@ -80,8 +80,6 @@ p {
 } */
 .MuiOutlinedInput-notchedOutline.disable-x {
   background-color: black;
-
-  
 }
 .MuiButton-root#search-button {
   width: 10px;

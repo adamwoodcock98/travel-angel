@@ -128,19 +128,9 @@ export const ViewAccommodation = ({ session }) => {
   } else if (accommodation.length) {
     return (
       <>
-        <div className="container">
+        {/* <div className="container"> */}
           <div className="accommodation-header">
-            <h1 className="title"> Your accommodation</h1>
-            <AddAccommodation
-              className="add-accomodation"
-              handleOpen={handleOpen}
-              open={open}
-              handleClose={handleClose}
-              accommodationData={accommodationArray}
-              accommodationId={null}
-              userId={userId}
-              tripId={tripId}
-            />
+            <h1 className="title very-big"> Your accommodation</h1>
           </div>
           <div className="accommodation-body">
             <AccommodationCard
@@ -151,6 +141,7 @@ export const ViewAccommodation = ({ session }) => {
               handleUpload={handleUpload}
             />
           </div>
+          <div id="fab-card-position">
           <Fab
             size="large"
             color="secondary"
@@ -158,7 +149,17 @@ export const ViewAccommodation = ({ session }) => {
             onClick={handleOpen}
           >
             <AddIcon />
-          </Fab>
+          </Fab></div>
+          <AddAccommodation
+              className="add-accomodation"
+              handleOpen={handleOpen}
+              open={open}
+              handleClose={handleClose}
+              accommodationData={accommodationArray}
+              accommodationId={null}
+              userId={userId}
+              tripId={tripId}
+            />
           <Alerts
             message={alertMessage}
             open={alertOpen}
@@ -166,18 +167,20 @@ export const ViewAccommodation = ({ session }) => {
             alertPosition={alertPosition}
             alertType={alertType}
           />
-        </div>
+        {/* </div> */}
       </>
     );
   } else {
     return (
       <div className="empty-window">
-        <h1>Accommodation</h1>
+        <div>
+          <h1 className="very-big">Accommodation</h1>
+        </div>
         <div className="empty-prompt" >
         <h3>Looks like you don't have any saved places</h3>
         <h2>Press  +  to get started</h2>
         </div>
-        <div className="empty-button" >
+        <div className="empty-button" id="fab-card-position">
           <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>

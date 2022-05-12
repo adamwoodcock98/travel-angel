@@ -123,8 +123,8 @@ const Transfers = ({ session }) => {
     return (
       <>
         <div className="transfers">
-          <div className="transfer-header">
-            <h1>Your transfers</h1>
+          <div className="transfer-header very-big">
+            <h1>Transfers</h1>
           </div>
           <div className="transfers-content">
             <div className="transfers-content-outbound">
@@ -149,6 +149,7 @@ const Transfers = ({ session }) => {
             </div>
           </div>
           <div>
+          <div id="fab-card-position">
             <Fab
               size="large"
               color="secondary"
@@ -156,7 +157,7 @@ const Transfers = ({ session }) => {
               onClick={handleOpen}
             >
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddTransfer
               open={open}
               handleOpen={handleOpen}
@@ -173,20 +174,22 @@ const Transfers = ({ session }) => {
     );
   } else {
     return (
-      <div>
-        <h1>Transfers</h1>
+      <div className="empty-window">
+        <h1 className="very-big">Transfers</h1>
         <div className="empty-prompt">
-          <h3>Looks like you don't have any saved flights</h3>
+          <h3>Looks like you don't have any saved transfers</h3>
           <h2>Press + to get started</h2>
         </div>
-        <Fab
-          size="large"
-          color="secondary"
-          aria-label="add"
-          onClick={handleOpen}
-        >
-          <AddIcon />
-        </Fab>
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
         <AddTransfer
           open={open}
           handleOpen={handleOpen}

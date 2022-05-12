@@ -1,5 +1,6 @@
 import * as React from "react";
-import{ Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert } from "@mui/material";
+import "./snackbar.css"
 
 export const Alerts = ({
   message,
@@ -16,7 +17,7 @@ export const Alerts = ({
       autoHideDuration={6000}
       key={alertPosition.vertical + alertPosition.horizontal}
     >
-      <Alert severity={alertType}>{message}</Alert>
+      <Alert id="alert" variant="filled" severity={alertType}>{message}</Alert>
     </Snackbar>
   );
 };

@@ -14,17 +14,33 @@ code {
     monospace;
 }
 
+#fab-position {
+  position: fixed;
+  bottom: 0;
+  margin: 0 0 60px 34%;
+  max-width: 400px;
+  z-index: 2;
+}
+
+#fab-card-position {
+  position: fixed !important;
+  bottom: 0 !important;
+  margin: 0 0 60px 85% !important;
+  max-width: 400px !important;
+  z-index: 2;
+}
+
 .MuiFab-circular {
-  background-color: #eba0ae !important;
+  background-color: rgb(255, 119, 169) !important;
   background: linear-gradient(
     180deg,
     rgba(235, 160, 174, 0.6) 0%,
-    rgba(242, 39, 113, 0.6) 100%
+    rgba(242, 39, 113, 0.3) 100%
   );
   color: white !important;
   transition: 0.3s;
-  /* position: sticky !important;
-  top: 0 !important; */
+  position: sticky !important;
+  top: 0 !important;
 }
 
 .MuiFab-circular:hover {

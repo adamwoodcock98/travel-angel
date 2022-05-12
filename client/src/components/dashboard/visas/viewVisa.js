@@ -19,17 +19,21 @@ export default function VisaCard({ visa, handleUpload, userId, tripId, refresh }
         {visa.map((visa, index) => {
           return (
             <div className="card" key={index}>
-              <div className="crud-menu">
-                <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
-              </div>
-              <div className="heading">
-                <div className="header">
-                  <h3>Your entry visa to</h3>
+              
+              
+              <div className="header">
+                <div className="title">
+                  <h3 >Your entry visa to</h3>
                 </div>
+                <div className="crud-menu">
+                  <CrudMenu visaData={visa} visaId={visa._id} userId={userId} tripId={tripId} refresh={refresh} />
+                </div>
+              </div>
+
                 <div className="subheading">
                   <h1>{visa.issuingCountry}</h1>
                 </div>
-              </div>
+             
               <div className="body">
                 <div className="subbody-left">
                   <div className="start-date-header">

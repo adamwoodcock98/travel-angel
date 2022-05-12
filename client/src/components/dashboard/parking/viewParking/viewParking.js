@@ -5,8 +5,8 @@ import Upload from "../../../upload/upload";
 import CrudMenu from "./crud/crud";
 import Button from "@mui/material/Button";
 import DirectionsOutlinedIcon from "@mui/icons-material/DirectionsOutlined";
-import "../../../assets/styling/cards.css"
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import "../../../assets/styling/cards.css";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 const ParkingCard = (props) => {
   const parkingData = props.bookingData;
@@ -25,32 +25,35 @@ const ParkingCard = (props) => {
   return (
     <div className="card-container">
       <div className="card">
-        <div className="crud-menu">
+        
+        <div className="header">
+          <div className="title">
+            <h1>
+              Your booking
+              {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
+            </h1>
+            </div>
+          <div className="crud-menu">
           <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
         </div>
-        <div className="header">
-          <h1>
-            Your booking
-            {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
-          </h1>
         </div>
         <div className="body">
           <div className="subbody-left">
             <div className="start-date-header">
-              <h3>From</h3>
+              <p>From</p>
             </div>
             <div className="start-date-body">
-              <h2>{parkingData.startDate && formatDate(parkingData.startDate)}</h2>
-              <h2>{parkingData.startDate && formatTime(parkingData.startDate)}</h2>
+              <h3>{parkingData.startDate && formatDate(parkingData.startDate)}</h3>
+              <h3>{parkingData.startDate && formatTime(parkingData.startDate)}</h3>
             </div>
           </div>
           <div className="subbody-right">
             <div className="end-date-header">
-              <h3>Until</h3>
+              <p>Until</p>
             </div>
             <div className="end-date-body">
-              <h2>{parkingData.endDate && formatDate(parkingData.endDate)}</h2>
-              <h2>{parkingData.endDate && formatTime(parkingData.endDate)}</h2>
+              <h3>{parkingData.endDate && formatDate(parkingData.endDate)}</h3>
+              <h3>{parkingData.endDate && formatTime(parkingData.endDate)}</h3>
             </div>
           </div>
         </div>
@@ -60,13 +63,16 @@ const ParkingCard = (props) => {
             <h2>{parkingData.airport}</h2>
           </div>
           <div className="contact-content-name">
-            <h3>{parkingData.type} {parkingData.company}</h3>
+            <h3>
+              {parkingData.type} {parkingData.company}
+            </h3>
           </div>
           <div className="contact-content-address">
             <p>
               {parkingData.address.buildingNumber}{" "}
               {parkingData.address.buildingName},{" "}
-              {parkingData.address.addressLine1}, {parkingData.address.postalCode}
+              {parkingData.address.addressLine1},{" "}
+              {parkingData.address.postalCode}
             </p>
           </div>
           <div className="directions">
@@ -76,7 +82,7 @@ const ParkingCard = (props) => {
               target="_blank"
               href={props.handleDirections(parkingData.address)}
             >
-            Get Directions
+              Get Directions
             </Button>
           </div>
 
@@ -87,45 +93,47 @@ const ParkingCard = (props) => {
             <h2>For your vehicle: {parkingData.regPlate}</h2>
           </div>
         </div>
-      <div className="footer">
-        <h3>Notes</h3>
-        <p>{parkingData.notes}</p>
-      </div>
-      <div className="directions">
-          <Button
-            color="secondary"
-            startIcon={<DirectionsOutlinedIcon />}
-            target="_blank"
-            href={props.handleDirections(parkingData.address)}
-          >
-            Get Directions
-          </Button>
+        <div className="footer">
+          <h3>Notes</h3>
+          <p>{parkingData.notes}</p>
         </div>
-      <div className="upload">
-            <div className="uploads">
-              <div style={{display: "flex", alignItems: "center"}} className="documents" >
-                <h4>Documents</h4>
-                <Upload
-                  cardId={parkingData._id}
-                  url="dashboard/parking"
-                  handleUpload={handleUpload}
-                />
-              </div>
-              <i>Use this section to store any additional documents you may need for your flights</i>
-              {parkingData.uploads.length &&
-                parkingData.uploads.map((upload, index) => {
-                  return (
-                    <div className="document-button">
-                      <Button style={{padding: "0%"}} color="primary" onClick={() => handleSubmit(upload._id)} key={index} endIcon={<FileDownloadOutlinedIcon />}>
-                        {upload.name}
-                      </Button>
-                    </div>
-                  );
-                })}
+        <div className="upload">
+          <div className="uploads">
+            <div
+              style={{ display: "flex", alignItems: "center" }}
+              className="documents"
+            >
+              <h4>Documents</h4>
+              <Upload
+                cardId={parkingData._id}
+                url="dashboard/parking"
+                handleUpload={handleUpload}
+              />
             </div>
+            <i>
+              Use this section to store any additional documents you may need
+              for your flights
+            </i>
+            {parkingData.uploads.length &&
+              parkingData.uploads.map((upload, index) => {
+                return (
+                  <div className="document-button">
+                    <Button
+                      style={{ padding: "0%" }}
+                      color="primary"
+                      onClick={() => handleSubmit(upload._id)}
+                      key={index}
+                      endIcon={<FileDownloadOutlinedIcon />}
+                    >
+                      {upload.name}
+                    </Button>
+                  </div>
+                );
+              })}
           </div>
+        </div>
+      </div>
     </div>
-  </div>
   );
 };
 

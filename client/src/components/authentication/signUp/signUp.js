@@ -17,7 +17,7 @@ export default function SignUp({
 }) {
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>
+      <Button id="auth-btn" variant="filled" onClick={handleOpen}>
         Sign Up
       </Button>
       <Dialog open={open} onClose={handleClose}>
