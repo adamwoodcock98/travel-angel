@@ -1,14 +1,32 @@
-/* .transfer-card {
+.outbound-transfer-card {
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(#ffe3ec, #eba0ae);
-  border-radius: 25px;
-  opacity: 0.9;
-  text-align: center;
-  margin: 10;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey; 
+  
+  padding-right: 1%;
+  margin-right: 2%;
 }
 
-.crud-menu {
+.card-container {
+  flex: 1 1;
+  border-right: solid;
+  border-color: lightgrey;
+  margin-top:5%;
+}
+
+.inbound-transfer-card {
+  display: flex;
+  flex-direction: column;
+  border-color: lightgrey;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px lightgrey; 
+  padding-right: 1%;
+  margin-left: 2%;
+}
+
+/* .crud-menu {
   display: flex;
   flex: 1;
   justify-content: right;
@@ -63,38 +81,119 @@
 
 .transfer-upload {
   padding: 10px 0px 15px 0px;
-}
+} */
 
- */
 
  .transfers-content {
    display: flex;
    flex-direction: row;
-   justify-content: left;
+   justify-content: center;
  }
 
- /* .transfer-body {
-  text-align: center;
+ .transfer-body {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex: 1;
- } */
- .pickup-header {
-   display: flex;
-   flex-direction: column;
+  margin-bottom: 2%;
+ }
+
+ .transfers-content-subheading {
+  font-size: xx-large;
+  text-align: center;
+  color: #F22771 !important;
+ }
+
+ .transfers-header {
+  font-size: xx-large;
+  text-align: center;
+  color: #F22771 !important;
  }
  
  .pickup-content {
-  text-align: right;
+  text-align: left;
   padding-left: 25px;
   display: flex;
   justify-content: left;
   flex-direction: row;
+  margin-bottom: 2%;
  }
 
  .dropoff-content {
-  text-align: right;
-  padding-left: 25px;
+  text-align: left;
+  padding-left: 30px;
   display: flex;
   justify-content: right;
+  flex-direction: row;
  }
+
+.transfers-content-subheading {
+  color: #f22771
+}
+
+.pink{
+  color: #f22771
+}
+
+.pickup-address{
+  margin-top: 8%;
+}
+
+.dropoff-address{
+  margin-top: 8%;
+}
+
+.font-labels {
+  font-size: 80%;
+}
+
+/* FOOTER */
+
+.transfer-footer{
+  padding-left:25px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-top: solid 1px;
+  border-color: lightgrey;
+}
+
+.footer-labels{
+  display: flex;
+  flex-direction: row;
+  font-size: 80%;
+}
+
+.footer-left {
+  text-align: left;
+  flex: 1;
+}
+
+.footer-middle {
+  text-align: left;
+  flex: 1;
+}
+
+.footer-right {
+  text-align: left;
+  flex: 1;
+}
+
+.labels {
+  display: flex;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-text {
+  display: flex;
+}
+
+.footer-uploads{
+  padding-left: 25px;
+}
+
+

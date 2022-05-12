@@ -144,12 +144,12 @@ h3 {
 }
 
 .subbody-left {
-  text-align: right;
+  text-align: center;
   padding-right: 25px;
 }
 
 .subbody-right {
-  text-align: left;
+  text-align: center;
   padding-left: 25px;
 }
 

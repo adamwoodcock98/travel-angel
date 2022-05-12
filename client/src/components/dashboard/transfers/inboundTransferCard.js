@@ -35,72 +35,89 @@ export const InboundTransferCard = (props) => {
     <div className="card-container">
       {inboundTransfer.map((inboundTransfer, index) => {
         return (
-          <div className="card" key={index}>
-            
+          <div className="inbound-transfer-card" key={index}>
             <div className="header">
               <h1 className="title">{inboundTransfer.name}</h1>
-              <div className="crud-menu">
-              <CrudMenu
-                transferData={inboundTransfer}
-                transferId={inboundTransfer._id}
-                userId={userId}
-                tripId={tripId}
-                refresh={refresh}
-               />            
-              </div>
+                
+                
+                <div className="crud-menu">
+                <CrudMenu
+                  transferData={inboundTransfer}
+                  transferId={inboundTransfer._id}
+                  userId={userId}
+                  tripId={tripId}
+                  refresh={refresh}
+                />            
+                </div>
             </div>
             <div className="transfer-body">
               <div className="pickup-content">
+                <div className="pickup-body">
                 <div className="pickup-header">
                   <p className="light-label">Pickup</p>
                 </div>
-                <div className="pickup-body">
-                  <p>{formatDate(inboundTransfer.pickupTime)}</p>
-                  <p>{formatTime(inboundTransfer.pickupTime)}</p>
-                  <div className="address">
-                    <p>Address: </p>
+                  <h4>{formatDate(inboundTransfer.pickupTime)}</h4>
+                  <h4 className="pink">{formatTime(inboundTransfer.pickupTime)}</h4>
+                  <div className="pickup-address">
+                    <p className="light-label font-labels">Address: </p>
                     {inboundTransfer.pickupAddress && (
-                      <h3>{formatAddress(inboundTransfer.pickupAddress)}</h3>
+                      <p>{formatAddress(inboundTransfer.pickupAddress)}</p>
                     )}
                   </div>
                 </div>
                 <div className="dropoff-content">
+                  <div className="dropoff-body">
                   <div className="dropoff-header">
                   <p className="light-label">Dropoff</p>
                   </div>
-                  <div className="dropoff-body">
-                    <p>{formatDate(inboundTransfer.dropoffTime)}</p>
-                    <p>{formatTime(inboundTransfer.dropoffTime)}</p>
-                    <div className="address">
+                    <h4>{formatDate(inboundTransfer.dropoffTime)}</h4>
+                    <h4 className="pink">{formatTime(inboundTransfer.dropoffTime)}</h4>
+                    <div className="dropoff-address">
+                      <p className="light-label font-labels">Address: </p>
                       {inboundTransfer.dropoffAddress && (
-                        <p>
-                          Address:{" "}
+                        <h4>
                           {formatAddress(inboundTransfer.dropoffAddress)}
-                        </p>
+                        </h4>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="footer">
-              <div className="booking-reference">
-                <p>Booking Reference: </p>
-                {inboundTransfer.bookingReference && (
-                  <h3>{inboundTransfer.bookingReference}</h3>
-                )}
-              </div>
-              <div className="company">
-                <p>Company: </p>
-                {inboundTransfer.company && <h3>{inboundTransfer.company}</h3>}
-              </div>
-              <div className="contact-number">
-                {inboundTransfer.contactNumber && (
-                  <p>TEL: {inboundTransfer.contactNumber}</p>
-                )}
+              {/* FOOTER  */}
+              <div className="transfer-footer">
+                <div className="footer-labels">
+                  <div className="footer-left light-label">
+                    <p>Booking Reference: </p>
+                  </div>
+                  <div className="footer-middle light-label">
+                    <p>Company: </p>
+                  </div>
+                  <div className="footer-right light-label">
+                    <p>TEL:</p>
+                  </div>
+                </div>
+
+                <div className="footer-text">
+                  <div className="footer-left">
+                      {inboundTransfer.bookingReference && (
+                      <h4>{inboundTransfer.bookingReference}</h4>
+                      )}
+                  </div>
+                  <div className="footer-middle">
+                    {inboundTransfer.company && <h4>{inboundTransfer.company}</h4>}
+                  </div>
+                    <div className="footer-right">
+                      <div className="tel">
+                        {inboundTransfer.contactNumber && (
+                          <h4>{inboundTransfer.contactNumber}</h4>
+                        )}
+                      </div>
+                    </div>
+                  </div>
               </div>
               <div className="upload">
-                <div className="uploads">
+                <div className="footer-uploads">
                   <div
                     style={{ display: "flex", alignItems: "center" }}
                     className="documents"
@@ -134,7 +151,7 @@ export const InboundTransferCard = (props) => {
                     })}
                 </div>
               </div>
-            </div>
+            {/* </div> */}
           </div>
         );
       })}
