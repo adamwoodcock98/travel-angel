@@ -133,6 +133,7 @@ const Covid = ({ session }) => {
             </div>
           </div>
           <div className="covid-footer">
+          <div id="fab-card-position">
             <Fab
               size="large"
               color="secondary"
@@ -140,7 +141,7 @@ const Covid = ({ session }) => {
               onClick={handleOpen}
             >
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddTest
               open={open}
               handleOpen={handleOpen}

@@ -119,7 +119,7 @@ export const Passport = ({ session }) => {
           <DialogTitle>Passport</DialogTitle>
           <DialogContent>
             <div id="pass-render">{passportRender}</div>
-          </DialogContent>
+          </DialogContent><div id="fab-card-position">
                     <Fab
             id="pass-fab"
             size="medium"
@@ -128,7 +128,7 @@ export const Passport = ({ session }) => {
             onClick={handleOpen}
             >
             <AddIcon />
-          </Fab>
+          </Fab></div>
           <AddPassport
             open={open}
             handleOpen={handleOpen}

@@ -17,8 +17,16 @@ code {
 #fab-position {
   position: fixed;
   bottom: 0;
-  margin: 0 0 100px 25vw;
+  margin: 0 0 60px 34%;
   max-width: 400px;
+  z-index: 2;
+}
+
+#fab-card-position {
+  position: fixed !important;
+  bottom: 0 !important;
+  margin: 0 0 60px 85% !important;
+  max-width: 400px !important;
   z-index: 2;
 }
 

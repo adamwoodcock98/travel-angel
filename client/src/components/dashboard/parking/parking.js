@@ -143,10 +143,10 @@ const Parking = ({ session }) => {
             <h1 className="very-big">Parking</h1>
           </div>
           <div className="parking-content">{parking.length && parkingArray}</div>
-          <div className="parking-footer">
+          <div className="parking-footer"><div id="fab-card-position">
             <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
               <AddIcon />
-            </Fab>
+            </Fab></div>
             <AddParking
               open={open}
               handleOpen={handleOpen}
@@ -168,7 +168,7 @@ const Parking = ({ session }) => {
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
-        <div className="empty-button">
+        <div className="empty-button" id="fab-card-position">
           <Fab
             size="large"
             color="secondary"
