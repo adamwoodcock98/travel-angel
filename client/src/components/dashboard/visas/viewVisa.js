@@ -63,35 +63,46 @@ export default function VisaCard({
                 </div>
               </div>
             </div>
-              <div className="footer">
-                <div className="visaNumber">
-                  <p>Visa Number:</p> 
-                  <h3 className="visa-num">{visa.visaNumber}</h3>
-                </div>
+            <div className="footer">
+              <div className="visaNumber">
+                <p>Visa Number:</p>
+                <h3 className="visa-num">{visa.visaNumber}</h3>
+              </div>
 
-                <div className="upload">
-                  <div className="uploads">
-                    <div style={{display: "flex", alignItems: "center"}} className="documents" >
-                      <h4>Supporting Documents</h4>
-                      <Upload
-                        cardId={visa._id}
-                        url="dashboard/visas"
-                        handleUpload={handleUpload}
-                      />
-                    </div>
-                    <div>
-                      <i>Use this section to store any additional documents you may need for your flights</i>
-                      {visa.uploads.length &&
-                        visa.uploads.map((upload, index) => {
-                          return (
-                            <div className="document-button">
-                              <Button style={{padding: "0%"}} color="primary" onClick={() => handleSubmit(upload._id)} key={index} endIcon={<FileDownloadOutlinedIcon />}>
-                                {upload.name}
-                              </Button>
-                            </div>
-                          )})}
-                      </div>
-                    </div>
+              <div className="upload">
+                <div className="uploads">
+                  <div
+                    style={{ display: "flex", alignItems: "center" }}
+                    className="documents"
+                  >
+                    <h4>Supporting Documents</h4>
+                    <Upload
+                      cardId={visa._id}
+                      url="dashboard/visas"
+                      handleUpload={handleUpload}
+                    />
+                  </div>
+                  <div>
+                    <i>
+                      Use this section to store any additional documents you may
+                      need for your flights
+                    </i>
+                    {visa.uploads.length &&
+                      visa.uploads.map((upload, index) => {
+                        return (
+                          <div className="document-button">
+                            <Button
+                              style={{ padding: "0%" }}
+                              color="primary"
+                              onClick={() => handleSubmit(upload._id)}
+                              key={index}
+                              endIcon={<FileDownloadOutlinedIcon />}
+                            >
+                              {upload.name}
+                            </Button>
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
               </div>
