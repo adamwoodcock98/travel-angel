@@ -95,22 +95,23 @@ const Covid = ({ session }) => {
   }, [state, didUpdate]);
 
   if (loadingFailed) {
-    return(
+    return (
       <div className="empty-window">
         <h1>COVID-19</h1>
         <div className="empty-prompt">
-        <h3>This connection doesn't seem quite right</h3>
+          <h3>This connection doesn't seem quite right</h3>
           <h2>:(</h2>
           <br />
-          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+          <Button onClick={handleClose} variant="outlined" color="primary">
+            try again
+          </Button>
         </div>
       </div>
-    )
-  } else  if (loading) {
+    );
+  } else if (loading) {
     return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
-        <p color="secondary">loading...</p>
       </div>
     );
   } else if (didLoad && testData.length) {
@@ -133,31 +134,39 @@ const Covid = ({ session }) => {
           </div>
           <div className="covid-content">
             <div className="covid-content-vaccinations">
-              <h1 style={{textAlign: "center"}} className="fuschia">Vaccinations</h1>
+              <h1 style={{ textAlign: "center" }} className="fuschia">
+                Vaccinations
+              </h1>
               <div className="covid-card">
-              <VaccineCard
-                vaccinationsData={vaccineData}
-                handleUpload={handleUpload}
-              />
-            </div>
+                <VaccineCard
+                  vaccinationsData={vaccineData}
+                  handleUpload={handleUpload}
+                />
+              </div>
             </div>
             <div className="covid-content-testing">
-            <h1 style={{textAlign: "center"}} className="fuschia">Tests</h1>
-              <div className="covid-card"  style={{borderLeft: "1px solid", borderColor: "lightgrey"}}>
+              <h1 style={{ textAlign: "center" }} className="fuschia">
+                Tests
+              </h1>
+              <div
+                className="covid-card"
+                style={{ borderLeft: "1px solid", borderColor: "lightgrey" }}
+              >
                 {testsArray}
               </div>
             </div>
           </div>
           <div className="covid-footer">
-          <div id="fab-card-position">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab></div>
+            <div id="fab-card-position">
+              <Fab
+                size="large"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
             <AddTest
               open={open}
               handleOpen={handleOpen}
@@ -182,12 +191,12 @@ const Covid = ({ session }) => {
           <div className="covid-content">
             <div className="covid-content-vaccinations">
               <div className="card">
-                <h1>      </h1>
-              <VaccineCard
-                vaccinationsData={vaccineData}
-                refresh={handleClose}
-                handleUpload={handleUpload}
-              />
+                <h1> </h1>
+                <VaccineCard
+                  vaccinationsData={vaccineData}
+                  refresh={handleClose}
+                  handleUpload={handleUpload}
+                />
               </div>
             </div>
             <div className="covid-content-testing">

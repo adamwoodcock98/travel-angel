@@ -73,13 +73,13 @@ export default function AccommodationCard(props) {
               <div className="footer">
                 <div className="footer-labels">
                   <div className="footer-left">
-                    <p className="light-label">Booking Reference:</p>
+                    <p className="light-label">Booking reference</p>
                   </div>
                   <div className="footer-middle">
-                    <p className="light-label">Address:</p>
+                    <p className="light-label">Address</p>
                   </div>
                   <div className="footer-right">
-                    <p className="light-label">TEL:</p> 
+                    <p className="light-label">Tel</p> 
                   </div>
                 </div>
 

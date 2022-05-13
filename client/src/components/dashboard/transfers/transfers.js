@@ -117,22 +117,23 @@ const Transfers = ({ session }) => {
   }, [didUpdate, state]);
 
   if (loadingFailed) {
-    return(
+    return (
       <div className="empty-window">
         <h1>Transfers</h1>
         <div className="empty-prompt">
           <h3>This connection doesn't seem quite right</h3>
           <h2>:(</h2>
           <br />
-          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+          <Button onClick={handleClose} variant="outlined" color="primary">
+            try again
+          </Button>
         </div>
       </div>
-    )
+    );
   } else if (loading) {
     return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
-        <p color="secondary">loading...</p>
       </div>
     );
   } else if (outboundTransfer.length || inboundTransfer.length) {
@@ -154,28 +155,29 @@ const Transfers = ({ session }) => {
               />
             </div>
             <div className="transfers-content">
-            <div className="transfers-content-inbound">
-              <h1 className="transfers-content-subheading">Inbound</h1>
-              <InboundTransferCard
-                inboundTransfer={inboundTransfer}
-                userId={userId}
-                tripId={tripId}
-                refresh={handleClose}
-                handleUpload={handleUpload}
-              />
+              <div className="transfers-content-inbound">
+                <h1 className="transfers-content-subheading">Inbound</h1>
+                <InboundTransferCard
+                  inboundTransfer={inboundTransfer}
+                  userId={userId}
+                  tripId={tripId}
+                  refresh={handleClose}
+                  handleUpload={handleUpload}
+                />
               </div>
             </div>
           </div>
           <div>
-          <div id="fab-card-position">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab></div>
+            <div id="fab-card-position">
+              <Fab
+                size="large"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
             <AddTransfer
               open={open}
               handleOpen={handleOpen}
