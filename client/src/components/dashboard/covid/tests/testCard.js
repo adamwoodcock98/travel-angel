@@ -6,6 +6,7 @@ import BiotechOutlinedIcon from "@mui/icons-material/BiotechOutlined";
 import AddTest from "./newTest";
 import CrudMenu from "./crud/crud";
 import Upload from "../../../upload/upload";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import "../../../assets/styling/cards.css";
 
 const TestCard = (props) => {
@@ -113,19 +114,36 @@ const TestCard = (props) => {
         </div>
       </div>
       <div className="upload">
-        <Upload
-          cardId={testData._id}
-          url="dashboard/covid/test"
-          handleUpload={handleUpload}
-        />
         <div className="uploads">
-          Download Your Documents
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+            className="documents"
+          >
+            <h4>Documents</h4>
+            <Upload
+              cardId={testData._id}
+              url="dashboard/covid/test"
+              handleUpload={handleUpload}
+            />
+          </div>
+          <i>
+            Use this section to store any additional documents you may need for
+            your COVID tests
+          </i>
           {testData.uploads.length &&
             testData.uploads.map((upload, index) => {
               return (
-                <button onClick={() => handleSubmit(upload._id)} key={index}>
-                  {upload.name}
-                </button>
+                <div className="document-button">
+                  <Button
+                    style={{ padding: "0%" }}
+                    color="primary"
+                    onClick={() => handleSubmit(upload._id)}
+                    key={index}
+                    endIcon={<FileDownloadOutlinedIcon />}
+                  >
+                    {upload.name}
+                  </Button>
+                </div>
               );
             })}
         </div>
