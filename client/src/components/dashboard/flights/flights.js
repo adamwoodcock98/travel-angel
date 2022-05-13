@@ -198,7 +198,7 @@ const Flights = ({ session }) => {
   } else {
     return (
       <div className="empty-window">
-        <h1>Flights</h1>
+        <h1 className="very-big">Flights</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved flights</h3>
           <h2>Press + to get started</h2>
