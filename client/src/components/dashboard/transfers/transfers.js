@@ -167,16 +167,6 @@ const Transfers = ({ session }) => {
             </div>
           </div>
           <div>
-            <div id="fab-card-position">
-              <Fab
-                size="large"
-                color="secondary"
-                aria-label="add"
-                onClick={handleOpen}
-              >
-                <AddIcon />
-              </Fab>
-            </div>
             <AddTransfer
               open={open}
               handleOpen={handleOpen}
@@ -197,16 +187,6 @@ const Transfers = ({ session }) => {
             />
           </div>
         </div>
-      </>
-    );
-  } else {
-    return (
-      <div className="empty-window">
-        <h1 className="very-big">Transfers</h1>
-        <div className="empty-prompt">
-          <h3>Looks like you don't have any saved transfers</h3>
-          <h2>Press + to get started</h2>
-        </div>
         <div id="fab-card-position">
           <Fab
             size="large"
@@ -216,6 +196,16 @@ const Transfers = ({ session }) => {
           >
             <AddIcon />
           </Fab>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <div className="empty-window">
+        <h1 className="very-big">Transfers</h1>
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved transfers</h3>
+          <h2>Press + to get started</h2>
         </div>
         <AddTransfer
           open={open}
@@ -235,6 +225,16 @@ const Transfers = ({ session }) => {
           alertPosition={alertPosition}
           alertType={alertType}
         />
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       </div>
     );
   }

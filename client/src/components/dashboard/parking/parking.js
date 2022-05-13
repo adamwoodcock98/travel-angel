@@ -172,14 +172,6 @@ const Parking = ({ session }) => {
             {parking.length && parkingArray}
           </div>
           <div className="parking-footer">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab>
             <AddParking
               open={open}
               handleOpen={handleOpen}
@@ -198,6 +190,15 @@ const Parking = ({ session }) => {
             />
           </div>
         </div>
+        <div id="fab-card-position">
+            <Fab
+              size="large"
+              color="secondary"
+              aria-label="add"
+              onClick={handleOpen}
+            >
+              <AddIcon />
+            </Fab></div>
       </>
     )
   } else {
@@ -207,16 +208,6 @@ const Parking = ({ session }) => {
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
-        </div>
-        <div className="empty-button" id="fab-card-position">
-          <Fab
-            size="large"
-            color="secondary"
-            aria-label="add"
-            onClick={handleOpen}
-          >
-            <AddIcon />
-          </Fab>
         </div>
         <AddParking
           open={open}
@@ -234,6 +225,16 @@ const Parking = ({ session }) => {
           alertPosition={alertPosition}
           alertType={alertType}
         />
+         <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       </div>
     );
   }

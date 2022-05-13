@@ -149,15 +149,6 @@ const Covid = ({ session }) => {
             </div>
           </div>
           <div className="covid-footer">
-          <div id="fab-card-position">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab></div>
             <AddTest
               open={open}
               handleOpen={handleOpen}
@@ -169,6 +160,16 @@ const Covid = ({ session }) => {
               handleUpload={handleUpload}
             />
           </div>
+        </div>
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
         </div>
       </>
     );
@@ -197,16 +198,6 @@ const Covid = ({ session }) => {
                   <h2>Press + to get started</h2>
                 </div>
               )}
-              <div className="empty-prompt">
-                <Fab
-                  size="large"
-                  color="secondary"
-                  aria-label="add"
-                  onClick={handleOpen}
-                >
-                  <AddIcon />
-                </Fab>
-              </div>
             </div>
           </div>
           <div className="covid-footer"></div>
@@ -229,6 +220,16 @@ const Covid = ({ session }) => {
               alertType={alertType}
             />
           </div>
+        </div>
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
         </div>
       </>
     );
