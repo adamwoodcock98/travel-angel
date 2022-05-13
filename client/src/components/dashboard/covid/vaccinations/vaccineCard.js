@@ -5,7 +5,8 @@ import VaccinesOutlinedIcon from "@mui/icons-material/VaccinesOutlined";
 import AddVaccine from "./newVaccine";
 import DosePane from "./dosePane";
 import Upload from "../../../upload/upload";
-import "../../../assets/styling/cards.css"
+import "../../../assets/styling/cards.css";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 const VaccineCard = (props) => {
   const [open, setOpen] = useState(false);
@@ -57,7 +58,7 @@ const VaccineCard = (props) => {
       </div>
       <div className="vaccine-card-dose-content">
         <div className="vaccine-card-dose-title">
-          <p className="light-label" ></p>
+          <p className="light-label"></p>
         </div>
         <div className="vaccine-card-dose-pane">
           {vaccinationsData.vaccineDoses && dosesArray}
@@ -87,19 +88,36 @@ const VaccineCard = (props) => {
         <h4 className="light-label">Supporting documents</h4>
       </div>
       <div className="upload">
-        <Upload
-          cardId={vaccinationsData._id}
-          url="dashboard/covid"
-          handleUpload={handleUpload}
-        />
         <div className="uploads">
-          Download Your Documents
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+            className="documents"
+          >
+            <h4>Documents</h4>
+            <Upload
+              cardId={vaccinationsData._id}
+              url="dashboard/covid"
+              handleUpload={handleUpload}
+            />
+          </div>
+          <i>
+            Use this section to store any additional documents you may need for
+            your vaccinations
+          </i>
           {vaccinationsData.uploads.length &&
             vaccinationsData.uploads.map((upload, index) => {
               return (
-                <button onClick={() => handleSubmit(upload._id)} key={index}>
-                  {upload.name}
-                </button>
+                <div className="document-button">
+                  <Button
+                    style={{ padding: "0%" }}
+                    color="primary"
+                    onClick={() => handleSubmit(upload._id)}
+                    key={index}
+                    endIcon={<FileDownloadOutlinedIcon />}
+                  >
+                    {upload.name}
+                  </Button>
+                </div>
               );
             })}
         </div>

@@ -51,13 +51,13 @@
   
   opacity: 0.5;
   color: rgb(255, 255, 255);
-  background-color: #ac558954;
+  background-color: #ff35ae99;
   text-shadow: 0 0.1rem 0.7rem rgb(0, 0, 0);
 
   &:hover {
     opacity: 0.5;
     color: #fff;
-    background-color: #f22771;
+    background-color: #f22771CF;
     text-shadow: 0 0.1rem 0.7rem rgb(172, 172, 172);
   }
 
@@ -68,7 +68,7 @@
 
 .slides {
   display: grid;
-  > .slide {
+    .slide {
     grid-area: 1 / -1;
   }
 
@@ -82,12 +82,12 @@
     width: 5rem;
     height: 5rem;
     top: 30%;
-    transition: opacity 0.3s;
-    opacity: 0.5;
+    opacity: 1;
+    transition: 0.3s;
     z-index: 5;
 
     &:hover {
-      opacity: 1;
+      color: rgb(255, 119, 169);
     }
 
     &:focus {
@@ -110,7 +110,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   transition: transform 0.5s ease-in-out;
-  opacity: 0.7;
+  opacity: 0.3;
 
   display: grid;
   align-content: center;
@@ -127,7 +127,7 @@
   text-shadow: 0 0.1rem 1rem #000;
   opacity: 0;
   padding-left: 30px;
-  margin-top: -190px;
+  margin-top: -100px;
 
   .slideSubtitle,
   .slideTitle {
