@@ -3,40 +3,34 @@ import "./welcome.scss";
 import { Signup } from "../authentication/authentication";
 const slides = [
   {
-    title: "Travel Angel",
-    subtitle: "",
-    description: "Adventure is never far away",
-    image: "/slides/slide-2.jpg",
+    title: "Travel",
+    subtitle: "Angel",
+    description: "Your trip guardian",
+    image: "/slides/slide-3.png",
   },
   {
     title: "Store Your",
     subtitle: "Details",
     description: "In a safe & secure environment",
-    image: "/slides/slide-1.jpg",
+    image: "/slides/slide-4.png",
   },
   {
     title: "Find",
     subtitle: "Your Flight",
     description: "Without having to input the details manually",
-    image: "/slides/slide-6.jpg",
+    image: "/slides/slide-1.png",
   },
   {
     title: "Upload &",
     subtitle: "Download",
     description: "Your documents, plane tickets and booking confirmations",
-    image: "/slides/slide-4.jpg",
-  },
-  {
-    title: "View Your",
-    subtitle: "Trips",
-    description: "Whether it is upcoming, in progress or a thing in a past.",
-    image: "/slides/slide-5.jpg",
+    image: "/slides/slide-5.png",
   },
   {
     title: "Plan Your",
     subtitle: "Holidays",
     description: "Have everything you need in one place",
-    image: "/slides/slide-3.jpg",
+    image: "/slides/slide-2.png",
   },
 ];
 
