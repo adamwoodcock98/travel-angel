@@ -9,20 +9,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Alerts } from "../../assets/snackbar";
 import moment from "moment";
-import "../../assets/styling/cards.css"
+import "../../assets/styling/cards.css";
 import "../dashboard.css";
 
 const AddAccommodation = (props) => {
-
   const formatDate = (date) => moment(date).format("yyyy-MM-DD");
 
   const userId = props.userId;
   const tripId = props.tripId;
   const accommodationData = props.accommodationData;
-  console.log(accommodationData.name)
+  console.log(accommodationData.name);
   const accommodationId = props.accommodationId;
   const open = props.open;
   const handleClose = props.handleClose;
+  const handleUpload = props.handleUpload;
   const [openAddress, setOpenAddress] = useState(false);
   const [emptyFields, setEmptyFields] = useState([]);
   const [accommodation, setAccommodation] = useState({
@@ -42,7 +42,7 @@ const AddAccommodation = (props) => {
     stateCounty: accommodationData.address.stateCounty,
     countryCode: accommodationData.address.countryCode,
     user: userId,
-    trip: tripId, 
+    trip: tripId,
   });
 
   const [alertOpen, setAlertOpen] = useState(false);
@@ -64,8 +64,8 @@ const AddAccommodation = (props) => {
   };
 
   const handleExpand = () => {
-    setOpenAddress(true)
-  }
+    setOpenAddress(true);
+  };
 
   const handleContract = () => {
     setAccommodation({
@@ -85,10 +85,9 @@ const AddAccommodation = (props) => {
       stateCounty: "",
       countryCode: "",
       user: userId,
-    })
-    setOpenAddress(false)
-  }
-  
+    });
+    setOpenAddress(false);
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -103,9 +102,9 @@ const AddAccommodation = (props) => {
 
     let url;
     if (accommodationId) {
-      url = `http://localhost:8000/dashboard/accommodation/edit/${accommodationId}`
+      url = `http://localhost:8000/dashboard/accommodation/edit/${accommodationId}`;
     } else {
-      url = `http://localhost:8000/dashboard/accommodation`
+      url = `http://localhost:8000/dashboard/accommodation`;
     }
 
     const {
@@ -118,7 +117,7 @@ const AddAccommodation = (props) => {
       bookingReference,
       buildingNumber,
       buildingName,
-      addressLine1, 
+      addressLine1,
       addressLine2,
       city,
       postalCode,
@@ -146,9 +145,25 @@ const AddAccommodation = (props) => {
       trip: tripId,
     };
 
-    if (name === "" || contactNumber === "" || checkInDate === "" || checkOutDate === "" || checkInTime === "" || checkOutTime === "" || bookingReference === "") {
-      setEmptyFields(['name', 'contactNumber', 'checkInDateInput', 'checkOutDateInput', 'checkInTimeInput', 'checkOutTimeInput', 'bookingReference'])
-      return
+    if (
+      name === "" ||
+      contactNumber === "" ||
+      checkInDate === "" ||
+      checkOutDate === "" ||
+      checkInTime === "" ||
+      checkOutTime === "" ||
+      bookingReference === ""
+    ) {
+      setEmptyFields([
+        "name",
+        "contactNumber",
+        "checkInDateInput",
+        "checkOutDateInput",
+        "checkInTimeInput",
+        "checkOutTimeInput",
+        "bookingReference",
+      ]);
+      return;
     }
 
     await axios
@@ -174,17 +189,21 @@ const AddAccommodation = (props) => {
           user: userId,
         });
         handleClose();
+        handleUpload();
       })
       .catch((err) => {
         console.log(err.message);
-        handleAlert("Whoops! We couldn't add your accommodation, please try again.", "error");
+        handleAlert(
+          "Whoops! We couldn't add your accommodation, please try again.",
+          "error"
+        );
       });
   };
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle color="primary" >Add an accommodation</DialogTitle>
+        <DialogTitle color="primary">Add an accommodation</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Use this form to store the details of your accommodation.
@@ -200,7 +219,10 @@ const AddAccommodation = (props) => {
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('name') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{
+              border: emptyFields.includes("name") ? "1px solid red" : "",
+              borderRadius: "5px",
+            }}
             onChange={handleChange}
           />
           <TextField
@@ -214,7 +236,13 @@ const AddAccommodation = (props) => {
             type="number"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('contactNumber') ? '1px solid red' : '' , borderRadius: "5px", m: 1 }}
+            sx={{
+              border: emptyFields.includes("contactNumber")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+              m: 1,
+            }}
             onChange={handleChange}
           />
           <TextField
@@ -229,30 +257,43 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('checkInDateInput') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195 }}
+            sx={{
+              border: emptyFields.includes("checkInDateInput")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+              minWidth: 195,
+            }}
             InputLabelProps={{
               shrink: true,
             }}
             onChange={handleChange}
           />
-            <TextField
-              value={accommodation.checkInTime}
-              inputProps={{ "data-testid": "checkInTimeInput" }}
-              data-testid="checkInTime"
-              autoFocus
-              margin="dense"
-              id="checkInTime"
-              name="checkInTime"
-              label="Check-in time"
-              type="time"
-              variant="outlined"
-              required
-              sx={{border: emptyFields.includes('checkInTimeInput') ? '1px solid red' : '' , borderRadius: "5px", m: 1, minWidth: 195 }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={handleChange}
-            />
+          <TextField
+            value={accommodation.checkInTime}
+            inputProps={{ "data-testid": "checkInTimeInput" }}
+            data-testid="checkInTime"
+            autoFocus
+            margin="dense"
+            id="checkInTime"
+            name="checkInTime"
+            label="Check-in time"
+            type="time"
+            variant="outlined"
+            required
+            sx={{
+              border: emptyFields.includes("checkInTimeInput")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+              m: 1,
+              minWidth: 195,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={handleChange}
+          />
           <TextField
             value={formatDate(accommodation.checkOutDate)}
             inputProps={{ "data-testid": "checkOutDateInput" }}
@@ -265,7 +306,13 @@ const AddAccommodation = (props) => {
             type="date"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('checkOutDateInput') ? '1px solid red' : '' , borderRadius: "5px", minWidth: 195 }}
+            sx={{
+              border: emptyFields.includes("checkOutDateInput")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+              minWidth: 195,
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -283,7 +330,14 @@ const AddAccommodation = (props) => {
             type="time"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('checkOutTimeInput') ? '1px solid red' : '' , borderRadius: "5px", m: 1, minWidth: 195 }}
+            sx={{
+              border: emptyFields.includes("checkOutTimeInput")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+              m: 1,
+              minWidth: 195,
+            }}
             InputLabelProps={{
               shrink: true,
             }}
@@ -300,10 +354,15 @@ const AddAccommodation = (props) => {
             type="text"
             variant="outlined"
             required
-            sx={{border: emptyFields.includes('bookingReference') ? '1px solid red' : '' , borderRadius: "5px" }}
+            sx={{
+              border: emptyFields.includes("bookingReference")
+                ? "1px solid red"
+                : "",
+              borderRadius: "5px",
+            }}
             onChange={handleChange}
           />
-          <div style={{display: openAddress ? "" : "none"}} >
+          <div style={{ display: openAddress ? "" : "none" }}>
             <TextField
               value={accommodation.buildingNumber}
               inputProps={{ "data-testid": "buildingNumber" }}
@@ -327,7 +386,7 @@ const AddAccommodation = (props) => {
               type="text"
               variant="outlined"
               onChange={handleChange}
-              sx={{m: 1}}
+              sx={{ m: 1 }}
             />
             <TextField
               value={accommodation.addressLine1}
@@ -352,7 +411,7 @@ const AddAccommodation = (props) => {
               label="Address Line 2"
               type="text"
               variant="outlined"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               onChange={handleChange}
             />
             <TextField
@@ -376,7 +435,7 @@ const AddAccommodation = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handleChange}
@@ -402,23 +461,53 @@ const AddAccommodation = (props) => {
               id="countryCode"
               name="countryCode"
               label="Country"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handleChange}
             />
           </div>
-          <p className={"text-link"} onClick={handleExpand} style={{display: openAddress ? "none" : ""}}>+ add address</p>
-          <p className={"text-link"} onClick={handleContract} style={{display: openAddress ? "" : "none"}} >- remove address</p>
+          <p
+            className={"text-link"}
+            onClick={handleExpand}
+            style={{ display: openAddress ? "none" : "" }}
+          >
+            + add address
+          </p>
+          <p
+            className={"text-link"}
+            onClick={handleContract}
+            style={{ display: openAddress ? "" : "none" }}
+          >
+            - remove address
+          </p>
         </DialogContent>
         <DialogActions>
-        <Button id="default-cancel-button" onClick={handleClose}>Cancel</Button>
-          {!accommodationId && <Button id="save-details-button" onClick={handleSubmit} variant="outlined" sx={{color: "primary"}} data-testid="saveAccommodationDetails">
-            Save
-          </Button>}
-          {accommodationId && <Button id="save-details-button" onClick={handleSubmit} variant="outlined" sx={{color: "primary"}} data-testid="saveAccommodationDetails">
-            Update
-          </Button>}
+          <Button id="default-cancel-button" onClick={handleClose}>
+            Cancel
+          </Button>
+          {!accommodationId && (
+            <Button
+              id="save-details-button"
+              onClick={handleSubmit}
+              variant="outlined"
+              sx={{ color: "primary" }}
+              data-testid="saveAccommodationDetails"
+            >
+              Save
+            </Button>
+          )}
+          {accommodationId && (
+            <Button
+              id="save-details-button"
+              onClick={handleSubmit}
+              variant="outlined"
+              sx={{ color: "primary" }}
+              data-testid="saveAccommodationDetails"
+            >
+              Update
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
       <Alerts
@@ -430,6 +519,6 @@ const AddAccommodation = (props) => {
       />
     </div>
   );
-}
+};
 
 export default AddAccommodation;
