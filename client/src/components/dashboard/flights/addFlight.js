@@ -158,6 +158,8 @@ const AddFlight = ({
       missing
     );
 
+    console.log(emptyFields)
+
     axios
       .post(url, newFlight)
       .then((res) => {
