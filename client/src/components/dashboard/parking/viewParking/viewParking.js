@@ -101,7 +101,8 @@ const ParkingCard = (props) => {
         </div>
         <div className="upload">
           <div className="uploads">
-            <div style={{ display: "flex", alignItems: "center" }} className="documents">
+            <div style={{ display: "flex", alignItems: "center" }}className="documents"
+            >
               <h4>Documents</h4>
               <Upload
                 cardId={parkingData._id}

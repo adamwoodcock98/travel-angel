@@ -22,6 +22,7 @@ const AddTransfer = (props) => {
   const transferId = props.transferId;
   const open = props.open;
   const handleOpen = props.handleOpen;
+  const handleUpload = props.handleUpload;
   const handleClose = props.handleClose;
   const transferData = props.transferData;
   const [emptyFields, setEmptyFields] = useState([]);
@@ -65,6 +66,8 @@ const AddTransfer = (props) => {
     vertical: "top",
     horizontal: "center",
   };
+
+  const formatDateTime = (date) => moment(date).format("yyyy-MM-DDThh:mm:ss");
 
   const handleAlert = (message, type) => {
     setAlertOpen(true);
@@ -249,8 +252,8 @@ const AddTransfer = (props) => {
     axios
       .post(url, newTransfer)
       .then(() => {
-        handleAlert("Transfer added successfully", "success")
-        handleClose()
+        handleAlert("Transfer added successfully", "success");
+        handleClose();
         setTransfer({
           pickupTime: "",
           dropoffTime: "",
@@ -282,8 +285,10 @@ const AddTransfer = (props) => {
           trip: tripId,
         });
         handleClose();
+        handleUpload();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err.message);
         handleAlert(
           "Whoops! We couldn't add your transfer, please try again.",
           "error"
@@ -369,7 +374,7 @@ const AddTransfer = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={transfer.pickupTime}
+            value={formatDateTime(transfer.pickupTime)}
             autoFocus
             margin="dense"
             id="pickupTime"
@@ -390,7 +395,7 @@ const AddTransfer = (props) => {
           />
 
           <TextField
-            value={transfer.dropoffTime}
+            value={formatDateTime(transfer.dropoffTime)}
             autoFocus
             margin="dense"
             id="dropoffTime"
@@ -413,7 +418,9 @@ const AddTransfer = (props) => {
             onChange={handleChange}
           />
           <div style={{ display: openPickup ? "" : "none" }}>
-            <DialogContentText color="secondary">Pickup Address</DialogContentText>
+            <DialogContentText color="secondary">
+              Pickup Address
+            </DialogContentText>
             <TextField
               value={transfer.pickupAddress.buildingNumber}
               autoFocus
@@ -434,7 +441,7 @@ const AddTransfer = (props) => {
               label="Building Name"
               type="text"
               variant="outlined"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               onChange={handlePickupChange}
             />
             <TextField
@@ -461,7 +468,7 @@ const AddTransfer = (props) => {
               margin="dense"
               id="addressLine2"
               name="addressLine2"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               label="Address Line 2"
               type="text"
               variant="outlined"
@@ -492,7 +499,7 @@ const AddTransfer = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handlePickupChange}
@@ -522,7 +529,7 @@ const AddTransfer = (props) => {
               id="countryCode"
               name="countryCode"
               label="Country"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handlePickupChange}
@@ -535,7 +542,7 @@ const AddTransfer = (props) => {
           >
             + add pickup address
           </p>
-          
+
           <p
             className={"text-link"}
             onClick={handlePickupContract}
@@ -543,9 +550,11 @@ const AddTransfer = (props) => {
           >
             - remove pickup address
           </p>
-            <DialogContent />
+          <DialogContent />
           <div style={{ display: openDropoff ? "" : "none" }}>
-            <DialogContentText color="primary">Dropoff Address</DialogContentText>
+            <DialogContentText color="primary">
+              Dropoff Address
+            </DialogContentText>
             <TextField
               value={transfer.dropoffAddress.buildingNumber}
               autoFocus
@@ -564,7 +573,7 @@ const AddTransfer = (props) => {
               id="buildingName"
               name="buildingName"
               label="Building Name"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handleDropoffChange}
@@ -594,7 +603,7 @@ const AddTransfer = (props) => {
               id="addressLine2"
               name="addressLine2"
               label="Address Line 2"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handleDropoffChange}
@@ -624,7 +633,7 @@ const AddTransfer = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handleDropoffChange}
@@ -655,7 +664,7 @@ const AddTransfer = (props) => {
               name="countryCode"
               label="Country"
               type="text"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               variant="outlined"
               onChange={handleDropoffChange}
             />
@@ -679,12 +688,24 @@ const AddTransfer = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          {transferId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
-            Update
-          </Button>}
-          {!transferId && <Button id="save-details-button" variant="outlined" onClick={handleSubmit}>
-            Save
-          </Button>}
+          {transferId && (
+            <Button
+              id="save-details-button"
+              variant="outlined"
+              onClick={handleSubmit}
+            >
+              Update
+            </Button>
+          )}
+          {!transferId && (
+            <Button
+              id="save-details-button"
+              variant="outlined"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
       <Alerts

@@ -22,6 +22,7 @@ const AddParking = (props) => {
   const handleClose = props.handleClose;
   const parkingData = props.parkingData;
   const parkingId = props.parkingId;
+  const handleUpload = props.handleUpload;
   const [openAddress, setOpenAddress] = useState(false);
   const [emptyFields, setEmptyFields] = useState([]);
   const [parking, setParking] = useState({
@@ -174,6 +175,7 @@ const AddParking = (props) => {
       .then((res) => {
         handleAlert("Parking added successfully.", "success");
         handleClose();
+        handleUpload();
         setParking({
           startDate: "",
           endDate: "",
@@ -213,7 +215,7 @@ const AddParking = (props) => {
             Use this form to store your parking information
           </DialogContentText>
           <TextField
-            value={parking.startDate}
+            value={formatDateTime(parking.startDate)}
             autoFocus
             margin="dense"
             id="startDate"
@@ -233,7 +235,7 @@ const AddParking = (props) => {
             onChange={handleChange}
           />
           <TextField
-            value={parking.endDate}
+            value={formatDateTime(parking.endDate)}
             autoFocus
             margin="dense"
             id="endDate"
@@ -272,7 +274,7 @@ const AddParking = (props) => {
             name="type"
             label="Car Park Type"
             type="text"
-            sx={{m: 1}}
+            sx={{ m: 1 }}
             variant="outlined"
             onChange={handleChange}
           />
@@ -294,7 +296,7 @@ const AddParking = (props) => {
             id="company"
             name="company"
             label="Company"
-            sx={{m: 1}}
+            sx={{ m: 1 }}
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -317,7 +319,7 @@ const AddParking = (props) => {
             id="bookingReference"
             name="bookingReference"
             label="Booking Reference"
-            sx={{m: 1}}
+            sx={{ m: 1 }}
             type="text"
             variant="outlined"
             onChange={handleChange}
@@ -353,7 +355,7 @@ const AddParking = (props) => {
               margin="dense"
               id="buildingName"
               name="buildingName"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               label="Building Name"
               type="text"
               variant="outlined"
@@ -385,7 +387,7 @@ const AddParking = (props) => {
               margin="dense"
               id="addressLine2"
               name="addressLine2"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               label="Address Line 2"
               type="text"
               variant="outlined"
@@ -416,7 +418,7 @@ const AddParking = (props) => {
               id="stateCounty"
               name="stateCounty"
               label="State/Province"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               type="text"
               variant="outlined"
               onChange={handleChange}
@@ -447,7 +449,7 @@ const AddParking = (props) => {
               margin="dense"
               id="countryCode"
               name="countryCode"
-              sx={{m: 1}}
+              sx={{ m: 1 }}
               label="Country"
               type="text"
               variant="outlined"
@@ -473,12 +475,24 @@ const AddParking = (props) => {
           <Button id="default-cancel-button" onClick={handleClose}>
             Cancel
           </Button>
-          {!parkingId && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
-            Save
-          </Button>}
-          {parkingId && <Button id="save-details-button" variant="outlined" onClick={onSubmit}>
-            Update
-          </Button>}
+          {!parkingId && (
+            <Button
+              id="save-details-button"
+              variant="outlined"
+              onClick={onSubmit}
+            >
+              Save
+            </Button>
+          )}
+          {parkingId && (
+            <Button
+              id="save-details-button"
+              variant="outlined"
+              onClick={onSubmit}
+            >
+              Update
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
       <Alerts

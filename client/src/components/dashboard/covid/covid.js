@@ -179,6 +179,16 @@ const Covid = ({ session }) => {
             />
           </div>
         </div>
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       </>
     );
   } else if (didLoad) {
@@ -206,16 +216,6 @@ const Covid = ({ session }) => {
                   <h2>Press + to get started</h2>
                 </div>
               )}
-              <div className="empty-prompt">
-                <Fab
-                  size="large"
-                  color="secondary"
-                  aria-label="add"
-                  onClick={handleOpen}
-                >
-                  <AddIcon />
-                </Fab>
-              </div>
             </div>
           </div>
           <div className="covid-footer"></div>
@@ -238,6 +238,16 @@ const Covid = ({ session }) => {
               alertType={alertType}
             />
           </div>
+        </div>
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
         </div>
       </>
     );

@@ -187,6 +187,7 @@ const Transfers = ({ session }) => {
               tripId={tripId}
               transferId={null}
               emptyFields={emptyFields}
+              handleUpload={handleUpload}
             />
             <Alerts
               message={alertMessage}
@@ -196,16 +197,6 @@ const Transfers = ({ session }) => {
               alertType={alertType}
             />
           </div>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <div className="empty-window">
-        <h1 className="very-big">Transfers</h1>
-        <div className="empty-prompt">
-          <h3>Looks like you don't have any saved transfers</h3>
-          <h2>Press + to get started</h2>
         </div>
         <div id="fab-card-position">
           <Fab
@@ -217,6 +208,16 @@ const Transfers = ({ session }) => {
             <AddIcon />
           </Fab>
         </div>
+      </>
+    );
+  } else {
+    return (
+      <div className="empty-window">
+        <h1 className="very-big">Transfers</h1>
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved transfers</h3>
+          <h2>Press + to get started</h2>
+        </div>
         <AddTransfer
           open={open}
           handleOpen={handleOpen}
@@ -226,6 +227,7 @@ const Transfers = ({ session }) => {
           tripId={tripId}
           transferId={null}
           emptyFields={emptyFields}
+          handleUpload={handleUpload}
         />
         <Alerts
           message={alertMessage}
@@ -234,6 +236,16 @@ const Transfers = ({ session }) => {
           alertPosition={alertPosition}
           alertType={alertType}
         />
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       </div>
     );
   }

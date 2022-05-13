@@ -124,14 +124,14 @@ const Visas = ({ session }) => {
 
           <div>
             <div id="fab-card-position">
-            <Fab
-              size="large"
-              color="secondary"
-              aria-label="add"
-              onClick={handleOpen}
-            >
-              <AddIcon />
-            </Fab>
+              <Fab
+                size="large"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+              >
+                <AddIcon />
+              </Fab>
             </div>
             <AddVisa
               open={open}
@@ -141,8 +141,19 @@ const Visas = ({ session }) => {
               userId={userId}
               tripId={tripId}
               visaId={null}
+              handleUpload={handleUpload}
             />
           </div>
+        </div>
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
         </div>
       </>
     );
@@ -155,16 +166,6 @@ const Visas = ({ session }) => {
           <h3>Looks like you don't have any saved parking</h3>
           <h2>Press + to get started</h2>
         </div>
-        <div className="empty-button" id="fab-card-position">
-          <Fab
-            size="large"
-            color="secondary"
-            aria-label="add"
-            onClick={handleOpen}
-          >
-            <AddIcon />
-          </Fab>
-        </div>
         <AddVisa
           open={open}
           handleOpen={handleOpen}
@@ -174,6 +175,7 @@ const Visas = ({ session }) => {
           userId={userId}
           tripId={tripId}
           visaId={null}
+          handleUpload={handleUpload}
         />
         <Alerts
           message={alertMessage}
@@ -182,6 +184,16 @@ const Visas = ({ session }) => {
           alertPosition={alertPosition}
           alertType={alertType}
         />
+        <div id="fab-card-position">
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
+            <AddIcon />
+          </Fab>
+        </div>
       </div>
     );
   }
