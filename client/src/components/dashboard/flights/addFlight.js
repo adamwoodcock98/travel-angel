@@ -154,9 +154,9 @@ const AddFlight = ({
       field === "" && missing.push(Object.keys(field)[0]);
     });
 
-    setEmptyFields([
+    setEmptyFields(
       missing
-    ])
+    );
 
     axios
       .post(url, newFlight)

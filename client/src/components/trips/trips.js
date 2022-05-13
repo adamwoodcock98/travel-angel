@@ -24,6 +24,7 @@ const Trips = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [loadingFailed, setLoadingFailed] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [didUpdate, setDidUpdate] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("success");
   const alertPosition = {
@@ -62,7 +63,7 @@ const Trips = ({ session }) => {
       .finally(() => setLoading(false));;
     } else {
     }
-  }, [trip]);
+  }, [didUpdate]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -70,6 +71,7 @@ const Trips = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   const handleChange = (e) => {
@@ -168,7 +170,12 @@ const Trips = ({ session }) => {
           </div>
         </div>
       )}
-      {!tripArray.length && <h2>Nothing here. Add your trip now!</h2>}
+      {!tripArray.length &&
+      <div className="empty-prompt">
+        <h3>Looks like you don't have any saved flights</h3>
+        <h2>Press + to get started</h2>
+      </div>
+      }
       <Alerts
         message={alertMessage}
         open={alertOpen}

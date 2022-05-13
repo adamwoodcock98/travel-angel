@@ -28,9 +28,10 @@ app.use(bodyParser.json({ limit: "5mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 app.use(cookieParser());
 
+const local = "mongodb://127.0.0.1/travel-angel"
 const uri = process.env.ATLAS_URI;
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(local, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("DB connected");
   })
