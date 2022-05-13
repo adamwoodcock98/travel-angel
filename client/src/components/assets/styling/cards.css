@@ -79,6 +79,10 @@ h1 {
   color: rgb(74, 74, 74);
 }
 
+.grey{
+  color: rgb(74, 74, 74) !important;
+}
+
 /* Title cards */
 h2 {
   margin: 0;

@@ -26,9 +26,7 @@ export default function VisaCard({
         return (
           <div className="card" key={index}>
             <div className="header">
-              <div className="title">
                 <h3>Your entry visa to</h3>
-              </div>
               <div className="crud-menu">
                 <CrudMenu
                   visaData={visa}
@@ -95,8 +93,6 @@ export default function VisaCard({
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
         );
       })}
     </div>
