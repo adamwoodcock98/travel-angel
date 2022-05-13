@@ -158,7 +158,7 @@ const Flights = ({ session }) => {
           style={{ display: loading ? "none" : "" }}
         >
           <div className="flights-header">
-            <h1>Flights</h1>
+            <h1 className="very-big">Flights</h1>
           </div>
           <div className="flights-content">
             <div className="flights-content-outbound">
