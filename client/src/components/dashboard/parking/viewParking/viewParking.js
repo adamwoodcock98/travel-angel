@@ -124,7 +124,7 @@ const ParkingCard = (props) => {
               Use this section to store any additional documents you may need
               for your flights
             </i>
-            {parkingData.uploads.length &&
+            {parkingData.uploads.length > 0 &&
               parkingData.uploads.map((upload, index) => {
                 return (
                   <div className="document-button">

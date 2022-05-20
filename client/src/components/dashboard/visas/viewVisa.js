@@ -87,7 +87,7 @@ export default function VisaCard({
                       Use this section to store any additional documents you may
                       need for your flights
                     </i>
-                    {visa.uploads.length &&
+                    {visa.uploads.length > 0 &&
                       visa.uploads.map((upload, index) => {
                         return (
                           <div className="document-button">

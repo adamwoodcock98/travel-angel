@@ -140,7 +140,7 @@ export const OutboundTransferCard = (props) => {
                     Use this section to store any additional documents you may
                     need for your flights
                   </i>
-                  {outboundTransfer.uploads.length &&
+                  {outboundTransfer.uploads.length > 0 &&
                     outboundTransfer.uploads.map((upload, index) => {
                       return (
                         <div className="document-button">

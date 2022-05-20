@@ -87,7 +87,7 @@ export const FlightCard = (props) => {
             Use this section to store any additional documents you may need for
             your flights
           </i>
-          {flightData.uploads.length &&
+          {flightData.uploads.length > 0 &&
             flightData.uploads.map((upload, index) => {
               return (
                 <div className="document-button">
