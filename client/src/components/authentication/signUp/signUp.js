@@ -67,6 +67,7 @@ export default function SignUp({
             onChange={handleChange}
           />
           <TextField
+            value={user.password}
             autoFocus
             margin="dense"
             id="password"

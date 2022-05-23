@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import "./welcome.scss";
 import { Signup } from "../authentication/authentication";
+import axios from 'axios'
 const slides = [
   {
     title: "Travel",
@@ -134,6 +135,40 @@ function Slide({ slide, offset }) {
 
 export const Welcome = (handleClick) => {
   const [state, dispatch] = React.useReducer(slidesReducer, initialState);
+  const url = "http://localhost:8000";
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUser({
+      ...user,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { firstName, lastName, email, password } = user;
+    const newUser = { firstName, lastName, email, password };
+
+    await axios.post(`${url}/user/sign-up`, newUser).then((res) => {
+      handleClose();
+    });
+  };
   return (
     <div id="welcome-container">
       <div id="welcome-slide-show">
@@ -159,7 +194,14 @@ export const Welcome = (handleClick) => {
       </div>
       <div id="get-started">
         <button id="get-started-btn">
-          <Signup />
+          <Signup 
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          handleChange={handleChange}
+          user={user}
+          handleSubmit={handleSubmit}
+          />
         </button>
       </div>
     </div>
