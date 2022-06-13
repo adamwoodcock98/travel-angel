@@ -198,7 +198,7 @@ export const ViewAccommodation = ({ session }) => {
         <h2>Press  +  to get started</h2>
         </div>
         <div className="empty-button" id="fab-card-position">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <Fab size="large" type='button' name='add' color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
         </div>

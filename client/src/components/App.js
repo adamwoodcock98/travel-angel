@@ -3,7 +3,7 @@ import NavBar from "./navBar/navBar";
 import VerticalTabs from "./dashboard/dashboard";
 import Trips from "./trips/trips";
 import { Welcome } from "./welcome/welcome";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 const App = () => {
@@ -32,19 +32,19 @@ const App = () => {
     },
     palette: {
       primary: {
-        main: '#f22771',
+        main: "#f22771",
       },
       secondary: {
-        main: 'rgb(255, 0, 93)',
+        main: "rgb(255, 0, 93)",
       },
       error: {
-        main: '#FF3434',
+        main: "#FF3434",
       },
       warning: {
-        main: '#eba0ae',
+        main: "#eba0ae",
       },
       success: {
-        main: '#64baaa',
+        main: "#64baaa",
       },
     },
   });
@@ -56,7 +56,10 @@ const App = () => {
           <NavBar handleLogOut={handleLogOut} session={session} />
           <Routes>
             <Route path="/" element={<Trips session={session} />} />
-            <Route path="/:tripId" element={<VerticalTabs session={session} />} />
+            <Route
+              path="/:tripId"
+              element={<VerticalTabs session={session} />}
+            />
           </Routes>
         </Router>
       </ThemeProvider>
