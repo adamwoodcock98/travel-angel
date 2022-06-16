@@ -25,50 +25,44 @@ const ParkingCard = (props) => {
   return (
     <div className="card-container">
       <div className="card">
+        
         <div className="header">
           <div className="title">
             <h1>
               Your booking
-              {parkingData.bookingReference &&
-                `: ${parkingData.bookingReference}`}
+              {parkingData.bookingReference && `: ${parkingData.bookingReference}`}
             </h1>
-          </div>
+            </div>
           <div className="crud-menu">
-            <CrudMenu
-              userId={userId}
-              parkingData={parkingData}
-              tripId={tripId}
-              refresh={refresh}
-              handleUpload={handleUpload}
-            />
-          </div>
+          <CrudMenu userId={userId} parkingData={parkingData} tripId={tripId} refresh={refresh} />
+        </div>
         </div>
         <div className="body">
           <div className="subbody-left">
             <div className="start-date-header">
-              <p>From</p>
+              <p className="light-label">From</p>
             </div>
             <div className="start-date-body">
-              <h3>
-                {parkingData.startDate && formatDate(parkingData.startDate)}
-              </h3>
-              <h3>
-                {parkingData.startDate && formatTime(parkingData.startDate)}
-              </h3>
+              <h3>{parkingData.startDate && formatDate(parkingData.startDate)}</h3>
+              <h3 className="fuschia">{parkingData.startDate && formatTime(parkingData.startDate)}</h3>
             </div>
           </div>
           <div className="subbody-right">
             <div className="end-date-header">
-              <p>Until</p>
+              <p className="light-label">Until</p>
             </div>
             <div className="end-date-body">
               <h3>{parkingData.endDate && formatDate(parkingData.endDate)}</h3>
-              <h3>{parkingData.endDate && formatTime(parkingData.endDate)}</h3>
+              <h3 className="fuschia">{parkingData.endDate && formatTime(parkingData.endDate)}</h3>
             </div>
           </div>
         </div>
 
         <div className="contact-content-body">
+          <div className="parking-card-vehicle-content">
+            <p className="light-label">For your vehicle</p>
+            <h3>{parkingData.regPlate}</h3>
+          </div>
           <div className="contact-content-airport">
             <h2>{parkingData.airport}</h2>
           </div>
@@ -85,22 +79,20 @@ const ParkingCard = (props) => {
               {parkingData.address.postalCode}
             </p>
           </div>
-          <div className="directions">
+
+          <div className="contact-content-number">
+            <p className="light-label">Tel:</p> <h4>{parkingData.contactNumber}</h4>
+          </div>
+          <div className="directions" >
             <Button
               color="secondary"
               startIcon={<DirectionsOutlinedIcon />}
               target="_blank"
+              variant="outlined"
               href={props.handleDirections(parkingData.address)}
             >
               Get Directions
             </Button>
-          </div>
-
-          <div className="contact-content-number">
-            <h4>Tel: {parkingData.contactNumber}</h4>
-          </div>
-          <div className="parking-card-vehicle-content">
-            <h2>For your vehicle: {parkingData.regPlate}</h2>
           </div>
         </div>
         <div className="footer">
@@ -109,9 +101,7 @@ const ParkingCard = (props) => {
         </div>
         <div className="upload">
           <div className="uploads">
-            <div
-              style={{ display: "flex", alignItems: "center" }}
-              className="documents"
+            <div style={{ display: "flex", alignItems: "center" }}className="documents"
             >
               <h4>Documents</h4>
               <Upload

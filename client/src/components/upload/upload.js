@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { styled } from "@mui/material/styles";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 function Upload({ cardId, url, handleUpload }) {
   const [selectedFile, setSelectedFile] = useState();
@@ -49,7 +50,7 @@ function Upload({ cardId, url, handleUpload }) {
             onChange={changeHandler}
           />
           <IconButton variant="outlined" color="primary" component="span">
-            <UploadFileIcon />
+            <AddOutlinedIcon color="primary" />
           </IconButton>
         </div>
         <div style={{ display: selectedFile ? "" : "none" }}>
@@ -58,7 +59,7 @@ function Upload({ cardId, url, handleUpload }) {
             color="primary"
             onClick={handleSubmission}
           >
-            <SaveOutlinedIcon />
+            <SaveOutlinedIcon color="primary" />
           </IconButton>
         </div>
       </label>

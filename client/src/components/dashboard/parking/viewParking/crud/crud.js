@@ -118,10 +118,6 @@ const CrudMenu = (props) => {
           <EditOutlinedIcon />
           Edit
         </MenuItem>
-        <MenuItem onClick={handleCrudClose} disableRipple>
-          <FileDownloadOutlinedIcon />
-          Add to calendar
-        </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem
           onClick={handleDeletePromptOpen}
