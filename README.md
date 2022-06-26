@@ -44,6 +44,11 @@ Travel Angel is a MERN-stack web application used to safely and securely store t
 - [Passport Design](https://www.theguardian.com/uk-news/gallery/2015/nov/03/new-uk-passport-design-in-pictures)
 - Icons - [Angel Heart](https://www.flaticon.com/free-icon/angel_3314947?term=heart%20angel&page=1&position=29&page=1&position=29&related_id=3314947&origin=search), [Wings](https://www.flaticon.com/premium-icon/wings_2108883)
 
+## Video Demo
+For a short demonstration of all the features Travel Angel has to offer, please watch the following video.
+
+https://user-images.githubusercontent.com/74867241/173875311-b4b9a325-6b21-4ad4-8120-6fae4f81a445.mp4
+
 ## Team Approach
 
 **Section on general approach**
@@ -127,13 +132,6 @@ npm test:integration # Integration tests of end-to-end functionality
 ```
 
 Alternatively all three of the above commands (Linting, Unit, and Integration tests) can be chained by running `npm run test`
-
-### Accessing the Producution Environment
-
-Travel Angel is deployed on Heroku using a Mongo Atlas database, and the front-end of this can be accessed [here](https://travel-angel.herokuapp.com).
-The database and server-side will not be made available.
-
-https://user-images.githubusercontent.com/74867241/173875311-b4b9a325-6b21-4ad4-8120-6fae4f81a445.mp4
 
 
 # Appendix
