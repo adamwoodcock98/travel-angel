@@ -49,7 +49,7 @@ const App = () => {
     },
   });
 
-  if (session !== "null") {
+  if (session !== "null" && session !== null) {
     return (
       <ThemeProvider theme={theme}>
         <Router>
