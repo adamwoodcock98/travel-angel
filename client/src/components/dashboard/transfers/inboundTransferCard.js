@@ -133,7 +133,7 @@ export const InboundTransferCard = (props) => {
                     Use this section to store any additional documents you may
                     need for your flights
                   </i>
-                  {inboundTransfer.uploads.length &&
+                  {inboundTransfer.uploads.length > 0 &&
                     inboundTransfer.uploads.map((upload, index) => {
                       return (
                         <div className="document-button">

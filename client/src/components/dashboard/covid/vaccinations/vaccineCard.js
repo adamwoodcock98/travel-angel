@@ -104,7 +104,7 @@ const VaccineCard = (props) => {
             Use this section to store any additional documents you may need for
             your vaccinations
           </i>
-          {vaccinationsData.uploads.length &&
+          {vaccinationsData.uploads.length > 0 &&
             vaccinationsData.uploads.map((upload, index) => {
               return (
                 <div className="document-button">

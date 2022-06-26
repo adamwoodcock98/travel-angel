@@ -14,23 +14,23 @@
   flex-direction: row;
 }
 
-  .flights-content-outbound {
-    flex: 1;
-    border-right: solid;
-    border-color: lightgrey;
-    padding-right: 1%;
-  }
+.flights-content-outbound {
+  flex: 1;
+  border-right: solid 1px;
+  border-color: lightgrey;
+  padding-right: 1%;
+}
 
-  .flights-content-inbound {
-    flex: 1;
-    padding-left: 1%;
-  }
+.flights-content-inbound {
+  flex: 1;
+  padding-left: 1%;
+}
 
-  .flights-content-subheading {
-    font-size: xx-large;
-    text-align: center;
-    color: #F22771 !important;
-  }
+.flights-content-subheading {
+  font-size: xx-large;
+  text-align: center;
+  color: #f22771 !important;
+}
 
 .flights-footer {
   margin-top: 3%;
@@ -42,5 +42,5 @@
 }
 
 .fuschia {
-  color: #F22771 !important;
+  color: #f22771 !important;
 }

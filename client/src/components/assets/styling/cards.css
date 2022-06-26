@@ -1,4 +1,3 @@
-
 element {
   --primary-fuschia: "F22771";
 }
@@ -55,22 +54,21 @@ i {
 
 .empty-button {
   align-self: flex-end;
-
 }
 
 p.text-link {
-  color: #F22771;
+  color: #f22771;
 }
 
 p.text-link:hover {
   text-decoration: underline;
-  text-decoration-color: #F22771;
+  text-decoration-color: #f22771;
   cursor: pointer;
 }
 
 .loading {
-margin-top: 15%;
-color:#F22771;
+  margin-top: 15%;
+  color: #f22771;
 }
 
 /* Title page */
@@ -92,7 +90,6 @@ h4 {
 /* Subheading cards */
 h3 {
   margin: 0;
-  
 }
 
 /* Data: address, dates etc. */
@@ -105,8 +102,8 @@ h3 {
   color: rgb(160, 160, 160) !important;
 }
 
-.title{
-  color: #F22771 !important;
+.title {
+  color: #f22771 !important;
 }
 
 /* CARD LAYOUT - Accommo, Transfers, Parking, Visas*/
@@ -136,7 +133,6 @@ h3 {
   flex-direction: row;
   /* margin-top: 1%; */
 }
-
 
 .body {
   text-align: center;
@@ -198,5 +194,5 @@ h3 {
 }
 
 .fuschia {
-  color: #F22771;
+  color: #f22771;
 }

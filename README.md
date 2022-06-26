@@ -1,4 +1,5 @@
 # Travel Angel
+
 [![Tests](https://github.com/adamwoodcock98/travel-angel/actions/workflows/testing.yml/badge.svg)](https://github.com/adamwoodcock98/travel-angel/actions/workflows/testing.yml)
 
 Travel Angel is a MERN-stack web application used to safely and securely store travel documents.
@@ -39,9 +40,9 @@ Travel Angel is a MERN-stack web application used to safely and securely store t
 
 ### Resources
 
-- Slideshow Photos - [1](https://www.pexels.com/photo/birds-flying-in-the-sky-11054377/), [2](https://www.pexels.com/photo/view-of-cityscape-325185/), [3](https://www.pexels.com/photo/snow-covered-field-1076885/), [4](https://www.pexels.com/photo/green-pine-trees-covered-with-fogs-under-white-sky-during-daytime-167699/), [5](https://www.pexels.com/photo/down-angle-photography-of-red-clouds-and-blue-sky-844297/)
+- Slideshow Illustrations - [1](https://icons8.com/illustrations/illustration/fabulous-travel-3), [2](https://icons8.com/illustrations/illustration/experimental-air-travel-anywhere-in-the-world), [3](https://icons8.com/illustrations/illustration/cherry-680), [4](https://icons8.com/illustrations/illustration/fabulous-tour-search-1/), [5](https://icons8.com/illustrations/illustration/marginalia-autopilot-vehicle)
 - [Passport Design](https://www.theguardian.com/uk-news/gallery/2015/nov/03/new-uk-passport-design-in-pictures)
-- [Angel Heart Favicon](https://www.flaticon.com/free-icon/angel_3314947?term=heart%20angel&page=1&position=29&page=1&position=29&related_id=3314947&origin=search)
+- Icons - [Angel Heart](https://www.flaticon.com/free-icon/angel_3314947?term=heart%20angel&page=1&position=29&page=1&position=29&related_id=3314947&origin=search), [Wings](https://www.flaticon.com/premium-icon/wings_2108883)
 
 ## Team Approach
 
@@ -133,5 +134,6 @@ Travel Angel is deployed on Heroku using a Mongo Atlas database, and the front-e
 The database and server-side will not be made available.
 
 https://user-images.githubusercontent.com/74867241/173875311-b4b9a325-6b21-4ad4-8120-6fae4f81a445.mp4
+
 
 # Appendix

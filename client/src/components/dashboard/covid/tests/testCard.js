@@ -130,7 +130,7 @@ const TestCard = (props) => {
             Use this section to store any additional documents you may need for
             your COVID tests
           </i>
-          {testData.uploads.length &&
+          {testData.uploads.length > 0 &&
             testData.uploads.map((upload, index) => {
               return (
                 <div className="document-button">
