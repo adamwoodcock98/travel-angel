@@ -132,4 +132,6 @@ Alternatively all three of the above commands (Linting, Unit, and Integration te
 Travel Angel is deployed on Heroku using a Mongo Atlas database, and the front-end of this can be accessed [here](https://travel-angel.herokuapp.com).
 The database and server-side will not be made available.
 
+https://user-images.githubusercontent.com/74867241/173875311-b4b9a325-6b21-4ad4-8120-6fae4f81a445.mp4
+
 # Appendix
