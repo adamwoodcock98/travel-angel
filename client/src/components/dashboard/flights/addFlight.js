@@ -140,7 +140,9 @@ const AddFlight = ({
       trip,
     };
 
-    if (
+
+    const missing = [];
+    const arr = [
       departureTime === "" ||
       departureDate === "" ||
       departureAirport === "" ||
@@ -148,18 +150,15 @@ const AddFlight = ({
       arrivalAirport === "" ||
       arrivalCity === "" ||
       isOutbound === ""
-    ) {
-      setEmptyFields([
-        "departureTime",
-        "departureDate",
-        "departureAirport",
-        "departureCity",
-        "arrivalAirport",
-        "arrivalCity",
-        "isOutbound",
-      ]);
-      return;
-    }
+    ].forEach(field => {
+      field === "" && missing.push(Object.keys(field)[0]);
+    });
+
+    setEmptyFields(
+      missing
+    );
+
+    console.log(emptyFields)
 
     axios
       .post(url, newFlight)
@@ -303,11 +302,8 @@ const AddFlight = ({
             type="date"
             variant="outlined"
             required
+            error={emptyFields.includes("departureDate")}
             sx={{
-              border: emptyFields.includes("departureDate")
-                ? "1px solid red"
-                : "",
-              borderRadius: "5px",
               m: 1,
               minWidth: 195,
             }}
@@ -340,12 +336,7 @@ const AddFlight = ({
                 variant="outlined"
                 onChange={handleChange}
                 required
-                sx={{
-                  border: emptyFields.includes("isOutbound")
-                    ? "1px solid red"
-                    : "",
-                  borderRadius: "5px",
-                }}
+                error={emptyFields.includes("isOutbound")}
               >
                 <MenuItem value={false}>Inbound</MenuItem>
                 <MenuItem value={true}>Outbound</MenuItem>
@@ -361,12 +352,7 @@ const AddFlight = ({
               type="time"
               variant="outlined"
               required
-              sx={{
-                border: emptyFields.includes("departureTime")
-                  ? "1px solid red"
-                  : "",
-                borderRadius: "5px",
-              }}
+              error={emptyFields.includes("departureTime")}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -393,11 +379,8 @@ const AddFlight = ({
               type="text"
               variant="outlined"
               required
+              error={emptyFields.includes("departureAirport")}
               sx={{
-                border: emptyFields.includes("departureAirport")
-                  ? "1px solid red"
-                  : "",
-                borderRadius: "5px",
                 m: 1,
               }}
               onChange={handleChange}
@@ -423,11 +406,8 @@ const AddFlight = ({
               type="text"
               variant="outlined"
               required
+              error={emptyFields.includes("departureCity")}
               sx={{
-                border: emptyFields.includes("departureCity")
-                  ? "1px solid red"
-                  : "",
-                borderRadius: "5px",
                 m: 1,
               }}
               onChange={handleChange}
@@ -483,12 +463,7 @@ const AddFlight = ({
               type="text"
               variant="outlined"
               required
-              sx={{
-                border: emptyFields.includes("arrivalAirport")
-                  ? "1px solid red"
-                  : "",
-                borderRadius: "5px",
-              }}
+              error={emptyFields.includes("arrivalAirport")}
               onChange={handleChange}
             />
             <TextField
@@ -513,12 +488,7 @@ const AddFlight = ({
               type="text"
               variant="outlined"
               required
-              sx={{
-                border: emptyFields.includes("arrivalCity")
-                  ? "1px solid red"
-                  : "",
-                borderRadius: "5px",
-              }}
+              error={emptyFields.includes("arrivalCity")}
               onChange={handleChange}
             />
             <TextField

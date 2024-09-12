@@ -5,12 +5,13 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import "./trips.css";
+import { Alerts } from "../assets/snackbar";
+import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
 
 const Trips = ({ session }) => {
   const userId = session;
   const { tripId } = useParams;
-
-  console.log("the trips rendering ----");
 
   const [trip, setTrip] = useState({
     name: "",
@@ -20,15 +21,49 @@ const Trips = ({ session }) => {
   });
   const [open, setOpen] = useState(false);
   const [tripArray, setTripArray] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingFailed, setLoadingFailed] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [didUpdate, setDidUpdate] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("success");
+  const alertPosition = {
+    vertical: "top",
+    horizontal: "center",
+  };
+
+  const handleAlert = (message, type) => {
+    setAlertOpen(true);
+    setAlertMessage(message);
+    setAlertType(type);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   useEffect(() => {
+    setLoadingFailed(false);
+    setLoading(true);
     if (userId !== "null") {
       axios.get(`http://localhost:8000/trips/${userId}`).then((res) => {
         setTripArray(res.data.trips);
-      });
+      })
+      .catch((error) => {
+        if (error.response.status) {
+          handleAlert(
+            error.response.status + " - " + error.response.statusText,
+            "error"
+          );
+        } else {
+          handleAlert("There was a problem connecting to the server.", "error");
+          setLoadingFailed(true);
+        }
+      })
+      .finally(() => setLoading(false));;
     } else {
     }
-  }, [trip]);
+  }, [didUpdate]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,6 +71,7 @@ const Trips = ({ session }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDidUpdate(!didUpdate);
   };
 
   const handleChange = (e) => {
@@ -86,7 +122,27 @@ const Trips = ({ session }) => {
       (trip1, trip2) => new Date(trip1.startDate) - new Date(trip2.startDate)
     );
 
-  return (
+    if (loadingFailed) {
+      return (
+        <div className="empty-window">
+          <h1>Flights</h1>
+          <div className="empty-prompt">
+            <h3>This connection doesn't seem quite right</h3>
+            <h2>:(</h2>
+            <br />
+            <Button onClick={handleClose} variant="outlined" color="primary">
+              try again
+            </Button>
+          </div>
+        </div>
+      );
+    } else if (loading) {
+      return (
+        <div className="loading" style={{ display: loading ? "" : "none" }}>
+          <CircularProgress color="secondary" />
+        </div>
+      );
+    } else return (
     <div className="trip-container">
       <div className="trip-header">
         <h1 className="trip-h1">Trips</h1>
@@ -114,7 +170,19 @@ const Trips = ({ session }) => {
           </div>
         </div>
       )}
-      {!tripArray.length && <h2>Nothing here. Add your trip now!</h2>}
+      {!tripArray.length &&
+      <div className="empty-prompt">
+        <h3>Looks like you don't have any saved flights</h3>
+        <h2>Press + to get started</h2>
+      </div>
+      }
+      <Alerts
+        message={alertMessage}
+        open={alertOpen}
+        handleClose={handleAlertClose}
+        alertPosition={alertPosition}
+        alertType={alertType}
+      />
     </div>
   );
 };

@@ -17,7 +17,7 @@ export const Alerts = ({
       autoHideDuration={6000}
       key={alertPosition.vertical + alertPosition.horizontal}
     >
-      <Alert id="alert" variant="filled" severity={alertType}>{message}</Alert>
+      <Alert id="alert" variant="standard" severity={alertType}>{message}</Alert>
     </Snackbar>
   );
 };

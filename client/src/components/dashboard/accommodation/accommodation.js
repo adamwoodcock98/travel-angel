@@ -7,7 +7,7 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Alerts } from "../../assets/snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
-import "../../assets/styling/cards.css"
+import "../../assets/styling/cards.css";
 import Button from "@mui/material/Button";
 
 export const ViewAccommodation = ({ session }) => {
@@ -124,41 +124,42 @@ export const ViewAccommodation = ({ session }) => {
   };
 
   if (loadingFailed) {
-    return(
+    return (
       <div className="empty-window">
         <h1>Accommodation</h1>
         <div className="empty-prompt">
           <h3>This connection doesn't seem quite right</h3>
           <h2>:(</h2>
           <br />
-          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+          <Button onClick={handleClose} variant="outlined" color="primary">
+            try again
+          </Button>
         </div>
       </div>
-    )
+    );
   } else if (loading) {
-    return(
+    return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
-        <p color="secondary">loading...</p>
       </div>
-    )
+    );
   } else if (accommodation.length) {
     return (
       <>
         {/* <div className="container"> */}
-          <div className="accommodation-header">
-            <h1 className="very-big"> Accommodation</h1>
-          </div>
-          <div className="accommodation-body">
-            <AccommodationCard
-              accommodation={accommodation}
-              userId={userId}
-              handleDirections={handleDirections}
-              refresh={handleClose}
-              handleUpload={handleUpload}
-            />
-          </div>
-          <div id="fab-card-position">
+        <div className="accommodation-header">
+          <h1 className="very-big"> Accommodation</h1>
+        </div>
+        <div className="accommodation-body">
+          <AccommodationCard
+            accommodation={accommodation}
+            userId={userId}
+            handleDirections={handleDirections}
+            refresh={handleClose}
+            handleUpload={handleUpload}
+          />
+        </div>
+        <div id="fab-card-position">
           <Fab
             size="large"
             color="secondary"
@@ -166,24 +167,25 @@ export const ViewAccommodation = ({ session }) => {
             onClick={handleOpen}
           >
             <AddIcon />
-          </Fab></div>
-          <AddAccommodation
-              className="add-accomodation"
-              handleOpen={handleOpen}
-              open={open}
-              handleClose={handleClose}
-              accommodationData={accommodationArray}
-              accommodationId={null}
-              userId={userId}
-              tripId={tripId}
-            />
-          <Alerts
-            message={alertMessage}
-            open={alertOpen}
-            handleClose={handleAlertClose}
-            alertPosition={alertPosition}
-            alertType={alertType}
-          />
+          </Fab>
+        </div>
+        <AddAccommodation
+          className="add-accomodation"
+          handleOpen={handleOpen}
+          open={open}
+          handleClose={handleClose}
+          accommodationData={accommodationArray}
+          accommodationId={null}
+          userId={userId}
+          tripId={tripId}
+        />
+        <Alerts
+          message={alertMessage}
+          open={alertOpen}
+          handleClose={handleAlertClose}
+          alertPosition={alertPosition}
+          alertType={alertType}
+        />
         {/* </div> */}
       </>
     );
@@ -193,12 +195,17 @@ export const ViewAccommodation = ({ session }) => {
         <div>
           <h1 className="very-big">Accommodation</h1>
         </div>
-        <div className="empty-prompt" >
-        <h3>Looks like you don't have any saved places</h3>
-        <h2>Press  +  to get started</h2>
+        <div className="empty-prompt">
+          <h3>Looks like you don't have any saved places</h3>
+          <h2>Press + to get started</h2>
         </div>
         <div className="empty-button" id="fab-card-position">
-          <Fab size="large" color="secondary" aria-label="add" onClick={handleOpen}>
+          <Fab
+            size="large"
+            color="secondary"
+            aria-label="add"
+            onClick={handleOpen}
+          >
             <AddIcon />
           </Fab>
         </div>

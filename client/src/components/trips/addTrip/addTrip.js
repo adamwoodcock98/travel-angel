@@ -24,7 +24,7 @@ const AddTrip = ({
         <AddIcon />
       </Fab></div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Trip</DialogTitle>
+        <DialogTitle color="primary">Add Trip</DialogTitle>
         <DialogContent>
           <DialogContentText>Add an upcoming trip!</DialogContentText>
           <TextField
@@ -36,7 +36,7 @@ const AddTrip = ({
             label="Trip Name"
             type="text"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
             onChange={handleChange}
           />
@@ -49,7 +49,7 @@ const AddTrip = ({
             label="Start Date"
             type="date"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
             onChange={handleChange}
             InputLabelProps={{
@@ -65,7 +65,7 @@ const AddTrip = ({
             label="End Date"
             type="date"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
             onChange={handleChange}
             InputLabelProps={{

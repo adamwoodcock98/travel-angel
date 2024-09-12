@@ -93,7 +93,7 @@
 .footer-labels{
   display: flex;
   flex-direction: row;
-  font-size: 80%;
+  /* font-size: 80%; */
 }
 
 .footer-left {

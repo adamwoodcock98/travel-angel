@@ -34,6 +34,7 @@ element {
 
 i {
   color: dimgrey;
+  font-size: 90%;
 }
 
 .empty-window {
@@ -195,4 +196,12 @@ h3 {
 
 .fuschia {
   color: #f22771;
+}
+
+.contact-content-body {
+  text-align: left;
+}
+
+.parking-card-vehicle-content {
+  text-align: center;
 }

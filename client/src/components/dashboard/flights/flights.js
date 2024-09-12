@@ -102,22 +102,23 @@ const Flights = ({ session }) => {
   }, [didUpdate, state]);
 
   if (loadingFailed) {
-    return(
+    return (
       <div className="empty-window">
         <h1>Flights</h1>
         <div className="empty-prompt">
           <h3>This connection doesn't seem quite right</h3>
           <h2>:(</h2>
           <br />
-          <Button onClick={handleClose} variant="outlined" color="primary">try again</Button>
+          <Button onClick={handleClose} variant="outlined" color="primary">
+            try again
+          </Button>
         </div>
       </div>
-    )
+    );
   } else if (loading) {
     return (
       <div className="loading" style={{ display: loading ? "" : "none" }}>
         <CircularProgress color="secondary" />
-        <p color="secondary">loading...</p>
       </div>
     );
   } else if (outboundFlight.length || inboundFlight.length) {
@@ -157,7 +158,7 @@ const Flights = ({ session }) => {
           style={{ display: loading ? "none" : "" }}
         >
           <div className="flights-header">
-            <h1>Flights</h1>
+            <h1 className="very-big">Flights</h1>
           </div>
           <div className="flights-content">
             <div className="flights-content-outbound">
@@ -170,6 +171,16 @@ const Flights = ({ session }) => {
             </div>
           </div>
           <div className="flights-footer">
+            <div id="fab-card-position">
+              <Fab
+                size="large"
+                color="secondary"
+                aria-label="add"
+                onClick={handleOpen}
+              >
+                <AddIcon />
+              </Fab>
+            </div>
             <AddFlight
               open={open}
               handleOpen={handleOpen}
@@ -182,22 +193,12 @@ const Flights = ({ session }) => {
             />
           </div>
         </div>
-        <div id="fab-card-position">
-          <Fab
-            size="large"
-            color="secondary"
-            aria-label="add"
-            onClick={handleOpen}
-          >
-            <AddIcon />
-          </Fab>
-        </div>
       </>
     );
   } else {
     return (
       <div className="empty-window">
-        <h1>Flights</h1>
+        <h1 className="very-big">Flights</h1>
         <div className="empty-prompt">
           <h3>Looks like you don't have any saved flights</h3>
           <h2>Press + to get started</h2>
